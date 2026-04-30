@@ -1,0 +1,286 @@
+<h1
+    style="position:absolute;width:1px;height:1px;padding:0;margin:-1px;overflow:hidden;clip:rect(0,0,0,0);white-space:nowrap;border:0;">
+    Consulta de Preço Interno - Redutores IBR</h1>
+<!DOCTYPE html>
+<section class="detalhes-produto recolhido oculto" id="detalhesPreco" style="display: none;">
+    <h2 id="togglePreco">
+        💲 Verificar Preço
+        <span class="seta" id="setaTogglePreco">◀</span>
+    </h2>
+    <div class="conteudo-produto">
+        <div style="margin-top:16px;margin-bottom:8px" class="filtro-busca-wrapper">
+            <label class="form-label" for="codigoClienteInput">Código do Cliente:</label>
+            <div class="input-group search-options">
+                <input id="codigoClienteInput" type="text" maxlength="10" class="form-control rounded-1 border"
+                    placeholder="Digitar..." />
+                <button id="codigoClienteBtn" type="button"
+                    class="btn btn-orange rounded-1 p-3 px-4 fw-semibold w-100">Aplicar</button>
+                <button id="buscarClienteBtn" type="button"
+                    class="btn btn-buscar-preco-interno rounded-1 p-3 px-4 fw-semibold w-100">Buscar</button>
+                <button id="limparClienteBtn" type="button"
+                    class="btn btn-buscar-preco-interno rounded-1 p-3 px-4 fw-semibold w-100">Limpar</button>
+                <div class="mt-2 d-flex align-items-center">
+                    <p class="mt-2"><strong style="color:#ec4115;">Nome do Cliente:</strong>
+                        <span id="nomeClienteInfo" style="white-space:nowrap;"></span>
+                    </p>
+                </div>
+            </div>
+            <hr style="border: none; border-top: 2px solid #ec4115; margin: 20px 0;" />
+
+            <h3 style="color: #ec4115;">Compra Realizada por Caxias do Sul (RS)</h3>
+            <div id="precoRS"></div>
+            <p id="notaPrecoRS" class="nota-preco"
+                style="display:none;font-size:0.9em;color:#ec4115;font-style:italic;">
+                *Informamos que, por este produto ainda não estar cadastrado em nossa base, o valor apresentado poderá
+                sofrer variações - tanto para mais quanto para menos. Para garantir a aplicação do preço correto,
+                recomendamos solicitar o cadastro do item.
+            </p>
+            <hr id="linhaEntreEmpresasPreco"
+                style="display:none; border: none; border-top: 2px solid #ec4115; margin: 20px 0;">
+            <h3 style="color: #ec4115;">Compra Realizada por Indaiatuba (SP)</h3>
+            <div id="precoSP"></div>
+            <p id="notaPrecoSP" class="nota-preco"
+                style="display:none;font-size:0.9em;color:#ec4115;font-style:italic;">
+                *Informamos que, por este produto ainda não estar cadastrado em nossa base, o valor apresentado poderá
+                sofrer variações - tanto para mais quanto para menos. Para garantir a aplicação do preço correto,
+                recomendamos solicitar o cadastro do item.
+            </p>
+        </div>
+</section>
+
+<div id="formulario-buscar-cliente" style="display:none;" onmousedown="fecharAoClicarForaBuscarCliente(event)">
+    <div class="form-desenho-container" onmousedown="event.stopPropagation()" style="max-width:600px;width:90%;">
+        <h2 style="color:#ec4115;">Selecionar Cliente</h2>
+        <input id="buscarClienteInput" type="text" class="cssC campo-form" placeholder="Buscar..."
+            style="margin-bottom:12px;">
+        <div class="table-responsive" style="height:60vh;overflow-y:auto;">
+            <table class="table table-sm table-hover">
+                <thead>
+                    <tr>
+                        <th data-sort="codigo" style="cursor:pointer">Código</th>
+                        <th data-sort="nome" style="cursor:pointer">Nome</th>
+                    </tr>
+                </thead>
+                <tbody id="buscarClienteResultado"></tbody>
+            </table>
+        </div>
+        <div class="botoes-form">
+            <button type="button" id="fecharBuscarClienteBtn" class="botao-ibr botao-secundario">Cancelar</button>
+        </div>
+    </div>
+</div>
+
+<script nonce="<?= htmlspecialchars(csp_nonce(), ENT_QUOTES, 'UTF-8'); ?>">
+    (() => {
+        const init = () => {
+            const codigoInput = document.getElementById('codigoClienteInput');
+            if (codigoInput?.dataset.precoInternoInit === 'true') return;
+            if (codigoInput) codigoInput.dataset.precoInternoInit = 'true';
+            const btnAbrir = document.getElementById('buscarClienteBtn');
+            const overlay = document.getElementById('formulario-buscar-cliente');
+            const tabela = document.getElementById('buscarClienteResultado');
+            const campoBusca = document.getElementById('buscarClienteInput');
+            const fecharBtn = document.getElementById('fecharBuscarClienteBtn');
+            const tabelaContainer = tabela?.closest('.table-responsive');
+            const limparBtn = document.getElementById('limparClienteBtn');
+            const nomeInfo = document.getElementById('nomeClienteInfo');
+            let offset = 0;
+            const limit = 20;
+            let termo = '';
+            let carregando = false;
+            let fim = false;
+            let scrollPos = 0;
+            let controller = null;
+            let sortBy = 'codigo';
+            let sortDir = 'asc';
+            const thCodigo = overlay.querySelector('th[data-sort="codigo"]');
+            const thNome = overlay.querySelector('th[data-sort="nome"]');
+
+            function atualizarSetas() {
+                if (thCodigo) thCodigo.textContent = 'Código' + (sortBy === 'codigo' ? (sortDir === 'asc' ? ' ▲' : ' ▼') : '');
+                if (thNome) thNome.textContent = 'Nome' + (sortBy === 'nome' ? (sortDir === 'asc' ? ' ▲' : ' ▼') : '');
+            }
+            atualizarSetas();
+
+            let nomeCtrl = null;
+            async function mostrarNome(codigo) {
+                if (!nomeInfo) return;
+                if (nomeCtrl) nomeCtrl.abort();
+                if (!codigo) {
+                    nomeInfo.textContent = '';
+                    nomeCtrl = null;
+                    return;
+                }
+                nomeCtrl = new AbortController();
+                try {
+                    const r = await fetch('/AcessosConsultas/BuscarDadosPessoaPlenus.php?q=' + encodeURIComponent(codigo) + '&offset=0&limit=1', { signal: nomeCtrl.signal });
+                    if (!r.ok) throw new Error('HTTP');
+                    const j = await r.json();
+                    const pessoa = (j.pessoas || []).find(p => String(p.CD_PESSOA).trim() === String(codigo).trim());
+                    nomeInfo.textContent = pessoa ? pessoa.NM_PESSOA : '';
+                } catch (e) {
+                    if (e.name !== 'AbortError') nomeInfo.textContent = '';
+                } finally {
+                    nomeCtrl = null;
+                }
+            }
+
+            function freezeScroll() {
+                scrollPos = window.scrollY || document.documentElement.scrollTop;
+                document.body.style.top = `-${scrollPos}px`;
+                document.body.style.position = 'fixed';
+                document.body.style.width = '100%';
+                document.body.style.overflow = 'hidden';
+            }
+
+            function restoreScroll() {
+                const html = document.documentElement;
+                const prevBehavior = html.style.scrollBehavior;
+                html.style.scrollBehavior = 'auto';
+                document.body.style.position = '';
+                document.body.style.top = '';
+                document.body.style.width = '';
+                document.body.style.overflow = '';
+                window.scrollTo(0, scrollPos);
+                html.style.scrollBehavior = prevBehavior;
+            }
+
+            function abrir() {
+                overlay.style.display = 'flex';
+                overlay.style.animation = 'fadeInBackdrop 0.3s ease';
+                campoBusca.value = '';
+                tabela.innerHTML = '';
+                termo = '';
+                offset = 0;
+                fim = false;
+                carregar('', true);
+                freezeScroll();
+                document.body.style.overflow = 'hidden';
+                setTimeout(() => campoBusca.focus(), 200);
+            }
+
+            function fechar() {
+                overlay.style.animation = 'fadeOutBackdrop 0.3s ease';
+                setTimeout(() => {
+                    overlay.style.display = 'none';
+                    overlay.style.animation = '';
+                }, 300);
+                restoreScroll();
+                document.body.style.overflow = '';
+            }
+
+            async function carregar(q = '', reset = false) {
+                if (carregando && !reset) return;
+                if (reset) {
+                    if (controller) controller.abort();
+                    offset = 0;
+                    fim = false;
+                    tabela.innerHTML = '';
+                }
+                if (fim) return;
+                carregando = true;
+                controller = new AbortController();
+                if (offset === 0) {
+                    tabela.innerHTML = '<tr><td colspan="2">⌛ Carregando...</td></tr>';
+                }
+                try {
+                    const url = `/AcessosConsultas/BuscarDadosPessoaPlenus.php?q=${encodeURIComponent(q)}&offset=${offset}&limit=${limit}&sort=${sortBy}&dir=${sortDir}`;
+                    const r = await fetch(url, { signal: controller.signal });
+                    if (!r.ok) throw new Error('Erro HTTP');
+                    const j = await r.json();
+                    if (j.erro) throw new Error(j.erro);
+                    const html = (j.pessoas || []).map(p =>
+                        `<tr data-codigo="${p.CD_PESSOA}"><td>${p.CD_PESSOA}</td><td>${p.NM_PESSOA}</td></tr>`
+                    ).join('');
+                    if (offset === 0) {
+                        tabela.innerHTML = html || '<tr><td colspan="2">❌ Nenhum Resultado Encontrado. Tente Novamente...</td></tr>';
+                    } else {
+                        tabela.insertAdjacentHTML('beforeend', html);
+                    }
+                    offset += (j.pessoas || []).length;
+                    if ((j.pessoas || []).length < limit) {
+                        fim = true;
+                    }
+                } catch (e) {
+                    console.error(e);
+                    if (offset === 0) {
+                        tabela.innerHTML = '<tr><td colspan="2">❌ Erro ao Carregar. Tente Novamente...</td></tr>';
+                    }
+                } finally {
+                    carregando = false;
+                }
+            }
+
+            btnAbrir?.addEventListener('click', abrir);
+            fecharBtn?.addEventListener('click', fechar);
+            thCodigo?.addEventListener('click', () => ordenar('codigo'));
+            thNome?.addEventListener('click', () => ordenar('nome'));
+
+            function ordenar(campo) {
+                if (sortBy === campo) {
+                    sortDir = sortDir === 'asc' ? 'desc' : 'asc';
+                } else {
+                    sortBy = campo;
+                    sortDir = 'asc';
+                }
+                atualizarSetas();
+                carregar(termo, true);
+            }
+            limparBtn?.addEventListener('click', () => {
+                const input = codigoInput;
+                if (input) {
+                    input.value = '001';
+                    input.dispatchEvent(new Event('change'));
+                }
+                mostrarNome('001');
+            });
+
+            const input = codigoInput;
+            if (input) {
+                input.value = '001';
+                input.dispatchEvent(new Event('change'));
+            }
+            mostrarNome('001');
+
+
+            campoBusca?.addEventListener('input', () => {
+                termo = campoBusca.value;
+                carregar(termo, true);
+            });
+
+            tabelaContainer?.addEventListener('scroll', () => {
+                if (tabelaContainer.scrollTop + tabelaContainer.clientHeight >= tabelaContainer.scrollHeight - 5) {
+                    carregar(termo);
+                }
+            });
+
+            tabela?.addEventListener('click', e => {
+                const tr = e.target.closest('tr');
+                if (!tr) return;
+                tabela.querySelectorAll('tr').forEach(row => row.classList.remove('selecionado'));
+                tr.classList.add('selecionado');
+                const cod = tr.getAttribute('data-codigo');
+                if (cod) {
+                    const input = codigoInput;
+                    if (input) {
+                        input.value = cod;
+                        input.dispatchEvent(new Event('change'));
+                    }
+                    fechar();
+                }
+            });
+
+            overlay?.addEventListener('keydown', e => { if (e.key === 'Escape') fechar(); });
+            window.fecharAoClicarForaBuscarCliente = e => {
+                if (e.target !== e.currentTarget) return;
+                if (e.target.id === 'formulario-buscar-cliente') fechar();
+            };
+        };
+
+        if (document.readyState === 'loading') {
+            document.addEventListener('DOMContentLoaded', init, { once: true });
+        } else {
+            init();
+        }
+    })();
+</script>

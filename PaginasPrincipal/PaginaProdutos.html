@@ -1,0 +1,630 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+  <title>Catálogo de Redutores e Motorredutores | Configurador de Produtos IBR</title>
+  <link rel="canonical" href="https://configurador.redutoresibr.com.br/">
+  <link rel="alternate" hreflang="pt-BR" href="https://configurador.redutoresibr.com.br/">
+  <link rel="alternate" hreflang="x-default" href="https://configurador.redutoresibr.com.br/">
+  <meta name="description"
+    content="Configurador IBR de redutores e motorredutores com filtros técnicos, seleção rápida de modelos e solicitação de orçamentos online para seu projeto industrial.">
+  <meta property="og:type" content="website">
+  <meta property="og:title" content="Configurador de Produtos IBR">
+  <meta property="og:description" content="Configurador de Produtos: Configure, Projete e Cote!">
+  <meta property="og:url" content="https://configurador.redutoresibr.com.br/">
+  <meta property="og:image" content="https://configurador.redutoresibr.com.br/Imagens/LogotipoAplicativo512512.png">
+  <meta name="twitter:card" content="summary_large_image">
+  <meta name="twitter:title" content="Configurador de Produtos IBR">
+  <meta name="twitter:description" content="Configurador de Produtos: Configure, Projete e Cote!">
+  <meta name="twitter:image" content="https://configurador.redutoresibr.com.br/Imagens/LogotipoAplicativo512512.png">
+  <link rel="preload" as="image" href="/ImagensProdutos/IBRQ/0IBRQ.webp" fetchpriority="high">
+</head>
+
+<body>
+
+  <main id="main-content" data-page-title="Configurador de Produtos IBR">
+    <div class="pagina__titulo--bloco mt-5 mb-4">
+      <div class="container">
+        <div class="row">
+          <div class="col-12 d-flex align-items-center flex-wrap gap-3 pagina-produtos__titulo-wrapper">
+            <h1 class="titulo-pagina flex-grow-1 mb-0">
+              Configurador de <span class="text-orange">Produtos</span>
+            </h1>
+            <div class="pagina-produtos__acoes">
+              <button id="toggleFiltros" class="btn btn-outline-orange btn-sm w-fit pagina-produtos__titulo-botao"
+                data-gtag-context="filtros_produtos">
+                Filtrar Produtos <span id="toggleArrow" class="ms-1">&#9660;</span>
+              </button>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="container pagina-produtos__conteudo">
+      <div class="row">
+        <div class="col-12 text-start mb-3">
+          <div class="toggle-filtros-placeholder pagina-produtos__toggle-placeholder" aria-hidden="true">
+            Filtrar Produtos <span class="ms-1">&#9660;</span>
+          </div>
+          <div id="areaFiltros" class="collapse-filtros">
+            <form id="form-filtros-principal" onsubmit="return false;">
+              <div class="row mb-2 filtro-produtos">
+                <div class="col-xxl-4 col-lg-4 col-md-8 col-sm-12 col-12 mb-3 filtro-busca-wrapper">
+                  <label class="form-label" for="filtroBusca">Busca</label>
+                  <div class="input-group">
+                    <input type="search" id="filtroBusca" class="form-control rounded-1 border p-3"
+                      placeholder="Digite o que você procura..." aria-label="Digite o que você procura...">
+                  </div>
+                  <div id="resultadoBuscaFiltro"></div>
+                </div>
+                <div class="col-xxl-3 col-lg-4 col-md-6 col-sm-6 col-12 mb-3">
+                  <label class="form-label" for="botaoCategorias">Produtos</label>
+                  <div id="dropdownCategorias" class="dropdown-checkbox">
+                    <button type="button" class="dropdown-button cssC" id="botaoCategorias" tabindex="0"
+                      aria-expanded="false" aria-controls="listaCategorias" onclick="toggleDropdownCategorias(this)">
+                      Selecione...
+                    </button>
+                    <div id="listaCategorias" class="dropdown-list pagina-produtos__dropdown-list">
+                      <label><input type="checkbox" name="categoria" value="Acoplamentos"> Acoplamentos</label>
+                      <label><input type="checkbox" name="categoria" value="Alimentícios, Anticorrosivos e IP69K">
+                        Alimentícios, Anticorrosivos e IP69K</label>
+                      <label><input type="checkbox" name="categoria" value="Inversores de Frequência"> Inversores de
+                        Frequência</label>
+                      <label><input type="checkbox" name="categoria" value="Motorredutores"> Motorredutores</label>
+                      <label><input type="checkbox" name="categoria" value="Motores"> Motores</label>
+                      <label><input type="checkbox" name="categoria" value="Redutores de Velocidade"> Redutores de
+                        Velocidade</label>
+                      <label><input type="checkbox" name="categoria" value="Variadores de Velocidade"> Variadores de
+                        Velocidade</label>
+                    </div>
+                  </div>
+                </div>
+                <div class="col-xxl-3 col-lg-3 col-md-6 col-sm-6 col-12 mb-3">
+                  <label class="form-label" for="botaoLinhas">Linhas</label>
+                  <div id="dropdownLinhas" class="dropdown-checkbox">
+                    <button type="button" class="dropdown-button cssC" id="botaoLinhas" tabindex="0"
+                      aria-expanded="false" aria-controls="listaLinhas" onclick="toggleDropdownLinhas(this)">
+                      Selecione... </button>
+                    <div id="listaLinhas" class="dropdown-list pagina-produtos__dropdown-list">
+                      <label><input type="checkbox" name="linhaFiltro" value="Alto Rendimento"> Alto Rendimento</label>
+                      <label><input type="checkbox" name="linhaFiltro" value="Anticorrosivos"> Anticorrosivos</label>
+                      <label><input type="checkbox" name="linhaFiltro" value="Coroa e Sem Fim"> Coroa e Sem Fim</label>
+                      <label><input type="checkbox" name="linhaFiltro" value="Descentralizado">Descentralizado</label>
+                      <label><input type="checkbox" name="linhaFiltro" value="Dupla Redução"> Dupla Redução</label>
+                      <label><input type="checkbox" name="linhaFiltro" value="Precisão">Precisão</label>
+                      <label><input type="checkbox" name="linhaFiltro" value="Variadores">Variadores</label>
+                    </div>
+                  </div>
+                </div>
+                <div class="col-xxl-3 col-lg-3 col-md-6 col-sm-6 col-12 mb-3">
+                  <label class="form-label" for="botaoDesenhos">Desenhos Disponíveis</label>
+                  <div id="dropdownDesenhos" class="dropdown-checkbox">
+                    <button type="button" class="dropdown-button cssC" id="botaoDesenhos" tabindex="0"
+                      aria-expanded="false" aria-controls="listaDesenhos" onclick="toggleDropdownDesenhos(this)">
+                      Selecione...
+                    </button>
+                    <div id="listaDesenhos" class="dropdown-list pagina-produtos__dropdown-list">
+                      <label><input type="checkbox" name="desenhoFiltro" value="Sim"> Sim</label>
+                      <label><input type="checkbox" name="desenhoFiltro" value="Não"> Não</label>
+                    </div>
+                  </div>
+                </div>
+              </div>
+              <div id="botoesFiltros" class="d-grid gap-2 d-md-flex justify-content-md-center botoes-filtros-wrapper">
+                <button id="aplicarFiltros" class="btn btn-orange rounded-1 p-3 px-5 w-100 w-md-auto"
+                  data-gtag-event="home-filtro-aplicar" data-gtag-category="Filtro"
+                  data-gtag-context="filtros_produtos">
+                  <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor"
+                    class="bi bi-funnel" viewBox="0 0 16 16">
+                    <path
+                      d="M1.5 1.5A.5.5 0 0 1 2 1h12a.5.5 0 0 1 .39.812L10 6.586V13.5a.5.5 0 0 1-.74.439l-2-1A.5.5 0 0 1 7 12.999V6.586L1.11 1.812A.5.5 0 0 1 1.5 1.5z" />
+                  </svg>
+                  Aplicar Filtros
+                </button>
+                <button id="copiarLinkFiltros" class="btn btn-outline-orange rounded-1 p-3 px-5 ms-md-2 w-100 w-md-auto"
+                  type="button" data-gtag-event="home-filtro-copiar" data-gtag-category="Filtro"
+                  data-gtag-context="filtros_produtos">
+                  <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="none" viewBox="0 0 24 24">
+                    <path
+                      d="M6 11C6 8.17157 6 6.75736 6.87868 5.87868C7.75736 5 9.17157 5 12 5H15C17.8284 5 19.2426 5 20.1213 5.87868C21 6.75736 21 8.17157 21 11V16C21 18.8284 21 20.2426 20.1213 21.1213C19.2426 22 17.8284 22 15 22H12C9.17157 22 7.75736 22 6.87868 21.1213C6 20.2426 6 18.8284 6 16V11Z"
+                      stroke="currentColor" stroke-width="1.5" />
+                    <path
+                      d="M6 19C4.34315 19 3 17.6569 3 16V10C3 6.22876 3 4.34315 4.17157 3.17157C5.34315 2 7.22876 2 11 2H15C16.6569 2 18 3.34315 18 5"
+                      stroke="currentColor" stroke-width="1.5" />
+                  </svg>
+                  Copiar Filtros
+                </button>
+                <button id="limparFiltros" class="btn btn-outline-orange rounded-1 p-3 px-5 ms-md-2 w-100 w-md-auto"
+                  data-gtag-event="home-filtro-limpar" data-gtag-category="Filtro" data-gtag-context="filtros_produtos">
+                  <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor"
+                    class="bi bi-arrow-clockwise" viewBox="0 0 16 16">
+                    <path fill-rule="evenodd" d="M8 3a5 5 0 1 1-4.546 2.914.5.5 0 0 0-.908-.417A6 6 0 1 0 8 2v1z" />
+                    <path d="M8 1.5a.5.5 0 0 0-1 0v3h3a.5.5 0 0 0 0-1H8V1.5z" />
+                  </svg>
+                  Limpar Filtros
+                </button>
+                <button id="ordenarAlfa" class="btn btn-outline-orange rounded-1 p-3 px-5 ms-md-2 w-100 w-md-auto"
+                  data-gtag-context="filtros_produtos">
+                  <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor"
+                    class="bi bi-arrow-down-up" viewBox="0 0 16 16">
+                    <path fill-rule="evenodd"
+                      d="M11.5 15a.5.5 0 0 0 .5-.5V2.707l3.146 3.147a.5.5 0 0 0 .708-.708l-4-4a.5.5 0 0 0-.708 0l-4 4a.5.5 0 1 0 .708.708L11 2.707V14.5a.5.5 0 0 0 .5.5zm-7-14a.5.5 0 0 1 .5.5v11.793l3.146-3.147a.5.5 0 0 1 .708.708l-4 4a.5.5 0 0 1-.708 0l-4-4a.5.5 0 0 1 .708-.708L4 13.293V1.5a.5.5 0 0 1 .5-.5z" />
+                  </svg>
+                  Ordenar de A-Z
+                </button>
+              </div>
+              <div id="resumoFiltros" class="pagina-produtos__resumo-filtros" aria-live="polite">
+                <span id="produtosEncontrados" class="pagina-produtos__contador">0 Produtos Encontrados</span>
+                <div id="filtrosAtivosChips" class="pagina-produtos__chips" aria-label="Filtros ativos"></div>
+              </div>
+            </form>
+          </div>
+        </div>
+      </div>
+      <div id="loadingFiltros" class="text-center mt-2 pagina-produtos__hidden">
+        <div class="spinner-border text-orange" role="status" aria-hidden="true"></div>
+      </div>
+
+      <div id="noResults" class="text-center my-4 pagina-produtos__hidden">
+        <p class="mt-0">😅 Ops... nenhum produto encontrado! Que tal limpar os filtros 🧹 e tentar outra vez? 🚀</p>
+      </div>
+    </div>
+
+    <section class="home-botoes grid pagina-produtos__home-botoes">
+      <div class="botao-linha">
+        <a href="/ConfiguradorIBRQ?QULN=1.Q" class="botao-home" title="IBR Q">
+          <img class="lazy-product-image" src="/ImagensProdutos/IBRQ/0IBRQ.webp" data-lcp-hero="true"
+            data-path="/ImagensProdutos/IBRQ/" width="593" height="421" alt="IBR Q" draggable="false" loading="eager"
+            decoding="async" fetchpriority="high" sizes="(max-width: 599px) 100vw, (max-width: 1199px) 50vw, 33vw" />
+          <noscript>
+            <img src="/ImagensProdutos/IBRQ/0IBRQ.webp" data-path="/ImagensProdutos/IBRQ/" width="593" height="421"
+              alt="IBR Q" draggable="false" loading="eager" decoding="async" fetchpriority="high"
+              sizes="(max-width: 599px) 100vw, (max-width: 1199px) 50vw, 33vw" />
+          </noscript>
+          <span class="badge-novo">Desenhos Disponíveis</span>
+          <span class="botao-titulo">IBR Q</span>
+          <span class="botao-config">Configure seu Produto</span>
+        </a>
+      </div>
+
+      <div class="botao-linha">
+        <a href="/ConfiguradorIBRQDR?QULN=1.QDR" class="botao-home" title="IBR QDR">
+          <img class="lazy-product-image" src="/ImagensProdutos/IBRQDR/0IBRQDR.webp"
+            data-src="/ImagensProdutos/IBRQDR/0IBRQDR.webp" data-path="/ImagensProdutos/IBRQDR/" width="593"
+            height="421" alt="IBR QDR" draggable="false" loading="lazy" decoding="async" fetchpriority="low"
+            data-eager="true" data-priority="true" />
+          <noscript>
+            <img src="/ImagensProdutos/IBRQDR/0IBRQDR.webp" data-path="/ImagensProdutos/IBRQDR/" width="593"
+              height="421" alt="IBR QDR" draggable="false" loading="lazy" decoding="async" fetchpriority="low" />
+          </noscript>
+          <span class="badge-novo">Desenhos Disponíveis</span>
+          <span class="botao-titulo">IBR QDR</span>
+          <span class="botao-config">Configure seu Produto</span>
+        </a>
+      </div>
+
+      <div class="botao-linha">
+        <a href="/ConfiguradorIBRQP?QULN=1.QP" class="botao-home" title="IBR QP">
+          <img class="lazy-product-image" src="/ImagensProdutos/IBRQP/0IBRQP.webp"
+            data-src="/ImagensProdutos/IBRQP/0IBRQP.webp" data-path="/ImagensProdutos/IBRQP/" width="593" height="421"
+            alt="IBR QP" draggable="false" loading="lazy" decoding="async" fetchpriority="low" />
+          <noscript>
+            <img src="/ImagensProdutos/IBRQP/0IBRQP.webp" data-path="/ImagensProdutos/IBRQP/" width="593" height="421"
+              alt="IBR QP" draggable="false" loading="lazy" decoding="async" fetchpriority="low" />
+          </noscript>
+          <span class="badge-novo">Desenhos Disponíveis</span>
+          <span class="botao-titulo">IBR QP</span>
+          <span class="botao-config">Configure seu Produto</span>
+        </a>
+      </div>
+
+      <div class="botao-linha">
+        <a href="/ConfiguradorIBRC?HYLN=1.C" class="botao-home" title="IBR C">
+          <img class="lazy-product-image" src="/ImagensProdutos/IBRC/0IBRC.webp"
+            data-src="/ImagensProdutos/IBRC/0IBRC.webp" data-path="/ImagensProdutos/IBRC/" width="593" height="421"
+            alt="IBR C" draggable="false" loading="lazy" decoding="async" fetchpriority="low" />
+          <noscript>
+            <img src="/ImagensProdutos/IBRC/0IBRC.webp" data-path="/ImagensProdutos/IBRC/" width="593" height="421"
+              alt="IBR C" draggable="false" loading="lazy" decoding="async" fetchpriority="low" />
+          </noscript>
+          <span class="botao-titulo">IBR C</span>
+          <span class="botao-config">Configure seu Produto</span>
+        </a>
+      </div>
+
+      <div class="botao-linha">
+        <a href="/ConfiguradorIBRH?HYLN=1.H" class="botao-home" title="IBR H">
+          <img class="lazy-product-image" src="/ImagensProdutos/IBRH/0IBRH.webp"
+            data-src="/ImagensProdutos/IBRH/0IBRH.webp" data-path="/ImagensProdutos/IBRH/" width="593" height="421"
+            alt="IBR H" draggable="false" loading="lazy" decoding="async" fetchpriority="low" />
+          <noscript>
+            <img src="/ImagensProdutos/IBRH/0IBRH.webp" data-path="/ImagensProdutos/IBRH/" width="593" height="421"
+              alt="IBR H" draggable="false" loading="lazy" decoding="async" fetchpriority="low" />
+          </noscript>
+          <span class="botao-titulo">IBR H</span>
+          <span class="botao-config">Configure seu Produto</span>
+        </a>
+      </div>
+
+      <div class="botao-linha">
+        <a href="/ConfiguradorIBRM?HYLN=1.M" class="botao-home" title="IBR M">
+          <img class="lazy-product-image" src="/ImagensProdutos/IBRM/0IBRM.webp"
+            data-src="/ImagensProdutos/IBRM/0IBRM.webp" data-path="/ImagensProdutos/IBRM/" width="593" height="421"
+            alt="IBR M" draggable="false" loading="lazy" decoding="async" fetchpriority="low" />
+          <noscript>
+            <img src="/ImagensProdutos/IBRM/0IBRM.webp" data-path="/ImagensProdutos/IBRM/" width="593" height="421"
+              alt="IBR M" draggable="false" loading="lazy" decoding="async" fetchpriority="low" />
+          </noscript>
+          <span class="badge-novo">Desenhos Disponíveis</span>
+          <span class="botao-titulo">IBR M</span>
+          <span class="botao-config">Configure seu Produto</span>
+        </a>
+      </div>
+
+      <div class="botao-linha">
+        <a href="/ConfiguradorIBRP?HYLN=1.P" class="botao-home" title="IBR P">
+          <img class="lazy-product-image" src="/ImagensProdutos/IBRP/0IBRP.webp"
+            data-src="/ImagensProdutos/IBRP/0IBRP.webp" data-path="/ImagensProdutos/IBRP/" width="593" height="421"
+            alt="IBR P" draggable="false" loading="lazy" decoding="async" fetchpriority="low" />
+          <noscript>
+            <img src="/ImagensProdutos/IBRP/0IBRP.webp" data-path="/ImagensProdutos/IBRP/" width="593" height="421"
+              alt="IBR P" draggable="false" loading="lazy" decoding="async" fetchpriority="low" />
+          </noscript>
+          <span class="badge-novo">Desenhos Disponíveis</span>
+          <span class="botao-titulo">IBR P</span>
+          <span class="botao-config">Configure seu Produto</span>
+        </a>
+      </div>
+
+      <div class="botao-linha">
+        <a href="/ConfiguradorIBRR?HYLN=1.R" class="botao-home" title="IBR R">
+          <img class="lazy-product-image" src="/ImagensProdutos/IBRR/0IBRR.webp"
+            data-src="/ImagensProdutos/IBRR/0IBRR.webp" data-path="/ImagensProdutos/IBRR/" width="593" height="421"
+            alt="IBR R" draggable="false" loading="lazy" decoding="async" fetchpriority="low" />
+          <noscript>
+            <img src="/ImagensProdutos/IBRR/0IBRR.webp" data-path="/ImagensProdutos/IBRR/" width="593" height="421"
+              alt="IBR R" draggable="false" loading="lazy" decoding="async" fetchpriority="low" />
+          </noscript>
+          <span class="botao-titulo">IBR R</span>
+          <span class="botao-config">Configure seu Produto</span>
+        </a>
+      </div>
+
+      <div class="botao-linha">
+        <a href="/ConfiguradorIBRX?HYLN=1.X" class="botao-home" title="IBR X">
+          <img class="lazy-product-image" src="/ImagensProdutos/IBRX/0IBRX.webp"
+            data-src="/ImagensProdutos/IBRX/0IBRX.webp" data-path="/ImagensProdutos/IBRX/" width="593" height="421"
+            alt="IBR X" draggable="false" loading="lazy" decoding="async" fetchpriority="low" />
+          <noscript>
+            <img src="/ImagensProdutos/IBRX/0IBRX.webp" data-path="/ImagensProdutos/IBRX/" width="593" height="421"
+              alt="IBR X" draggable="false" loading="lazy" decoding="async" fetchpriority="low" />
+          </noscript>
+          <span class="botao-titulo">IBR X</span>
+          <span class="botao-config">Configure seu Produto</span>
+        </a>
+      </div>
+
+      <div class="botao-linha">
+        <a href="/ConfiguradorIBRFFA?FXLN=1.FFA" class="botao-home" title="IBR P FFA">
+          <img class="lazy-product-image" src="/ImagensProdutos/IBRPFFA/0IBRPFFA.webp"
+            data-src="/ImagensProdutos/IBRPFFA/0IBRPFFA.webp" data-path="/ImagensProdutos/IBRPFFA/" width="593"
+            height="421" alt="IBR P FFA" draggable="false" loading="lazy" decoding="async" fetchpriority="low" />
+          <noscript>
+            <img src="/ImagensProdutos/IBRPFFA/0IBRPFFA.webp" data-path="/ImagensProdutos/IBRPFFA/" width="593"
+              height="421" alt="IBR P FFA" draggable="false" loading="lazy" decoding="async" fetchpriority="low" />
+          </noscript>
+          <span class="botao-titulo">IBR P FFA</span>
+          <span class="botao-config">Configure seu Produto</span>
+        </a>
+      </div>
+
+      <div class="botao-linha">
+        <a href="/ConfiguradorIBRFKA?FXLN=1.FKA" class="botao-home" title="IBR X FKA">
+          <img class="lazy-product-image" src="/ImagensProdutos/IBRXFKA/0IBRXFKA.webp"
+            data-src="/ImagensProdutos/IBRXFKA/0IBRXFKA.webp" data-path="/ImagensProdutos/IBRXFKA/" width="593"
+            height="421" alt="IBR X FKA" draggable="false" loading="lazy" decoding="async" fetchpriority="low" />
+          <noscript>
+            <img src="/ImagensProdutos/IBRXFKA/0IBRXFKA.webp" data-path="/ImagensProdutos/IBRXFKA/" width="593"
+              height="421" alt="IBR X FKA" draggable="false" loading="lazy" decoding="async" fetchpriority="low" />
+          </noscript>
+          <span class="botao-titulo">IBR X FKA</span>
+          <span class="botao-config">Configure seu Produto</span>
+        </a>
+      </div>
+
+      <div class="botao-linha">
+        <a href="/ConfiguradorIBRFR?FXLN=1.FR" class="botao-home" title="IBR C FR">
+          <img class="lazy-product-image" src="/ImagensProdutos/IBRCFR/0IBRCFR.webp"
+            data-src="/ImagensProdutos/IBRCFR/0IBRCFR.webp" data-path="/ImagensProdutos/IBRCFR/" width="593"
+            height="421" alt="IBR C FR" draggable="false" loading="lazy" decoding="async" fetchpriority="low" />
+          <noscript>
+            <img src="/ImagensProdutos/IBRCFR/0IBRCFR.webp" data-path="/ImagensProdutos/IBRCFR/" width="593"
+              height="421" alt="IBR C FR" draggable="false" loading="lazy" decoding="async" fetchpriority="low" />
+          </noscript>
+          <span class="botao-titulo">IBR C FR</span>
+          <span class="botao-config">Configure seu Produto</span>
+        </a>
+      </div>
+
+      <div class="botao-linha">
+        <a href="/ConfiguradorIBRMSI?MOLN=2.I" class="botao-home" title="IBR MS/ML">
+          <img class="lazy-product-image" src="/ImagensProdutos/IBRMSML/0IBRMSML.webp"
+            data-src="/ImagensProdutos/IBRMSML/0IBRMSML.webp" data-path="/ImagensProdutos/IBRMSML/" width="593"
+            height="421" alt="IBR MS/ML" draggable="false" loading="lazy" decoding="async" fetchpriority="low" />
+          <noscript>
+            <img src="/ImagensProdutos/IBRMSML/0IBRMSML.webp" data-path="/ImagensProdutos/IBRMSML/" width="593"
+              height="421" alt="IBR MS/ML" draggable="false" loading="lazy" decoding="async" fetchpriority="low" />
+          </noscript>
+          <span class="badge-novo">Desenhos Disponíveis</span>
+          <span class="botao-titulo">IBR MS/ML</span>
+          <span class="botao-config">Configure seu Produto</span>
+        </a>
+      </div>
+
+      <div class="botao-linha">
+        <a href="/ConfiguradorIBRMI?MOLN=3.I" class="botao-home" title="IBR T3A/T3C">
+          <img class="lazy-product-image" src="/ImagensProdutos/IBRT3AT3C/0IBRT3AT3C.webp"
+            data-src="/ImagensProdutos/IBRT3AT3C/0IBRT3AT3C.webp" data-path="/ImagensProdutos/IBRT3AT3C/" width="593"
+            height="421" alt="IBR T3A/T3C" draggable="false" loading="lazy" decoding="async" fetchpriority="low" />
+          <noscript>
+            <img src="/ImagensProdutos/IBRT3AT3C/0IBRT3AT3C.webp" data-path="/ImagensProdutos/IBRT3AT3C/" width="593"
+              height="421" alt="IBR T3A/T3C" draggable="false" loading="lazy" decoding="async" fetchpriority="low" />
+          </noscript>
+          <span class="badge-novo">Desenhos Disponíveis</span>
+          <span class="botao-titulo">IBR T3A/T3C</span>
+          <span class="botao-config">Configure seu Produto</span>
+        </a>
+      </div>
+
+      <div class="botao-linha">
+        <a href="/ConfiguradorIBRMW?MOLN=3.W" class="botao-home" title="IBR WEG ALTO RENDIMENTO">
+          <img class="lazy-product-image" src="/ImagensProdutos/WEGT3A/0WEGT3A.webp"
+            data-src="/ImagensProdutos/WEGT3A/0WEGT3A.webp" data-path="/ImagensProdutos/WEGT3A/" width="593"
+            height="421" alt="IBR WEG ALTO RENDIMENTO" draggable="false" loading="lazy" decoding="async"
+            fetchpriority="low" />
+          <noscript>
+            <img src="/ImagensProdutos/WEGT3A/0WEGT3A.webp" data-path="/ImagensProdutos/WEGT3A/" width="593"
+              height="421" alt="IBR WEG ALTO RENDIMENTO" draggable="false" loading="lazy" decoding="async"
+              fetchpriority="low" />
+          </noscript>
+          <span class="badge-novo">Desenhos Disponíveis</span>
+          <span class="botao-titulo">IBR WEG ALTO RENDIMENTO</span>
+          <span class="botao-config">Configure seu Produto</span>
+        </a>
+      </div>
+
+      <div class="botao-linha">
+        <a href="/ConfiguradorIBRMAPM?MOLN=3.APM" class="botao-home" title="IBR ANTICORROSIVOS APM">
+          <img class="lazy-product-image" src="/ImagensProdutos/IBRAPM/0IBRAPM.webp"
+            data-src="/ImagensProdutos/IBRAPM/0IBRAPM.webp" data-path="/ImagensProdutos/IBRAPM/" width="593"
+            height="421" alt="IBR ANTICORROSIVOS APM" draggable="false" loading="lazy" decoding="async"
+            fetchpriority="low" />
+          <noscript>
+            <img src="/ImagensProdutos/IBRAPM/0IBRAPM.webp" data-path="/ImagensProdutos/IBRAPM/" width="593"
+              height="421" alt="IBR ANTICORROSIVOS APM" draggable="false" loading="lazy" decoding="async"
+              fetchpriority="low" />
+          </noscript>
+          <span class="badge-novo">Desenhos Disponíveis</span>
+          <span class="botao-titulo">IBR ANTICORROSIVOS APM</span>
+          <span class="botao-config">Configure seu Produto</span>
+        </a>
+      </div>
+
+      <div class="botao-linha">
+        <a href="/ConfiguradorIBRMSPM?MOLN=3.SPM" class="botao-home" title="IBR ANTICORROSIVOS SPM">
+          <img class="lazy-product-image" src="/ImagensProdutos/IBRSPM/0IBRSPM.webp"
+            data-src="/ImagensProdutos/IBRSPM/0IBRSPM.webp" data-path="/ImagensProdutos/IBRSPM/" width="593"
+            height="421" alt="IBR ANTICORROSIVOS SPM" draggable="false" loading="lazy" decoding="async"
+            fetchpriority="low" />
+          <noscript>
+            <img src="/ImagensProdutos/IBRSPM/0IBRSPM.webp" data-path="/ImagensProdutos/IBRSPM/" width="593"
+              height="421" alt="IBR ANTICORROSIVOS SPM" draggable="false" loading="lazy" decoding="async"
+              fetchpriority="low" />
+          </noscript>
+          <span class="badge-novo">Desenhos Disponíveis</span>
+          <span class="botao-titulo">IBR ANTICORROSIVOS SPM</span>
+          <span class="botao-config">Configure seu Produto</span>
+        </a>
+      </div>
+
+      <div class="botao-linha">
+        <a href="/ConfiguradorIBRPB?PLLN=3.PB" class="botao-home" title="IBR PB">
+          <img class="lazy-product-image" src="/ImagensProdutos/IBRPB/0IBRPB.webp"
+            data-src="/ImagensProdutos/IBRPB/0IBRPB.webp" data-path="/ImagensProdutos/IBRPB/" width="593" height="421"
+            alt="IBR PB" draggable="false" loading="lazy" decoding="async" fetchpriority="low" />
+          <noscript>
+            <img src="/ImagensProdutos/IBRPB/0IBRPB.webp" data-path="/ImagensProdutos/IBRPB/" width="593" height="421"
+              alt="IBR PB" draggable="false" loading="lazy" decoding="async" fetchpriority="low" />
+          </noscript>
+          <span class="badge-novo">Desenhos Disponíveis</span>
+          <span class="botao-titulo">IBR PB</span>
+          <span class="botao-config">Configure seu Produto</span>
+        </a>
+      </div>
+
+      <div class="botao-linha">
+        <a href="/ConfiguradorIBRPBL?PLLN=3.PBL" class="botao-home" title="IBR PBL">
+          <img class="lazy-product-image" src="/ImagensProdutos/IBRPBL/0IBRPBL.webp"
+            data-src="/ImagensProdutos/IBRPBL/0IBRPBL.webp" data-path="/ImagensProdutos/IBRPBL/" width="593"
+            height="421" alt="IBR PBL" draggable="false" loading="lazy" decoding="async" fetchpriority="low" />
+          <noscript>
+            <img src="/ImagensProdutos/IBRPBL/0IBRPBL.webp" data-path="/ImagensProdutos/IBRPBL/" width="593"
+              height="421" alt="IBR PBL" draggable="false" loading="lazy" decoding="async" fetchpriority="low" />
+          </noscript>
+          <span class="badge-novo">Desenhos Disponíveis</span>
+          <span class="botao-titulo">IBR PBL</span>
+          <span class="botao-config">Configure seu Produto</span>
+        </a>
+      </div>
+
+      <div class="botao-linha">
+        <a href="/ConfiguradorIBRSA?PLLN=3.SA" class="botao-home" title="IBR SA">
+          <img class="lazy-product-image" src="/ImagensProdutos/IBRSA/0IBRSA.webp"
+            data-src="/ImagensProdutos/IBRSA/0IBRSA.webp" data-path="/ImagensProdutos/IBRSA/" width="593" height="421"
+            alt="IBR SA" draggable="false" loading="lazy" decoding="async" fetchpriority="low" />
+          <noscript>
+            <img src="/ImagensProdutos/IBRSA/0IBRSA.webp" data-path="/ImagensProdutos/IBRSA/" width="593" height="421"
+              alt="IBR SA" draggable="false" loading="lazy" decoding="async" fetchpriority="low" />
+          </noscript>
+          <span class="badge-novo">Desenhos Disponíveis</span>
+          <span class="botao-titulo">IBR SA</span>
+          <span class="botao-config">Configure seu Produto</span>
+        </a>
+      </div>
+
+      <div class="botao-linha">
+        <a href="/ConfiguradorIBRSB?PLLN=3.SB" class="botao-home" title="IBR SB">
+          <img class="lazy-product-image" src="/ImagensProdutos/IBRSB/0IBRSB.webp"
+            data-src="/ImagensProdutos/IBRSB/0IBRSB.webp" data-path="/ImagensProdutos/IBRSB/" width="593" height="421"
+            alt="IBR SB" draggable="false" loading="lazy" decoding="async" fetchpriority="low" />
+          <noscript>
+            <img src="/ImagensProdutos/IBRSB/0IBRSB.webp" data-path="/ImagensProdutos/IBRSB/" width="593" height="421"
+              alt="IBR SB" draggable="false" loading="lazy" decoding="async" fetchpriority="low" />
+          </noscript>
+          <span class="badge-novo">Desenhos Disponíveis</span>
+          <span class="botao-titulo">IBR SB</span>
+          <span class="botao-config">Configure seu Produto</span>
+        </a>
+      </div>
+
+      <div class="botao-linha">
+        <a href="/ConfiguradorIBRSBL?PLLN=3.SBL" class="botao-home" title="IBR SBL">
+          <img class="lazy-product-image" src="/ImagensProdutos/IBRSBL/0IBRSBL.webp"
+            data-src="/ImagensProdutos/IBRSBL/0IBRSBL.webp" data-path="/ImagensProdutos/IBRSBL/" width="593"
+            height="421" alt="IBR SBL" draggable="false" loading="lazy" decoding="async" fetchpriority="low" />
+          <noscript>
+            <img src="/ImagensProdutos/IBRSBL/0IBRSBL.webp" data-path="/ImagensProdutos/IBRSBL/" width="593"
+              height="421" alt="IBR SBL" draggable="false" loading="lazy" decoding="async" fetchpriority="low" />
+          </noscript>
+          <span class="badge-novo">Desenhos Disponíveis</span>
+          <span class="botao-titulo">IBR SBL</span>
+          <span class="botao-config">Configure seu Produto</span>
+        </a>
+      </div>
+
+      <div class="botao-linha">
+        <a href="/ConfiguradorIBRSD?PLLN=3.SD" class="botao-home" title="IBR SD">
+          <img class="lazy-product-image" src="/ImagensProdutos/IBRSD/0IBRSD.webp"
+            data-src="/ImagensProdutos/IBRSD/0IBRSD.webp" data-path="/ImagensProdutos/IBRSD/" width="593" height="421"
+            alt="IBR SD" draggable="false" loading="lazy" decoding="async" fetchpriority="low" />
+          <noscript>
+            <img src="/ImagensProdutos/IBRSD/0IBRSD.webp" data-path="/ImagensProdutos/IBRSD/" width="593" height="421"
+              alt="IBR SD" draggable="false" loading="lazy" decoding="async" fetchpriority="low" />
+          </noscript>
+          <span class="badge-novo">Desenhos Disponíveis</span>
+          <span class="botao-titulo">IBR SD</span>
+          <span class="botao-config">Configure seu Produto</span>
+        </a>
+      </div>
+
+      <div class="botao-linha">
+        <a href="/ConfiguradorIBRV?VALN=1.V" class="botao-home" title="IBR V">
+          <img class="lazy-product-image" src="/ImagensProdutos/IBRV/0IBRV.webp"
+            data-src="/ImagensProdutos/IBRV/0IBRV.webp" data-path="/ImagensProdutos/IBRV/" width="593" height="421"
+            alt="IBR V" draggable="false" loading="lazy" decoding="async" fetchpriority="low" />
+          <noscript>
+            <img src="/ImagensProdutos/IBRV/0IBRV.webp" data-path="/ImagensProdutos/IBRV/" width="593" height="421"
+              alt="IBR V" draggable="false" loading="lazy" decoding="async" fetchpriority="low" />
+          </noscript>
+          <span class="badge-novo">Desenhos Disponíveis</span>
+          <span class="botao-titulo">IBR V</span>
+          <span class="botao-config">Configure seu Produto</span>
+        </a>
+      </div>
+
+      <div class="botao-linha">
+        <a href="/ConfiguradorIBRZ?ACLN=1.Z" class="botao-home" title="IBR Z">
+          <img class="lazy-product-image" src="/ImagensProdutos/IBRZ/0IBRZ.webp"
+            data-src="/ImagensProdutos/IBRZ/0IBRZ.webp" data-path="/ImagensProdutos/IBRZ/" width="593" height="421"
+            alt="IBR Z" draggable="false" loading="lazy" decoding="async" fetchpriority="low" />
+          <noscript>
+            <img src="/ImagensProdutos/IBRZ/0IBRZ.webp" data-path="/ImagensProdutos/IBRZ/" width="593" height="421"
+              alt="IBR Z" draggable="false" loading="lazy" decoding="async" fetchpriority="low" />
+          </noscript>
+          <span class="botao-titulo">IBR Z</span>
+          <span class="botao-config">Configure seu Produto</span>
+        </a>
+      </div>
+
+      <div class="botao-linha">
+        <a href="/ConfiguradorIBRVFN?ACLN=1.VFN" class="botao-home" title="IBR Z">
+          <img class="lazy-product-image" src="/ImagensProdutos/IBRVFN/0IBRVFN.webp"
+            data-src="/ImagensProdutos/IBRVFN/0IBRVFN.webp" data-path="/ImagensProdutos/IBRVFN/" width="593"
+            height="421" alt="IBR VFN" draggable="false" loading="lazy" decoding="async" fetchpriority="low" />
+          <noscript>
+            <img src="/ImagensProdutos/IBRVFN/0IBRVFN.webp" data-path="/ImagensProdutos/IBRVFN/" width="593"
+              height="421" alt="IBR VFN" draggable="false" loading="lazy" decoding="async" fetchpriority="low" />
+          </noscript>
+          <span class="botao-titulo">IBR VFN</span>
+          <span class="botao-config">Configure seu Produto</span>
+        </a>
+      </div>
+
+      <div class="botao-linha">
+        <a href="/ConfiguradorIBRGR?AELN=3.GR" class="botao-home" title="IBR GR">
+          <img class="lazy-product-image" src="/ImagensProdutos/IBRGR/0IBRGR.webp"
+            data-src="/ImagensProdutos/IBRGR/0IBRGR.webp" data-path="/ImagensProdutos/IBRGR/" width="593" height="421"
+            alt="IBR GR" draggable="false" loading="lazy" decoding="async" fetchpriority="low" />
+          <noscript>
+            <img src="/ImagensProdutos/IBRGR/0IBRGR.webp" data-path="/ImagensProdutos/IBRGR/" width="593" height="421"
+              alt="IBR GR" draggable="false" loading="lazy" decoding="async" fetchpriority="low" />
+          </noscript>
+          <span class="botao-titulo">IBR GR</span>
+          <span class="botao-config">Configure seu Produto</span>
+        </a>
+      </div>
+
+      <div class="botao-linha">
+        <a href="/ConfiguradorIBRGS?AELN=3.GS" class="botao-home" title="IBR GS">
+          <img class="lazy-product-image" src="/ImagensProdutos/IBRGS/0IBRGS.webp"
+            data-src="/ImagensProdutos/IBRGS/0IBRGS.webp" data-path="/ImagensProdutos/IBRGS/" width="593" height="421"
+            alt="IBR GS" draggable="false" loading="lazy" decoding="async" fetchpriority="low" />
+          <noscript>
+            <img src="/ImagensProdutos/IBRGS/0IBRGS.webp" data-path="/ImagensProdutos/IBRGS/" width="593" height="421"
+              alt="IBR GS" draggable="false" loading="lazy" decoding="async" fetchpriority="low" />
+          </noscript>
+          <span class="botao-titulo">IBR GS</span>
+          <span class="botao-config">Configure seu Produto</span>
+        </a>
+      </div>
+
+      <div class="botao-linha">
+        <a href="/ConfiguradorIBRRIC?AELN=3.RIC" class="botao-home" title="IBR RIC">
+          <img class="lazy-product-image" src="/ImagensProdutos/IBRRIC/0IBRRIC.webp"
+            data-src="/ImagensProdutos/IBRRIC/0IBRRIC.webp" data-path="/ImagensProdutos/IBRRIC/" width="593"
+            height="421" alt="IBR RIC" draggable="false" loading="lazy" decoding="async" fetchpriority="low" />
+          <noscript>
+            <img src="/ImagensProdutos/IBRRIC/0IBRRIC.webp" data-path="/ImagensProdutos/IBRRIC/" width="593"
+              height="421" alt="IBR RIC" draggable="false" loading="lazy" decoding="async" fetchpriority="low" />
+          </noscript>
+          <span class="botao-titulo">IBR RIC</span>
+          <span class="botao-config">Configure seu Produto</span>
+        </a>
+      </div>
+
+      <div class="botao-linha">
+        <a href="/ConfiguradorIBRK?INLN=4.K" class="botao-home" title="IBR INVEOR M">
+          <img class="lazy-product-image" src="/ImagensProdutos/IBRK/0IBRK.webp"
+            data-src="/ImagensProdutos/IBRK/0IBRK.webp" data-path="/ImagensProdutos/IBRK/" width="593" height="421"
+            alt="IBR INVEOR M" draggable="false" loading="lazy" decoding="async" fetchpriority="low" />
+          <noscript>
+            <img src="/ImagensProdutos/IBRK/0IBRK.webp" data-path="/ImagensProdutos/IBRK/" width="593" height="421"
+              alt="IBR INVEOR M" draggable="false" loading="lazy" decoding="async" fetchpriority="low" />
+          </noscript>
+          <span class="botao-titulo">IBR INVEOR M</span>
+          <span class="botao-config">Configure seu Produto</span>
+        </a>
+        <div id="home-sentinel" aria-hidden="true"></div>
+    </section>
+
+    <div id="titulo-estrutural" class="visually-hidden">
+      Configurador de Produtos
+    </div>
+  </main>
+
+  <script nonce="<?= htmlspecialchars(csp_nonce(), ENT_QUOTES, 'UTF-8'); ?>" defer
+    data-versioned-src="/Layout/LayoutAjudaSeletores.min.js"></script>
+  <script nonce="<?= htmlspecialchars(csp_nonce(), ENT_QUOTES, 'UTF-8'); ?>" defer
+    data-versioned-src="/PaginasPrincipal/PaginaProdutos.min.js"></script>
