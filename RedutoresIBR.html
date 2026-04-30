@@ -1,0 +1,665 @@
+<!--
+<?php
+require_once __DIR__ . '/SEO/HiddenSeoText.php';
+
+$canonicalOrigin = 'https://configurador.redutoresibr.com.br';
+$trackingParameters = [
+  'utm_source',
+  'utm_medium',
+  'utm_campaign',
+  'utm_term',
+  'utm_content',
+  'gclid',
+  'fbclid',
+  'msclkid',
+  'dclid'
+];
+
+$friendlyCodeMap = [
+  '1.C' => 'IBRC',
+  '1.FFA' => 'IBRPFFA',
+  '1.FKA' => 'IBRXFKA',
+  '1.FR' => 'IBRCFR',
+  '1.H' => 'IBRH',
+  '1.M' => 'IBRM',
+  '1.P' => 'IBRP',
+  '1.Q' => 'IBRQ',
+  '1.QDR' => 'IBRQDR',
+  '1.QP' => 'IBRQP',
+  '1.R' => 'IBRR',
+  '1.V' => 'IBRV',
+  '1.VFN' => 'IBRVFN',
+  '1.X' => 'IBRX',
+  '1.Z' => 'IBRZ',
+  '2.I' => 'IBRMSML',
+  '3.APM' => 'ANTICORROSIVOSAPM',
+  '3.GR' => 'IBRGR',
+  '3.GS' => 'IBRGS',
+  '3.I' => 'IBRT3AT3C',
+  '3.PB' => 'IBRPB',
+  '3.PBL' => 'IBRPBL',
+  '3.RIC' => 'IBRRIC',
+  '3.SA' => 'IBRSA',
+  '3.SB' => 'IBRSB',
+  '3.SBL' => 'IBRSBL',
+  '3.SD' => 'IBRSD',
+  '3.SPM' => 'ANTICORROSIVOSSPM',
+  '3.W' => 'WEGALTORENDIMENTO',
+  '4.K' => 'IBRK'
+];
+
+
+$reverseFriendlyCodeMap = [];
+foreach ($friendlyCodeMap as $lineCode => $friendlyCode) {
+  $reverseFriendlyCodeMap[strtoupper($friendlyCode)] = $lineCode;
+}
+
+$seoLineTitles = [
+  '1.FFA' => 'Configurador IBR PFFA',
+  '1.FKA' => 'Configurador IBR XFKA',
+  '1.QDR' => 'Configurador IBR QDR',
+  '3.SB' => 'Configurador IBR SB',
+  '3.GR' => 'Configurador IBR GR',
+  '3.SBL' => 'Configurador IBR SBL',
+  '1.R' => 'Configurador IBR R',
+  '2.I' => 'Configurador IBR MS/ML',
+  '3.W' => 'Configurador WEG Alto Rendimento',
+  '1.V' => 'Configurador IBR V',
+  '1.Z' => 'Configurador IBR Z'
+];
+
+$requestUri = isset($_SERVER['REQUEST_URI']) ? (string) $_SERVER['REQUEST_URI'] : '/';
+$requestPath = parse_url($requestUri, PHP_URL_PATH);
+$requestPath = is_string($requestPath) && $requestPath !== '' ? $requestPath : '/';
+$requestPath = '/' . ltrim($requestPath, '/');
+
+$rawQuery = parse_url($requestUri, PHP_URL_QUERY);
+$requestParams = [];
+if (is_string($rawQuery) && $rawQuery !== '') {
+  parse_str($rawQuery, $requestParams);
+}
+
+foreach ($trackingParameters as $trackingParameter) {
+  unset($requestParams[$trackingParameter]);
+}
+
+$selectedLineCode = null;
+$friendlyPath = $requestPath;
+foreach ($requestParams as $parameterValue) {
+  if (!is_string($parameterValue) || $parameterValue === '') {
+    continue;
+  }
+  $normalizedCode = strtoupper($parameterValue);
+  if (!isset($friendlyCodeMap[$normalizedCode])) {
+    continue;
+  }
+  $selectedLineCode = $normalizedCode;
+  break;
+}
+
+if ($selectedLineCode === null && preg_match('~^/Configurador([^/?#]+)$~i', $requestPath, $pathnameMatches)) {
+  $slug = strtoupper($pathnameMatches[1]);
+  if (isset($reverseFriendlyCodeMap[$slug])) {
+    $selectedLineCode = $reverseFriendlyCodeMap[$slug];
+  }
+}
+
+$canonicalParams = $requestParams;
+if ($selectedLineCode !== null && isset($friendlyCodeMap[$selectedLineCode])) {
+  $friendlyPath = '/Configurador' . $friendlyCodeMap[$selectedLineCode];
+  $canonicalParams = [];
+}
+
+$canonicalQueryString = http_build_query($canonicalParams, '', '&', PHP_QUERY_RFC3986);
+$canonicalHref = $canonicalOrigin . $friendlyPath . ($canonicalQueryString !== '' ? '?' . $canonicalQueryString : '');
+
+$pageTitle = 'Configurador de Produtos IBR';
+if ($selectedLineCode !== null && isset($seoLineTitles[$selectedLineCode])) {
+  $pageTitle = $seoLineTitles[$selectedLineCode] . ' | Redutores IBR';
+}
+?>
+-->
+
+<!DOCTYPE html>
+<html lang="pt-BR">
+
+<head>
+
+  <meta charset="utf-8" />
+  <meta content="width=device-width, initial-scale=1.0, viewport-fit=cover" name="viewport" />
+  <link rel="preload" href="/Fontes/Sarabun-Regular.woff2" as="font" type="font/woff2" crossorigin>
+  <link rel="preload" href="/Fontes/Sarabun-SemiBold.woff2" as="font" type="font/woff2" crossorigin>
+  <link rel="preload" href="/Fontes/Sarabun-Bold.woff2" as="font" type="font/woff2" crossorigin>
+  <style id="font-face-inline">
+    @font-face {
+      font-family: 'Sarabun';
+      src: url('/Fontes/Sarabun-Regular.woff2') format('woff2');
+      font-weight: 400;
+      font-style: normal;
+      font-display: swap;
+    }
+
+    @font-face {
+      font-family: 'Sarabun';
+      src: url('/Fontes/Sarabun-SemiBold.woff2') format('woff2');
+      font-weight: 600;
+      font-style: normal;
+      font-display: swap;
+    }
+
+    @font-face {
+      font-family: 'Sarabun';
+      src: url('/Fontes/Sarabun-Bold.woff2') format('woff2');
+      font-weight: 700;
+      font-style: normal;
+      font-display: swap;
+    }
+
+    @font-face {
+      font-family: 'Sora';
+      src: url('/Fontes/Sora-Bold.woff2') format('woff2');
+      font-weight: 700;
+      font-style: normal;
+      font-display: swap;
+    }
+  </style>
+
+  <script nonce="<?= htmlspecialchars(csp_nonce(), ENT_QUOTES, 'UTF-8'); ?>">
+    (function bootstrapInitialLoader(global) {
+      if (!global || typeof document === 'undefined') {
+        return;
+      }
+
+      function ensureInitialLoader() {
+        if (typeof document === 'undefined') {
+          return;
+        }
+
+        var root = document.documentElement;
+
+        function applyRootLoadingState() {
+          if (!root) {
+            return;
+          }
+
+          if (!root.hasAttribute('data-initial-loader-bg')) {
+            root.setAttribute('data-initial-loader-bg', root.style.backgroundColor || '');
+          }
+
+          if (!root.hasAttribute('data-initial-loader-aria')) {
+            var previousAriaBusy = root.getAttribute('aria-busy');
+            root.setAttribute('data-initial-loader-aria', previousAriaBusy == null ? '' : previousAriaBusy);
+          }
+
+          root.style.backgroundColor = '#ec4115';
+          root.classList.add('is-initial-loading');
+          root.setAttribute('data-loading', 'true');
+          root.setAttribute('aria-busy', 'true');
+        }
+
+        function ensureLoaderStyles() {
+          var head = document.head || document.getElementsByTagName('head')[0];
+          if (!head || head.querySelector('style[data-initial-loader-style="true"]')) {
+            return;
+          }
+
+          var style = document.createElement('style');
+          style.dataset.initialLoaderStyle = 'true';
+          style.textContent = [
+            '#loader{position:fixed;z-index:1000000;inset:0;display:flex;align-items:center;justify-content:center;background:#ec4115;}',
+            '#loader .spinner{width:40px;height:40px;background-color:#fff;animation:loader-rotate 1.2s infinite ease-in-out;}',
+            '@keyframes loader-rotate{0%{transform:perspective(120px) rotateX(0deg) rotateY(0deg);}50%{transform:perspective(120px) rotateX(-180.1deg) rotateY(0deg);}100%{transform:perspective(120px) rotateX(-180deg) rotateY(-179.9deg);}}',
+            '@-webkit-keyframes loader-rotate{0%{-webkit-transform:perspective(120px) rotateX(0deg) rotateY(0deg);}50%{-webkit-transform:perspective(120px) rotateX(-180.1deg) rotateY(0deg);}100%{-webkit-transform:perspective(120px) rotateX(-180deg) rotateY(-179.9deg);}}'
+          ].join('');
+          head.appendChild(style);
+        }
+
+        function createLoader() {
+          if (document.getElementById('loader')) {
+            return;
+          }
+
+          try {
+            var loader = document.createElement('div');
+            loader.id = 'loader';
+            loader.className = 'loader initial-loader';
+            loader.setAttribute('role', 'status');
+            loader.setAttribute('aria-live', 'polite');
+            loader.setAttribute('aria-busy', 'true');
+            loader.setAttribute('aria-label', 'Carregando...');
+            loader.dataset.initialLoader = 'true';
+            loader.style.cssText = [
+              'position:fixed',
+              'z-index:1000000',
+              'inset:0',
+              'display:flex',
+              'align-items:center',
+              'justify-content:center',
+              'background:#ec4115'
+            ].join(';');
+
+            var spinner = document.createElement('div');
+            spinner.className = 'spinner';
+            spinner.setAttribute('aria-hidden', 'true');
+            spinner.style.cssText = [
+              'width:40px',
+              'height:40px',
+              'background-color:#fff',
+              'animation:loader-rotate 1.2s infinite ease-in-out'
+            ].join(';');
+
+            loader.appendChild(spinner);
+            document.body.appendChild(loader);
+          } catch (err) {
+            console.error('Failed to create initial loader', err);
+          }
+        }
+
+        function initLoader() {
+          applyRootLoadingState();
+          ensureLoaderStyles();
+          createLoader();
+        }
+
+        applyRootLoadingState();
+        ensureLoaderStyles();
+
+        if (document.body) {
+          createLoader();
+        } else {
+          document.addEventListener('DOMContentLoaded', initLoader, { once: true });
+        }
+      }
+
+      global.ensureInitialLoader = ensureInitialLoader;
+      ensureInitialLoader();
+    })(typeof window !== 'undefined' ? window : this);
+  </script>
+
+  <link href="/Imagens/Icone.ico" rel="shortcut icon" type="image/x-icon" />
+  <link href="/Imagens/Icone.ico" rel="icon" type="image/x-icon" />
+  <link rel="apple-touch-icon" href="/Imagens/LogotipoAplicativo192192.png">
+  <link rel="manifest" href="/Manifest.json">
+  <script nonce="<?= htmlspecialchars(csp_nonce(), ENT_QUOTES, 'UTF-8'); ?>">
+    window.APP_VERSION = 'versao.8.7.2';
+    window.__APP_VERSION_SOURCE__ = 'inline';
+  </script>
+  <script nonce="<?= htmlspecialchars(csp_nonce(), ENT_QUOTES, 'UTF-8'); ?>" src="/Versionamento/CarregarVersao.js"
+    defer></script>
+  <script nonce="<?= htmlspecialchars(csp_nonce(), ENT_QUOTES, 'UTF-8'); ?>">
+    (function initPreferredHomeFiltersState() {
+      var STORAGE_KEY = 'filtros_produtos';
+      var ROOT_ATTR = 'data-home-filtros-open';
+
+      function applyPreferredState(opened) {
+        if (opened) {
+          document.documentElement.setAttribute(ROOT_ATTR, 'true');
+        } else {
+          document.documentElement.removeAttribute(ROOT_ATTR);
+        }
+      }
+
+      function readStoredPreference() {
+        if (typeof window === 'undefined' || !('localStorage' in window)) {
+          return null;
+        }
+        try {
+          var raw = window.localStorage.getItem(STORAGE_KEY);
+          return raw ? JSON.parse(raw) : null;
+        } catch (error) {
+          return null;
+        }
+      }
+
+      var stored = readStoredPreference();
+      applyPreferredState(Boolean(stored && stored.filtrosAbertos === true));
+
+      window.__setHomeFiltrosRootState = function setHomeFiltrosRootState(opened) {
+        applyPreferredState(Boolean(opened));
+      };
+    })();
+  </script>
+  <link rel="preconnect" href="https://cdn.jsdelivr.net">
+  <link rel="dns-prefetch" href="//www.googletagmanager.com">
+  <link rel="prefetch" href="/Fontes/Sora-Bold.woff2" data-versioned-href="/Fontes/Sora-Bold.woff2" as="font"
+    type="font/woff2" crossorigin>
+  <link rel="preload" href="/Layout/Layout.min.css" data-versioned-href="/Layout/Layout.min.css" as="style">
+  <link rel="preload" as="image" href="/ImagensProdutos/IBRQ/0IBRQ.webp" fetchpriority="high">
+  <link rel="stylesheet" href="/Layout/Layout.min.css" data-versioned-href="/Layout/Layout.min.css">
+  <link rel="preload" href="/Acessibilidade/LayoutAcessibilidade.css"
+    data-versioned-href="/Acessibilidade/LayoutAcessibilidade.css" as="style">
+  <link rel="stylesheet" href="/Acessibilidade/LayoutAcessibilidade.css"
+    data-versioned-href="/Acessibilidade/LayoutAcessibilidade.css">
+  <style>
+    html {
+      overflow-y: scroll;
+      scrollbar-gutter: stable both-edges;
+    }
+
+    @supports (scrollbar-gutter: stable) {
+      html {
+        overflow-y: auto;
+      }
+    }
+
+    #app-shell[data-placeholder="true"] {
+      min-height: clamp(760px, calc(100vh - 180px), 1040px);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      padding: 1rem;
+      background: #f7f7f7;
+    }
+
+    #app-shell[data-placeholder="true"] .app-shell__placeholder {
+      width: min(1100px, 100%);
+      height: clamp(560px, 78vh, 900px);
+      border-radius: 16px;
+      background: linear-gradient(135deg, #ffffff 0%, #f1f1f1 50%, #ffffff 100%);
+      box-shadow: 0 10px 24px rgba(0, 0, 0, 0.08);
+      animation: app-shell-pulse 1.4s ease-in-out infinite;
+    }
+
+    @keyframes app-shell-pulse {
+      0% {
+        opacity: 0.6;
+      }
+
+      50% {
+        opacity: 1;
+      }
+
+      100% {
+        opacity: 0.6;
+      }
+    }
+
+    @media (prefers-color-scheme: dark) {
+      #app-shell[data-placeholder="true"] {
+        background: #161616;
+      }
+
+      #app-shell[data-placeholder="true"] .app-shell__placeholder {
+        background: linear-gradient(135deg, #1f1f1f 0%, #232323 50%, #1f1f1f 100%);
+        box-shadow: 0 10px 24px rgba(0, 0, 0, 0.4);
+      }
+    }
+  </style>
+  <meta name="color-scheme" content="light dark">
+  <meta name="mobile-web-app-capable" content="yes">
+  <meta name="apple-mobile-web-app-capable" content="yes">
+  <link rel="canonical" href="<?= htmlspecialchars($canonicalHref, ENT_QUOTES, 'UTF-8'); ?>">
+  <link rel="alternate" hreflang="pt-BR" href="<?= htmlspecialchars($canonicalHref, ENT_QUOTES, 'UTF-8'); ?>">
+  <link rel="alternate" hreflang="x-default" href="<?= htmlspecialchars($canonicalHref, ENT_QUOTES, 'UTF-8'); ?>">
+  <title>Home | Configurador de Produtos IBR</title>
+  <meta name="description"
+    content="Ferramenta online para configuração de redutores, motorredutores e motores. Configure linhas como IBR Q, IBR QDR, IBR QP, IBR C, IBR H, IBR M, IBR P, IBR R, IBR X e outras.">
+  <meta name="keywords"
+    content="IBR, redutores, configurador, motores, variadores, planetários, desenhos, cotações, 3D Download, Download, 3D, PDF, PDF Download, Desenhos Download, Cotação, Orçamento">
+  <meta name="author" content="Redutores IBR">
+  <meta name="robots" content="index, follow, max-snippet:-1, max-image-preview:large, max-video-preview:-1">
+  <meta name="googlebot" content="index, follow, max-snippet:-1, max-image-preview:large, max-video-preview:-1">
+  <meta property="og:title" content="<?= htmlspecialchars($pageTitle, ENT_QUOTES, 'UTF-8'); ?>">
+  <meta property="og:description"
+    content="Ferramenta online para configuração de redutores, motorredutores e motores das diversas linhas IBR.">
+  <meta property="og:type" content="website">
+  <meta property="og:image" content="https://configurador.redutoresibr.com.br/Imagens/LogotipoAplicativo512512.png">
+  <meta name="twitter:image" content="https://configurador.redutoresibr.com.br/Imagens/LogotipoAplicativo512512.png">
+  <meta property="og:image:alt" content="Logotipo">
+  <meta property="og:image:width" content="512">
+  <meta property="og:image:height" content="512">
+  <meta property="og:url" content="<?= htmlspecialchars($canonicalHref, ENT_QUOTES, 'UTF-8'); ?>">
+  <meta property="og:locale" content="pt_BR">
+  <meta property="og:site_name" content="Configurador de Produtos IBR">
+  <meta name="twitter:card" content="summary_large_image">
+  <meta name="twitter:title" content="<?= htmlspecialchars($pageTitle, ENT_QUOTES, 'UTF-8'); ?>">
+  <meta name="twitter:url" content="<?= htmlspecialchars($canonicalHref, ENT_QUOTES, 'UTF-8'); ?>">
+  <meta name="twitter:description"
+    content="Configure online redutores, motorredutores e motores das principais linhas.">
+  <meta name="twitter:image" content="https://configurador.redutoresibr.com.br/Imagens/LogotipoAplicativo512512.png">
+
+  <script nonce="<?= htmlspecialchars(csp_nonce(), ENT_QUOTES, 'UTF-8'); ?>">
+    (function preloadCarregarPagina() {
+      try {
+        var head = document.head || document.getElementsByTagName('head')[0];
+        if (!head || head.querySelector('link[data-preload-carregar-pagina]')) {
+          return;
+        }
+        var supportCheck = document.createElement('link');
+        if (supportCheck.relList && typeof supportCheck.relList.supports === 'function' &&
+          !supportCheck.relList.supports('preload')) {
+          return;
+        }
+        var link = document.createElement('link');
+        link.rel = 'preload';
+        link.as = 'script';
+        link.setAttribute('data-preload-carregar-pagina', 'true');
+        var resolver = typeof buildVersionedAssetUrl === 'function'
+          ? buildVersionedAssetUrl
+          : function fallbackResolver(url) {
+            if (typeof window !== 'undefined') {
+              var version = window.APP_VERSION;
+              if (typeof version === 'string') {
+                version = version.trim();
+              } else if (version != null) {
+                version = String(version);
+              }
+              if (version) {
+                var normalizedUrl = url;
+                var hashIndex = normalizedUrl.indexOf('#');
+                var hash = '';
+                if (hashIndex >= 0) {
+                  hash = normalizedUrl.slice(hashIndex);
+                  normalizedUrl = normalizedUrl.slice(0, hashIndex);
+                }
+                var separator = normalizedUrl.indexOf('?') >= 0 ? '&' : '?';
+                return normalizedUrl + separator + 'versao=' + encodeURIComponent(version) + hash;
+              }
+            }
+            return url;
+          };
+        link.href = resolver('/PaginasCarregarPagina/CarregarPagina.min.js');
+        head.appendChild(link);
+      } catch (error) {
+        console.warn('CarregarPagina preload setup failed.', error);
+      }
+    })();
+  </script>
+  <script nonce="<?= htmlspecialchars(csp_nonce(), ENT_QUOTES, 'UTF-8'); ?>"
+    data-versioned-src="/SEO/RegraLinksCanonicos.js" defer></script>
+  <script nonce="<?= htmlspecialchars(csp_nonce(), ENT_QUOTES, 'UTF-8'); ?>" type="application/ld+json">
+    {
+      "@context": "https://schema.org",
+      "@type": "WebSite",
+      "@id": "https://configurador.redutoresibr.com.br/#website",
+      "url": "https://configurador.redutoresibr.com.br/",
+      "name": "Configurador de Produtos IBR",
+      "inLanguage": "pt-BR",
+      "publisher": {
+        "@type": "Organization",
+        "@id": "https://www.redutoresibr.com.br/#organization",
+        "name": "Redutores IBR",
+        "url": "https://www.redutoresibr.com.br/",
+        "logo": {
+          "@type": "ImageObject",
+          "url": "https://configurador.redutoresibr.com.br/Imagens/LogotipoAplicativo512512.png",
+          "width": 512,
+          "height": 512
+        }
+      },
+      "potentialAction": {
+        "@type": "SearchAction",
+        "target": "https://configurador.redutoresibr.com.br/?busca={search_term_string}",
+        "query-input": "required name=search_term_string"
+      }
+    }
+  </script>
+  <script nonce="<?= htmlspecialchars(csp_nonce(), ENT_QUOTES, 'UTF-8'); ?>" type="application/ld+json">
+    {
+      "@context": "https://schema.org",
+      "@type": "Organization",
+      "@id": "https://www.redutoresibr.com.br/#organization",
+      "name": "Redutores IBR",
+      "url": "https://www.redutoresibr.com.br/",
+      "logo": "https://configurador.redutoresibr.com.br/Imagens/LogotipoAplicativo512512.png"
+    }
+ </script>
+  <script nonce="<?= htmlspecialchars(csp_nonce(), ENT_QUOTES, 'UTF-8'); ?>">
+    window.__layoutStylesConfig = {
+      loadMainLayout: true,
+      loadBootstrap: false,
+      loadHomeStyles: true,
+      autoLoadDeferred: true
+    };
+  </script>
+</head>
+
+<body>
+
+  <?php echo renderHiddenSeoText('Visão geral do configurador online de produtos Redutores IBR', [
+      'A página inicial reúne o acesso ao configurador de produtos e aos principais fluxos de navegação para seleção técnica de redutores, motorredutores, variadores e acessórios industriais. O usuário consegue iniciar a busca por linha, abrir filtros e avançar para informações de aplicação, desenhos e solicitação de cotação.',
+      'O conteúdo complementar reforça que o portal foi estruturado para apoiar decisões de engenharia e compras com parâmetros objetivos de configuração. Também orienta sobre rotas importantes, política de privacidade e uso de recursos de consulta para encontrar rapidamente a solução mais adequada ao cenário de operação.'
+    ]); ?>
+
+  <main id="app-shell" class="app-shell" data-placeholder="true" aria-busy="true">
+    <h1 id="seo-h1-home" class="sr-only">Configurador de Produtos IBR</h1>
+    <div class="app-shell__placeholder" aria-hidden="true"></div>
+  </main>
+
+
+  <script nonce="<?= htmlspecialchars(csp_nonce(), ENT_QUOTES, 'UTF-8'); ?>"
+    data-versioned-src="/Acessibilidade/LayoutAcessibilidade.js" defer></script>
+  <script nonce="<?= htmlspecialchars(csp_nonce(), ENT_QUOTES, 'UTF-8'); ?>"
+    data-versioned-src="/PaginasCarregarPagina/CarregarPagina.min.js" defer></script>
+  <script nonce="<?= htmlspecialchars(csp_nonce(), ENT_QUOTES, 'UTF-8'); ?>">
+    (function waitForCarregarPagina() {
+      if (typeof carregarPagina === 'function') {
+        carregarPagina('PaginasPrincipal/PaginaProdutos.html', false);
+      } else {
+        window.setTimeout(waitForCarregarPagina, 50);
+      }
+    })();
+  </script>
+  <script nonce="<?= htmlspecialchars(csp_nonce(), ENT_QUOTES, 'UTF-8'); ?>">
+    (function dedupeHomeH1() {
+      const shellH1 = document.getElementById('seo-h1-home');
+      if (!shellH1) return;
+
+      const observer = new MutationObserver(() => {
+        const mainContent = document.getElementById('main-content');
+        if (!mainContent) return;
+        const h1s = mainContent.querySelectorAll('h1');
+        if (h1s.length === 1) {
+          shellH1.remove();
+          observer.disconnect();
+        }
+      });
+
+      observer.observe(document.getElementById('app-shell') || document.body, { childList: true, subtree: true });
+    })();
+  </script>
+
+  <script nonce="<?= htmlspecialchars(csp_nonce(), ENT_QUOTES, 'UTF-8'); ?>">
+    (function setupDeferredStylesLoading() {
+      const events = ['scroll', 'click', 'keydown', 'pointerdown', 'touchstart'];
+      const TIMEOUT = 4000;
+      let idleHandle = null;
+      let timeoutHandle = null;
+      let listenersAttached = false;
+
+      function cleanup() {
+        events.forEach(event => window.removeEventListener(event, triggerLoad));
+        if (typeof window !== 'undefined' && typeof window.cancelIdleCallback === 'function' && idleHandle !== null) {
+          window.cancelIdleCallback(idleHandle);
+        }
+        if (timeoutHandle !== null) {
+          clearTimeout(timeoutHandle);
+        }
+      }
+
+      function triggerLoad() {
+        if (typeof window.__loadDeferredLayoutStyles === 'function') {
+          window.__loadDeferredLayoutStyles({ includeOptional: true });
+          cleanup();
+        }
+      }
+
+      function attachListeners() {
+        if (listenersAttached) {
+          return;
+        }
+        listenersAttached = true;
+        events.forEach(event => window.addEventListener(event, triggerLoad, { once: true, passive: true }));
+        document.addEventListener('DOMContentLoaded', triggerLoad, { once: true });
+        if ('requestIdleCallback' in window) {
+          idleHandle = window.requestIdleCallback(() => {
+            triggerLoad();
+          }, { timeout: TIMEOUT });
+        } else {
+          timeoutHandle = window.setTimeout(triggerLoad, TIMEOUT);
+        }
+      }
+
+      (function waitForLoader() {
+        if (typeof window.__loadDeferredLayoutStyles === 'function') {
+          attachListeners();
+          if (document.readyState !== 'loading') {
+            triggerLoad();
+          }
+        } else {
+          window.setTimeout(waitForLoader, 200);
+        }
+      })();
+    })();
+  </script>
+
+  <noscript>
+    <div class="container" style="padding: 2rem 1rem 3rem;">
+      <h2 style="font-size: 2rem; color: #ec4115;">Configurador de Produtos Redutores IBR</h2>
+      <p>
+        Para aproveitar todos os recursos do configurador é necessário habilitar o JavaScript. Enquanto isso, você pode
+        acessar
+        diretamente as principais linhas de produtos pelos links abaixo.
+      </p>
+      <ul>
+        <li><a href="/ConfiguradorIBRQ?QULN=1.Q">Linha IBR Q</a></li>
+        <li><a href="/ConfiguradorIBRQDR?QULN=1.QDR">Linha IBR QDR</a></li>
+        <li><a href="/ConfiguradorIBRQP?QULN=1.QP">Linha IBR QP</a></li>
+        <li><a href="/ConfiguradorIBRC?HYLN=1.C">Linha IBR C</a></li>
+        <li><a href="/ConfiguradorIBRH?HYLN=1.H">Linha IBR H</a></li>
+        <li><a href="/ConfiguradorIBRM?HYLN=1.M">Linha IBR M</a></li>
+        <li><a href="/ConfiguradorIBRP?HYLN=1.P">Linha IBR P</a></li>
+        <li><a href="/ConfiguradorIBRR?HYLN=1.R">Linha IBR R</a></li>
+        <li><a href="/ConfiguradorIBRX?HYLN=1.X">Linha IBR X</a></li>
+        <li><a href="/ConfiguradorIBRFFA?FXLN=1.FFA">Linha IBR P FFA</a></li>
+        <li><a href="/ConfiguradorIBRFKA?FXLN=1.FKA">Linha IBR X FKA</a></li>
+        <li><a href="/ConfiguradorIBRFR?FXLN=1.FR">Linha IBR C FR</a></li>
+        <li><a href="/ConfiguradorIBRMSI?MOLN=2.I">Linha IBR MS/ML</a></li>
+        <li><a href="/ConfiguradorIBRMI?MOLN=3.I">Linha IBR T3A/T3C</a></li>
+        <li><a href="/ConfiguradorIBRMW?MOLN=3.W">Linha IBR WEG ALTO RENDIMENTO</a></li>
+        <li><a href="/ConfiguradorIBRMAPM?MOLN=3.APM">Linha IBR APM</a></li>
+        <li><a href="/ConfiguradorIBRMSPM?MOLN=3.SPM">Linha IBR SPM</a></li>
+        <li><a href="/ConfiguradorIBRPB?PLLN=3.PB">Linha IBR PB</a></li>
+        <li><a href="/ConfiguradorIBRPBL?PLLN=3.PBL">Linha IBR PBL</a></li>
+        <li><a href="/ConfiguradorIBRSA?PLLN=3.SA">Linha IBR SA</a></li>
+        <li><a href="/ConfiguradorIBRSB?PLLN=3.SB">Linha IBR SB</a></li>
+        <li><a href="/ConfiguradorIBRSBL?PLLN=3.SBL">Linha IBR SBL</a></li>
+        <li><a href="/ConfiguradorIBRSD?PLLN=3.SD">Linha IBR SD</a></li>
+        <li><a href="/ConfiguradorIBRV?VALN=1.V">Linha IBR V</a></li>
+        <li><a href="/ConfiguradorIBRZ?ACLN=1.Z">Linha IBR Z</a></li>
+        <li><a href="/ConfiguradorIBRVFN?ACLN=1.VFN">Linha IBR VFN</a></li>
+        <li><a href="/ConfiguradorIBRGR?AELN=3.GR">Linha IBR GR</a></li>
+        <li><a href="/ConfiguradorIBRGS?AELN=3.GS">Linha IBR GS</a></li>
+        <li><a href="/ConfiguradorIBRRIC?AELN=3.RIC">Linha IBR RIC</a></li>
+        <li><a href="/ConfiguradorIBRK?INLN=4.K">Linha IBR K INVEOR</a></li>
+      </ul>
+      <p>
+        Caso esteja procurando outros materiais, consulte o <a href="/sitemap.xml">mapa do site</a> ou entre em contato
+        conosco em
+        <a href="https://www.redutoresibr.com.br/contato" rel="external">redutoresibr.com.br</a>.
+      </p>
+    </div>
+  </noscript>
+</body>
+
+</html>

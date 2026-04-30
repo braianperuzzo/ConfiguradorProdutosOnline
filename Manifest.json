@@ -1,0 +1,68 @@
+{
+    "name": "Configurador de Produtos IBR",
+    "short_name": "Configurador de Produtos IBR",
+    "id": "configurador.redutoresibr.com.br",
+    "description": "Configurador de Produtos: Configure, Projete e Cote!",
+    "start_url": "/",
+    "display": "standalone",
+    "scope": "/",
+    "background_color": "#ffffff",
+    "theme_color": "#ec4115",
+    "orientation": "any",
+    "launch_handler": {
+        "client_mode": "focus-existing"
+    },
+    "icons": [
+        {
+            "src": "/Imagens/LogotipoAplicativo192192.png",
+            "sizes": "192x192",
+            "type": "image/png"
+        },
+        {
+            "src": "/Imagens/LogotipoAplicativo512512.png",
+            "sizes": "512x512",
+            "type": "image/png"
+        }
+    ],
+    "screenshots": [
+        {
+            "src": "/Imagens/Banner512512.png",
+            "sizes": "512x512",
+            "type": "image/png",
+            "label": "Tela Inicial"
+        }
+    ],
+    "dir": "ltr",
+    "lang": "pt-BR",
+    "categories": [
+        "business",
+        "personalization",
+        "productivity",
+        "shopping"
+    ],
+    "iarc_rating_id": "e74541e1-1bdc-4db6-8c8b-0123456789ab",
+    "prefer_related_applications": true,
+    "related_applications": [
+        {
+            "platform": "play",
+            "url": "https://play.google.com/store/apps/details?id=com.configuradordeprodutos.redutoresibr.android",
+            "id": "com.configuradordeprodutos.redutoresibr.android"
+        }
+    ],
+    "capture_links": "existing-client-navigate",
+    "display_override": [
+        "standalone",
+        "window-controls-overlay"
+    ],
+    "protocol_handlers": [
+        {
+            "protocol": "web+ibrconf",
+            "url": "https://configurador.redutoresibr.com.br/?url=%s"
+        }
+    ],
+    "edge_side_panel": {
+        "preferred_width": 340,
+        "preferred_height": 600
+    },
+    "handle_links": "preferred"
+}

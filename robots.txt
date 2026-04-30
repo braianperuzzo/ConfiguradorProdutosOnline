@@ -1,0 +1,14 @@
+User-agent: *
+Disallow: /node_modules/
+Disallow: /PaginasAreaClienteAcessoCadastro/
+Disallow: /PaginasAreaClienteSessaoPerfil/
+Disallow: /PaginasAreaClienteRegistrosHistoricos/
+Disallow: /CarrinhoProdutos
+Disallow: /AreaCliente
+Allow: /Scripts/
+Allow: /Layout/
+Allow: /Fontes/
+Allow: /*.txt$
+Sitemap: https://configurador.redutoresibr.com.br/sitemap-index.xml
+Sitemap: https://configurador.redutoresibr.com.br/sitemap.xml
+Sitemap: https://configurador.redutoresibr.com.br/sitemap-images.xml

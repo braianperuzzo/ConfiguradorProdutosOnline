@@ -1,0 +1,62 @@
+{
+  "name": "configuradoronline",
+  "version": "8.7.2",
+  "description": "",
+  "scripts": {
+    "update-version": "node Versionamento/AtualizarVersao.js",
+    "update-canonicals": "node SEO/AtualizarLinksCanonicos.js",
+    "update-sitemap-lastmod": "node SEO/UltimaModificacaoSitemap.js",
+    "submit-indexnow": "node SEO/EnviarIndexNow.js",
+    "prepublishOnly": "npm run generate-image-manifest && npm run sitemap-images.xml && npm run sitemap-index.xml && npm run update-sitemap-lastmod",
+    "generate-image-manifest": "node SEO/GerarManifestoImagens.js",
+    "generate-image-sitemap": "node SEO/GerarSitemapImagens.js",
+    "sitemap-images.xml": "npm run generate-image-sitemap",
+    "sitemap-index.xml": "node SEO/GerarSitemapIndex.js",
+    "build-bootstrap": "sass --quiet --quiet-deps --style=compressed --no-source-map --load-path=node_modules Layout/BibliotecasBootstrap.scss Layout/BibliotecasBootstrap.min.css",
+    "postcss-styles": "postcss Layout/*.css Fontes/*.css --replace --no-map",
+    "build:app": "node Build.js",
+    "seo:auditar-backlinks:default": "node -e \"const { spawnSync } = require('child_process'); const fs = require('fs'); const input = './SEO/backlinks-bing.csv'; if (!fs.existsSync(input)) { console.log('[seo:auditar-backlinks:default] Arquivo ./SEO/backlinks-bing.csv não encontrado; rotina ignorada.'); process.exit(0); } const npmCmd = process.platform === 'win32' ? 'npm.cmd' : 'npm'; const result = spawnSync(npmCmd, ['run', 'seo:auditar-backlinks', '--', '--input', input, '--min-score', '60', '--top', '50'], { stdio: 'inherit' }); process.exit(result.status ?? 1);\"",
+    "build:checks": "node -e \"const { spawnSync } = require('child_process'); const npmCmd = process.platform === 'win32' ? 'npm.cmd' : 'npm'; const checks = ['seo:auditar-backlinks:default', 'lint:tags', 'test:h1', 'sitemap-images.xml', 'sitemap-index.xml', 'submit-indexnow']; let failed = false; for (const check of checks) { const result = spawnSync(npmCmd, ['run', check], { stdio: 'inherit' }); if ((result.status ?? 1) !== 0) failed = true; } process.exit(failed ? 1 : 0);\"",
+    "build": "npm run build:app && npm run build:checks",
+    "lint:tags": "node SEO/ValidarTags.js",
+    "update-bootstrap": "npm install bootstrap@latest --save-dev",
+    "update-lockfile": "npm install --package-lock-only",
+    "lint:noarchive": "node SEO/ValidarNoArchivePublico.js",
+    "test:h1": "node SEO/ValidarH1Paginas.js",
+    "seo:auditar-backlinks": "node SEO/AuditarBacklinksBing.js"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "type": "commonjs",
+  "devDependencies": {
+    "autoprefixer": "^10.4.27",
+    "bootstrap": "^5.3.8",
+    "browserslist": "^4.28.1",
+    "browserslist-to-esbuild": "^2.1.1",
+    "esbuild": "^0.27.3",
+    "fast-xml-parser": "^5.4.2",
+    "postcss": "^8.5.8",
+    "postcss-cli": "^11.0.1",
+    "sass": "^1.97.3",
+    "sharp": "^0.34.5",
+    "workbox-build": "^7.4.0"
+  },
+  "main": "CSRFInicia.js",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/braian-peruzzo-redutores-ibr/ConfiguradorOnline.git"
+  },
+  "bugs": {
+    "url": "https://github.com/braian-peruzzo-redutores-ibr/ConfiguradorOnline/issues"
+  },
+  "homepage": "https://github.com/braian-peruzzo-redutores-ibr/ConfiguradorOnline#readme",
+  "browserslist": [
+    ">0.2%",
+    "not dead",
+    "not op_mini all"
+  ],
+  "overrides": {
+    "serialize-javascript": "^7.0.4"
+  }
+}
