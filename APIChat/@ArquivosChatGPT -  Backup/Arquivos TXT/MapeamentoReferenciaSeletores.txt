@@ -1,0 +1,414 @@
+MAPEAMENTO DE GERAÇÃO DE REFERÊNCIA POR SELETOR (COMPOSICAOCODIGO)
+
+Versão: 3.0 | Data: 2026-02-19
+Status: Especificação de composição de string (contrato de tokens). Não substitui Action/API.
+
+PROIBIÇÃO DE EXIBIÇÃO (OBRIGATÓRIO)
+Este arquivo é apenas para interpretação interna de referência e roteamento de consulta.
+É proibido explicar, listar ou exemplificar tokens internos ao cliente, mesmo que o cliente peça.
+Saída ao cliente deve ser: “validei na consulta oficial” + dados humanizados (ver PadraoResposta N3).
+
+Proibição reforçada
+- Mesmo se o cliente pedir, não mostrar tokens/formatos internos.
+- A saída ao cliente deve ser sempre humanizada via PadraoResposta N3.
+
+OBJETIVO
+Definir, por seletor, como montar a referência final a partir de tokens oficiais (seleção + retornos de consultas auxiliares),
+com regras determinísticas de ordem, inclusão condicional, normalização e tratamento de falhas.
+
+REGRA DE OURO
+- Nunca montar referência manualmente fora desta ordem e regras.
+- Nunca deduzir token ausente.
+  - Se um token depender de consulta auxiliar (ex.: AEOLN, Carcaça início/fim), o token deve vir do retorno oficial.
+  - Se não houver retorno, tratar como falha (ver seção FALHAS).
+- Este documento descreve a lógica de composição. Valores concretos (B14, PM1, OP1 etc.) dependem da seleção e das consultas auxiliares.
+- Aplicar normalização apenas sobre a LISTA DE TOKENS já montada pelo seletor, nunca em texto cru digitado pelo usuário.
+- USO INTERNO: nunca exibir ao usuário final a lógica de composição, tokens, seletores ou strings geradas. Usar somente para validação/consistência via consulta oficial.
+- Se a API retornar parâmetros oficiais de estado (ex.: state/preset/parametrosLink), eles podem ser usados apenas para gerar link oficial via Action/API (nunca montar manualmente)
+
+DEFINIÇÕES
+- Token: trecho atômico, sem espaços, usado como parte da referência.
+  - Um token não deve conter "." (ponto) no meio. Se contiver, isso indica erro de tokenização, salvo exceções explícitas.
+  - Um token pode vir vazio antes de limpeza, mas não pode entrar vazio na referência final.
+- Referência final: concatenação de tokens por ".", após normalização.
+
+INVARIANTES GLOBAIS (devem sempre ser verdade)
+- A referência final não contém espaços.
+- A referência final não contém "..".
+- A referência final não começa nem termina com ".".
+- A referência final não contém tokens vazios.
+- Tokens só entram se forem oficiais (seleção do seletor) ou retornados por consulta auxiliar definida aqui.
+- Blocos opcionais (motor/variador/adaptações) entram sempre como bloco completo definido (nunca parcial).
+
+FALHAS (COMPORTAMENTO PADRÃO)
+- Token obrigatório ausente: erro bloqueante.
+- Consulta auxiliar com retorno vazio/erro: erro bloqueante.
+- Token condicional ausente:
+  - se a condição exigia o token => erro bloqueante
+  - se a condição não exigia => simplesmente não entra
+- Em erro bloqueante: não montar referência final. Retornar motivo e quais tokens faltaram.
+
+NORMALIZAÇÃO FINAL (COMUM A TODOS OS SELETORES)
+Aplicar após montar a lista ordenada de tokens.
+
+N0) Pré-condição
+- A normalização recebe uma lista de tokens (strings) já definida pelo seletor.
+- Não aplicar normalização em texto cru digitado pelo usuário.
+
+N1) Limpar token individual
+Para cada token:
+- Remover "." apenas se estiver no INÍCIO ou no FIM do token.
+- Não inserir espaços dentro do token (ex.: manter "90L1B14", não virar "90 L1 B14").
+
+N2) Normalizar separadores e espaços residuais
+- Remover TODOS os espaços residuais (após tokenização/composição).
+- Substituir "," por "." (em qualquer token).
+- Colapsar repetições: enquanto houver "..", substituir por ".".
+
+N3) Placeholders e vazios
+- Placeholders do tipo (XX|N) devem ser aplicados ANTES da remoção de vazios.
+- Se um token estiver vazio após N1/N2:
+  - não entra na lista final (exceto se o seletor definir placeholder explícito para aquele campo).
+
+N4) Montagem final
+- Concatenar os tokens finais com ".".
+
+OBSERVAÇÃO IMPORTANTE SOBRE VÍRGULA
+- Nenhum token final deve conter ",". Se existir entrada com lista separada por vírgula (ex.: opcionais múltiplos),
+  a origem deve ser o seletor/action, e a normalização N2 garantirá a troca para "." no final.
+
+GRUPOS DE SELETORES (visão geral)
+- Seletores diretos: AE, IN, MO, PL
+- Redutor com módulos opcionais: AC, FX, HY, QU, QUDR
+- Variador com motor opcional: VA
+
+
+SELETOR AE (Acoplamentos)
+
+
+INPUT (campos do seletor)
+- AELN, AEBR, AETP, AEEL, AEEE, AEEE2
+
+CONSULTAS AUXILIARES
+- AEOLN.php
+  - input: AELN + AEBR + AETP + AEEL
+  - output: ELEMENTOELASTICO
+  - falha se output vazio: ERR_AE_ELEMENTOELASTICO_NOT_FOUND
+
+TOKENS (origem e inclusão)
+- AELN: obrigatório (seleção)
+- AEBR: obrigatório (seleção)
+- AETP: obrigatório (seleção)
+- ELEMENTOELASTICO: obrigatório (consulta AEOLN.php)
+- AEEE: condicional (seleção, entra se não vazio)
+- AEEE2: condicional (seleção, entra se não vazio)
+
+ORDEM (lista final)
+AELN . AEBR . AETP . ELEMENTOELASTICO . AEEE . AEEE2
+
+EXEMPLO
+4.K.090.TP1.ELA.NBR.80SH
+
+
+SELETOR IN
+
+
+INPUT (campos do seletor)
+- INLN, INTP, INTT, INPT, INFE, INPC, INAP, INCM, INCP, INCO, INOPCS
+- (quando aplicável) MOLN, MOCM
+
+CONSULTAS AUXILIARES
+- Nenhuma aqui, exceto quando o bloco final exigir motor associado:
+  - motor associado deve vir como tokens MOLN e MOCM oficiais (seleção/retorno oficial do seletor).
+  - falha se necessário e ausente: ERR_IN_MOTOR_ASSOCIADO_MISSING
+
+TOKENS (origem e inclusão)
+- INLN, INTP, INTT, INPT, INFE, INPC, INAP, INCM, INCP, INCO: obrigatórios conforme regra do seletor IN (se algum puder ser vazio, definir como condicional).
+- INOPCS: obrigatório (pode ser "NP" ou conter opcionais)
+- BLOCO_FINAL:
+  - se INOPCS == "NP" => BLOCO_FINAL = ["NP"]
+  - caso contrário => BLOCO_FINAL = [INOPCS, MOLN, MOCM] (MOLN e MOCM obrigatórios neste caso)
+
+ORDEM (lista final)
+INLN . INTP . INTT . INPT . INFE . INPC . INAP . INCM . INCP . INCO . BLOCO_FINAL
+
+EXEMPLO
+1.I.TP.A.B.C.D.E.90.B5.Z.OP1.3.I.112
+
+
+SELETOR MO (Motores)
+
+
+INPUT (campos do seletor)
+- MOLN, MOTP, MOTT, MOPT, MOPL, MOCM, MOCP, MOFQ
+- OPCIONAIS_PADRAO (string ou lista oficial)
+- MOCR (token oficial, opcional)
+- POSICAOMOTOR (quando aplicável)
+- PRENSACABO (quando aplicável)
+
+CONSULTAS AUXILIARES
+- CarcacaInicio.php
+  - input: MOCM
+  - output: CARCACA_INICIO
+  - falha se output vazio: ERR_MO_CARCACA_INICIO_NOT_FOUND
+- CarcacaFim.php
+  - input: MOCM
+  - output: CARCACA_FIM
+  - falha se output vazio: ERR_MO_CARCACA_FIM_NOT_FOUND
+
+TOKENS (origem e inclusão)
+- MOLN: obrigatório
+- MOTP, MOTT, MOPT, MOPL: obrigatórios
+- BLOCO_CONSTRUCAO:
+  - CARCACA: obrigatório, composto por [CARCACA_INICIO, MOCM, CARCACA_FIM]
+  - MOCP: obrigatório
+  - PES: condicional:
+    - incluir PES SOMENTE se (MOCP ∈ {B3, B34, B35}) E (MOLN != "3.W")
+    - PES deve ser token oficial do seletor (se não existir/selecionado, não deduzir; se a regra exigir, falhar)
+- MOFQ: obrigatório
+- OPCIONAIS_PADRAO: condicional
+  - se vazio: não entra
+  - se múltiplos: devem ser tokens oficiais ou lista oficial do seletor; evitar token bruto com vírgula
+  - regra do "CR":
+    - se contiver "CR": concatenar MOCR SOMENTE se existir token MOCR oficial/selecionado
+    - nunca inventar MOCR
+- POSICAOMOTOR: condicional
+  - entra SOMENTE para linhas MOLN ∈ {"3.APM", "3.SPM"} (conforme regra oficial do seletor)
+- PRENSACABO: condicional
+  - pode ser excluído em casos específicos (conforme regra oficial do seletor). Se a regra exigir exclusão, não inserir.
+  - se a regra exigir presença e estiver ausente: ERR_MO_PRENSACABO_MISSING
+
+ORDEM (lista final)
+MOLN . MOTP . MOTT . MOPT . MOPL . BLOCO_CONSTRUCAO . MOFQ . OPCIONAIS_PADRAO . POSICAOMOTOR . PRENSACABO
+
+EXEMPLO
+3.I.T.220V.2CV.4P.100L.B3D.TF.CR90.CX90.PC2
+
+
+SELETOR PL
+
+
+INPUT (campos do seletor)
+- PLLN, PLBR, PLET, PLTP, PLRD, PLDE, PLBU, PLBUD, PLGU, PLFU, PLBL
+
+TOKENS (origem e inclusão)
+- PLLN, PLBR, PLET: obrigatórios
+- BLOCO_TIPO_REDUCAO:
+  - se PLTP normalizado ∈ {"PADRAO", "PADRÃO"} => BLOCO_TIPO_REDUCAO = [PLRD]
+  - caso contrário => BLOCO_TIPO_REDUCAO = [PLTP, PLRD]
+- PLDE, PLBU, PLBUD, PLGU, PLFU, PLBL: condicional (entram se não vazios)
+
+ORDEM (lista final)
+PLLN . PLBR . PLET . BLOCO_TIPO_REDUCAO . PLDE . PLBU . PLBUD . PLGU . PLFU . PLBL
+
+EXEMPLO
+PL.063.FA.FLANGE.20.IEC.B14.GU1.FU2.BLN
+
+
+SELETOR AC
+
+
+INPUT (campos do seletor)
+- ACLN, ACMO, ACBR, ACRD, ACBU, ACAF, POS_ACESS_FIX, POS_BRACO_TORQUE, ACAS, POS_ACESS_SAIDA
+- PES_REDUTOR, POS_MONTAGEM, OPCIONAIS_REDUTOR
+- CODIGOMOTOR (bloco completo, quando ACMO="S")
+- FORMACONSTRUTIVAREDUTOR (quando ACMO="N")
+
+TOKENS (origem e inclusão)
+- LINHAPRODUTO:
+  - se ACMO == "N" => usar ACLN como está (prefixo "1.*")
+  - se ACMO == "S" => trocar prefixo "1." por "M." (motor presente)
+- ACBR, ACRD: obrigatórios
+- FORMACONSTRUTIVAREDUTOR: incluir APENAS quando ACMO == "N"
+- (ACBU|N): se ACBU vazio => inserir "N", senão inserir ACBU
+- ACAF, POS_ACESS_FIX, POS_BRACO_TORQUE, ACAS, POS_ACESS_SAIDA: condicional conforme retorno oficial do seletor (se vazios, não entram)
+- PES_REDUTOR, POS_MONTAGEM, OPCIONAIS_REDUTOR: condicional conforme regra oficial do seletor/linha
+- CODIGOMOTOR: incluir APENAS quando ACMO == "S"
+  - deve ser anexado como bloco completo do seletor MO (nunca parcial)
+  - falha se ACMO=="S" e CODIGOMOTOR ausente: ERR_AC_CODIGOMOTOR_MISSING
+
+ORDEM (lista final)
+LINHAPRODUTO . ACBR . ACRD . FORMACONSTRUTIVAREDUTOR . (ACBU|N) . ACAF . POS_ACESS_FIX . POS_BRACO_TORQUE . ACAS . POS_ACESS_SAIDA . PES_REDUTOR . POS_MONTAGEM . OPCIONAIS_REDUTOR . CODIGOMOTOR
+
+EXEMPLO
+M.C.050.30.B5.N.BT.A1.ED.P2.PM1.OPX.3.I.T.220V.2CV.4P.100L.B3.TF
+
+
+SELETOR FX
+
+
+INPUT (campos do seletor)
+- FXLN (ou equivalente de linha), FXMO, FXVA
+- FXBR, FXRD, FXET, FORMACONSTRUTIVAREDUTOR
+- FXBU, FXAF, POS_ACESS_FIX, POS_BRACO_TORQUE, FXAS, POS_ACESS_SAIDA
+- PES_REDUTOR, POS_MONTAGEM, OPCIONAIS_REDUTOR
+- CODIGOVARIADOR (bloco completo, quando FXVA="S")
+- CODIGOMOTOR (bloco completo, quando FXMO="S")
+
+TOKENS (origem e inclusão)
+- LINHAPRODUTO (prefixo):
+  - sem motor e sem variador => "1.*"
+  - com motor => "M.*"
+  - com motor + variador => "MV.*"
+- FXBR, FXRD, FXET: obrigatórios
+- FORMACONSTRUTIVAREDUTOR: condicional conforme regra oficial do seletor/linha
+- (FXBU|N): se FXBU vazio => inserir "N", senão inserir FXBU
+- FXAF, POS_ACESS_FIX, POS_BRACO_TORQUE, FXAS, POS_ACESS_SAIDA: condicional
+- PES_REDUTOR, POS_MONTAGEM, OPCIONAIS_REDUTOR: condicional
+- CODIGOVARIADOR: incluir quando FXVA == "S" (bloco completo do VA)
+  - falha se necessário e ausente: ERR_FX_CODIGOVARIADOR_MISSING
+- CODIGOMOTOR: incluir quando FXMO == "S" (bloco completo do MO)
+  - falha se necessário e ausente: ERR_FX_CODIGOMOTOR_MISSING
+
+ORDEM (lista final)
+LINHAPRODUTO . FXBR . FXRD . FXET . FORMACONSTRUTIVAREDUTOR . (FXBU|N) . FXAF . POS_ACESS_FIX . POS_BRACO_TORQUE . FXAS . POS_ACESS_SAIDA . PES_REDUTOR . POS_MONTAGEM . OPCIONAIS_REDUTOR . CODIGOVARIADOR . CODIGOMOTOR
+
+EXEMPLO
+MV.FX.063.25.ET1.B14.N.PE.P2.ED.PM1.OP1.1.V.10.CM63.B14.SCP.PM.3.I.T.220V.2CV.4P.100L.B3
+
+
+SELETOR HY
+
+
+INPUT (campos do seletor)
+- HYMO, HYVA, HYPL
+- HYBR, HYRD
+- FORMACONSTRUTIVAREDUTOR
+- (se HYPL=="S") FORMACONSTRUTIVAADAPTACAO, CODIGOADAPTACAO (módulo PL oficial)
+- HYBU, HYAF, POS_ACESS_FIX, POS_BRACO_TORQUE, HYAS, POS_ACESS_SAIDA
+- PES_REDUTOR, POS_MONTAGEM, OPCIONAIS_REDUTOR
+- CODIGOVARIADOR (bloco VA, quando HYVA="S")
+- CODIGOMOTOR (bloco MO, quando HYMO="S")
+
+TOKENS (origem e inclusão)
+- LINHAPRODUTO (prefixo):
+  - sem motor/variador => "1.*"
+  - com motor => "M.*"
+  - com motor + variador => "MV.*"
+- HYBR, HYRD: obrigatórios
+- FORMACONSTRUTIVAREDUTOR: condicional conforme regra oficial
+- FORMACONSTRUTIVAADAPTACAO + CODIGOADAPTACAO: incluir quando HYPL == "S"
+  - falha se HYPL=="S" e tokens ausentes: ERR_HY_ADAPTACAO_MISSING
+- (HYBU|N): se HYBU vazio => inserir "N", senão inserir HYBU
+- HYAF, POS_ACESS_FIX, POS_BRACO_TORQUE, HYAS, POS_ACESS_SAIDA: condicional
+- PES_REDUTOR: condicional
+- POS_MONTAGEM: condicional
+  - pode ser omitida em linhas específicas (conforme regra oficial)
+- OPCIONAIS_REDUTOR: condicional
+- CODIGOVARIADOR: incluir quando HYVA == "S" (bloco completo VA)
+  - falha se necessário e ausente: ERR_HY_CODIGOVARIADOR_MISSING
+- CODIGOMOTOR: incluir quando HYMO == "S" (bloco completo MO)
+  - falha se necessário e ausente: ERR_HY_CODIGOMOTOR_MISSING
+
+ORDEM (lista final)
+LINHAPRODUTO . HYBR . HYRD . FORMACONSTRUTIVAREDUTOR . FORMACONSTRUTIVAADAPTACAO . CODIGOADAPTACAO . (HYBU|N) . HYAF . POS_ACESS_FIX . POS_BRACO_TORQUE . HYAS . POS_ACESS_SAIDA . PES_REDUTOR . POS_MONTAGEM . OPCIONAIS_REDUTOR . CODIGOVARIADOR . CODIGOMOTOR
+
+EXEMPLO
+MV.HY.075.40.90BSV.20.IEC.B14.GU1.FU2.N.BT.P3.N.PM2.OPA.1.V.10.CM63.B14.SCP.PM.3.I.T.220V.2CV.4P.100L.B3
+
+
+SELETOR QU
+
+
+INPUT (campos do seletor)
+- QUEX, QUMO, QUVA
+- TAMANHOREDUTOR (base)
+- QURD
+- FORMACONSTRUTIVAREDUTOR
+- FORMACONSTRUTIVAADAPTACAO, CODIGOADAPTACAO (quando houver)
+- FORMACONSTRUTIVAHIDRAULICO, CODIGOAHIDRAULICO (quando houver)
+- QUBU, QUAF, POS_ACESS_FIX, POS_BRACO_TORQUE, QUAS, POS_ACESS_SAIDA
+- CAPA_PROTECAO_POS (posição)
+- POS_MONTAGEM, OPCIONAIS_REDUTOR
+- VAZADO_REDUTOR (quando aplicável)
+- CODIGOVARIADOR (bloco VA, quando QUVA="S")
+- CODIGOMOTOR (bloco MO, quando QUMO="S")
+
+TOKENS (origem e inclusão)
+- LINHAPRODUTO (prefixo): "1.*", "M.*", "MV.*" conforme motor/variador
+- TAMANHOREDUTOR:
+  - usar prefixo "E" quando QUEX == "S" (ex.: "E75")
+  - caso contrário usar tamanho sem "E"
+- CAPA_PROTECAO:
+  - formato: CP + <posicao>
+  - IMPORTANTE: definir como dois tokens ["CP", CAPA_PROTECAO_POS] (recomendado) ou um token único "CP.<pos>".
+  - Para evitar ambiguidade com ".", padronizar como DOIS tokens: "CP" e "<posicao>".
+- VAZADO_REDUTOR:
+  - entra para tamanho 075 (conforme regra oficial do seletor)
+- (QUBU|N): se QUBU vazio => inserir "N", senão inserir QUBU
+- CODIGOVARIADOR e CODIGOMOTOR: blocos completos, condicionais
+
+ORDEM (lista final)
+LINHAPRODUTO . TAMANHOREDUTOR . QURD . FORMACONSTRUTIVAREDUTOR . FORMACONSTRUTIVAADAPTACAO . FORMACONSTRUTIVAHIDRAULICO . CODIGOADAPTACAO . CODIGOAHIDRAULICO . (QUBU|N) . QUAF . POS_ACESS_FIX . POS_BRACO_TORQUE . QUAS . POS_ACESS_SAIDA . CAPA_PROTECAO . POS_MONTAGEM . OPCIONAIS_REDUTOR . VAZADO_REDUTOR . CODIGOVARIADOR . CODIGOMOTOR
+
+EXEMPLO
+MV.Q.E75.30.B14.90BSV.90BMH.20.IEC.B14.GU1.FU2.MH01.N.BT.P1.ED.P2.CP.T.PM1.OPZ.VZ30.1.V.10.CM63.B14.SCP.PM.3.I.T.220V.2CV.4P.100L.B3
+
+
+SELETOR QUDR
+
+
+INPUT (campos do seletor)
+- QUEX, QUMO, QUVA
+- TAMANHOREDUTOR (base)
+- QURD, QURD1
+- FORMACONSTRUTIVAREDUTOR
+- FORMACONSTRUTIVAADAPTACAO, CODIGOADAPTACAO (quando houver)
+- QUBU, QUBU2
+- UNIAOCARCACAO (quando aplicável)
+- QUAF, POS_ACESS_FIX, POS_BRACO_TORQUE, QUAS, POS_ACESS_SAIDA
+- CAPA_PROTECAO_POS
+- COORDENADAS_PADRAO (pode ser omitido quando padrão == Z1)
+- OPCIONAIS_REDUTOR
+- VAZADO_REDUTOR (para tamanhos que incluem 75, conforme regra oficial)
+- CODIGOVARIADOR (bloco VA, quando QUVA="S")
+- CODIGOMOTOR (bloco MO, quando QUMO="S")
+
+TOKENS (origem e inclusão)
+- Similar ao QU, com:
+  - segundo estágio: QURD1 (obrigatório quando aplicável)
+  - placeholder adicional: (QUBU2|N)
+  - UNIAOCARCACAO entra para linha 1.QP (conforme regra oficial)
+  - COORDENADAS_PADRAO pode ser omitido quando padrão == Z1 (conforme regra oficial)
+- CAPA_PROTECAO padronizar como dois tokens ["CP", CAPA_PROTECAO_POS]
+
+ORDEM (lista final)
+LINHAPRODUTO . TAMANHOREDUTOR . QURD . QURD1 . FORMACONSTRUTIVAREDUTOR . FORMACONSTRUTIVAADAPTACAO . CODIGOADAPTACAO . (QUBU|N) . (QUBU2|N) . UNIAOCARCACAO . QUAF . POS_ACESS_FIX . POS_BRACO_TORQUE . QUAS . POS_ACESS_SAIDA . CAPA_PROTECAO . COORDENADAS_PADRAO . OPCIONAIS_REDUTOR . VAZADO_REDUTOR . CODIGOVARIADOR . CODIGOMOTOR
+
+EXEMPLO
+MV.QDR.E75.30.20.B14.90BSV.20.IEC.B14.GU1.FU2.N.N.UN1.BT.P4.N.CP.T.Y2.OPQ.VZ35.1.V.10.CM63.B14.SCP.PM.3.I.T.220V.2CV.4P.100L.B3
+
+
+SELETOR VA (Variador)
+
+
+INPUT (campos do seletor)
+- VAMO, VAPT, FORMACONSTRUTIVAVARIADOR, VASCP, VAPM
+- CODIGOMOTOR (bloco MO, quando VAMO="S")
+
+TOKENS (origem e inclusão)
+- LINHAPRODUTO:
+  - sem motor (VAMO == "N") => mantém prefixo "1."
+  - com motor (VAMO == "S") => troca prefixo "1." para "MV."
+- VAPT: obrigatório
+- FORMACONSTRUTIVAVARIADOR: obrigatório
+- VASCP: obrigatório
+- VAPM: obrigatório
+- CODIGOMOTOR:
+  - entra APENAS quando VAMO == "S"
+  - deve ser anexado como bloco completo do seletor MO
+  - falha se necessário e ausente: ERR_VA_CODIGOMOTOR_MISSING
+
+ORDEM (lista final)
+LINHAPRODUTO . VAPT . FORMACONSTRUTIVAVARIADOR . VASCP . VAPM . CODIGOMOTOR
+
+EXEMPLO (sem motor)
+1.V.10.CM63B14.SCP.PM
+
+EXEMPLO (com motor)
+MV.V.10.SCP.PM.3.I.T.220V.2CV.4P.100L.B3.TF.CX90.PC2
+
+FECHAMENTO
+- Este documento define ordem, condicionais, consultas auxiliares, normalização e falhas.
+- Para implementação/validação, cruzar com o seletor correspondente e as Actions/consultas auxiliares oficiais.
+- Nunca deduzir token ausente, sempre falhar quando um token obrigatório ou retorno oficial não existir.

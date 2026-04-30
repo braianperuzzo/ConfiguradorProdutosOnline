@@ -1,0 +1,77 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "title": "FormularioSolicitacaoCotacaoGPT",
+  "type": "object",
+  "additionalProperties": false,
+  "required": [
+    "nome",
+    "documento",
+    "email",
+    "telefoneCelular",
+    "quantidade",
+    "conversaChatGPT"
+  ],
+  "properties": {
+    "nome": {
+      "type": "string",
+      "title": "Nome Completo",
+      "minLength": 5,
+      "description": "Informe nome e sobrenome."
+    },
+    "documento": {
+      "type": "string",
+      "title": "CPF/CNPJ",
+      "description": "Aceita com máscara ou só números."
+    },
+    "email": {
+      "type": "string",
+      "title": "E-mail(s)",
+      "description": "Um ou mais e-mails separados por ';' (ex.: a@b.com.br;c@d.com.br)."
+    },
+    "telefoneCelular": {
+      "type": "string",
+      "title": "Telefone ou Celular",
+      "description": "Obrigatório conter DDD. Aceita com/sem +55."
+    },
+    "quantidade": {
+      "type": "integer",
+      "title": "Quantidade",
+      "minimum": 1
+    },
+    "observacoes": {
+      "type": "string",
+      "title": "Observações",
+      "maxLength": 250,
+      "description": "Campo opcional. Máximo 250 caracteres."
+    },
+    "empresa": {
+      "type": "string",
+      "title": "Empresa",
+      "description": "Opcional para envio; no caso de CNPJ válido, o backend consulta automaticamente o nome da empresa."
+    },
+    "referenciaProduto": {
+      "type": "string",
+      "title": "Referência do Produto"
+    },
+    "codigoProduto": {
+      "type": "string",
+      "title": "Código do Produto"
+    },
+    "link": {
+      "type": "string",
+      "title": "Link",
+      "format": "uri"
+    },
+    "origem": {
+      "type": "string",
+      "title": "Origem",
+      "default": "gpt_chat"
+    },
+    "conversaChatGPT": {
+      "type": "string",
+      "title": "Conversa extraída do ChatGPT",
+      "minLength": 10,
+      "description": "Inclua toda a conversa da pessoa + respostas do chat para contexto comercial."
+    }
+  }
+}

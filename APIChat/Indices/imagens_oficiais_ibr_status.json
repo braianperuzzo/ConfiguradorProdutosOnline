@@ -1,0 +1,128 @@
+{
+    "ok": true,
+    "erro": "",
+    "version": "1.2.0",
+    "lastCrawlAt": "2026-03-26T18:28:33+00:00",
+    "durationMs": 20720,
+    "totalSeeds": 21,
+    "totalFetched": 21,
+    "totalDirectoryCandidates": 123,
+    "totalImages": 123,
+    "seedStatus": [
+        {
+            "url": "https://configurador.redutoresibr.com.br/PaginasPrincipal/PaginaProdutos.html",
+            "ok": true,
+            "status": 200
+        },
+        {
+            "url": "https://configurador.redutoresibr.com.br/PaginasConfiguradores/ConfiguradorQU.html",
+            "ok": true,
+            "status": 200
+        },
+        {
+            "url": "https://configurador.redutoresibr.com.br/PaginasConfiguradores/ConfiguradorQUDR.html",
+            "ok": true,
+            "status": 200
+        },
+        {
+            "url": "https://configurador.redutoresibr.com.br/PaginasConfiguradores/ConfiguradorPL.html",
+            "ok": true,
+            "status": 200
+        },
+        {
+            "url": "https://configurador.redutoresibr.com.br/PaginasConfiguradores/ConfiguradorHY.html",
+            "ok": true,
+            "status": 200
+        },
+        {
+            "url": "https://configurador.redutoresibr.com.br/PaginasConfiguradores/ConfiguradorMO.html",
+            "ok": true,
+            "status": 200
+        },
+        {
+            "url": "https://configurador.redutoresibr.com.br/PaginasConfiguradores/ConfiguradorAC.html",
+            "ok": true,
+            "status": 200
+        },
+        {
+            "url": "https://configurador.redutoresibr.com.br/PaginasConfiguradores/ConfiguradorFX.html",
+            "ok": true,
+            "status": 200
+        },
+        {
+            "url": "https://configurador.redutoresibr.com.br/PaginasConfiguradores/ConfiguradorAE.html",
+            "ok": true,
+            "status": 200
+        },
+        {
+            "url": "https://configurador.redutoresibr.com.br/PaginasConfiguradores/ConfiguradorIN.html",
+            "ok": true,
+            "status": 200
+        },
+        {
+            "url": "https://configurador.redutoresibr.com.br/PaginasConfiguradores/ConfiguradorVA.html",
+            "ok": true,
+            "status": 200
+        },
+        {
+            "url": "https://configurador.redutoresibr.com.br/PaginasConfiguradoresSeletores/SeletoresConfiguradorQU.html",
+            "ok": true,
+            "status": 200
+        },
+        {
+            "url": "https://configurador.redutoresibr.com.br/PaginasConfiguradoresSeletores/SeletoresConfiguradorQUDR.html",
+            "ok": true,
+            "status": 200
+        },
+        {
+            "url": "https://configurador.redutoresibr.com.br/PaginasConfiguradoresSeletores/SeletoresConfiguradorPL.html",
+            "ok": true,
+            "status": 200
+        },
+        {
+            "url": "https://configurador.redutoresibr.com.br/PaginasConfiguradoresSeletores/SeletoresConfiguradorHY.html",
+            "ok": true,
+            "status": 200
+        },
+        {
+            "url": "https://configurador.redutoresibr.com.br/PaginasConfiguradoresSeletores/SeletoresConfiguradorMO.html",
+            "ok": true,
+            "status": 200
+        },
+        {
+            "url": "https://configurador.redutoresibr.com.br/PaginasConfiguradoresSeletores/SeletoresConfiguradorAC.html",
+            "ok": true,
+            "status": 200
+        },
+        {
+            "url": "https://configurador.redutoresibr.com.br/PaginasConfiguradoresSeletores/SeletoresConfiguradorFX.html",
+            "ok": true,
+            "status": 200
+        },
+        {
+            "url": "https://configurador.redutoresibr.com.br/PaginasConfiguradoresSeletores/SeletoresConfiguradorAE.html",
+            "ok": true,
+            "status": 200
+        },
+        {
+            "url": "https://configurador.redutoresibr.com.br/PaginasConfiguradoresSeletores/SeletoresConfiguradorIN.html",
+            "ok": true,
+            "status": 200
+        },
+        {
+            "url": "https://configurador.redutoresibr.com.br/PaginasConfiguradoresSeletores/SeletoresConfiguradorVA.html",
+            "ok": true,
+            "status": 200
+        }
+    ],
+    "indexMeta": {
+        "version": "1.2.0",
+        "updatedAt": "2026-03-26T18:28:33+00:00"
+    },
+    "directorySnapshot": {
+        "exists": true,
+        "totalFiles": 155,
+        "maxFileMtime": 1774384603,
+        "filesHash": "58f91daa777c9977fbfe8c519f91aecf6f457c0f"
+    }
+}

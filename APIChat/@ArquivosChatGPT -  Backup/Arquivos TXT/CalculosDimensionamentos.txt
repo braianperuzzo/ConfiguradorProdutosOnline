@@ -1,0 +1,358 @@
+Versão: 1.5 | Data: 2026-02-19 | Documento de apoio (triagem)
+ATENÇÃO: fechamento e validação final sempre no catálogo oficial do modelo/linha, incluindo correções, limites térmicos e condições de montagem.
+
+IMPORTANTE (uso correto)
+- Este material é para TRIAGEM. Não autoriza validação final de limites/compatibilidade.
+- Para validar limites, usar somente consulta oficial ou catálogo/manual do Manifesto.
+
+Aviso adicional:
+- Se o usuário estiver pedindo validação final/limites, parar e exigir fonte oficial (consulta oficial ou catálogo do Manifesto).
+- Este texto não autoriza conclusão de compatibilidade/limite sem fonte oficial.
+
+0) Objetivo e regra de uso
+
+Este texto serve para TRIAGEM rápida e para orientar o que coletar e o que comparar.
+Ele NÃO substitui o catálogo e NÃO encerra seleção em aplicações críticas.
+
+Regra de ouro:
+- Termos com “_perm”, “N”, “max” ou “B” vêm do catálogo oficial do modelo/linha.
+- Se faltar desenho/plano de referência, tabela de correção ou dados de duty/ambiente, a seleção fica “pendente”.
+
+Triagem conservadora (recomendação prática):
+- Se qualquer comparação ficar próxima do limite de catálogo, classificar como “muito próximo do limite” e exigir validação completa.
+- Se qualquer comparação exceder o limite, reprovar e propor alternativas (subir tamanho/linha, mudar transmissão, adicionar apoio, reduzir pico, etc.).
+
+Nota de segurança:
+Em aplicações com envolvimento de pessoas, elevação, alta inércia, reversão frequente, ciclos altos, processos variáveis (misturadores/agitadores), não fechar só por triagem.
+
+1) COMO USAR (3 passos)
+
+1) Confirme unidades e dados-base. Não misturar sem converter.
+   Potência: kW ou CV
+   Rotação: rpm
+   Torque: Nm
+   Força: N
+   Distância: mm ou m
+
+   Conversões úteis:
+   - 1 CV ≈ 0,7355 kW
+
+   Se precisar estimar torque a partir de potência:
+   - Se a potência for no eixo de ENTRADA (P1, kW): T1_est(Nm) = 9550 * P1(kW) / n1(rpm)
+   - Se a potência for no eixo de SAÍDA (P2, kW):   T2_est(Nm) = 9550 * P2(kW) / n2(rpm)
+   - Se só tiver P1 e quiser estimar P2: P2_est ≈ P1 * η (η típico do catálogo, apenas para perdas e térmico)
+
+2) Defina requisitos na saída:
+   - T2_req (contínuo)
+   - T2_peak (pico real: partida, frenagem, reversão, choques, picos de processo)
+   - n1 e/ou n2 (rotações reais)
+
+3) Estime forças e momento fletor com base na transmissão e nas distâncias reais.
+   Compare com o catálogo do modelo/linha:
+   - T2_req vs T2N
+   - T2_peak vs T2max
+   - n1 vs n1N e n1B
+   - F2r_req e F2a_req vs F2r_perm e F2a_perm (com correções de rotação e posição quando existirem)
+   - M2k_req vs M2k_perm
+   - Limites térmicos (catálogo) e condições de montagem/ambiente
+
+
+2) Convenções e símbolos
+
+n1: rotação de entrada (rpm)
+n2: rotação de saída (rpm)
+i: relação de redução, i = n1/n2 (adimensional)
+
+T1: torque de entrada (Nm)
+T2_req: torque requerido na saída, contínuo (Nm)
+T2_peak: pico de torque na saída (Nm)
+
+T2N: torque nominal contínuo permitido (Nm), catálogo
+T2max: torque máximo/curto tempo permitido (Nm), catálogo
+
+n1N: rotação de entrada nominal recomendada (rpm), catálogo
+n1B: rotação de entrada máxima admissível (rpm), catálogo
+
+F2r_req: força radial requerida no eixo de saída (N)
+F2a_req: força axial requerida no eixo de saída (N)
+
+F2r_perm: força radial permissível (N), catálogo (condições de referência)
+F2a_perm: força axial permissível (N), catálogo (condições de referência)
+
+M2k_req: momento fletor requerido no eixo de saída (Nm)
+M2k_perm: momento fletor permissível (Nm), catálogo
+
+P1: potência no eixo de entrada (kW)
+P2: potência útil no eixo de saída (kW)
+η: eficiência (0 a 1 ou %), catálogo
+
+fs: fator de serviço (adimensional), catálogo
+J: inércia (kg·m²), quando houver aceleração/frenagem/reversão/servo
+
+
+3) Redução (i): velocidade e torque
+
+Fórmulas:
+i = n1 / n2
+n2 = n1 / i
+
+Orientação de triagem:
+- A redução aumenta o torque disponível na saída aproximadamente com i, descontadas perdas.
+- Não “aprovar” redutor por conversão T1→T2. Aprovação é SEMPRE por comparação com T2N/T2max, rotação, forças, momento e térmico do catálogo.
+- Use η para perdas e risco térmico, não como “validador” de torque admissível.
+
+Nota sobre eficiência (η)
+- Valores típicos são apenas referência de triagem e NÃO substituem dados oficiais do produto/linha.
+- Nunca concluir torque/limites/vida útil com base apenas em η típico.
+
+Exemplo:
+i = 10
+n1 = 3000 rpm → n2 = 300 rpm
+
+
+4) Velocidade de entrada (n1)
+
+Se motor acoplado direto: n1 = rotação do motor.
+
+Verificações (catálogo):
+- n1 ≤ n1B (obrigatório)
+- Em contínuo com torque nominal, preferir n1 ≤ n1N
+
+
+5) Torque: contínuo, pico e ciclos
+
+5.1) Torque nominal (T2N)
+Verificação: T2_req ≤ T2N
+
+5.2) Torque máximo / curto tempo (T2max)
+Verificação: T2_peak ≤ T2max
+Observação: considerar critérios de frequência e ciclagem do catálogo (quantas ocorrências, tempo, duty).
+
+5.3) Como capturar T2_peak (roteiro mínimo)
+Se o cliente não souber o pico, coletar:
+- existe reversão? quantas vezes por hora?
+- tempo de aceleração até velocidade (rampa)
+- existe frenagem rápida ou freio mecânico?
+- há choque (batida, travamento parcial, carga irregular)?
+- há pico de processo (compactação, grumo, viscosidade variável)?
+
+Sem esses dados, classificar como “pendente” para engenharia/catálogo completo.
+
+
+6) Forças no eixo de saída: radial e axial
+
+6.1) Força radial (F2r_req)
+Típica em polias, correntes e engrenagens externas.
+A força radial no eixo depende do arranjo real e da posição da carga no eixo (distâncias).
+
+Importante:
+- Força tangencial equivalente (Ft) NÃO é automaticamente força radial no eixo.
+- Em correias/correntes, a força radial pode ser bem maior por pré-tensão, ângulo de envolvimento e geometria.
+- Em engrenagens, existem componentes tangencial, radial e, em helicoidais, componente axial.
+
+6.2) Fator de posição da carga (p), triagem (aproximação)
+- carga no meio do vão (aprox. d ≤ L/2): p = 1,0
+- carga mais afastada (aprox. d > L/2): p = 1,5
+Nota: fechar sempre com o desenho e correções do catálogo.
+
+6.3) Força radial permissível (F2r_perm), catálogo
+É informada em condições de referência e pode exigir correção por:
+- rotação na saída (n2)
+- posição/distâncias (d, L ou equivalente do desenho)
+- tipo de elemento (polia/corrente/engrenagem) e diâmetro/raio
+
+Verificação:
+- F2r_req ≤ F2r_perm (aplicando correções do catálogo quando existirem)
+
+6.4) Força axial (F2a_req)
+Atua paralela ao eixo. Em excesso reduz vida de rolamentos e pode aquecer.
+Origem comum:
+- engrenagens helicoidais e cônicas podem gerar empuxo axial (não ignorar).
+
+6.5) Força axial permissível (F2a_perm), catálogo
+Verificação:
+- F2a_req ≤ F2a_perm (com correções do catálogo quando existirem)
+
+Se exceder:
+- avaliar apoio axial externo
+- avaliar versão/linha com rolamentos adequados
+- exigir engenharia/catálogo completo
+
+
+7) Momento fletor (M2k_req)
+
+Cargas com braço geram momento fletor no eixo de saída.
+
+Regra obrigatória antes de calcular:
+- Definir o plano de referência exatamente como no desenho/catálogo da linha (ex.: plano do rolamento, face, ombro).
+- Se o catálogo não definir claramente, não assumir. Coletar desenho/arranjo.
+
+Triagem rápida (quando aplicável):
+M2k_req ≈ F_resultante * braço
+
+Verificação (catálogo):
+M2k_req ≤ M2k_perm
+
+
+8) Inércia e aceleração (quando aplicável)
+
+Em servo, indexação, aceleração/frenagem frequente, alta inércia e reversão:
+- A inércia e o perfil de aceleração podem dominar a seleção.
+Este documento não substitui o critério de inércia do catálogo/engenharia.
+
+Dados mínimos:
+- J da carga e do motor
+- tempo de aceleração/frenagem
+- ciclos por hora
+- se passa por reversão e quanto tempo em cada sentido
+
+Sem isso: “pendente” para engenharia/catálogo.
+
+
+9) Vida útil média (LH)
+
+LH é estimativa estatística, depende de perfil de carga, montagem, alinhamento, lubrificação, temperatura e contaminação.
+Fechar somente com critérios do catálogo (S1/S5/duty e limites térmicos variam por linha).
+
+
+10) Backlash e rigidez torsional
+
+Backlash (arcmin):
+- classes e limites variam por linha/tamanho/redução. Sempre catálogo.
+
+Rigidez torsional (Nm/arcmin):
+- crítica em posicionamento/servo. Sempre catálogo.
+
+
+11) Eficiência (η), perdas e limites térmicos
+
+η = P2 / P1
+
+Uso correto na triagem:
+- Estimar perdas: P_perdas ≈ P1 - P2
+- Identificar risco de aquecimento
+- NÃO usar η para “validar” torque admissível
+
+Validação térmica (catálogo):
+Muitos catálogos trazem limite térmico (potência térmica admissível, curvas térmicas, temperatura máxima de carcaça/óleo/graxa).
+
+Dados críticos para térmico:
+- temperatura ambiente
+- montagem e ventilação (confinado, pouca troca térmica, proximidade de fontes quentes)
+- regime de operação (S1/S5/duty) e ciclos
+
+Regra prática:
+- serviço (fs) não substitui validação térmica. Tratar térmico como verificação separada e obrigatória.
+
+
+12) Ruído e limites de temperatura
+
+Ruído e temperaturas de referência dependem de rotação, carga, montagem e ambiente.
+Fechar apenas com limites e condições do catálogo.
+
+
+13) Força tangencial equivalente (Ft_est), estimativa preliminar
+
+Uso:
+Pré-dimensionamento rápido quando se conhece torque e diâmetro primitivo.
+
+Forma clara:
+Ft_est(N) ≈ 2 * T2_req(Nm) / d(m)
+
+Se d estiver em mm:
+Ft_est(N) ≈ (T2_req * 2000) / d(mm)
+
+Opcional (triagem) para refletir diferenças de transmissão:
+Ft_est ≈ (T2_req * 2000 * fk) / d(mm)
+
+fk (típicos de triagem, validar depois):
+- engrenagem direta: 1,15
+- corrente: 1,25
+- correia trapezoidal: 1,75
+- correia plana: 2,50
+
+Alertas:
+- Ft_est NÃO é F2r_req.
+- Em correias/correntes, F2r_req depende de tração, pré-tensão, ângulo de envolvimento e arranjo.
+- Em engrenagens, considerar componentes de força e, se helicoidal, componente axial.
+
+Obrigatório no fechamento:
+- determinar F2r_req e F2a_req pelo arranjo real e método do catálogo
+- aplicar correções por rotação e posição quando existirem
+
+
+14) Fator de serviço (fs), referência de catálogo
+
+fs depende de:
+tipo de carga, horas/dia, choques, partidas/hora, reversão, ambiente e duty cycle.
+
+Triagem (qualitativo):
+uniforme → fs menor
+choque moderado → fs intermediário
+choque forte → fs maior
+
+Fechamento:
+- usar fs da tabela do catálogo da linha/modelo
+- aplicar fs exatamente como o catálogo definir (no torque, na vida, na carga equivalente, etc.)
+- registrar o critério usado
+- não usar multiplicadores “universais”
+
+
+15) Acoplamento (quando aplicável), DIN 740-2 (triagem)
+
+Aplicar somente se o acoplamento estiver especificado e com dados do fornecedor (TKN, TKmax e fatores).
+
+Checagens típicas (triagem):
+- torque nominal do acoplamento deve suportar o torque nominal da máquina, com fator de temperatura
+- torque máximo do acoplamento deve suportar picos previstos, com fatores de aplicação
+
+Se houver vibração torsional, ressonância, partidas muito frequentes ou reversões:
+- exigir verificação do fornecedor e, se necessário, cálculo torsional
+
+Nota:
+Critérios finais seguem a norma e o fornecedor do acoplamento, não este texto.
+
+
+16) Aplicações que exigem apoio técnico (não fechar só com triagem)
+
+Consultar engenharia/técnico antes de concluir quando houver:
+- inércia elevada ou acelerações agressivas
+- reversão frequente ou ciclagem alta
+- envolvimento de pessoas (elevação, transporte etc.)
+- misturadores/agitadores com viscosidade variável, sedimentação, grumos
+- retrofit com histórico desconhecido
+- ambiente quente, confinamento, baixa ventilação, poeira/contaminação alta
+
+
+17) Checklist final (comparações obrigatórias)
+
+Antes de concluir modelo/tamanho:
+1) T2_req ≤ T2N
+2) T2_peak ≤ T2max (com critério de frequência do catálogo)
+3) n1 ≤ n1B (preferir n1 ≤ n1N em contínuo)
+4) F2r_req ≤ F2r_perm (com correções do catálogo por rotação/posição quando aplicável)
+5) F2a_req ≤ F2a_perm (com correções do catálogo quando existirem)
+6) M2k_req ≤ M2k_perm
+7) Limites térmicos atendidos (catálogo) com condições reais de ambiente e montagem
+8) fs aplicado conforme o catálogo, com critério registrado
+
+Se qualquer item exceder limite:
+- selecionar tamanho/linha superior OU
+- revisar transmissão, apoios externos, diâmetros, posição da carga, rampas, picos e duty
+
+
+18) Dados mínimos de entrada (coleta)
+
+Sempre coletar:
+- potência (kW ou CV) e unidade confirmada
+- rotações (n1 e/ou n2)
+- T2_req (contínuo) e T2_peak (pico), ou dados para calcular
+- tipo de carga (uniforme/choque) e regime (S1/S5/duty)
+- tipo de transmissão na saída (polia/corrente/engrenagem) e diâmetro primitivo d (mm)
+- posição da carga no eixo (distâncias) e forças axiais (se houver)
+- temperatura ambiente e condição de montagem/ventilação (especialmente se quente ou confinado)
+
+Quando houver aceleração/frenagem, reversão ou servo:
+- inércias (J motor e J carga)
+- tempos de aceleração/frenagem
+- ciclos por hora, reversões por hora

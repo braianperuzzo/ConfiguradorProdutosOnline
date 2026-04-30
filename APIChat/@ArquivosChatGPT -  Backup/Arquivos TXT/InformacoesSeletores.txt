@@ -1,0 +1,692 @@
+IBR — Informações de Seletores (Linhas + Variáveis)
+Versão: 2.3 | Data: 2026-02-19
+
+Uso permitido
+- Este arquivo serve apenas para roteamento interno (decidir qual consulta oficial/catálogo usar).
+- É proibido usar como fonte para concluir linha/tamanho/limites sem validação oficial.
+
+FIREWALL (OBRIGATÓRIO) — nunca exibir ao cliente
+Proibido expor: nomes de seletores, chaves internas, tokens, variáveis, ids, enum internos.
+Uso permitido: somente para roteamento interno (decidir qual catálogo/configurador consultar).
+
+TRADUÇÃO PARA LINGUAGEM DO CLIENTE
+Sempre converter termos internos para rótulos humanos.
+Nunca imprimir o termo interno original.
+
+OBJETIVO
+- Centralizar a taxonomia de seletores, linhas internas e variáveis do configurador.
+- Padronizar escrita, apelidos, sinônimos e observações para BUSCA, auditoria e validação.
+- Servir como referência de leitura. A verdade final de código, referência, compatibilidade e link é sempre Action/API.
+
+REGRAS DE SEGURANÇA (obrigatórias)
+- Este arquivo NÃO autoriza montar referência/código manualmente fora do seletor correspondente.
+- Nunca inferir valores ausentes. Qualquer campo dependente de consulta auxiliar deve vir do retorno oficial.
+- Em ambiguidade, NÃO decidir por texto. Validar por Action/API.
+- Nunca usar "descricao" para decidir token. Decisão sempre por id/variavel/sinônimos normalizados + validação.
+- Nunca promover sinônimos a token oficial. Sinônimos existem somente para busca.
+- USO INTERNO: este arquivo é para roteamento/triagem/auditoria. Nunca expor ao usuário final nomes de seletores, tokens ou variáveis internas.
+- Saída para o cliente deve ser sempre em linguagem amigável (ex.: “flange IEC B14”, “montagem”, “redução”), sem códigos internos.
+
+NORMALIZAÇÃO (para busca)
+- Converter para UPPERCASE.
+- Remover acentos somente para busca (não regravar como dado oficial).
+- Colapsar espaços internos e remover espaços ao redor de separadores.
+- Preservar '.', '/', '+', '-', '_' quando fizerem parte de código/referência.
+- Preferir match por boundary quando possível (evita PC3 bater em PC30).
+
+ESTRUTURA DO ARQUIVO
+- [META] informações de versão, origem e regras.
+- [INDICE] contadores e lista de seletores.
+- [SELETOR] cadastro dos seletores (nível 1 do configurador).
+- [LINHA] linhas internas (sub-linhas) por seletor, quando existirem.
+- [VAR] cadastro de variáveis por seletor (produto_pai), com sinônimos e controles.
+
+GRAMÁTICA E CAMPOS (contrato)
+- Campos OFICIAIS: codigo, id, produto_pai, variavel. Estes são os únicos campos que podem virar decisão/consulta.
+- Campos AUXILIARES: apelidos, sinonimos, observacoes, regras_chave, risco_colisao, ui_label.
+- Datas: YYYY-MM-DD.
+- Status (enum): ativo | inativo | legado | rascunho.
+- versao_item: versão do item.
+- depends_on: lista de dependências (tokens/consultas auxiliares).
+- requires_api: true/false. Se true, a resposta final depende de Action/API.
+
+REGRAS DE DESAMBIGUAÇÃO (ordem de prioridade)
+1) Match exato em id (ex.: FX.FXOPX).
+2) Match exato em variavel dentro do produto_pai (ex.: FXOPX).
+3) Match exato em sinonimos_norm (termo normalizado).
+4) Match parcial com boundary + maior especificidade (peso maior).
+5) Se houver empate ou risco, parar e validar por Action/API.
+
+REGRAS DE BLOQUEIO (anti-colisão)
+- Termos curtos (1–2 letras) não decidem sozinhos: C, Q, R, P, IN.
+- Termos com possível colisão de linguagem comum devem exigir contexto:
+  - PES: pode colidir com "peso". Só aceitar se contexto indicar montagem/apoio.
+  - CAPA/TAMPA/COVER: exigir contexto de proteção/tampa.
+  - POSICAO/ORIENTACAO: exigir referência ao item correto (fixação/saída/montagem).
+- Se risco_colisao = alto, sempre requires_api = true (ou bloquear decisão por texto).
+
+INTEGRIDADE (checks recomendados)
+- id é único globalmente.
+- produto_pai existe em [SELETOR].
+- variavel não se repete dentro do mesmo produto_pai, exceto sufixos explícitos (ex.: AEEE/AEEE2).
+- Se ui_label existir, deve mapear para uma variável exibida em UI, mas a decisão continua pelo id/variavel oficial.
+- Linhas internas, se usadas para decisão, devem declarar aplica_em (seletor(es) válidos).
+
+
+[META]
+
+
+[META]
+documento: IBR — Informações de Seletores (Catálogo de Seletores + Linhas + Variáveis)
+versao_doc: 2.3
+data_doc: 2026-02-19
+origem: InformacoesSeletores.xlsx -> normalizado em TXT
+status_doc: Referência para leitura/validação. Não substitui Action/API.
+observacao: Este TXT é para busca e auditoria, nunca para inferência de código/referência final.
+
+
+[INDICE]
+
+
+[INDICE]
+seletores_total: 10
+linhas_internas_total: 30
+variaveis_total: 133
+seletores: AC; AE; FX; HY; IN; MO; PL; QU; QUDR; VA
+
+
+[SELETOR] (nível 1)
+
+
+[SELETOR AC]
+codigo: AC
+descricao: CONFIGURADOR — REDUTOR COAXIAL
+apelidos: C; COAXIAL; COAXIAL AC; REDUTOR COAXIAL; MOTORREDUTOR COAXIAL
+prefixos_possiveis: 1.; M.
+regras_chave: Redutor coaxial. Pode existir com motor (prefixo M.) conforme regras do seletor.
+tokens_dependentes:
+requires_api: true
+status: ativo
+
+[SELETOR AE]
+codigo: AE
+descricao: CONFIGURADOR — ACOPLAMENTO
+apelidos: ACOPLAMENTO; ACOPLAMENTOS; ELEMENTO ELASTICO; ELEMENTO ELÁSTICO; LUVA; COUPLING
+prefixos_possiveis: 3.
+regras_chave: Acoplamentos. ELEMENTOELASTICO depende de consulta auxiliar (AEOLN).
+tokens_dependentes: AEOLN
+requires_api: true
+status: ativo
+
+[SELETOR FX]
+codigo: FX
+descricao: CONFIGURADOR — REDUTOR HELICOIDAL/ORTOGONAL
+apelidos: HELICOIDAL; ORTOGONAL; FX; MOTORREDUTOR FX; REDUTOR FX
+prefixos_possiveis: 1.; M.; MV.
+regras_chave: Prefixo muda conforme motor/variador. Validar montagem e opcionais por Action/API.
+tokens_dependentes:
+requires_api: true
+status: ativo
+
+[SELETOR HY]
+codigo: HY
+descricao: CONFIGURADOR — REDUTOR HELICOIDAL
+apelidos: HY; HELICOIDAL; MOTORREDUTOR HY; REDUTOR HY
+prefixos_possiveis: 1.; M.; MV.
+regras_chave: Pode incluir adaptação PL, variador e motor. Prefixo varia. Validar por Action/API.
+tokens_dependentes:
+requires_api: true
+status: ativo
+
+[SELETOR IN]
+codigo: IN
+descricao: CONFIGURADOR — IN (SELETOR DIRETO)
+apelidos: IN; INTERMEDIARIO; INTERMEDIÁRIO; BASE; SUPORTE
+prefixos_possiveis: 2.; 4.
+regras_chave: Possui BLOCO_FINAL condicional (INOPCS e suporte/motor). Validar por Action/API.
+tokens_dependentes: INOPCS
+requires_api: true
+status: ativo
+
+[SELETOR MO]
+codigo: MO
+descricao: CONFIGURADOR — MOTORES
+apelidos: MOTOR; MOTORES; WEG; IBR; TRIFASICO; TRIFÁSICO; MOTOFREIO
+prefixos_possiveis: 3.; 1.
+regras_chave: Carcaça pode depender de consulta auxiliar. Regras condicionais para PES e POSICAOMOTOR.
+tokens_dependentes:
+requires_api: true
+status: ativo
+
+[SELETOR PL]
+codigo: PL
+descricao: CONFIGURADOR — PLANETÁRIO / MÓDULO
+apelidos: PL; PLANETARIO; PLANETÁRIO; MODULO; MÓDULO; ADAPTACAO; ADAPTAÇÃO
+prefixos_possiveis: 3.
+regras_chave: BLOCO_TIPO_REDUCAO depende de PLTP (padrão vs especial).
+tokens_dependentes: PLTP
+requires_api: true
+status: ativo
+
+[SELETOR QU]
+codigo: QU
+descricao: CONFIGURADOR — REDUTOR COROA E SEM-FIM (Q)
+apelidos: QU; Q; COROA; SEM-FIM; WORM; MOTORREDUTOR Q
+prefixos_possiveis: 1.; M.; MV.
+regras_chave: Pode ter módulos extras (adaptação/hidráulico/variador/motor) e regras de vazado/capa.
+tokens_dependentes:
+requires_api: true
+status: ativo
+
+[SELETOR QUDR]
+codigo: QUDR
+descricao: CONFIGURADOR — QDR (2 ESTÁGIOS)
+apelidos: QDR; QUDR; QU DR; DUPLO; DOIS ESTAGIOS; DOIS ESTÁGIOS
+prefixos_possiveis: 1.; M.; MV.
+regras_chave: Similar ao QU, com estágio 1/2 (QURD1/QURD2) e coordenadas.
+tokens_dependentes:
+requires_api: true
+status: ativo
+
+[SELETOR VA]
+codigo: VA
+descricao: CONFIGURADOR — VARIADOR
+apelidos: VA; VAR; VARIADOR; VARIADOR MECANICO; VARIADOR MECÂNICO
+prefixos_possiveis: 1.; MV.
+regras_chave: Pode anexar motor. Prefixo muda para MV. quando motor presente.
+tokens_dependentes:
+requires_api: true
+status: ativo
+
+
+[LINHA] (sub-linhas)
+Nota: se for usar linha para decisão, preencher aplica_em.
+
+[REGRAS_ESPECIAIS_DE_ROTEAMENTO_TEXTUAL]
+objetivo: resolver colisões entre descrição comercial e aplica_em compartilhado sem inferir seletor final por texto cru
+
+regras_gerais:
+- aplica_em compartilhado não decide sozinho o seletor final
+- descrição comercial serve para pré-roteamento, nunca para conclusão final sem Action/API
+- quando existir regra explícita de roteamento textual, ela prevalece sobre aplica_em compartilhado
+- ordem interna de linhas de um seletor não pode ser reutilizada como heurística global
+
+regras_explicitas_confirmadas:
+- "IBR P FFA" -> pré-rotear como FX
+- "IBR P" sem complemento conflitante -> pré-rotear como FX
+- aplicar o mesmo princípio para regras explícitas próprias de "IBR C" e "IBR H", sem derivar uma pela outra
+
+bloqueios:
+- é proibido classificar item como HY apenas porque a descrição contém FFA, FKA, FR ou R
+- HYLN só pode ser avaliado depois que o item já estiver oficialmente confirmado como HY
+- em caso de conflito entre descrição comercial e enquadramento, bloquear conclusão e validar por Action/API
+
+observacao:
+- este bloco organiza pré-roteamento textual
+- a conclusão final de seletor, linha e elegibilidade continua dependente de retorno oficial
+
+[LINHA 1.C]
+codigo: 1.C
+descricao_curta: IBR C
+aplica_em: AC
+versao_item: v1.0
+data_atualizacao: 2026-02-17
+status: ativo
+
+[LINHA 1.FFA]
+codigo: 1.FFA
+descricao_curta: IBR FFA
+aplica_em: FX; HY
+versao_item: v1.0
+data_atualizacao: 2026-02-17
+status: ativo
+nota_roteamento: quando aparecer como "IBR P FFA", aplicar pré-roteamento em FX; não promover para HY por texto cru
+
+[LINHA 1.FKA]
+codigo: 1.FKA
+descricao_curta: IBR FKA
+aplica_em: FX; HY
+versao_item: v1.0
+data_atualizacao: 2026-02-17
+status: ativo
+nota_roteamento: sublinha compartilhada; não decidir HY por texto cru
+
+[LINHA 1.FR]
+codigo: 1.FR
+descricao_curta: IBR FR
+aplica_em: FX; HY
+versao_item: v1.0
+data_atualizacao: 2026-02-17
+status: ativo
+nota_roteamento: sublinha compartilhada; não decidir HY por texto cru
+
+[LINHA 1.H]
+codigo: 1.H
+descricao_curta: IBR H
+aplica_em: HY
+versao_item: v1.0
+data_atualizacao: 2026-02-17
+status: ativo
+
+[LINHA 1.M]
+codigo: 1.M
+descricao_curta: IBR M
+aplica_em: MO
+versao_item: v1.0
+data_atualizacao: 2026-02-17
+status: ativo
+
+[LINHA 1.P]
+codigo: 1.P
+descricao_curta: IBR P
+aplica_em: PL
+versao_item: v1.0
+data_atualizacao: 2026-02-17
+status: ativo
+
+[LINHA 1.Q]
+codigo: 1.Q
+descricao_curta: IBR Q
+aplica_em: QU
+versao_item: v1.0
+data_atualizacao: 2026-02-17
+status: ativo
+
+[LINHA 1.QDR]
+codigo: 1.QDR
+descricao_curta: IBR QDR
+aplica_em: QUDR
+versao_item: v1.0
+data_atualizacao: 2026-02-17
+status: ativo
+
+[LINHA 1.QP]
+codigo: 1.QP
+descricao_curta: IBR QP
+aplica_em: QUDR
+versao_item: v1.0
+data_atualizacao: 2026-02-17
+status: ativo
+
+[LINHA 1.R]
+codigo: 1.R
+descricao_curta: IBR R
+aplica_em: FX; HY
+versao_item: v1.0
+data_atualizacao: 2026-02-17
+status: ativo
+
+[LINHA 1.V]
+codigo: 1.V
+descricao_curta: IBR VARIADOR DE VELOCIDADE
+aplica_em: VA
+versao_item: v1.0
+data_atualizacao: 2026-02-17
+status: ativo
+
+[LINHA 1.VFN]
+codigo: 1.VFN
+descricao_curta: IBR ANTICORROSIVO VFN
+aplica_em: FX; HY; QU; QUDR
+versao_item: v1.0
+data_atualizacao: 2026-02-17
+status: ativo
+
+[LINHA 1.X]
+codigo: 1.X
+descricao_curta: IBR X
+aplica_em: FX; HY
+versao_item: v1.0
+data_atualizacao: 2026-02-17
+status: ativo
+
+[LINHA 1.Z]
+codigo: 1.Z
+descricao_curta: IBR ANTICORROSIVO Z
+aplica_em: FX; HY; QU; QUDR
+versao_item: v1.0
+data_atualizacao: 2026-02-17
+status: ativo
+
+[LINHA 2.I]
+codigo: 2.I
+descricao_curta: IBR MS ML STANDARD
+aplica_em: IN
+versao_item: v1.0
+data_atualizacao: 2026-02-17
+status: ativo
+
+[LINHA 3.APM]
+codigo: 3.APM
+descricao_curta: IBR ANTICORROSIVO APM
+aplica_em: FX; HY; QU; QUDR
+versao_item: v1.0
+data_atualizacao: 2026-02-17
+status: ativo
+
+[LINHA 3.GR]
+codigo: 3.GR
+descricao_curta: IBR ACOPLAMENTO ELÁSTICO GR
+aplica_em: AE
+versao_item: v1.0
+data_atualizacao: 2026-02-17
+status: ativo
+
+[LINHA 3.GS]
+codigo: 3.GS
+descricao_curta: IBR ACOPLAMENTO ELÁSTICO GS
+aplica_em: AE
+versao_item: v1.0
+data_atualizacao: 2026-02-17
+status: ativo
+
+[LINHA 3.I]
+codigo: 3.I
+descricao_curta: IBR T3A T3C
+aplica_em: IN
+versao_item: v1.0
+data_atualizacao: 2026-02-17
+status: ativo
+
+[LINHA 3.PB]
+codigo: 3.PB
+descricao_curta: IBR PLANETÁRIO PB
+aplica_em: PL
+versao_item: v1.0
+data_atualizacao: 2026-02-17
+status: ativo
+
+[LINHA 3.PBL]
+codigo: 3.PBL
+descricao_curta: IBR PLANETÁRIO PBL
+aplica_em: PL
+versao_item: v1.0
+data_atualizacao: 2026-02-17
+status: ativo
+
+[LINHA 3.RIC]
+codigo: 3.RIC
+descricao_curta: IBR ACOPLAMENTO ELÁSTICO RIC
+aplica_em: AE
+versao_item: v1.0
+data_atualizacao: 2026-02-17
+status: ativo
+
+[LINHA 3.SA]
+codigo: 3.SA
+descricao_curta: IBR PLANETÁRIO SA
+aplica_em: PL
+versao_item: v1.0
+data_atualizacao: 2026-02-17
+status: ativo
+
+[LINHA 3.SB]
+codigo: 3.SB
+descricao_curta: IBR PLANETÁRIO SB
+aplica_em: PL
+versao_item: v1.0
+data_atualizacao: 2026-02-17
+status: ativo
+
+[LINHA 3.SBL]
+codigo: 3.SBL
+descricao_curta: IBR PLANETÁRIO SBL
+aplica_em: PL
+versao_item: v1.0
+data_atualizacao: 2026-02-17
+status: ativo
+
+[LINHA 3.SD]
+codigo: 3.SD
+descricao_curta: IBR PLANETÁRIO SD
+aplica_em: PL
+versao_item: v1.0
+data_atualizacao: 2026-02-17
+status: ativo
+
+[LINHA 3.SPM]
+codigo: 3.SPM
+descricao_curta: IBR ANTICORROSIVO SPM
+aplica_em: FX; HY; QU; QUDR
+versao_item: v1.0
+data_atualizacao: 2026-02-17
+status: ativo
+
+[LINHA 3.W]
+codigo: 3.W
+descricao_curta: IBR WEG
+aplica_em: MO
+versao_item: v1.0
+data_atualizacao: 2026-02-17
+status: ativo
+
+[LINHA 4.K]
+codigo: 4.K
+descricao_curta: IBR INVERSOR DE FREQUÊNCIA KOSTAL
+aplica_em: IN
+versao_item: v1.0
+data_atualizacao: 2026-02-17
+status: ativo
+
+
+[VAR] (modelo novo)
+sinonimos: TERMO|PESO|NOTA; TERMO|PESO|NOTA
+sinonimos_norm: tokens normalizados para indexação (não viram oficial)
+
+
+;SELETOR AC — variáveis: 8
+
+[VAR AC.ACAF]
+id: AC.ACAF
+produto_pai: AC
+variavel: ACAF
+descricao: Acessório de fixação
+sinonimos: FIXACAO|2|geral; FLANGE|3|específico; PES|2|pode colidir com peso
+sinonimos_norm: FIXACAO;FLANGE;PES
+risco_colisao: medio
+depends_on:
+requires_api: true
+versao_item: v1.0
+data_atualizacao: 2026-02-17
+status: ativo
+
+[VAR AC.ACAS]
+id: AC.ACAS
+produto_pai: AC
+variavel: ACAS
+descricao: Acessório de saída
+sinonimos: SAIDA|3|direto; FLANGESAIDA|3|específico
+sinonimos_norm: FLANGESAIDA;SAIDA
+risco_colisao: baixo
+depends_on:
+requires_api: true
+versao_item: v1.0
+data_atualizacao: 2026-02-17
+status: ativo
+
+[VAR AC.ACBR]
+id: AC.ACBR
+produto_pai: AC
+variavel: ACBR
+descricao: Tamanho do redutor
+sinonimos: TAMANHO|3|direto; PORTE|2|comum
+sinonimos_norm: PORTE;TAMANHO
+risco_colisao: baixo
+depends_on:
+requires_api: true
+versao_item: v1.0
+data_atualizacao: 2026-02-17
+status: ativo
+
+[VAR AC.ACCM]
+id: AC.ACCM
+produto_pai: AC
+variavel: ACCM
+descricao: Carcaça/eixo de entrada
+sinonimos: CARCACA|3|direto; ENTRADA|2|comum
+sinonimos_norm: CARCACA;ENTRADA
+risco_colisao: medio
+depends_on:
+requires_api: true
+versao_item: v1.0
+data_atualizacao: 2026-02-17
+status: ativo
+
+[VAR AC.ACCP]
+id: AC.ACCP
+produto_pai: AC
+variavel: ACCP
+descricao: Forma construtiva
+sinonimos: FORMACONSTRUTIVA|3|direto; MONTAGEM|2|comum
+sinonimos_norm: FORMACONSTRUTIVA;MONTAGEM
+risco_colisao: medio
+depends_on:
+requires_api: true
+versao_item: v1.0
+data_atualizacao: 2026-02-17
+status: ativo
+
+[VAR AC.ACLN]
+id: AC.ACLN
+produto_pai: AC
+variavel: ACLN
+descricao: Linha do redutor
+sinonimos: LINHA|3|direto; FAMILIA|2|comum
+sinonimos_norm: FAMILIA;LINHA
+risco_colisao: baixo
+depends_on:
+requires_api: true
+versao_item: v1.0
+data_atualizacao: 2026-02-17
+status: ativo
+
+[VAR AC.ACPM]
+id: AC.ACPM
+produto_pai: AC
+variavel: ACPM
+descricao: Posição de montagem
+sinonimos: POSICAOMONTAGEM|3|direto; ORIENTACAO|2|comum
+sinonimos_norm: ORIENTACAO;POSICAOMONTAGEM
+risco_colisao: alto
+depends_on:
+requires_api: true
+versao_item: v1.0
+data_atualizacao: 2026-02-17
+status: ativo
+
+[VAR AC.ACRD]
+id: AC.ACRD
+produto_pai: AC
+variavel: ACRD
+descricao: Redução do redutor
+sinonimos: REDUCAO|3|direto; RELACAO|2|comum
+sinonimos_norm: REDUCAO;RELACAO
+risco_colisao: baixo
+depends_on:
+requires_api: true
+versao_item: v1.0
+data_atualizacao: 2026-02-17
+status: ativo
+
+;SELETOR AE — variáveis: 6
+
+[VAR AE.AEBR]
+id: AE.AEBR
+produto_pai: AE
+variavel: AEBR
+descricao: Tamanho
+sinonimos: TAMANHO|3|direto; PORTE|2|comum
+sinonimos_norm: PORTE;TAMANHO
+risco_colisao: baixo
+depends_on:
+requires_api: true
+versao_item: v1.0
+data_atualizacao: 2026-02-17
+status: ativo
+
+[VAR AE.AEEE]
+id: AE.AEEE
+produto_pai: AE
+variavel: AEEE
+descricao: Elemento de entrada
+sinonimos: ENTRADA|3|direto; CUBOENTRADA|3|específico
+sinonimos_norm: CUBOENTRADA;ENTRADA
+risco_colisao: medio
+depends_on:
+requires_api: true
+versao_item: v1.0
+data_atualizacao: 2026-02-17
+status: ativo
+
+[VAR AE.AEEE2]
+id: AE.AEEE2
+produto_pai: AE
+variavel: AEEE2
+descricao: Elemento de entrada 2
+sinonimos: SEGUNDAENTRADA|3|direto; LADO2|2|comum
+sinonimos_norm: LADO2;SEGUNDAENTRADA
+risco_colisao: medio
+depends_on:
+requires_api: true
+versao_item: v1.0
+data_atualizacao: 2026-02-17
+status: ativo
+
+[VAR AE.AEEL]
+id: AE.AEEL
+produto_pai: AE
+variavel: AEEL
+descricao: Elemento elástico
+sinonimos: ELEMENTOELASTICO|3|direto; INSERTO|2|comum
+sinonimos_norm: ELEMENTOELASTICO;INSERTO
+risco_colisao: medio
+depends_on: AEOLN
+requires_api: true
+versao_item: v1.0
+data_atualizacao: 2026-02-17
+status: ativo
+
+[VAR AE.AELN]
+id: AE.AELN
+produto_pai: AE
+variavel: AELN
+descricao: Linha do acoplamento
+sinonimos: LINHA|3|direto; SERIE|2|comum
+sinonimos_norm: LINHA;SERIE
+risco_colisao: baixo
+depends_on:
+requires_api: true
+versao_item: v1.0
+data_atualizacao: 2026-02-17
+status: ativo
+
+[VAR AE.AETP]
+id: AE.AETP
+produto_pai: AE
+variavel: AETP
+descricao: Tipo
+sinonimos: TIPO|3|direto; VERSAO|2|comum
+sinonimos_norm: TIPO;VERSAO
+risco_colisao: baixo
+depends_on:
+requires_api: true
+versao_item: v1.0
+data_atualizacao: 2026-02-17
+status: ativo
+
+;NOTA
+A partir daqui, aplicar o mesmo padrão para FX, HY, IN, MO, PL, QU, QUDR, VA:
+- sinonimos com peso
+- risco_colisao
+- depends_on quando existir
+- requires_api true (recomendado)
+- ui_label quando o nome da UI divergir do token oficial
+;;
+Se você quiser, eu reescrevo também o restante (FX/HY/IN/MO/PL/QU/QUDR/VA) no mesmo padrão, mantendo seus dados.
+
+
+CHECKS RÁPIDOS (para implementação)
+- Preferir boundary match e maior especificidade (peso).
+- Priorizar tokens mais longos.
+- Bloquear decisão por termos curtos e por colisões conhecidas.
+- Em ambiguidade, validar por Action/API.

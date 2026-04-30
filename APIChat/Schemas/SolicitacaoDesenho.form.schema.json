@@ -1,0 +1,63 @@
+{
+  "name": "SolicitacaoDesenho",
+  "strict": true,
+  "schema": {
+    "type": "object",
+    "additionalProperties": false,
+    "required": [
+      "nome",
+      "documento",
+      "email",
+      "codigoProduto",
+      "formatoDesenho"
+    ],
+    "properties": {
+      "nome": {
+        "type": "string",
+        "description": "Nome completo do solicitante (nome e sobrenome)."
+      },
+      "documento": {
+        "type": "string",
+        "description": "CPF ou CNPJ válido (aceita com pontuação ou só números)."
+      },
+      "email": {
+        "type": "string",
+        "description": "Um ou mais emails no formato: xx@yy.com.br;xx@yy.com.br"
+      },
+      "codigoProduto": {
+        "type": "string",
+        "description": "Código do produto no formato XXXX.00000000."
+      },
+      "formatoDesenho": {
+        "description": "Aceita código numérico (1..8), múltiplos códigos separados por ';' (ex.: 1;3;8), descrição exata ou array de códigos.",
+        "oneOf": [
+          {
+            "type": "string"
+          },
+          {
+            "type": "integer",
+            "minimum": 1,
+            "maximum": 8
+          },
+          {
+            "type": "array",
+            "items": {
+              "type": "integer",
+              "minimum": 1,
+              "maximum": 8
+            },
+            "minItems": 1
+          }
+        ]
+      },
+      "origem": {
+        "type": "string",
+        "description": "Identificação opcional da origem da requisição."
+      },
+      "conversaChatGPT": {
+        "type": "string",
+        "description": "Trecho opcional da conversa para auditoria."
+      }
+    }
+  }
+}

@@ -1,0 +1,3327 @@
+{
+  "openapi": "3.1.1",
+  "info": {
+    "title": "APIChat - Montagem de Configurador + Exploração Pública",
+    "description": "Contrato estável com envelope único, idempotência e proteção LGPD.",
+    "version": "8.7.2"
+  },
+  "servers": [
+    {
+      "url": "https://configurador.redutoresibr.com.br"
+    }
+  ],
+  "components": {
+    "securitySchemes": {
+      "ApiKeyAuth": {
+        "type": "apiKey",
+        "in": "header",
+        "name": "X-Api-Key",
+        "description": "Obrigatório para todos os endpoints. Envie no header `X-Api-Key` a partir do backend/server-side."
+      }
+    },
+    "schemas": {
+      "MontarLinkRequest": {
+        "type": "object",
+        "anyOf": [
+          {
+            "required": [
+              "variaveis"
+            ]
+          },
+          {
+            "required": [
+              "falaSolicitante"
+            ]
+          },
+          {
+            "required": [
+              "solicitacao"
+            ]
+          }
+        ],
+        "properties": {
+          "configurador": {
+            "type": "string",
+            "description": "Opcional quando a API conseguir inferir pela fala/variáveis.",
+            "enum": [
+              "AC",
+              "AE",
+              "FX",
+              "HY",
+              "IN",
+              "MO",
+              "PL",
+              "QU",
+              "QUDR",
+              "VA"
+            ]
+          },
+          "variaveis": {
+            "type": "object",
+            "description": "Objeto com chave/valor das variáveis finais do configurador.",
+            "additionalProperties": {
+              "type": "string"
+            }
+          },
+          "falaSolicitante": {
+            "type": "string",
+            "description": "Texto livre do cliente. A API extrai variáveis no formato CHAVE=VALOR ou CHAVE:VALOR, incluindo URLs com querystring."
+          },
+          "solicitacao": {
+            "type": "string",
+            "description": "Alias de `falaSolicitante` para compatibilidade retroativa."
+          },
+          "response_schema": {
+            "type": "object",
+            "description": "JSON Schema opcional para validar a resposta final do endpoint antes do retorno."
+          },
+          "response_schema_policy": {
+            "type": "string",
+            "description": "Política de validação pós-geração: strict_fail (erro 422), auto_repair (tentativa de reparo) ou best_effort (retorna com aviso).",
+            "enum": [
+              "strict_fail",
+              "auto_repair",
+              "best_effort"
+            ]
+          },
+          "codigoProduto": {
+            "type": "string",
+            "description": "Código do produto no formato XXXX.00000000 para autoidentificar configurador e variáveis via base oficial."
+          },
+          "referenciaEstruturada": {
+            "type": "string",
+            "description": "Referência estruturada completa para recuperar CD_PRODCONFIG e variáveis automaticamente."
+          },
+          "cdProdConfig": {
+            "type": "string",
+            "description": "Alias de configurador/CD_PRODCONFIG (ex.: QU, HY, QUDR ou linha equivalente)."
+          },
+          "CD_PRODCONFIG": {
+            "type": "string",
+            "description": "Alias legado em maiúsculas de cdProdConfig."
+          }
+        }
+      },
+      "MontarLinkResponseSucesso": {
+        "type": "object",
+        "properties": {
+          "ok": {
+            "type": "boolean",
+            "const": true
+          },
+          "configurador": {
+            "type": "string"
+          },
+          "link": {
+            "type": "string",
+            "description": "Sempre retorna link amigável (sem querystring), ex.: /ConfiguradorIBRQ."
+          },
+          "variaveisIdentificadas": {
+            "type": "object",
+            "additionalProperties": {
+              "type": "string"
+            }
+          },
+          "_schemaAviso": {
+            "type": "object",
+            "description": "Preenchido apenas em best_effort quando houver divergência de schema.",
+            "properties": {
+              "codigo": {
+                "type": "string"
+              },
+              "path": {
+                "type": "string",
+                "description": "Caminho JSONPath do campo inválido, ex.: $.items[2].price"
+              },
+              "mensagem": {
+                "type": "string"
+              }
+            }
+          }
+        }
+      },
+      "ProdutoConfigurador": {
+        "type": "object",
+        "properties": {
+          "CodigoProduto": {
+            "type": "string"
+          },
+          "DescricaoProduto": {
+            "type": "string"
+          },
+          "EtiquetaProduto": {
+            "type": [
+              "string",
+              "null"
+            ]
+          },
+          "ProdutoPai": {
+            "type": "string"
+          },
+          "ObservacaoDatasheet": {
+            "type": [
+              "string",
+              "null"
+            ]
+          },
+          "DS_DESCRICAO": {
+            "type": "string"
+          },
+          "DS_REFERENCIA": {
+            "type": "string"
+          }
+        }
+      },
+      "ProdutosConfiguradorResponse": {
+        "type": "object",
+        "properties": {
+          "ok": {
+            "type": "boolean"
+          },
+          "pagina": {
+            "type": "integer"
+          },
+          "limite": {
+            "type": "integer",
+            "description": "Limite efetivamente aplicado na resposta. Se o cliente enviar valor acima do máximo permitido, o serviço trunca para o máximo operacional."
+          },
+          "total": {
+            "type": "integer"
+          },
+          "totalPaginas": {
+            "type": "integer"
+          },
+          "temMais": {
+            "type": "boolean",
+            "description": "Indica se existem mais páginas. true quando ainda há resultados após a página atual."
+          },
+          "proximaPagina": {
+            "type": [
+              "integer",
+              "null"
+            ],
+            "description": "Número da próxima página quando temMais=true; null quando temMais=false."
+          },
+          "filtros": {
+            "type": "object",
+            "properties": {
+              "codigo": {
+                "type": [
+                  "string",
+                  "null"
+                ]
+              },
+              "produtoPai": {
+                "type": [
+                  "string",
+                  "null"
+                ]
+              },
+              "somenteDescricao": {
+                "type": "boolean"
+              },
+              "modoCompacto": {
+                "type": "boolean"
+              }
+            }
+          },
+          "dados": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/ProdutoConfigurador"
+            }
+          }
+        },
+        "required": [
+          "ok",
+          "pagina",
+          "limite",
+          "total",
+          "totalPaginas",
+          "temMais",
+          "proximaPagina",
+          "filtros",
+          "dados"
+        ]
+      },
+      "ExplorarSiteListarResponse": {
+        "type": "object",
+        "properties": {
+          "ok": {
+            "type": "boolean"
+          },
+          "acao": {
+            "type": "string"
+          },
+          "total": {
+            "type": "integer"
+          },
+          "paginas": {
+            "type": "array",
+            "items": {
+              "type": "string"
+            }
+          }
+        }
+      },
+      "ExplorarSiteLerResponse": {
+        "type": "object",
+        "properties": {
+          "ok": {
+            "type": "boolean"
+          },
+          "acao": {
+            "type": "string"
+          },
+          "arquivo": {
+            "type": "object",
+            "properties": {
+              "path": {
+                "type": "string"
+              },
+              "bytes": {
+                "type": "integer"
+              },
+              "conteudo": {
+                "type": "string"
+              }
+            }
+          }
+        }
+      },
+      "ProdutoDescricaoResponse": {
+        "type": "object",
+        "properties": {
+          "ok": {
+            "type": "boolean"
+          },
+          "codigo": {
+            "type": "string"
+          },
+          "DS_DESCRICAO": {
+            "type": "string"
+          },
+          "DS_REFERENCIA": {
+            "type": "string"
+          }
+        },
+        "required": [
+          "ok",
+          "codigo",
+          "DS_DESCRICAO",
+          "DS_REFERENCIA"
+        ]
+      },
+      "ProdutoPorCodigoResponse": {
+        "type": "object",
+        "properties": {
+          "ok": {
+            "type": "boolean"
+          },
+          "filtros": {
+            "type": "object",
+            "properties": {
+              "somenteDescricao": {
+                "type": "boolean"
+              },
+              "modoCompacto": {
+                "type": "boolean"
+              }
+            }
+          },
+          "dados": {
+            "type": "object",
+            "properties": {
+              "codigo": {
+                "type": "string"
+              },
+              "DS_DESCRICAO": {
+                "type": "string"
+              },
+              "DS_REFERENCIA": {
+                "type": "string"
+              },
+              "produtoPai": {
+                "type": [
+                  "string",
+                  "null"
+                ]
+              },
+              "etiqueta": {
+                "type": [
+                  "string",
+                  "null"
+                ]
+              },
+              "observacaoDatasheet": {
+                "type": [
+                  "string",
+                  "null"
+                ]
+              },
+              "manualEGarantia": {
+                "type": [
+                  "string",
+                  "null"
+                ]
+              },
+              "catalogo": {
+                "type": [
+                  "string",
+                  "null"
+                ]
+              },
+              "maisInfo": {
+                "type": [
+                  "string",
+                  "null"
+                ]
+              },
+              "conhecaTambem": {
+                "type": [
+                  "string",
+                  "null"
+                ]
+              }
+            }
+          }
+        }
+      },
+      "BuscarProdutoResponse": {
+        "type": "object",
+        "properties": {
+          "ok": {
+            "type": "boolean"
+          },
+          "paginacao": {
+            "type": "object",
+            "properties": {
+              "q": {
+                "type": "string"
+              },
+              "tipoBusca": {
+                "type": "string"
+              },
+              "pagina": {
+                "type": "integer"
+              },
+              "limite": {
+                "type": "integer",
+                "description": "Limite efetivamente aplicado (o backend trunca para o máximo permitido do endpoint)."
+              },
+              "retornados": {
+                "type": "integer"
+              },
+              "temMais": {
+                "type": "boolean",
+                "description": "true quando existem resultados adicionais após a página atual."
+              },
+              "proximaPagina": {
+                "type": [
+                  "integer",
+                  "null"
+                ],
+                "description": "Próxima página quando temMais=true; null caso contrário."
+              }
+            }
+          },
+          "dados": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/ProdutoConfigurador"
+            }
+          }
+        }
+      },
+      "CapabilitiesResponse": {
+        "type": "object",
+        "properties": {
+          "ok": {
+            "type": "boolean"
+          },
+          "capabilities": {
+            "type": "object",
+            "properties": {
+              "configuradoresSuportados": {
+                "type": "array",
+                "items": {
+                  "type": "string"
+                }
+              },
+              "versoes": {
+                "type": "object",
+                "properties": {
+                  "openapi": {
+                    "type": "string"
+                  },
+                  "schema": {
+                    "type": "string"
+                  },
+                  "endpoints": {
+                    "type": "object",
+                    "additionalProperties": {
+                      "type": "string"
+                    }
+                  }
+                }
+              },
+              "limitesOperacionais": {
+                "type": "object",
+                "properties": {
+                  "limiteMaximo": {
+                    "type": "integer"
+                  },
+                  "maxBytesLeitura": {
+                    "type": "integer"
+                  }
+                }
+              },
+              "recursosHabilitados": {
+                "type": "object",
+                "description": "Mapa de recursos. Quando autenticacao.diagnostico.readyForProtectedActions=false, recursos protegidos por autenticação retornam false e capacidades não protegidas permanecem disponíveis para diagnóstico.",
+                "additionalProperties": {
+                  "oneOf": [
+                    {
+                      "type": "boolean"
+                    },
+                    {
+                      "type": "string"
+                    },
+                    {
+                      "type": "array",
+                      "items": {
+                        "type": "string"
+                      }
+                    }
+                  ]
+                }
+              }
+            }
+          },
+          "autenticacao": {
+            "type": "object",
+            "description": "Diagnóstico de autenticação para orientar próximas chamadas da sessão. Use autenticacao.diagnostico.readyForProtectedActions para decidir se ações protegidas por autenticação podem ser executadas.",
+            "additionalProperties": false,
+            "properties": {
+              "chaveConfigurada": {
+                "type": "boolean"
+              },
+              "autenticado": {
+                "type": "boolean"
+              },
+              "headerEsperado": {
+                "type": "string",
+                "example": "X-Api-Key"
+              },
+              "diagnostico": {
+                "type": "object",
+                "additionalProperties": false,
+                "properties": {
+                  "riscoOperacional": {
+                    "type": "boolean",
+                    "description": "True quando autenticacaoObrigatoria=true e autenticado=false no diagnóstico corrente."
+                  },
+                  "status": {
+                    "type": "string",
+                    "enum": [
+                      "OK",
+                      "DEGRADED",
+                      "BLOCKED"
+                    ],
+                    "description": "Estado operacional consolidado de autenticação. BLOCKED indica bloqueio de ações protegidas."
+                  },
+                  "readyForProtectedActions": {
+                    "type": "boolean",
+                    "description": "False quando autenticacaoObrigatoria=true e autenticado=false. Nesse estado, recursos protegidos retornam false em capabilities.recursosHabilitados."
+                  },
+                  "codigo": {
+                    "type": "string"
+                  },
+                  "mensagem": {
+                    "type": "string"
+                  }
+                },
+                "required": [
+                  "riscoOperacional",
+                  "status",
+                  "readyForProtectedActions",
+                  "codigo",
+                  "mensagem"
+                ]
+              }
+            },
+            "required": [
+              "chaveConfigurada",
+              "autenticado",
+              "headerEsperado",
+              "diagnostico"
+            ]
+          }
+        }
+      },
+      "ErrorResponse": {
+        "type": "object",
+        "required": [
+          "ok",
+          "erro",
+          "codigoErro",
+          "requestId"
+        ],
+        "properties": {
+          "ok": {
+            "type": "boolean",
+            "const": false,
+            "description": "Sempre false em respostas de erro."
+          },
+          "erro": {
+            "type": "string",
+            "description": "Mensagem amigável para o consumidor da API."
+          },
+          "codigoErro": {
+            "type": "string",
+            "description": "Código estável para tratamento programático (ex.: PARAMETROS_INVALIDOS, NAO_AUTORIZADO, RATE_LIMIT_EXCEDIDO)."
+          },
+          "requestId": {
+            "type": "string",
+            "description": "Identificador da requisição para rastreamento em logs e suporte."
+          }
+        }
+      },
+      "RegistrarTelemetriaRequest": {
+        "type": "object",
+        "required": [
+          "evento"
+        ],
+        "properties": {
+          "evento": {
+            "type": "string",
+            "description": "Nome do evento de uso. Eventos estratégicos recomendados: configuracao_incompleta, falha_falta_dado, aplicacao_critica, consulta_codigo_direto (aliases em linguagem natural também são aceitos e normalizados). Em fallback de Actions, registrar consistentemente configuracao_incompleta (faltou contexto mínimo) e falha_falta_dado (faltou dado crítico para executar)."
+          },
+          "acao": {
+            "type": "string",
+            "description": "Alias aceito para evento quando o cliente só consegue enviar o campo acao.",
+            "deprecated": true
+          },
+          "ação": {
+            "type": "string",
+            "description": "Alias acentuado aceito para evento por compatibilidade com clientes legados.",
+            "deprecated": true
+          },
+          "event": {
+            "type": "string",
+            "description": "Alias em inglês aceito para evento por compatibilidade.",
+            "deprecated": true
+          },
+          "origem": {
+            "type": "string"
+          },
+          "sessaoId": {
+            "type": "string"
+          },
+          "metadados": {
+            "type": "object",
+            "additionalProperties": true
+          },
+          "consentimentoIA": {
+            "type": "boolean",
+            "description": "Confirma consentimento para treinamento/telemetria quando não houver cookie lgpd-cookies-consent no request."
+          },
+          "consentimentoTreinamentoIA": {
+            "type": [
+              "boolean",
+              "string"
+            ],
+            "description": "Consentimento explícito para Treinamento de IA quando não houver cookie de consentimento."
+          },
+          "consentimento": {
+            "type": [
+              "boolean",
+              "string"
+            ],
+            "description": "Alias de consentimentoTreinamentoIA para compatibilidade."
+          },
+          "severidade": {
+            "type": "string",
+            "description": "Nível de severidade do evento (ex.: info, warning, error, critical)."
+          },
+          "contexto": {
+            "type": "object",
+            "additionalProperties": true,
+            "description": "Contexto livre do evento. É mesclado aos metadados e sanitizado no backend."
+          },
+          "requestIdsRelacionados": {
+            "type": "array",
+            "items": {
+              "type": "string"
+            },
+            "description": "Lista opcional de requestIds correlacionados para rastreabilidade."
+          }
+        }
+      },
+      "TelemetriaUsoResponse": {
+        "type": "object",
+        "properties": {
+          "ok": {
+            "type": "boolean"
+          },
+          "resumo": {
+            "type": "object",
+            "additionalProperties": true,
+            "description": "Resumo agregado incluindo eventosPorTipo/origem e, quando houver, eventosEstrategicos."
+          },
+          "ultimosEventos": {
+            "type": "array",
+            "items": {
+              "type": "object",
+              "additionalProperties": true
+            }
+          }
+        }
+      },
+      "TelemetriaRegistroResponse": {
+        "type": "object",
+        "properties": {
+          "ok": {
+            "type": "boolean"
+          },
+          "mensagem": {
+            "type": "string"
+          },
+          "resumoAtual": {
+            "type": "object",
+            "additionalProperties": true
+          },
+          "eventId": {
+            "type": "string"
+          },
+          "storedAt": {
+            "type": "string",
+            "format": "date-time"
+          },
+          "requestId": {
+            "type": "string"
+          }
+        }
+      },
+      "MemoryScope": {
+        "type": "string",
+        "enum": [
+          "session",
+          "user",
+          "tenant",
+          "global"
+        ],
+        "description": "Escopo da memória no subsistema."
+      },
+      "MemoryRetrieveResponse": {
+        "type": "object",
+        "properties": {
+          "ok": {
+            "type": "boolean"
+          },
+          "dados": {
+            "type": "array",
+            "items": {
+              "type": "object",
+              "additionalProperties": true
+            }
+          },
+          "total": {
+            "type": "integer"
+          }
+        },
+        "additionalProperties": true
+      },
+      "MemoryDeleteResponse": {
+        "type": "object",
+        "properties": {
+          "ok": {
+            "type": "boolean"
+          },
+          "removidas": {
+            "type": "integer"
+          }
+        },
+        "required": [
+          "ok",
+          "removidas"
+        ]
+      },
+      "MemoryPrivacyResponse": {
+        "type": "object",
+        "properties": {
+          "ok": {
+            "type": "boolean"
+          },
+          "scope": {
+            "$ref": "#/components/schemas/MemoryScope"
+          },
+          "ownerKey": {
+            "type": "string"
+          },
+          "optIn": {
+            "type": "boolean"
+          }
+        }
+      },
+      "MemoryUpsertResponse": {
+        "type": "object",
+        "properties": {
+          "ok": {
+            "type": "boolean"
+          },
+          "jobId": {
+            "type": "string"
+          },
+          "status": {
+            "type": "string",
+            "enum": [
+              "queued",
+              "running",
+              "succeeded",
+              "failed",
+              "expired"
+            ]
+          },
+          "createdAt": {
+            "type": "string",
+            "format": "date-time"
+          },
+          "updatedAt": {
+            "type": "string",
+            "format": "date-time"
+          },
+          "expiresAt": {
+            "type": "string",
+            "format": "date-time"
+          },
+          "retentionSec": {
+            "type": "integer"
+          },
+          "timeoutMs": {
+            "type": "integer"
+          },
+          "cancelRequested": {
+            "type": "boolean"
+          },
+          "erro": {
+            "type": [
+              "object",
+              "null"
+            ]
+          },
+          "resultado": {
+            "type": [
+              "object",
+              "null"
+            ]
+          },
+          "id": {
+            "type": "string"
+          }
+        },
+        "additionalProperties": true
+      },
+      "MemorySetPrivacyOrUpsertRequest": {
+        "type": "object",
+        "description": "Payload para POST /APIChat/GerenciarMemorias.php. Use action para definir a operação (privacy/create/write_pipeline). Owner aceita aliases com precedência: owner > ownerId > userId > clienteId > tenantId > sessionId > sessaoId; fallback para anon somente quando nenhum identificador existir.",
+        "required": [
+          "action"
+        ],
+        "properties": {
+          "action": {
+            "type": "string",
+            "enum": [
+              "privacy",
+              "create",
+              "write_pipeline"
+            ]
+          },
+          "id": {
+            "type": "string"
+          },
+          "scope": {
+            "$ref": "#/components/schemas/MemoryScope"
+          },
+          "namespace": {
+            "type": "string"
+          },
+          "conteudo": {
+            "type": "string"
+          },
+          "valor": {
+            "description": "Payload flexível armazenado no item de memória."
+          },
+          "ttl": {
+            "type": "integer",
+            "minimum": 1
+          },
+          "ttlSec": {
+            "type": "integer",
+            "minimum": 1,
+            "description": "TTL em segundos para retenção da memória."
+          },
+          "owner": {
+            "type": "string"
+          },
+          "ownerId": {
+            "type": "string"
+          },
+          "userId": {
+            "type": "string"
+          },
+          "clienteId": {
+            "type": "string"
+          },
+          "tenantId": {
+            "type": "string"
+          },
+          "sessionId": {
+            "type": "string"
+          },
+          "sessaoId": {
+            "type": "string"
+          },
+          "metadata": {
+            "type": "object",
+            "additionalProperties": true
+          },
+          "memoryType": {
+            "type": "string",
+            "enum": [
+              "contextual",
+              "structural"
+            ],
+            "description": "Classificação da memória para governança (contextual vs estrutural)."
+          },
+          "optIn": {
+            "type": "boolean"
+          }
+        },
+        "additionalProperties": true
+      },
+      "AsyncAcceptedResponse": {
+        "type": "object",
+        "required": [
+          "ok",
+          "status",
+          "jobId",
+          "statusUrl",
+          "cancelUrl"
+        ],
+        "properties": {
+          "ok": {
+            "type": "boolean",
+            "example": true
+          },
+          "status": {
+            "type": "string",
+            "enum": [
+              "accepted"
+            ],
+            "example": "accepted"
+          },
+          "jobId": {
+            "type": "string",
+            "example": "job_a1b2c3"
+          },
+          "statusUrl": {
+            "type": "string"
+          },
+          "cancelUrl": {
+            "type": "string"
+          },
+          "retryAfter": {
+            "type": "integer",
+            "example": 2
+          }
+        }
+      },
+      "AsyncJobStatusResponse": {
+        "type": "object",
+        "required": [
+          "ok",
+          "jobId",
+          "status"
+        ],
+        "properties": {
+          "ok": {
+            "type": "boolean"
+          },
+          "jobId": {
+            "type": "string"
+          },
+          "status": {
+            "type": "string",
+            "enum": [
+              "queued",
+              "processing",
+              "completed",
+              "cancelled"
+            ]
+          },
+          "result": {
+            "type": "object",
+            "nullable": true,
+            "additionalProperties": true
+          }
+        }
+      },
+      "ConsultaSelectResponse": {
+        "type": "object",
+        "properties": {
+          "ok": {
+            "type": "boolean"
+          },
+          "consulta": {
+            "type": "object",
+            "properties": {
+              "sqlOriginal": {
+                "type": "string"
+              },
+              "sqlExecutado": {
+                "type": "string"
+              },
+              "limiteAplicado": {
+                "type": "integer"
+              },
+              "retornados": {
+                "type": "integer"
+              }
+            }
+          },
+          "dados": {
+            "type": "array",
+            "items": {
+              "type": "object",
+              "additionalProperties": true
+            }
+          }
+        }
+      },
+      "SolicitacaoCotacaoRequest": {
+        "type": "object",
+        "required": [
+          "nome",
+          "documento",
+          "email",
+          "telefoneCelular",
+          "quantidade",
+          "conversaChatGPT"
+        ],
+        "properties": {
+          "nome": {
+            "type": "string",
+            "minLength": 3,
+            "maxLength": 120,
+            "description": "Nome completo (nome e sobrenome)."
+          },
+          "empresa": {
+            "type": "string",
+            "maxLength": 120
+          },
+          "documento": {
+            "type": "string",
+            "description": "CPF ou CNPJ com ou sem máscara."
+          },
+          "email": {
+            "type": "string",
+            "description": "Formato obrigatório no GPT: emails separados por ponto e vírgula (;). Ex.: a@b.com.br;c@d.com.br"
+          },
+          "emails": {
+            "type": "array",
+            "items": {
+              "type": "string",
+              "format": "email"
+            },
+            "minItems": 1,
+            "description": "Compatibilidade legada. Prefira enviar \"email\" como string separada por ;."
+          },
+          "telefoneCelular": {
+            "type": "string",
+            "description": "Telefone ou celular com DDD. Aceita com/sem +55."
+          },
+          "quantidade": {
+            "type": "integer",
+            "minimum": 1
+          },
+          "observacoes": {
+            "type": "string",
+            "maxLength": 250,
+            "description": "Opcional, até 250 caracteres."
+          },
+          "referenciaProduto": {
+            "type": "string",
+            "maxLength": 120,
+            "description": "Opcional. Se enviado, será adicionado à nota da oportunidade."
+          },
+          "codigoProduto": {
+            "type": "string",
+            "maxLength": 120,
+            "description": "Opcional. Se enviado, será adicionado à nota da oportunidade."
+          },
+          "link": {
+            "type": "string",
+            "format": "uri"
+          },
+          "origem": {
+            "type": "string",
+            "maxLength": 80,
+            "default": "gpt_api_chat"
+          },
+          "conversaChatGPT": {
+            "type": "string",
+            "minLength": 10,
+            "description": "Conversa da pessoa + respostas do ChatGPT. Será registrada na nota: \"Conversa extraída do ChatGPT:\"."
+          }
+        }
+      },
+      "SolicitacaoCotacaoResponse": {
+        "type": "object",
+        "required": [
+          "ok",
+          "mensagem"
+        ],
+        "properties": {
+          "ok": {
+            "type": "boolean",
+            "const": true
+          },
+          "mensagem": {
+            "type": "string"
+          },
+          "protocolo": {
+            "type": [
+              "string",
+              "null"
+            ],
+            "description": "Alias legado do número de oportunidade. Enquanto em fila, retorna null."
+          },
+          "dadosRecebidos": {
+            "type": "object",
+            "properties": {
+              "nome": {
+                "type": "string"
+              },
+              "documentoTipo": {
+                "type": "string",
+                "enum": [
+                  "CPF",
+                  "CNPJ"
+                ]
+              },
+              "emailsQuantidade": {
+                "type": "integer"
+              },
+              "telefoneInformado": {
+                "type": "boolean"
+              },
+              "quantidade": {
+                "type": "integer"
+              },
+              "referencia": {
+                "type": "string"
+              },
+              "codigo": {
+                "type": "string"
+              },
+              "origem": {
+                "type": "string"
+              },
+              "conversaInformada": {
+                "type": "boolean"
+              },
+              "statusSolicitacao": {
+                "type": "string",
+                "enum": [
+                  "enfileirada"
+                ]
+              }
+            }
+          },
+          "requestId": {
+            "type": "string"
+          },
+          "oportunidade": {
+            "type": [
+              "string",
+              "null"
+            ],
+            "description": "Número da oportunidade. Enquanto em fila, retorna null."
+          },
+          "jobId": {
+            "type": "string",
+            "description": "Identificador do job em fila para rastreio interno."
+          }
+        }
+      },
+      "SolicitacaoDesenhoRequest": {
+        "type": "object",
+        "required": [
+          "nome",
+          "documento",
+          "email",
+          "codigoProduto",
+          "formatoDesenho"
+        ],
+        "properties": {
+          "nome": {
+            "type": "string",
+            "minLength": 3,
+            "maxLength": 120,
+            "description": "Nome completo (nome e sobrenome)."
+          },
+          "documento": {
+            "type": "string",
+            "description": "CPF ou CNPJ válido (com ou sem pontuação)."
+          },
+          "email": {
+            "type": "string",
+            "description": "Um ou mais emails no formato: xx@yy.com.br;xx@yy.com.br"
+          },
+          "codigoProduto": {
+            "type": "string",
+            "description": "Código do produto no formato XXXX.00000000."
+          },
+          "formatoDesenho": {
+            "description": "Aceita código numérico (1..8), string com múltiplos separados por ';' (ex.: 1;3;8), descrição exata ou array de códigos.",
+            "oneOf": [
+              {
+                "type": "string"
+              },
+              {
+                "type": "integer",
+                "minimum": 1,
+                "maximum": 8
+              },
+              {
+                "type": "array",
+                "items": {
+                  "type": "integer",
+                  "minimum": 1,
+                  "maximum": 8
+                },
+                "minItems": 1
+              }
+            ]
+          },
+          "origem": {
+            "type": "string",
+            "maxLength": 80,
+            "default": "gpt_api_chat"
+          },
+          "conversaChatGPT": {
+            "type": "string"
+          }
+        }
+      },
+      "SolicitacaoDesenhoResponse": {
+        "type": "object",
+        "required": [
+          "ok",
+          "mensagem"
+        ],
+        "properties": {
+          "ok": {
+            "type": "boolean",
+            "const": true
+          },
+          "mensagem": {
+            "type": "string"
+          },
+          "mensagemCliente": {
+            "type": "string",
+            "description": "Mensagem pronta para o GPT responder imediatamente ao usuário final."
+          },
+          "jobId": {
+            "type": "string"
+          },
+          "formatosPermitidosTexto": {
+            "type": "string",
+            "description": "Retorno textual exato dos formatos permitidos, separado por quebra de linha."
+          },
+          "formatosPermitidos": {
+            "type": "array",
+            "items": {
+              "type": "string"
+            }
+          },
+          "dadosRecebidos": {
+            "type": "object",
+            "properties": {
+              "nome": {
+                "type": "string"
+              },
+              "documento": {
+                "type": "string"
+              },
+              "documentoTipo": {
+                "type": "string",
+                "enum": [
+                  "CPF",
+                  "CNPJ"
+                ]
+              },
+              "emailsQuantidade": {
+                "type": "integer"
+              },
+              "empresa": {
+                "type": "string"
+              },
+              "codigo": {
+                "type": "string"
+              },
+              "formatos": {
+                "type": "array",
+                "items": {
+                  "type": "string"
+                }
+              },
+              "linhaProduto": {
+                "type": "string"
+              },
+              "hyln": {
+                "type": "string"
+              },
+              "numeroSolicitacao": {
+                "type": "string"
+              },
+              "drvwIdField": {
+                "type": "string"
+              },
+              "origem": {
+                "type": "string"
+              },
+              "statusSolicitacao": {
+                "type": "string",
+                "enum": [
+                  "enfileirada"
+                ]
+              }
+            }
+          },
+          "orientacaoGPT": {
+            "type": "object",
+            "properties": {
+              "primeiraRespostaImediata": {
+                "type": "string"
+              },
+              "incluirLinkConfigurador": {
+                "type": "boolean"
+              }
+            }
+          }
+        }
+      },
+      "EnviarTeecRequest": {
+        "type": "object",
+        "required": [
+          "conversaChatGPT"
+        ],
+        "properties": {
+          "comando": {
+            "type": "string",
+            "description": "Comando recebido no chat. Aceita .EnviarTEEC ou .EnviarTEEC <observação>."
+          },
+          "mensagem": {
+            "type": "string",
+            "description": "Alias opcional de comando para compatibilidade."
+          },
+          "conversaChatGPT": {
+            "type": "string",
+            "description": "Transcrição da conversa atual completa que será enviada por email."
+          },
+          "conversa": {
+            "type": "string",
+            "description": "Fallback de conversa para compatibilidade legada quando conversaChatGPT não for enviado."
+          },
+          "observacao": {
+            "type": "string",
+            "description": "Observação opcional. Se omitida, a API tenta extrair do texto após .EnviarTEEC."
+          }
+        }
+      },
+      "EnviarTeecResponse": {
+        "type": "object",
+        "additionalProperties": true,
+        "properties": {
+          "ok": {
+            "type": "boolean"
+          },
+          "mensagem": {
+            "type": "string"
+          },
+          "destinatario": {
+            "type": "string",
+            "format": "email"
+          },
+          "linhasConversa": {
+            "type": "integer"
+          },
+          "observacaoInformada": {
+            "type": "boolean"
+          },
+          "erro": {
+            "type": "string"
+          },
+          "codigoErro": {
+            "type": "string"
+          },
+          "requestId": {
+            "type": "string"
+          }
+        }
+      },
+      "ImagensOficiaisImage": {
+        "type": "object",
+        "properties": {
+          "imageUrl": {
+            "type": "string"
+          },
+          "type": {
+            "type": "string",
+            "enum": [
+              "PRODUCT_PHOTO",
+              "DIMENSIONAL_DRAWING",
+              "ASSEMBLY_MOUNTING",
+              "TABLE_CHART",
+              "WIRING_DIAGRAM",
+              "ICON_OTHER"
+            ]
+          },
+          "tags": {
+            "type": "array",
+            "items": {
+              "type": "string"
+            }
+          },
+          "lineFamily": {
+            "type": "string"
+          },
+          "context": {
+            "type": "string"
+          },
+          "sourcePageUrl": {
+            "type": "string"
+          }
+        },
+        "required": [
+          "imageUrl",
+          "type",
+          "tags",
+          "lineFamily",
+          "context",
+          "sourcePageUrl"
+        ]
+      },
+      "ImagensOficiaisSearchResponse": {
+        "type": "object",
+        "properties": {
+          "ok": {
+            "type": "boolean"
+          },
+          "query": {
+            "type": "object",
+            "properties": {
+              "q": {
+                "type": "string"
+              },
+              "linha": {
+                "type": "string"
+              },
+              "tipo": {
+                "type": "string",
+                "enum": [
+                  "",
+                  "PRODUCT_PHOTO",
+                  "DIMENSIONAL_DRAWING",
+                  "ASSEMBLY_MOUNTING",
+                  "TABLE_CHART",
+                  "WIRING_DIAGRAM",
+                  "ICON_OTHER"
+                ]
+              },
+              "limit": {
+                "type": "integer",
+                "minimum": 1,
+                "maximum": 4
+              },
+              "codigo": {
+                "type": "string"
+              }
+            },
+            "additionalProperties": false
+          },
+          "images": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/ImagensOficiaisImage"
+            }
+          },
+          "notes": {
+            "type": "array",
+            "items": {
+              "type": "string"
+            }
+          }
+        },
+        "required": [
+          "ok",
+          "query",
+          "images",
+          "notes"
+        ]
+      },
+      "ImagensOficiaisStatusResponse": {
+        "type": "object",
+        "properties": {
+          "ok": {
+            "type": "boolean"
+          },
+          "status": {
+            "$ref": "#/components/schemas/ImagensOficiaisCrawlStatus"
+          },
+          "totalIndexedImages": {
+            "type": "integer",
+            "minimum": 0,
+            "description": "Quantidade atual de imagens no índice (`images`), ou seja, o acervo atualmente indexado para busca."
+          },
+          "totalFilesystemImages": {
+            "type": "integer",
+            "minimum": 0,
+            "description": "Contagem real de arquivos de imagem em `ImagensProdutos` e subpastas. Use este campo como referência principal de acervo disponível."
+          },
+          "indexOutdated": {
+            "type": "boolean",
+            "description": "True quando o índice está defasado em relação ao filesystem (totais diferentes) ou com divergência de versão."
+          }
+        },
+        "required": [
+          "ok",
+          "status",
+          "totalIndexedImages",
+          "totalFilesystemImages",
+          "indexOutdated"
+        ]
+      },
+      "ImagensOficiaisCrawlStatus": {
+        "type": "object",
+        "properties": {
+          "ok": {
+            "type": "boolean"
+          },
+          "version": {
+            "type": "string"
+          },
+          "lastCrawlAt": {
+            "type": "string",
+            "format": "date-time"
+          },
+          "durationMs": {
+            "type": "integer",
+            "minimum": 0
+          },
+          "totalSeeds": {
+            "type": "integer",
+            "minimum": 0
+          },
+          "totalFetched": {
+            "type": "integer",
+            "minimum": 0
+          },
+          "totalImages": {
+            "type": "integer",
+            "minimum": 0
+          },
+          "seedStatus": {
+            "type": "array",
+            "items": {
+              "type": "object",
+              "properties": {
+                "url": {
+                  "type": "string"
+                },
+                "ok": {
+                  "type": "boolean"
+                },
+                "erro": {
+                  "type": "string"
+                },
+                "status": {
+                  "type": "integer"
+                }
+              },
+              "required": [
+                "url",
+                "ok"
+              ],
+              "additionalProperties": false
+            }
+          }
+        },
+        "required": [
+          "ok",
+          "version",
+          "lastCrawlAt",
+          "durationMs",
+          "totalSeeds",
+          "totalFetched",
+          "totalImages",
+          "seedStatus"
+        ],
+        "additionalProperties": true
+      },
+      "OrquestrarMemoriasETelemetriaRequest": {
+        "type": "object",
+        "required": [
+          "acao"
+        ],
+        "properties": {
+          "acao": {
+            "type": "string",
+            "enum": [
+              "consultarMemorias",
+              "create",
+              "privacy",
+              "write_pipeline",
+              "import_training",
+              "removerMemoria",
+              "registrarEventoTelemetriaUso"
+            ]
+          },
+          "payload": {
+            "type": "object",
+            "description": "Payload opcional dependente da ação. Para registrarEventoTelemetriaUso, use o schema RegistrarTelemetriaRequest. Para ações de memória (create|write_pipeline|privacy|import_training), inclua os campos esperados por GerenciarMemorias.php. Para create/write_pipeline, envie conteúdo em payload.conteudo (ou payload.content)."
+          },
+          "conteudo": {
+            "type": "string",
+            "description": "Conteúdo da memória quando acao=create|write_pipeline. Atalho de compatibilidade para clientes que enviam conteúdo no nível raiz."
+          },
+          "content": {
+            "type": "string",
+            "description": "Alias de conteudo para criação de memória."
+          },
+          "texto": {
+            "type": "string",
+            "description": "Alias de texto para criação de memória (ex.: texto após .RegistroMemoria)."
+          },
+          "comando": {
+            "type": "string",
+            "description": "Comando bruto recebido no chat (ex.: .RegistroMemoria teste). Quando acao=create e não houver conteúdo explícito, o backend tenta extrair o texto após o comando."
+          }
+        }
+      },
+      "OrquestrarConfiguradorEReferenciasRequest": {
+        "type": "object",
+        "properties": {
+          "acao": {
+            "type": "string",
+            "description": "Ação a executar no pipeline unificado.",
+            "enum": [
+              "gerarLinkConfigurador",
+              "validarReferenciaEstruturadaGet",
+              "validarReferenciaEstruturadaPost"
+            ]
+          },
+          "configurador": {
+            "type": "string",
+            "description": "Opcional quando a API conseguir inferir pela fala/variáveis.",
+            "enum": [
+              "AC",
+              "AE",
+              "FX",
+              "HY",
+              "IN",
+              "MO",
+              "PL",
+              "QU",
+              "QUDR",
+              "VA"
+            ]
+          },
+          "cdProdConfig": {
+            "type": "string",
+            "description": "Alias de configurador/CD_PRODCONFIG (ex.: QU, HY, QUDR ou linha equivalente)."
+          },
+          "CD_PRODCONFIG": {
+            "type": "string",
+            "description": "Alias legado em maiúsculas de cdProdConfig."
+          },
+          "codigoProduto": {
+            "type": "string",
+            "description": "Código do produto no formato XXXX.00000000 para autoidentificar configurador e variáveis via base oficial."
+          },
+          "referenciaEstruturada": {
+            "type": "string",
+            "description": "Referência estruturada completa para recuperar CD_PRODCONFIG e variáveis automaticamente."
+          },
+          "codigo": {
+            "type": "string"
+          },
+          "referencia": {
+            "type": "string"
+          },
+          "codigoOuReferencia": {
+            "type": "string"
+          },
+          "variaveis": {
+            "type": "object",
+            "description": "Objeto com chave/valor das variáveis finais do configurador.",
+            "additionalProperties": {
+              "type": "string"
+            }
+          },
+          "falaSolicitante": {
+            "type": "string",
+            "description": "Texto livre do cliente. A API extrai variáveis no formato CHAVE=VALOR ou CHAVE:VALOR, incluindo URLs com querystring."
+          },
+          "solicitacao": {
+            "type": "string",
+            "description": "Alias de `falaSolicitante` para compatibilidade retroativa."
+          },
+          "response_schema": {
+            "type": "object",
+            "description": "JSON Schema opcional para validar a resposta final do endpoint antes do retorno."
+          },
+          "response_schema_policy": {
+            "type": "string",
+            "description": "Política de validação pós-geração: strict_fail (erro 422), auto_repair (tentativa de reparo) ou best_effort (retorna com aviso).",
+            "enum": [
+              "strict_fail",
+              "auto_repair",
+              "best_effort"
+            ]
+          }
+        },
+        "additionalProperties": true,
+        "description": "Quando acao=gerarLinkConfigurador, aceita código/referência/configurador para detectar CD_PRODCONFIG e gerar o link oficial do configurador com querystrings, além de retornar variaveisIdentificadas."
+      },
+      "StatusResposta": {
+        "type": "string",
+        "enum": [
+          "success",
+          "partial",
+          "error"
+        ]
+      },
+      "Warning": {
+        "type": "object",
+        "properties": {
+          "codigo": {
+            "type": "string"
+          },
+          "mensagem": {
+            "type": "string"
+          },
+          "deprecatedFieldUsed": {
+            "type": "string"
+          }
+        },
+        "required": [
+          "codigo",
+          "mensagem"
+        ]
+      },
+      "DetalheValidacao": {
+        "type": "object",
+        "properties": {
+          "campo": {
+            "type": "string"
+          },
+          "regra": {
+            "type": "string"
+          },
+          "valorRecebido": {},
+          "mensagem": {
+            "type": "string"
+          }
+        },
+        "required": [
+          "campo",
+          "regra",
+          "mensagem"
+        ]
+      },
+      "ResponseSuccessEnvelope": {
+        "type": "object",
+        "required": [
+          "status",
+          "data",
+          "requestId",
+          "timestamp"
+        ],
+        "properties": {
+          "status": {
+            "$ref": "#/components/schemas/StatusResposta"
+          },
+          "data": {
+            "type": "object",
+            "properties": {
+              "publico": {
+                "type": "object"
+              },
+              "interno": {
+                "type": "object"
+              }
+            }
+          },
+          "warnings": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/Warning"
+            }
+          },
+          "requestId": {
+            "type": "string"
+          },
+          "timestamp": {
+            "type": "string",
+            "format": "date-time"
+          },
+          "redactionsApplied": {
+            "type": "boolean"
+          }
+        }
+      },
+      "ResponseErrorEnvelope": {
+        "type": "object",
+        "required": [
+          "status",
+          "codigoErro",
+          "mensagemUsuario",
+          "requestId",
+          "timestamp"
+        ],
+        "properties": {
+          "status": {
+            "type": "string",
+            "enum": [
+              "error"
+            ]
+          },
+          "codigoErro": {
+            "type": "string",
+            "enum": [
+              "PAYLOAD_INVALIDO",
+              "NAO_AUTORIZADO",
+              "SEM_PERMISSAO",
+              "NAO_ENCONTRADO",
+              "IDEMPOTENCY_CONFLICT",
+              "VALIDATION_ERROR",
+              "RATE_LIMIT_EXCEEDED",
+              "ERRO_INTERNO_SOLICITACAO_COTACAO"
+            ]
+          },
+          "mensagemUsuario": {
+            "type": "string"
+          },
+          "mensagemTecnica": {
+            "type": "string"
+          },
+          "detalhes": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/DetalheValidacao"
+            }
+          },
+          "warnings": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/Warning"
+            }
+          },
+          "requestId": {
+            "type": "string"
+          },
+          "timestamp": {
+            "type": "string",
+            "format": "date-time"
+          },
+          "redactionsApplied": {
+            "type": "boolean"
+          }
+        }
+      }
+    },
+    "parameters": {
+      "IdempotencyKey": {
+        "name": "Idempotency-Key",
+        "in": "header",
+        "required": false,
+        "schema": {
+          "type": "string",
+          "minLength": 8,
+          "maxLength": 128
+        },
+        "description": "Chave para deduplicar operações de criação."
+      }
+    }
+  },
+  "paths": {
+    "/APIChat/BuscaProduto.php": {
+      "get": {
+        "operationId": "buscarProdutos",
+        "summary": "Busca unificada de produtos e validação de referência (GET)",
+        "security": [
+          {
+            "ApiKeyAuth": []
+          }
+        ],
+        "parameters": [
+          {
+            "name": "acao",
+            "in": "query",
+            "required": false,
+            "schema": {
+              "type": "string",
+              "enum": [
+                "buscarProdutosPorTexto",
+                "buscarProdutoPorCodigo",
+                "consultarProdutosConfigurador",
+                "validarReferenciaEstruturadaGet"
+              ]
+            }
+          },
+          {
+            "name": "q",
+            "in": "query",
+            "required": false,
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "codigo",
+            "in": "query",
+            "required": false,
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "referencia",
+            "in": "query",
+            "required": false,
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "pagina",
+            "in": "query",
+            "required": false,
+            "schema": {
+              "type": "integer",
+              "minimum": 1
+            }
+          },
+          {
+            "name": "limite",
+            "in": "query",
+            "required": false,
+            "schema": {
+              "type": "integer",
+              "minimum": 1,
+              "maximum": 200
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Sucesso",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ResponseSuccessEnvelope"
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "Erro padronizado",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ResponseErrorEnvelope"
+                }
+              }
+            }
+          },
+          "401": {
+            "description": "Erro padronizado",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ResponseErrorEnvelope"
+                }
+              }
+            }
+          },
+          "403": {
+            "description": "Erro padronizado",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ResponseErrorEnvelope"
+                }
+              }
+            }
+          },
+          "404": {
+            "description": "Erro padronizado",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ResponseErrorEnvelope"
+                }
+              }
+            }
+          },
+          "409": {
+            "description": "Erro padronizado",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ResponseErrorEnvelope"
+                }
+              }
+            }
+          },
+          "422": {
+            "description": "Erro padronizado",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ResponseErrorEnvelope"
+                }
+              }
+            }
+          },
+          "429": {
+            "description": "Erro padronizado",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ResponseErrorEnvelope"
+                }
+              }
+            }
+          },
+          "500": {
+            "description": "Erro padronizado",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ResponseErrorEnvelope"
+                }
+              }
+            }
+          }
+        },
+        "description": "Endpoint único para busca/listagem de produtos e validação de referência estruturada (GET)."
+      },
+      "post": {
+        "operationId": "buscarProdutosPost",
+        "summary": "Ações POST de produto (consulta SQL, validação e busca)",
+        "security": [
+          {
+            "ApiKeyAuth": []
+          }
+        ],
+        "requestBody": {
+          "required": false,
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/OrquestrarConfiguradorEReferenciasRequest"
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "Sucesso",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ResponseSuccessEnvelope"
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "Entrada inválida"
+          },
+          "401": {
+            "description": "Erro padronizado",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ResponseErrorEnvelope"
+                }
+              }
+            }
+          },
+          "403": {
+            "description": "Erro padronizado",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ResponseErrorEnvelope"
+                }
+              }
+            }
+          },
+          "404": {
+            "description": "Erro padronizado",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ResponseErrorEnvelope"
+                }
+              }
+            }
+          },
+          "405": {
+            "description": "Método não permitido para ação"
+          },
+          "409": {
+            "description": "Erro padronizado",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ResponseErrorEnvelope"
+                }
+              }
+            }
+          },
+          "422": {
+            "description": "Erro padronizado",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ResponseErrorEnvelope"
+                }
+              }
+            }
+          },
+          "429": {
+            "description": "Erro padronizado",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ResponseErrorEnvelope"
+                }
+              }
+            }
+          },
+          "500": {
+            "description": "Erro padronizado",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ResponseErrorEnvelope"
+                }
+              }
+            }
+          }
+        },
+        "description": "Use `acao=consultaSelect` para SELECT somente leitura; `acao=validarReferenciaEstruturadaPost` para validar referência (normalização + validação/formato + dados do produto quando houver, sem garantir link preenchido); também suporta buscas via POST."
+      }
+    },
+    "/APIChat/OrquestrarConfiguradorEReferencias.php": {
+      "post": {
+        "operationId": "orquestrarConfiguradorEReferencias",
+        "summary": "Pipeline unificado de configurador e validações",
+        "security": [
+          {
+            "ApiKeyAuth": []
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Sucesso",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ResponseSuccessEnvelope"
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "Erro padronizado",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ResponseErrorEnvelope"
+                }
+              }
+            }
+          },
+          "401": {
+            "description": "Erro padronizado",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ResponseErrorEnvelope"
+                }
+              }
+            }
+          },
+          "403": {
+            "description": "Erro padronizado",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ResponseErrorEnvelope"
+                }
+              }
+            }
+          },
+          "404": {
+            "description": "Erro padronizado",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ResponseErrorEnvelope"
+                }
+              }
+            }
+          },
+          "409": {
+            "description": "Erro padronizado",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ResponseErrorEnvelope"
+                }
+              }
+            }
+          },
+          "422": {
+            "description": "Erro padronizado",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ResponseErrorEnvelope"
+                }
+              }
+            }
+          },
+          "429": {
+            "description": "Erro padronizado",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ResponseErrorEnvelope"
+                }
+              }
+            }
+          },
+          "500": {
+            "description": "Erro padronizado",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ResponseErrorEnvelope"
+                }
+              }
+            }
+          }
+        },
+        "description": "Ações: gerarLinkConfigurador, validarReferenciaEstruturadaGet, validarReferenciaEstruturadaPost. Regra de uso: se precisar de link preenchido, valide a referência primeiro e depois chame gerarLinkConfigurador quando valida=true.",
+        "requestBody": {
+          "required": false,
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/OrquestrarConfiguradorEReferenciasRequest"
+              }
+            }
+          }
+        }
+      }
+    },
+    "/APIChat/ConsultarCapacidadesApiChat.php": {
+      "get": {
+        "operationId": "consultarCapacidadesApiChat",
+        "summary": "Diagnóstico unificado de sessão e capabilities",
+        "security": [
+          {
+            "ApiKeyAuth": []
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Sucesso",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ResponseSuccessEnvelope"
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "Erro padronizado",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ResponseErrorEnvelope"
+                }
+              }
+            }
+          },
+          "401": {
+            "description": "Erro padronizado",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ResponseErrorEnvelope"
+                }
+              }
+            }
+          },
+          "403": {
+            "description": "Erro padronizado",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ResponseErrorEnvelope"
+                }
+              }
+            }
+          },
+          "404": {
+            "description": "Erro padronizado",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ResponseErrorEnvelope"
+                }
+              }
+            }
+          },
+          "409": {
+            "description": "Erro padronizado",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ResponseErrorEnvelope"
+                }
+              }
+            }
+          },
+          "422": {
+            "description": "Erro padronizado",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ResponseErrorEnvelope"
+                }
+              }
+            }
+          },
+          "429": {
+            "description": "Erro padronizado",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ResponseErrorEnvelope"
+                }
+              }
+            }
+          },
+          "500": {
+            "description": "Erro padronizado",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ResponseErrorEnvelope"
+                }
+              }
+            }
+          }
+        },
+        "description": "Ações: consultarCapacidadesApiChat (padrão), consultarContextoInicial, consultarResumoTelemetriaUso.",
+        "parameters": [
+          {
+            "name": "acao",
+            "in": "query",
+            "required": false,
+            "schema": {
+              "type": "string",
+              "enum": [
+                "consultarCapacidadesApiChat",
+                "consultarContextoInicial",
+                "consultarResumoTelemetriaUso"
+              ]
+            },
+            "description": "Define a ação de diagnóstico consolidada. Sem `acao`, o endpoint retorna capabilities."
+          }
+        ]
+      }
+    },
+    "/APIChat/ConsultaConteudo.php": {
+      "get": {
+        "operationId": "consultaConteudo",
+        "summary": "Consulta unificada de conteúdo",
+        "security": [
+          {
+            "ApiKeyAuth": []
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Sucesso",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ResponseSuccessEnvelope"
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "Erro padronizado",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ResponseErrorEnvelope"
+                }
+              }
+            }
+          },
+          "401": {
+            "description": "Erro padronizado",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ResponseErrorEnvelope"
+                }
+              }
+            }
+          },
+          "403": {
+            "description": "Erro padronizado",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ResponseErrorEnvelope"
+                }
+              }
+            }
+          },
+          "404": {
+            "description": "Erro padronizado",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ResponseErrorEnvelope"
+                }
+              }
+            }
+          },
+          "409": {
+            "description": "Erro padronizado",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ResponseErrorEnvelope"
+                }
+              }
+            }
+          },
+          "422": {
+            "description": "Erro padronizado",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ResponseErrorEnvelope"
+                }
+              }
+            }
+          },
+          "429": {
+            "description": "Erro padronizado",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ResponseErrorEnvelope"
+                }
+              }
+            }
+          },
+          "500": {
+            "description": "Erro padronizado",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ResponseErrorEnvelope"
+                }
+              }
+            }
+          }
+        },
+        "description": "Ações/rotas de leitura: listar, ler, status, cancel e busca de imagens oficiais por rota.",
+        "parameters": [
+          {
+            "name": "acao",
+            "in": "query",
+            "required": false,
+            "schema": {
+              "type": "string",
+              "enum": [
+                "listar",
+                "ler",
+                "status",
+                "cancel",
+                "buscarImagensOficiaisIBR",
+                "resolverImagensOficiaisIBR"
+              ]
+            },
+            "description": "Ação principal do endpoint unificado."
+          },
+          {
+            "name": "rota",
+            "in": "query",
+            "required": false,
+            "schema": {
+              "type": "string",
+              "enum": [
+                "search",
+                "resolve",
+                "by-product",
+                "status",
+                "crawl"
+              ]
+            },
+            "description": "Rota de imagens oficiais (search, resolve, by-product, status, crawl)."
+          },
+          {
+            "name": "path",
+            "in": "query",
+            "required": false,
+            "schema": {
+              "type": "string"
+            },
+            "description": "Obrigatório quando acao=ler; caminho relativo permitido para leitura de arquivo público."
+          },
+          {
+            "name": "codigoProduto",
+            "in": "query",
+            "required": false,
+            "schema": {
+              "type": "string"
+            },
+            "description": "Código do produto para rota=by-product (alias preferencial)."
+          },
+          {
+            "name": "codigo",
+            "in": "query",
+            "required": false,
+            "schema": {
+              "type": "string"
+            },
+            "description": "Alias legado de codigoProduto para rota=by-product."
+          },
+          {
+            "name": "q",
+            "in": "query",
+            "required": false,
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "linha",
+            "in": "query",
+            "required": false,
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "tipo",
+            "in": "query",
+            "required": false,
+            "schema": {
+              "type": "string",
+              "enum": [
+                "PRODUCT_PHOTO",
+                "DIMENSIONAL_DRAWING",
+                "ASSEMBLY_MOUNTING",
+                "TABLE_CHART",
+                "WIRING_DIAGRAM",
+                "ICON_OTHER"
+              ]
+            }
+          },
+          {
+            "name": "limit",
+            "in": "query",
+            "required": false,
+            "schema": {
+              "type": "integer",
+              "minimum": 1,
+              "maximum": 5000,
+              "default": 4
+            }
+          },
+          {
+            "name": "async",
+            "in": "query",
+            "required": false,
+            "schema": {
+              "type": "boolean"
+            },
+            "description": "Quando true em ações de leitura assíncrona, retorna accepted com jobId/statusUrl/cancelUrl."
+          },
+          {
+            "name": "jobId",
+            "in": "query",
+            "required": false,
+            "schema": {
+              "type": "string"
+            },
+            "description": "Identificador do job para acao=status e acao=cancel."
+          }
+        ]
+      },
+      "post": {
+        "operationId": "consultaConteudoPost",
+        "summary": "Consulta unificada de conteúdo (POST)",
+        "security": [
+          {
+            "ApiKeyAuth": []
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Sucesso",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ResponseSuccessEnvelope"
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "Erro padronizado",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ResponseErrorEnvelope"
+                }
+              }
+            }
+          },
+          "401": {
+            "description": "Erro padronizado",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ResponseErrorEnvelope"
+                }
+              }
+            }
+          },
+          "403": {
+            "description": "Erro padronizado",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ResponseErrorEnvelope"
+                }
+              }
+            }
+          },
+          "404": {
+            "description": "Erro padronizado",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ResponseErrorEnvelope"
+                }
+              }
+            }
+          },
+          "409": {
+            "description": "Erro padronizado",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ResponseErrorEnvelope"
+                }
+              }
+            }
+          },
+          "422": {
+            "description": "Erro padronizado",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ResponseErrorEnvelope"
+                }
+              }
+            }
+          },
+          "429": {
+            "description": "Erro padronizado",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ResponseErrorEnvelope"
+                }
+              }
+            }
+          },
+          "500": {
+            "description": "Erro padronizado",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ResponseErrorEnvelope"
+                }
+              }
+            }
+          }
+        },
+        "description": "Usado principalmente para rota=resolve e rota=crawl no fluxo de imagens oficiais.",
+        "requestBody": {
+          "required": false,
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object",
+                "properties": {
+                  "rota": {
+                    "type": "string"
+                  },
+                  "acao": {
+                    "type": "string"
+                  },
+                  "q": {
+                    "type": "string"
+                  },
+                  "texto": {
+                    "type": "string"
+                  },
+                  "query": {
+                    "type": "string"
+                  },
+                  "linha": {
+                    "type": "string"
+                  },
+                  "tipo": {
+                    "type": "string"
+                  },
+                  "codigoProduto": {
+                    "type": "string"
+                  },
+                  "codigo": {
+                    "type": "string"
+                  },
+                  "limit": {
+                    "type": "integer"
+                  }
+                },
+                "additionalProperties": true
+              }
+            }
+          }
+        }
+      }
+    },
+    "/APIChat/OrquestrarMemoriasETelemetria.php": {
+      "post": {
+        "operationId": "orquestrarMemoriasETelemetria",
+        "summary": "Event store unificado",
+        "security": [
+          {
+            "ApiKeyAuth": []
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Sucesso",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ResponseSuccessEnvelope"
+                }
+              }
+            }
+          },
+          "201": {
+            "description": "Evento de telemetria registrado.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ResponseSuccessEnvelope"
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "Erro padronizado",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ResponseErrorEnvelope"
+                }
+              }
+            }
+          },
+          "401": {
+            "description": "Erro padronizado",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ResponseErrorEnvelope"
+                }
+              }
+            }
+          },
+          "403": {
+            "description": "Erro padronizado",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ResponseErrorEnvelope"
+                }
+              }
+            }
+          },
+          "404": {
+            "description": "Erro padronizado",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ResponseErrorEnvelope"
+                }
+              }
+            }
+          },
+          "409": {
+            "description": "Erro padronizado",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ResponseErrorEnvelope"
+                }
+              }
+            }
+          },
+          "422": {
+            "description": "Erro padronizado",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ResponseErrorEnvelope"
+                }
+              }
+            }
+          },
+          "429": {
+            "description": "Erro padronizado",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ResponseErrorEnvelope"
+                }
+              }
+            }
+          },
+          "500": {
+            "description": "Erro padronizado",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ResponseErrorEnvelope"
+                }
+              }
+            }
+          }
+        },
+        "description": "Ações: consultarMemorias, create, privacy, write_pipeline, import_training, removerMemoria e registrarEventoTelemetriaUso. Para telemetria, envie acao=registrarEventoTelemetriaUso com payload de evento. Para memória via comando, use acao=create.",
+        "requestBody": {
+          "required": false,
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/OrquestrarMemoriasETelemetriaRequest"
+              },
+              "examples": {
+                "registrarEventoTelemetriaUso": {
+                  "summary": "Registro explícito de telemetria via action + payload",
+                  "value": {
+                    "acao": "registrarEventoTelemetriaUso",
+                    "payload": {
+                      "evento": "falha_falta_dado",
+                      "origem": "chat",
+                      "severidade": "warning",
+                      "contexto": {
+                        "etapa": "validacao",
+                        "motivo": "codigo_ausente"
+                      },
+                      "requestIdsRelacionados": [
+                        "req-abc",
+                        "req-def"
+                      ],
+                      "consentimentoIA": true
+                    }
+                  }
+                },
+                "criarMemoriaViaComando": {
+                  "summary": "Registro de memória contextual via comando de chat",
+                  "value": {
+                    "acao": "create",
+                    "payload": {
+                      "conteudo": "teste - cliente pediu redutor para 1,5 kW",
+                      "scope": "global",
+                      "namespace": "chat_comandos",
+                      "memoryType": "contextual"
+                    }
+                  }
+                }
+              }
+            }
+          }
+        },
+        "parameters": [
+          {
+            "name": "Idempotency-Key",
+            "in": "header",
+            "required": false,
+            "schema": {
+              "type": "string",
+              "minLength": 8,
+              "maxLength": 128
+            },
+            "description": "Chave para deduplicar operações de criação."
+          }
+        ]
+      }
+    },
+    "/APIChat/SolicitacaoCotacao.php": {
+      "post": {
+        "operationId": "abrirSolicitacaoCotacao",
+        "summary": "Abre uma solicitação de cotação com dados coletados no chat.",
+        "security": [
+          {
+            "ApiKeyAuth": []
+          }
+        ],
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/SolicitacaoCotacaoRequest"
+              }
+            }
+          }
+        },
+        "responses": {
+          "202": {
+            "description": "Solicitação enfileirada com sucesso (oportunidade ainda em processamento).",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ResponseSuccessEnvelope"
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "Dados inválidos.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorResponse"
+                }
+              }
+            }
+          },
+          "401": {
+            "description": "Não autenticado.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorResponse"
+                },
+                "examples": {
+                  "naoAutorizadoActionConfig": {
+                    "summary": "NAO_AUTORIZADO com ação corretiva",
+                    "value": {
+                      "ok": false,
+                      "erro": "API key ausente ou inválida.",
+                      "codigoErro": "NAO_AUTORIZADO",
+                      "acaoCorretiva": "Configure a Action com o header X-Api-Key contendo a mesma chave ativa no servidor.",
+                      "requestId": "9f2ca5f62b834f17bb1cc8d9f5165c77"
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "403": {
+            "description": "Erro padronizado",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ResponseErrorEnvelope"
+                }
+              }
+            }
+          },
+          "404": {
+            "description": "Erro padronizado",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ResponseErrorEnvelope"
+                }
+              }
+            }
+          },
+          "409": {
+            "description": "Erro padronizado",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ResponseErrorEnvelope"
+                }
+              }
+            }
+          },
+          "422": {
+            "description": "Erro padronizado",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ResponseErrorEnvelope"
+                }
+              }
+            }
+          },
+          "429": {
+            "description": "Rate limit excedido.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorResponse"
+                }
+              }
+            }
+          },
+          "500": {
+            "description": "Erro interno.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorResponse"
+                }
+              }
+            }
+          }
+        },
+        "description": "Classe `protegida`: exige `X-Api-Key` válido. Sem chave válida, a resposta esperada é `401 NAO_AUTORIZADO` (`codigoErro=NAO_AUTORIZADO`).",
+        "parameters": [
+          {
+            "name": "Idempotency-Key",
+            "in": "header",
+            "required": false,
+            "schema": {
+              "type": "string",
+              "minLength": 8,
+              "maxLength": 128
+            },
+            "description": "Chave para deduplicar operações de criação."
+          }
+        ]
+      }
+    },
+    "/APIChat/SolicitacaoDesenho.php": {
+      "post": {
+        "operationId": "abrirSolicitacaoDesenho",
+        "summary": "Abre uma solicitação de desenho com validação rígida de produto e formato.",
+        "security": [
+          {
+            "ApiKeyAuth": []
+          }
+        ],
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/SolicitacaoDesenhoRequest"
+              }
+            }
+          }
+        },
+        "responses": {
+          "202": {
+            "description": "Solicitação de desenho enfileirada com sucesso.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ResponseSuccessEnvelope"
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "Dados inválidos ou código de produto inexistente/inativo.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorResponse"
+                }
+              }
+            }
+          },
+          "401": {
+            "description": "Não autenticado.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorResponse"
+                },
+                "examples": {
+                  "naoAutorizadoActionConfig": {
+                    "summary": "NAO_AUTORIZADO com ação corretiva",
+                    "value": {
+                      "ok": false,
+                      "erro": "API key ausente ou inválida.",
+                      "codigoErro": "NAO_AUTORIZADO",
+                      "acaoCorretiva": "Configure a Action com o header X-Api-Key contendo a mesma chave ativa no servidor.",
+                      "requestId": "9f2ca5f62b834f17bb1cc8d9f5165c77"
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "403": {
+            "description": "Erro padronizado",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ResponseErrorEnvelope"
+                }
+              }
+            }
+          },
+          "404": {
+            "description": "Erro padronizado",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ResponseErrorEnvelope"
+                }
+              }
+            }
+          },
+          "409": {
+            "description": "Erro padronizado",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ResponseErrorEnvelope"
+                }
+              }
+            }
+          },
+          "422": {
+            "description": "Erro padronizado",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ResponseErrorEnvelope"
+                }
+              }
+            }
+          },
+          "429": {
+            "description": "Rate limit excedido.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorResponse"
+                }
+              }
+            }
+          },
+          "500": {
+            "description": "Erro interno.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorResponse"
+                }
+              }
+            }
+          }
+        },
+        "description": "Classe `protegida`: exige `X-Api-Key` válido. Sem chave válida, a resposta esperada é `401 NAO_AUTORIZADO` (`codigoErro=NAO_AUTORIZADO`).",
+        "parameters": [
+          {
+            "name": "Idempotency-Key",
+            "in": "header",
+            "required": false,
+            "schema": {
+              "type": "string",
+              "minLength": 8,
+              "maxLength": 128
+            },
+            "description": "Chave para deduplicar operações de criação."
+          }
+        ]
+      }
+    },
+    "/APIChat/EnviarTEEC.php": {
+      "post": {
+        "operationId": "executarEnviarTEEC",
+        "summary": "Envia por email a conversa atual quando o comando .EnviarTEEC for utilizado.",
+        "description": "Processa .EnviarTEEC (com observação opcional), estrutura a conversa linha a linha e envia para braian.peruzzo@redutoresibr.com.br.\n\nClasse `protegida`: exige `X-Api-Key` válido. Sem chave válida, a resposta esperada é `401 NAO_AUTORIZADO` (`codigoErro=NAO_AUTORIZADO`).",
+        "security": [
+          {
+            "ApiKeyAuth": []
+          }
+        ],
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/EnviarTeecRequest"
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "Email TEEC enviado com sucesso.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ResponseSuccessEnvelope"
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "Comando inválido, conversa ausente ou payload inválido.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/EnviarTeecResponse"
+                }
+              }
+            }
+          },
+          "401": {
+            "description": "Não autenticado.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorResponse"
+                },
+                "examples": {
+                  "naoAutorizadoActionConfig": {
+                    "summary": "NAO_AUTORIZADO com ação corretiva",
+                    "value": {
+                      "ok": false,
+                      "erro": "API key ausente ou inválida.",
+                      "codigoErro": "NAO_AUTORIZADO",
+                      "acaoCorretiva": "Configure a Action com o header X-Api-Key contendo a mesma chave ativa no servidor.",
+                      "requestId": "9f2ca5f62b834f17bb1cc8d9f5165c77"
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "403": {
+            "description": "Erro padronizado",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ResponseErrorEnvelope"
+                }
+              }
+            }
+          },
+          "404": {
+            "description": "Erro padronizado",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ResponseErrorEnvelope"
+                }
+              }
+            }
+          },
+          "409": {
+            "description": "Erro padronizado",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ResponseErrorEnvelope"
+                }
+              }
+            }
+          },
+          "422": {
+            "description": "Erro padronizado",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ResponseErrorEnvelope"
+                }
+              }
+            }
+          },
+          "429": {
+            "description": "Erro padronizado",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ResponseErrorEnvelope"
+                }
+              }
+            }
+          },
+          "500": {
+            "description": "Erro interno ao enviar email.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/EnviarTeecResponse"
+                }
+              }
+            }
+          }
+        },
+        "parameters": [
+          {
+            "name": "Idempotency-Key",
+            "in": "header",
+            "required": false,
+            "schema": {
+              "type": "string",
+              "minLength": 8,
+              "maxLength": 128
+            },
+            "description": "Chave para deduplicar operações de criação."
+          }
+        ]
+      }
+    }
+  }
+}

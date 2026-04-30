@@ -1,0 +1,1 @@
+{"timestamp":"2026-02-23T17:45:15+00:00","tipo":"erro_validacao","requestId":"77a3cf75285f48f8","dados":{"status":400,"codigoErro":"CODIGO_PRODUTO_INVALIDO","mensagem":"Código do produto inválido. Formato esperado: XXXX.00000000.","extra":[]}}

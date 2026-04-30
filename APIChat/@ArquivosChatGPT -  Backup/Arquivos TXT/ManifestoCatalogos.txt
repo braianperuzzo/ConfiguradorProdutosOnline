@@ -1,0 +1,388 @@
+ManifestoCatalogo
+versao_indice: 2026-02-17
+fonte: site_ibr
+
+
+POLITICA DO ASSISTENTE (obrigatorio)
+1) Usar SOMENTE URLs presentes neste Manifesto. Nunca inventar links.
+2) Sempre citar url_visualizacao como referencia oficial.
+3) Usar url_pdf_atual apenas quando o usuario pedir download/baixar PDF, ou se o visualizador nao abrir.
+4) Escolher 1 documento principal por resposta.
+   - Regra geral: no máximo 2 links.
+   - Exceção (N3 / validação por código ou referência): permitir até 3 a 5 links, somente os mais relevantes e sempre oficiais (quando disponíveis).
+   - Em N3 (validado), quando houver muitos documentos possíveis, priorizar nesta ordem: Manual, Datasheet, Catálogo (visão geral / tabelas / família), Vídeo (se houver e for relevante), Produtos Relacionados, Descrição, Código interno, Link do configurador (se retornado pronto pela consulta oficial)
+5) Se houver duvida entre documentos, fazer 1 pergunta curta para desambiguar (ex.: modelo, aplicacao, torque/rpm, ambiente).
+6) Se nao houver match bom, usar fallback (ver REGRAS DE SELECAO).
+
+KIT DE LINKS (N3 validado) — regra prática
+Se existirem URLs relevantes no Manifesto para a família/linha:
+- Sempre retornar 2–4 links (respeitando limite N3).
+- Composição sugerida:
+  1) Manual e Garantia (se existir)
+  2) Datasheet/Manual específico (se existir)
+  3) Catálogo da linha/família
+  4) Mais informações / Conheça também (se existir e for relevante)
+
+REGRA-CHAVE (links)
+- url_visualizacao = CANONICA (estavel) e deve ser citada como referencia oficial.
+- url_pdf_atual = VOLATIL (link em /_uploads pode mudar quando o arquivo e atualizado).
+- Padrao: citar url_visualizacao. Alternativa tecnica: url_pdf_atual somente quando necessario.
+
+CONTRATO (schema por [DOC])
+Campos obrigatorios:
+- id (string unica, sem espacos; kebab-case recomendado)
+- titulo (string)
+- tipo (catalogo|manual|datasheet|guia|tabela|outro)
+- categoria (ver ENUM_CATEGORIA)
+- tags_busca (string; separador obrigatorio: ";")
+- url_visualizacao (url)
+- url_pdf_atual (url)
+
+Campos recomendados:
+- idioma (pt|en|es)
+- status (ativo|legado|substituido|rascunho)
+- data_publicacao (YYYY-MM-DD|desconhecido)
+- atualizado_em (YYYY-MM-DD|desconhecido)
+- prioridade (1..5)   ; 1 = mais importante para desempate
+- paginas (numero|desconhecido)
+- observacoes (string curta)
+
+ENUM_TIPO (valores permitidos)
+- catalogo
+- manual
+- datasheet
+- guia
+- tabela
+- outro
+
+ENUM_CATEGORIA (valores permitidos, sem acento, sem espacos)
+- geral
+- planetarios
+- automacao
+- anticorrosivos
+- motores
+- redutores-motorredutores
+- outro
+
+REGRAS DE TAGS (tags_busca)
+- tags_busca e OBRIGATORIO em todo [DOC].
+- Separador: ";" (ponto e virgula). Sem virgulas. Sem pipes.
+- Nao permitir tags vazias. Nao permitir ";;".
+- Normalizacao recomendada (pipeline): trim de espacos ao redor de cada tag.
+- Ordem recomendada das tags (melhora o match):
+  1) tipo
+  2) categoria
+  3) familia/modelo (quando existir, ex.: ibr q, ibr r, ibr c)
+  4) intencoes do usuario (ex.: instalacao, lubrificacao, manutencao, garantia, selecao)
+  5) aplicacoes (maquinas/processos)
+  6) parametros de selecao/dimensionamento (torque, rpm, relacao, etc.)
+  7) ambientes (corrosivo, lavagem, alimento, etc.)
+  8) sinonimos e variacoes comuns (com e sem acento quando fizer sentido)
+- Acentos: permitido. Duplicar com/sem acento apenas nos termos principais (quando comum).
+
+PADRAO_TAGS (referencia para enriquecimento)
+Intencoes: instalacao; lubrificacao; manutencao; garantia; selecao; dimensionamento; especificacoes; ligacao eletrica; tabelas; desenhos; dimensoes
+Tipos: catalogo; manual; datasheet; guia; tabela
+Aplicacoes: esteira; transportador; rosca; elevador canecas; agitador; extrusora; misturador; dosador; embalagem; paletizacao; posicionamento; pick and place
+Parametros: torque; rpm; relacao; eficiencia; backlash; rigidez; inercia; carga radial; carga axial; fator servico; montagem; flange; eixo; acoplamento
+Ambientes: corrosivo; lavagem; umidade; quimico; marinho; alimento; inox; pintura; protecao; epoxi; galvanizacao; vedacao; ip
+
+REGRAS ESPECIAIS (manuais sem visualizador)
+- Quando nao existir visualizador, usar o MESMO link nos dois campos:
+  url_visualizacao = url_pdf_atual
+- Mesmo assim, o chat continua citando url_visualizacao (que sera o PDF direto).
+- Se url_visualizacao == url_pdf_atual, o assistente pode avisar: "PDF direto (sem visualizador)".
+
+REGRAS DE SELECAO (ranking e desempate)
+- Objetivo: selecionar o melhor [DOC] para a pergunta do usuario.
+- Pontuacao (heuristica recomendada):
+  A) Match de tags (quantidade e relevancia)
+  B) Tipo mais especifico para a intencao:
+     datasheet > manual > guia > tabela > catalogo > outro
+  C) Categoria mais aderente ao contexto
+  D) Prioridade (menor numero ganha: 1 melhor que 5)
+  E) Atualizado_em mais recente (se existir)
+- Desempate final: escolher o documento com melhor aderencia de tipo e categoria.
+- Fallback:
+  - Pergunta ampla sobre linhas/portfolio: usar catalogo-geral
+  - Pergunta sobre garantia/instalacao/lubrificacao/manutencao: usar manual mais provavel e pedir modelo (Q/R/M/X/H/P/C etc.) se necessario
+  - Pergunta sobre automacao/servo/precisao/backlash: preferir catalogo-planetarios-precisao e/ou catalogo-automacao
+  - Se nenhum doc adequado: dizer que nao ha documento cadastrado e oferecer o mais proximo (geralmente catalogo-geral)
+
+VALIDACOES RECOMENDADAS (pipeline)
+- id unico; kebab-case; sem espacos
+- tipo dentro de ENUM_TIPO
+- categoria dentro de ENUM_CATEGORIA
+- tags_busca:
+  - obrigatorio
+  - separado por ";"
+  - sem tags vazias
+  - minimo recomendado: 10 tags (ajuste conforme necessidade)
+- url_visualizacao e url_pdf_atual:
+  - obrigatorios
+  - comecam com "https://"
+- Manuais sem visualizador:
+  - url_visualizacao == url_pdf_atual
+- Opcional: verificar se url_visualizacao responde (HTTP 200) em rotina de qualidade
+
+
+[DOC]
+id: catalogo-geral
+titulo: Catalogo Geral
+tipo: catalogo
+categoria: geral
+tags_busca: catalogo; geral; portfolio; linhas; redutores; motorredutores; variadores; selecao; dimensionamento; aplicacoes; torque; rpm; relacao; fator servico; montagem; flange; eixo; esteira; transportador; extrusora; agitador
+url_visualizacao: https://www.redutoresibr.com.br/pt/Arquivos/visualizar/catalogo-geral#book/
+url_pdf_atual: https://www.redutoresibr.com.br/_uploads/f3af8179-1b00-4aa1-a2c5-c79abcb334be.pdf
+idioma: pt
+status: ativo
+data_publicacao: desconhecido
+atualizado_em: desconhecido
+prioridade: 2
+paginas: desconhecido
+observacoes: PDF em /_uploads pode mudar, referencia oficial para o chat = url_visualizacao.
+
+[DOC]
+id: catalogo-planetarios-precisao
+titulo: Catalogo Planetarios de Precisao
+tipo: catalogo
+categoria: planetarios
+tags_busca: catalogo; planetarios; precisao; servo; servomotor; automacao; posicionamento; baixo backlash; backlash baixo; folga angular; repetibilidade; rigidez; rigidez torsional; rigidez torcional; inercia; relacao; eficiencia; flange; eixo; acoplamento; cnc; robotica; embalagem; pick and place
+url_visualizacao: https://www.redutoresibr.com.br/pt/Arquivos/visualizar/catalogo-planetarios-de-precisao#book/
+url_pdf_atual: https://www.redutoresibr.com.br/_uploads/22a93b5a-f7ee-4e2a-8a0c-c8f32e51fe5d.pdf
+idioma: pt
+status: ativo
+data_publicacao: desconhecido
+atualizado_em: desconhecido
+prioridade: 1
+paginas: 108
+observacoes: PDF em /_uploads pode mudar, referencia oficial para o chat = url_visualizacao.
+
+[DOC]
+id: catalogo-automacao
+titulo: Catalogo Automacao
+tipo: catalogo
+categoria: automacao
+tags_busca: catalogo; automacao; acionamentos; posicionamento; servo; servomotor; precisao; baixo backlash; rigidez; inercia; relacao; torque; rpm; flange; eixo; acoplamento; redutor compacto; embalagem; paletizacao; dosador; manipulador; robotica; pick and place; indexador; mesa indexadora
+url_visualizacao: https://www.redutoresibr.com.br/pt/Arquivos/visualizar/catalogo-automacao#book/
+url_pdf_atual: https://www.redutoresibr.com.br/_uploads/008d4e09-17cf-49f7-8644-8bb76338ace9.pdf
+idioma: pt
+status: ativo
+data_publicacao: desconhecido
+atualizado_em: desconhecido
+prioridade: 2
+paginas: 32
+observacoes: PDF em /_uploads pode mudar, referencia oficial para o chat = url_visualizacao.
+
+[DOC]
+id: catalogo-anticorrosivos
+titulo: Catalogo Anticorrosivos
+tipo: catalogo
+categoria: anticorrosivos
+tags_busca: catalogo; anticorrosivos; corrosao; ambiente agressivo; quimico; lavagem; higienico; alimentos; food grade; marinho; umidade; salinidade; inox; aco inox; pintura especial; protecao; revestimento; epoxi; galvanizacao; vedacao; selo; retentor; ip; inoxidavel
+url_visualizacao: https://www.redutoresibr.com.br/pt/Arquivos/visualizar/catalogo-anticorrosivos#book/
+url_pdf_atual: https://www.redutoresibr.com.br/_uploads/1ff0752e-b066-4cbd-bc55-e8aff05aee6a.pdf
+idioma: pt
+status: ativo
+data_publicacao: desconhecido
+atualizado_em: desconhecido
+prioridade: 3
+paginas: 27
+observacoes: PDF em /_uploads pode mudar, referencia oficial para o chat = url_visualizacao.
+
+
+;; MANUAIS (PDF direto / Downloads)
+;; Sem visualizador: url_visualizacao = url_pdf_atual (mesmo link).
+
+
+[DOC]
+id: manual-ibr-q
+titulo: Manual de instrucoes e certificado de garantia IBR Q (WEB)
+tipo: manual
+categoria: redutores-motorredutores
+tags_busca: manual; redutores-motorredutores; ibr q; garantia; instalacao; lubrificacao; manutencao; montagem; selecao; dimensionamento; torque; rpm; relacao; fator servico; flange; eixo; esteira; transportador; extrusora; agitador; protecao
+url_visualizacao: https://www.redutoresibr.com.br/_uploads/ce25fc8c-8060-4245-a715-9f447ef97eda.pdf
+url_pdf_atual: https://www.redutoresibr.com.br/_uploads/ce25fc8c-8060-4245-a715-9f447ef97eda.pdf
+idioma: pt
+status: ativo
+data_publicacao: desconhecido
+atualizado_em: desconhecido
+prioridade: 1
+paginas: desconhecido
+observacoes: PDF direto (sem visualizador). Downloads da pagina do produto.
+
+[DOC]
+id: manual-ibr-r
+titulo: Manual de instrucoes e certificado de garantia IBR R
+tipo: manual
+categoria: redutores-motorredutores
+tags_busca: manual; redutores-motorredutores; ibr r; garantia; instalacao; lubrificacao; manutencao; montagem; selecao; dimensionamento; torque; rpm; relacao; fator servico; flange; eixo; esteira; transportador; rosca; dosador
+url_visualizacao: https://www.redutoresibr.com.br/_uploads/485a3a65-515d-4bf6-b843-b317b38f85c3.pdf
+url_pdf_atual: https://www.redutoresibr.com.br/_uploads/485a3a65-515d-4bf6-b843-b317b38f85c3.pdf
+idioma: pt
+status: ativo
+data_publicacao: desconhecido
+atualizado_em: desconhecido
+prioridade: 1
+paginas: desconhecido
+observacoes: PDF direto (sem visualizador). Downloads da pagina do produto.
+
+[DOC]
+id: manual-ibr-m
+titulo: Manual de instrucoes e certificado de garantia IBR M (WEB)
+tipo: manual
+categoria: redutores-motorredutores
+tags_busca: manual; redutores-motorredutores; ibr m; garantia; instalacao; lubrificacao; manutencao; montagem; selecao; dimensionamento; torque; rpm; relacao; fator servico; flange; eixo; esteira; transportador; misturador; agitador
+url_visualizacao: https://www.redutoresibr.com.br/_uploads/c4984fcd-4402-4324-a8cc-02f63254c31b.pdf
+url_pdf_atual: https://www.redutoresibr.com.br/_uploads/c4984fcd-4402-4324-a8cc-02f63254c31b.pdf
+idioma: pt
+status: ativo
+data_publicacao: desconhecido
+atualizado_em: desconhecido
+prioridade: 1
+paginas: desconhecido
+observacoes: PDF direto (sem visualizador). Downloads da pagina do produto.
+
+[DOC]
+id: manual-ibr-x
+titulo: Manual de instrucoes e certificado de garantia IBR X (WEB)
+tipo: manual
+categoria: redutores-motorredutores
+tags_busca: manual; redutores-motorredutores; ibr x; garantia; instalacao; lubrificacao; manutencao; montagem; selecao; dimensionamento; torque; rpm; relacao; fator servico; flange; eixo; esteira; transportador; extrusora; elevador canecas
+url_visualizacao: https://www.redutoresibr.com.br/_uploads/80d3bcca-c48a-4b2e-afc7-92ee2ffc6f24.pdf
+url_pdf_atual: https://www.redutoresibr.com.br/_uploads/80d3bcca-c48a-4b2e-afc7-92ee2ffc6f24.pdf
+idioma: pt
+status: ativo
+data_publicacao: desconhecido
+atualizado_em: desconhecido
+prioridade: 1
+paginas: desconhecido
+observacoes: PDF direto (sem visualizador). Downloads da pagina do produto.
+
+[DOC]
+id: manual-ibr-h-p
+titulo: Manuais de instrucao e certificado de garantia IBR H e P (WEB)
+tipo: manual
+categoria: redutores-motorredutores
+tags_busca: manual; redutores-motorredutores; ibr h; ibr p; garantia; instalacao; lubrificacao; manutencao; montagem; selecao; dimensionamento; torque; rpm; relacao; fator servico; flange; eixo; esteira; transportador; rosca; misturador; agitador
+url_visualizacao: https://www.redutoresibr.com.br/_uploads/7862bb0a-1088-46fb-8b27-c62b9bdc9efe.pdf
+url_pdf_atual: https://www.redutoresibr.com.br/_uploads/7862bb0a-1088-46fb-8b27-c62b9bdc9efe.pdf
+idioma: pt
+status: ativo
+data_publicacao: desconhecido
+atualizado_em: desconhecido
+prioridade: 1
+paginas: desconhecido
+observacoes: PDF direto (sem visualizador). Downloads da pagina do produto.
+
+[DOC]
+id: manual-ibr-c-web
+titulo: Manual de instrucao e certificado de garantia IBR C (WEB)
+tipo: manual
+categoria: redutores-motorredutores
+tags_busca: manual; redutores-motorredutores; ibr c; coaxial; garantia; instalacao; lubrificacao; manutencao; montagem; selecao; dimensionamento; torque; rpm; relacao; fator servico; flange; eixo; esteira; transportador; embalagem; paletizacao
+url_visualizacao: https://www.redutoresibr.com.br/_uploads/e888336e-cbb6-4594-9e1e-ff44f46d66ad.pdf
+url_pdf_atual: https://www.redutoresibr.com.br/_uploads/e888336e-cbb6-4594-9e1e-ff44f46d66ad.pdf
+idioma: pt
+status: ativo
+data_publicacao: desconhecido
+atualizado_em: desconhecido
+prioridade: 1
+paginas: desconhecido
+observacoes: PDF direto (sem visualizador). Downloads da pagina do produto.
+
+[DOC]
+id: manual-ibr-c-adicional
+titulo: Manual e certificado adicional IBR C
+tipo: manual
+categoria: redutores-motorredutores
+tags_busca: manual; redutores-motorredutores; ibr c; coaxial; garantia; instalacao; manutencao; montagem; anexo; complemento; certificado
+url_visualizacao: https://www.redutoresibr.com.br/_uploads/6151866f-6890-4b36-ad7a-ac72d86a4000.pdf
+url_pdf_atual: https://www.redutoresibr.com.br/_uploads/6151866f-6890-4b36-ad7a-ac72d86a4000.pdf
+idioma: pt
+status: ativo
+data_publicacao: desconhecido
+atualizado_em: desconhecido
+prioridade: 2
+paginas: desconhecido
+observacoes: PDF direto (sem visualizador). Pode ser anexo complementar.
+
+[DOC]
+id: manual-motor-motofreio-ibr-ms
+titulo: Manual de instrucoes e certificado de garantia do motor e motor com freio (motofreio) IBR (MS)
+tipo: manual
+categoria: motores
+tags_busca: manual; motores; ibr ms; motor; motofreio; freio; garantia; instalacao; ligacao; eletrico; manutencao; torque; rpm; ventilacao; grau de protecao; esteira; transportador; embalagem
+url_visualizacao: https://www.redutoresibr.com.br/_uploads/49e3bb8a-8599-4f7a-be88-4184afe8c03e.pdf
+url_pdf_atual: https://www.redutoresibr.com.br/_uploads/49e3bb8a-8599-4f7a-be88-4184afe8c03e.pdf
+idioma: pt
+status: ativo
+data_publicacao: desconhecido
+atualizado_em: desconhecido
+prioridade: 2
+paginas: desconhecido
+observacoes: PDF direto (sem visualizador). Downloads da pagina do produto.
+
+[DOC]
+id: manual-motor-motofreio-ibr-ml
+titulo: Manual de instrucoes e certificado de garantia do motor e motor com freio (motofreio) IBR (ML)
+tipo: manual
+categoria: motores
+tags_busca: manual; motores; ibr ml; motor; motofreio; freio; garantia; instalacao; ligacao; eletrico; manutencao; torque; rpm; ventilacao; grau de protecao; esteira; transportador; paletizacao
+url_visualizacao: https://www.redutoresibr.com.br/_uploads/a67ef1a3-ae59-4f7a-be88-4184afe8c03e.pdf
+url_pdf_atual: https://www.redutoresibr.com.br/_uploads/a67ef1a3-ae59-4f7a-be88-4184afe8c03e.pdf
+idioma: pt
+status: ativo
+data_publicacao: desconhecido
+atualizado_em: desconhecido
+prioridade: 2
+paginas: desconhecido
+observacoes: PDF direto (sem visualizador). Downloads da pagina do produto.
+
+[DOC]
+id: manual-ibr-cfr
+titulo: Manual de instrucoes e certificado de garantia IBR CFR (WEB)
+tipo: manual
+categoria: redutores-motorredutores
+tags_busca: manual; redutores-motorredutores; ibr cfr; cfr; coaxial; garantia; instalacao; lubrificacao; manutencao; montagem; selecao; dimensionamento; torque; rpm; relacao; fator servico; flange; eixo; esteira; transportador
+url_visualizacao: https://www.redutoresibr.com.br/_uploads/1d15ffb7-69d0-4125-82ad-d07122f302a2.pdf
+url_pdf_atual: https://www.redutoresibr.com.br/_uploads/1d15ffb7-69d0-4125-82ad-d07122f302a2.pdf
+idioma: pt
+status: ativo
+data_publicacao: desconhecido
+atualizado_em: desconhecido
+prioridade: 2
+paginas: desconhecido
+observacoes: PDF direto (sem visualizador). Downloads da pagina do produto.
+
+[DOC]
+id: manual-ibr-xfka
+titulo: Manual de instrucoes e certificado de garantia IBR XFKA (WEB)
+tipo: manual
+categoria: redutores-motorredutores
+tags_busca: manual; redutores-motorredutores; ibr xfka; xfka; garantia; instalacao; lubrificacao; manutencao; montagem; selecao; dimensionamento; torque; rpm; relacao; fator servico; flange; eixo; esteira; transportador; embalagem
+url_visualizacao: https://www.redutoresibr.com.br/_uploads/74d0cfc5-16d9-44df-9e61-17f30f7f2f8e.pdf
+url_pdf_atual: https://www.redutoresibr.com.br/_uploads/74d0cfc5-16d9-44df-9e61-17f30f7f2f8e.pdf
+idioma: pt
+status: ativo
+data_publicacao: desconhecido
+atualizado_em: desconhecido
+prioridade: 2
+paginas: desconhecido
+observacoes: PDF direto (sem visualizador). Downloads da pagina do produto.
+
+[DOC]
+id: manual-ibr-p-ffa
+titulo: Manual de instrucoes e certificado de garantia IBR P FFA (WEB)
+tipo: manual
+categoria: redutores-motorredutores
+tags_busca: manual; redutores-motorredutores; ibr p ffa; p ffa; garantia; instalacao; lubrificacao; manutencao; montagem; selecao; dimensionamento; torque; rpm; relacao; fator servico; flange; eixo; esteira; transportador; rosca; dosador
+url_visualizacao: https://www.redutoresibr.com.br/_uploads/8f301ad5-48d0-466a-87b5-0239b1c6b603.pdf
+url_pdf_atual: https://www.redutoresibr.com.br/_uploads/8f301ad5-48d0-466a-87b5-0239b1c6b603.pdf
+idioma: pt
+status: ativo
+data_publicacao: desconhecido
+atualizado_em: desconhecido
+prioridade: 2
+paginas: desconhecido
+observacoes: PDF direto (sem visualizador). Downloads da pagina do produto.

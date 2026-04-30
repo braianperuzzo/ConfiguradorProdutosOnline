@@ -1,0 +1,1 @@
+{"timestamp":"2026-02-20T19:24:37+00:00","tipo":"erro_validacao","requestId":"0ae71285b8f401f7","dados":{"status":400,"codigoErro":"DOCUMENTO_INVALIDO","mensagem":"Documento inválido. Envie CPF (11 dígitos) ou CNPJ (14 dígitos) válido.","extra":[]}}

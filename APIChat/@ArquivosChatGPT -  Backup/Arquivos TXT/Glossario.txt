@@ -1,0 +1,292 @@
+IBR — Glossário e Dicionário de Tokens (Normalização de Descrições)
+Versão: 3.1 | Data: 2026-02-19
+Objetivo: reduzir variações de escrita e melhorar BUSCA/VALIDAÇÃO via configurador e API.
+Escopo: normalização SOMENTE para busca e comparação textual. Não altera nem substitui dados oficiais.
+
+Regra de uso (anti-inferência)
+O glossário serve apenas para entender termos e orientar perguntas/roteamento.
+É proibido concluir linha/família/série apenas por match de glossário.
+Se houver ambiguidade, fazer 1 pergunta curta para destravar ou pedir código/referência.
+
+Regra de segurança
+- Match de glossário nunca é conclusão: é apenas pista para perguntar 1 dado ou validar por código/referência.
+
+0) REGRA DE SEGURANÇA (obrigatória)
+- Normalização e tokens servem para BUSCA, ranking e triagem.
+- Confirmação de modelo, compatibilidade, limites e geração de link: somente após Action/API (código/referência) e documento oficial quando aplicável.
+- Nunca deduzir família/linha/tamanho a partir de texto normalizado.
+- Em qualquer conflito/ambiguidade: NÃO decidir por texto, marcar flag e exigir validação por Action.
+
+1) PIPELINE (visão geral, determinístico e testável)
+Entrada (campos) -> NORMALIZE -> LEX (candidatos) -> MAP (variantes->canônico) -> RULES (contexto/conflitos) -> OUTPUT
+- NORMALIZE: padroniza string para busca (sem alterar dado oficial).
+- LEX: identifica ocorrências respeitando boundary.
+- MAP: converte variantes em tokens canônicos via dicionário.
+- RULES: aplica contexto, prioridade, negação e conflitos.
+- OUTPUT: retorna tokens, hints, flags e evidências (matches) para auditoria.
+
+2) NORMALIZAÇÃO (pré-processamento)
+2.1 Ordem recomendada (por campo, para busca)
+1) Converter para UPPERCASE.
+2) Colapsar espaços: múltiplos espaços -> 1 espaço; trim início/fim.
+3) Normalizar acentos APENAS para busca (ex.: “TRIFÁSICO” ~ “TRIFASICO”), sem regravar como dado oficial.
+4) Normalizar símbolos decorativos quando não forem parte de código:
+   - Remover: "°", "º", "™", "®" (apenas quando não fizerem parte de referência/código).
+   - Ex.: “270°” -> “270”.
+
+2.2 Preservar (não quebrar código)
+- Preservar separadores que podem fazer parte de referência/código: ".", "/", "+", "-", "_".
+- Preservar dígitos e combinações alfanuméricas (ex.: "90L1B14", "3~", "440V").
+- NÃO inserir espaços dentro de padrões IEC/códigos (ex.: manter "90L1B14", não transformar em "90 L1 B14").
+- NÃO remover "-" "/" "." quando fizerem parte do código/referência.
+
+2.3 Unificações permitidas (para busca, via dicionário)
+- Unificar variações comuns SOMENTE quando estiverem cadastradas como variantes no dicionário.
+  Exemplos:
+  - "MOTO-F" ~ "MOTO F" ~ "MOTOF"
+  - "CX 270" ~ "CX270"
+- Remover apenas caracteres que não carregam significado de código (ex.: “°” fora de referência).
+
+3) TOKENIZAÇÃO / BOUNDARY (evitar falso-positivo)
+3.1 Delimitadores (boundary)
+Considere como boundary (quebra de token):
+- início/fim de string
+- espaço
+- qualquer um destes caracteres: ".", ",", ";", ":", "/", "\", "+", "-", "_", "(", ")", "[", "]"
+
+3.2 Regras práticas de match
+- Preferir match por token inteiro: só considerar “encontrado” se estiver delimitado por boundary.
+- Proibir match parcial:
+  exemplos (NÃO pode): PC3 bater em PC30; B5 bater em B50; IR3 bater em IR30.
+- Priorizar tokens mais específicos/longos sobre curtos.
+  Ex.: "90L1B14" > "B14"; "220/380/440V" > "440V".
+
+3.3 Evidência (auditoria)
+- Para cada token detectado, guardar evidência:
+  canonical, variant, start, end, source_field.
+
+4) CONTEXTO (“próximo”) E REGRAS DE ESCOPAMENTO
+4.1 Definição de “próximo”
+- “Próximo” significa:
+  (A) mesmo campo (ex.: DESCRICAO, OBS, APLICACAO), e
+  (B) dentro de uma janela de até 3 tokens (antes/depois) OU até 12 caracteres (o que for mais restritivo).
+- Não usar contexto de um campo para validar token em outro campo.
+
+4.2 Tokens dependentes de contexto (ex.: CX270)
+- Números isolados NÃO viram tokens, a menos que:
+  - haja um gatilho/contexto válido próximo no mesmo campo.
+- Se faltar contexto, gerar flag e não emitir token.
+
+5) TOKENS NEGATIVOS / NEGADORES (escopo e conflito)
+5.1 Negadores comuns (para busca)
+- SEM
+- S/
+- S/FREIO
+- SF
+- NAO
+- NÃO
+- WITHOUT
+- NO
+
+5.2 Regra de escopo (negação por alvo)
+- Negação só é aplicada quando o alvo estiver próximo.
+  Ex.: “SEM FREIO” nega FREIO.
+  Ex.: “SEM VENTILADOR” NÃO nega FREIO.
+- Tokens como "SF" e "S/" só contam como negador de freio se “FREIO/BRAKE” estiver próximo.
+
+5.3 Regra de conflito (obrigatória)
+- Se houver token explícito de característica (ex.: FREIO/BRAKE/MOTOF) E houver negador relacionado no escopo:
+  => estado BLOCK, flag AMBIGUO_FREIO e Action obrigatória.
+- Em conflito, não inferir nem “escolher o mais provável”.
+
+6) CATEGORIAS: TOKEN vs HINT (não confundir verdade com pista)
+6.1 Definições
+- TOKEN: item canônico que passou boundary e regras. Serve para busca, ranking e triagem.
+- HINT: pista para ranking/busca, mas NÃO deve gerar inferência nem regra forte.
+
+6.2 Exemplos de HINT
+- IBR: string de marca/linha (somente para busca).
+- WEG / W / 3.W / 3W: associado a WEG (somente para busca; NÃO confirma fabricante sem cadastro/Action).
+
+6.3 Colisão entre hint comercial e seletor
+- Strings comerciais como "IBR P", "IBR P FFA", "IBR C", "IBR C FR" e "IBR H" podem servir para busca e pré-roteamento somente quando houver regra explícita cadastrada.
+- Mesmo quando houver regra explícita de pré-roteamento, isso não substitui a confirmação oficial por Action/API.
+- É proibido usar sublinhas compartilhadas (ex.: FFA, FKA, FR, R) para concluir seletor final sem validação oficial.
+- Ordem interna de tentativa de um seletor não pode ser reaproveitada como heurística global.
+- Em conflito entre hint comercial e enquadramento oficial, bloquear inferência e validar oficialmente.
+
+7) TOKENS DE CONJUNTO (motorredutor / redutor / variador) — uso: busca
+7.1 Prefixos e descritores
+- MTR = motorredutor (conjunto redutor + motor).
+- RED = redutor (sem motor).
+- VAR / VA = variador (quando aplicável ao configurador).
+
+7.2 Freio — regras para busca (não confirma cadastro)
+- Indicativos fortes de motofreio (token explícito):
+  MOTOF, MOTO-F, MOTO FREIO, MOTOFREIO, MTRF, MTR+F, MTR C/FREIO, MOTOR+FREIO,
+  C/FREIO, COM FREIO, FREIO, ELETROFREIO, BRAKE, DC BRAKE, FREIO DC, FREIO CC, FB
+- Token “MOTOR” sozinho NÃO confirma freio.
+- Se existir token explícito de freio, ele prevalece sobre “MOTOR”.
+- Se existir negador relacionado no escopo: BLOCK -> AMBIGUO_FREIO -> Action obrigatória.
+
+8) TOKENS DE MOTOR — uso: busca; confirmar em cadastro
+8.1 Fabricante / linha / eficiência (strings de busca)
+- WEG pode aparecer como “MOTOR WEG” (não confirma fabricante sem Action).
+- IR3: nomenclatura interna em descrições IBR. ATENÇÃO: não assumir equivalência com IE3/IE2.
+- TRIF / TRIFASICO / TRIFÁSICO / TRIF. / TRI / 3~ / 3F: alimentação trifásica (variações comuns).
+
+8.2 Potência, polos, frequência e tensão (tokens de busca; unidade sempre confirmada)
+- Potência (detectar unidade, não converter aqui): KW, CV, HP.
+  - Variações comuns (permitidas via dicionário): "C V", "H P".
+- Polos: 2P, 4P, 6P, 8P.
+- Frequência: 50HZ, 60HZ (aceitar também "50 HZ", "60 HZ" via dicionário).
+- Tensões típicas: 220V, 380V, 440V (podem vir como 220/380/440V, 220-380V, 220;380;440V).
+  Regra: número sem “V” NÃO vira tensão token.
+
+9) FLANGE / FORMA CONSTRUTIVA IEC (motor) / ENTRADA DO REDUTOR — busca
+- B14: flange pequeno (IEC). Pode vir embutido: 80B14, L80B14, 90L1B14.
+- B5: flange grande (IEC). Pode vir embutido: L80B5.
+Regras:
+- Emitir token B14/B5 quando detectado como sufixo válido em padrão IEC (ex.: "*B14", "*B5"),
+  mantendo o trecho original como evidência em matches.
+- Evitar mapear "B5" dentro de "B50" (regra anti-parcial).
+
+10) CAIXA DE LIGAÇÃO / PRENSA-CABO — busca (com contexto)
+10.1 Tokens
+- CX180 / CX270: posição/ângulo da caixa de ligação.
+- PC1 / PC3: posição do prensa-cabo.
+
+10.2 Variantes textuais comuns (busca)
+- CAIXA DE LIGACAO, CAIXA, CX
+- PRENSACABO, PRENSA CABO, PRENSA-CABO, PC
+
+10.3 Regra importante (anti-falso-positivo)
+- NÃO mapear “270” sozinho para CX270.
+- “270” só vira CX270 se houver contexto próximo no mesmo campo:
+  gatilhos válidos: CX, CAIXA, CAIXA DE LIGACAO.
+- Se houver “270” sem contexto: emitir flag CONTEXTO_INSUFICIENTE_CX270 e não emitir CX270.
+
+11) TOKENS DE FAMÍLIAS IBR — uso: busca; nunca confirmar por texto
+- QU (associado a conjunto Q no cadastro, quando aparecer).
+- HY, FX, AC, AE, IN, MO, PL, VA, QUDR (famílias/seletores suportados).
+Regra:
+- Se o texto sugere família, usar apenas como token/hint para busca textual.
+- Confirmação do item e do configurador: somente via Action/API.
+
+12) DICIONÁRIO (variantes -> canônico) PARA BUSCA
+12.1 Regras gerais
+- Preferir match por token inteiro / boundary.
+- Prioridade por especificidade: variantes mais longas/exatas ganham de curtas.
+- Em conflito, não inferir: marcar e exigir Action.
+- Cada entrada do dicionário deve ter:
+  canonical, variants, category, type (TOKEN|HINT), added_at, added_by, source, tests (positivo/negativo).
+
+12.2 Entradas principais (mínimo)
+A) FREIO
+- Canônico: MOTOF (TOKEN)
+  Variantes:
+  MOTO-F | MOTO FREIO | MOTOR FREIO | MOTOFREIO | MTRF | MTR+F | MOTOR+FREIO |
+  C/FREIO | COM FREIO |
+  FREIO | ELETROFREIO | BRAKE | DC BRAKE | FREIO DC | FREIO CC | FB
+  Observação: indicativo de motor com freio (confirmar no cadastro).
+
+B) NEGADORES (freio)
+- Canônico: SEM_FREIO (TOKEN)
+  Variantes:
+  SEM FREIO | S/FREIO | S/ FREIO | MOTOR SEM FREIO | WITHOUT BRAKE | NO BRAKE
+  Observação: se coexistir com token de freio no escopo => BLOCK + AMBIGUO_FREIO + Action obrigatória.
+- Canônico: NEGADOR_GENERICO (HINT)
+  Variantes:
+  SEM | NAO | NÃO | WITHOUT | NO | S/ | SF
+  Observação: só sobe para SEM_FREIO quando alvo FREIO/BRAKE estiver no escopo.
+
+C) MOTOR (sem indicação explícita de freio)
+- Canônico: MOTOR (TOKEN)
+  Variantes: MOTOR ELETRICO | MTR MOTOR
+  Observação: sem token explícito de freio, tratar como “sem confirmação de freio” (não assumir “sem freio” como verdade).
+
+D) ALIMENTAÇÃO
+- Canônico: TRIF (TOKEN)
+  Variantes: TRIFASICO | TRIFÁSICO | TRIF. | TRI | 3~ | 3F
+
+E) FLANGES
+- Canônico: B14 (TOKEN)
+  Variantes: FLANGE B14 | IEC B14
+  Observação: também pode ser detectado como sufixo em padrão IEC (ex.: 90L1B14) via regra, sem listar tudo.
+- Canônico: B5 (TOKEN)
+  Variantes: FLANGE B5 | IEC B5
+
+F) CAIXA / PRENSA-CABO
+- Canônico: CX270 (TOKEN)
+  Variantes: CX270 | CX 270 | CAIXA 270 | CAIXA DE LIGACAO 270
+  Regra: “270” sozinho NÃO é variante válida.
+- Canônico: PC3 (TOKEN)
+  Variantes: PC3 | PC 3 | PRENSA 3 | PRENSACABO 3
+
+G) RENDIMENTO (busca)
+- Canônico: IR3 (TOKEN)
+  Variantes: ALTO RENDIMENTO IR3
+  Observação: não assumir equivalência IE3/IE2.
+
+H) MARCA/FABRICANTE (busca)
+- Canônico: IBR (HINT)
+  Variantes: IBR
+- Canônico: WEG (HINT)
+  Variantes: WEG | W | 3W | 3.W
+
+13) PRIORIDADE, CONFLITOS E DESEMPATE
+13.1 Ordem de força (em geral)
+1) Código/referência estruturada (Action/API) > texto.
+2) Token explícito > hint.
+3) Variante mais longa/exata > curta.
+4) Token com unidade/contexto > número solto.
+
+13.2 Conflitos obrigatórios (BLOCK)
+- MOTOF + SEM_FREIO (no escopo) -> BLOCK + AMBIGUO_FREIO.
+- Qualquer característica + negador relacionado (no escopo) -> BLOCK.
+
+14) OUTPUT DO NORMALIZADOR (contrato para implementação)
+Para cada entrada (por campo) e também agregado, retornar:
+
+- raw_fields: mapa {campo: string original}
+- normalized_fields: mapa {campo: string normalizada}
+- tokens: lista de tokens canônicos (TOKEN) detectados (ex.: ["MTR","MOTOF","TRIF","B14","CX270","PC3"])
+- hints: lista de hints canônicos (HINT) detectados (ex.: ["WEG","IBR"])
+- matches: lista de evidências:
+  - {canonical, type(TOKEN|HINT), variant, start, end, source_field}
+- flags: lista de alertas padronizados
+- severity: INFO | WARN | BLOCK
+- notes: (opcional) texto curto explicando o motivo das flags
+
+Regras do output:
+- tokens só entram se respeitarem boundary e regras de contexto.
+- se houver conflito (ex.: MOTOF + SEM_FREIO): NÃO decidir, tokens podem conter ambos,
+  flags deve conter AMBIGUO_FREIO e severity deve ser BLOCK.
+
+15) CHECKLIST “NÃO FAZER”
+- Não converter normalização em dado oficial (não gravar descrição normalizada como “descrição do produto”).
+- Não inferir tamanho/modelo/compatibilidade por texto (sempre Action para validar).
+- Não gerar link manualmente (link do configurador apenas por Action quando aplicável).
+- Não forçar família/linha por token, usar apenas para busca.
+
+16) FECHAMENTO OPERACIONAL (pipeline recomendado)
+- Se flags contiverem severity=BLOCK:
+  -> parar conclusão por texto e exigir Action/API.
+- Se a busca retornar múltiplos candidatos:
+  1) buscarProdutosPorTexto (busca aproximada)
+  2) se o usuário tiver referência/código: validarReferenciaEstruturada (GET/POST)
+  3) se houver código exato: buscarProdutoPorCodigo
+  4) só então concluir/confirmar e, se aplicável, gerarLinkConfigurador (Action)
+
+17) TESTES MÍNIMOS (regressão)
+Positivos:
+- "MOTO FREIO TRIF 90L1B14 CX 270 PC3" -> MOTOF, TRIF, B14, CX270, PC3
+- "SEM FREIO MOTOR TRIF 220/380/440V" -> SEM_FREIO, MOTOR, TRIF, 220/380/440V (se você tokenizar tensões)
+Negativos:
+- "PC30" NÃO pode gerar PC3
+- "B50" NÃO pode gerar B5
+- "IR30" NÃO pode gerar IR3
+- "270" sozinho NÃO pode gerar CX270
+- "SF" sozinho NÃO pode gerar SEM_FREIO (sem alvo no escopo)
+Conflito:
+- "MOTOF SEM FREIO" -> tokens: MOTOF + SEM_FREIO, flags: AMBIGUO_FREIO, severity: BLOCK
