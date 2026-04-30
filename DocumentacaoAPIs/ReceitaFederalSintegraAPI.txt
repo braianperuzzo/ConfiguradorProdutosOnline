@@ -1,0 +1,74 @@
+GET
+/consultas/v2/cnpj-receita-federal/{cnpj}
+curl -G https://api.sintegrapi.com.br/consultas/v2/cnpj-receita-federal/{cnpj} \
+  -H "x-api-key: {apiKey}" \
+  -H "cache: 10"
+
+  Resposta
+
+    {
+      "request_id": "326dd48e-4039-4e27-b339-33ad3bedbefa",
+      "success": true,
+      "error": false,
+      "error_message": null,
+      "response": {
+      "cnpj": "15436940000103",
+      "identificador_matriz_filial": "Matriz",
+      "data_de_abertura": "2012-04-02",
+      "nome_empresarial": "AMAZON SERVICOS DE VAREJO DO BRASIL LTDA.",
+      "nome_fantasia": "AMAZON.COM.BR",
+      "atividade_economica_principal": {
+      "codigo": "4761001",
+      "descricao": "Comercio varejista de livros"
+  },
+      "atividades_economicas_secundarias": [
+  {
+      "codigo": "4530703",
+      "descricao": "Comercio a varejo de pecas e acessorios novos para veiculos automotores"
+  },
+  {
+      "codigo": "4530705",
+      "descricao": "Comercio a varejo de pneumaticos e camaras-de-ar"
+  },
+  {
+      "codigo": "4541206",
+      "descricao": "Comercio a varejo de pecas e acessorios novos para motocicletas e motonetas"
+  },
+      ],
+      "natureza_juridica": {
+      "codigo": "Sociedade Empresaria Limitada",
+      "descricao": "DEMAIS"
+  },
+      "logradouro": "PRES JUSCELINO KUBITSCHEK",
+      "numero": "2041",
+      "complemento": "ANDAR 18 20 21 22 E 23",
+      "bairro": "JD AMERICA",
+      "cep": "04543011",
+      "municipio": "SAO PAULO",
+      "uf": "SP",
+      "endereco_eletronico": "AMZBR-TAX-COMPLIANCE@AMAZON.COM",
+      "telefone": "1141302000",
+      "ente_federativo_responsavel": "",
+      "situacao_cadastral": "SEM MOTIVO",
+      "data_da_situacao_cadastral": "2012-04-02",
+      "situacao_especial": "",
+      "data_da_situacao_especial": "",
+      "socios": [
+  {
+      "nome": "RICARDO JOSE THOMAZ PAGANI",
+      "cpf_cnpj_socio": "***678298**",
+      ...
+  },
+  {
+      "nome": "RAINFOREST HOLDCO 1 LLC",
+      "cpf_cnpj_socio": "28886481000101",
+      "qualificacao_socio": "Socio Pessoa Juridica Domiciliado no Exterior",
+      "data_entrada_sociedade": "2017-11-30",
+      "pais": "ESTADOS UNIDOS",
+      "documento_representante_legal": "***747448**",
+      "nome_representante_legal": "FERNANDO GENTIL MONTEIRO",
+      "faixa_etaria": "0"
+  },
+      ]
+  }
+  }

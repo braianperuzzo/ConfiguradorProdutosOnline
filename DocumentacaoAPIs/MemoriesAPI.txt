@@ -1,0 +1,24 @@
+# API de Memórias Semânticas
+
+## Endpoint CRUD
+- `GET /memories` → recupera memórias por escopo com ranking híbrido.
+- `POST /memories` → cria memória (`action=create`) e configura consentimento (`action=privacy`).
+- `PUT /memories?id=...` → atualiza memória existente.
+- `DELETE /memories?id=...` → remove memória por id.
+- `DELETE /memories?purge=1&scope=user&userId=...` → purge por escopo/owner.
+
+### Campos principais
+- `scope`: `session` (curta duração), `user` e `tenant` (longa duração).
+- `memoryType`: `contextual` (memória operacional com TTL) ou `structural` (conhecimento estável).
+- `namespace`: separação lógica por contexto de negócio.
+- `priority`/`businessPriority`: prioridade para ranking.
+- `ttlSec`: tempo de retenção; defaults por escopo (`session` 1 dia, `user` 30 dias, `workspace/tenant` 90 dias).
+- `memoryType=contextual`: aplica TTL padrão e limite máximo de 90 dias.
+- `memoryType=structural`: sem expiração por padrão (ou TTL explícito, até 365 dias).
+- `consent`: metadados de consentimento (`granted`, `legalBasis`, `capturedAt`, `source`).
+
+## Integração de memória na API
+- Para usar memórias, consuma diretamente `GET|POST|PUT|DELETE /APIChat/GerenciarMemorias.php`.
+- Recomenda-se separar os domínios via `namespace` e controlar retenção com `ttlSec`.
+- Para proteção de dados, configure consentimento com `action=privacy` por escopo/owner.
+- Para governança de conhecimento, combine `memoryType` + `ttlSec` e use filtros de recuperação por `memoryType`.

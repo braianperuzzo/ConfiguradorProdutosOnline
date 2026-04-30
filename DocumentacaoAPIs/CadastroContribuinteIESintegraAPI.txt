@@ -1,0 +1,33 @@
+GET
+/consultas/v2/simples/{cnpj}
+curl -G https://api.sintegrapi.com.br/consultas/v2/simples/15436940000103 \
+  -H "x-api-key: {apiKey}" \
+  -H "cache: 25"
+
+      {
+        "request_id": "9daccd1a-b0d2-4f3a-8235-db10b61364eb",
+        "success": true,
+        "error": false,
+        "cnpj": "33521890000136",
+        "atualizado_em": "2025-11-02T19:55:01.856Z",
+        "simples_nacional": {
+            "optante": false,
+            "historico": [
+                {
+                    "de": "2019-05-03",
+                    "ate": "2022-12-31",
+                    "motivo": "Excluída por Opção do Contribuinte"
+                }
+            ]
+        },
+        "simei": {
+            "optante": false,
+            "historico": [
+                {
+                    "de": "2019-05-03",
+                    "ate": "2022-12-31",
+                    "motivo": "Excluída por Opção do Contribuinte"
+                }
+            ]
+        }
+    }

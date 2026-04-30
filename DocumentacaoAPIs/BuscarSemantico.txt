@@ -1,0 +1,50 @@
+Buscar semântico de configuradores
+=================================
+
+Endpoint
+--------
+* URL: /PaginasConsultaProdutos/BuscaSemantica.php
+* Método: GET (aceita POST, mas a integração atual usa GET)
+* Parâmetros:
+  * termo (string) – consulta do usuário.
+
+Resposta (JSON)
+---------------
+* query: string original.
+* normalizado: string normalizada (minúscula, sem acentos).
+* termos: tokens extraídos da consulta.
+* expansoes: termos derivados por sinônimos ou variações.
+* sinonimos: mapa de sinônimos aplicados.
+* resultados: array de objetos ranqueados com:
+  * id: identificador da linha (ex.: 1.Q, 3.APM).
+  * tipo: origem do resultado (produto ou documentacao).
+  * titulo: título do configurador.
+  * url: URL amigável do configurador.
+  * score: pontuação calculada.
+  * matches: termos que contribuíram para o score.
+  * resumo: 1–2 frases com base na descrição do item.
+* duracaoMs: tempo total de processamento.
+
+Estratégia de ranking
+---------------------
+1. Normalização da consulta: remove acentos, pontuação e deixa tudo em minúsculas.
+2. Tokenização: separa a consulta em palavras únicas.
+3. Expansão semântica: adiciona variações por sinônimos (ex.: "redutor" → "redutores", "reducao").
+4. Pontuação (score):
+   * Match exato do código da linha: +120.
+   * Match exato do título: +100.
+   * Consulta completa encontrada no texto do configurador: +60.
+   * Cada token literal encontrado: +12.
+   * Cada termo expandido encontrado: +6.
+5. Ordenação: score descrescente e desempate por título.
+
+Logs de consulta
+----------------
+* Cada chamada bem-sucedida grava um evento em LogsErros/site.log com:
+  * componente = "buscar_semantico"
+  * nivel = "info"
+  * termo original, versão normalizada, tokens e expansões aplicadas
+  * total de resultados e top 5 IDs com score
+  * duracao_ms
+* Erros são gravados com nivel = "erro" e mensagem de exceção.
+* Dados sensíveis são sanitizados automaticamente pelo logger.

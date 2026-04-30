@@ -1,0 +1,2349 @@
+<!DOCTYPE html>
+<html lang="pt-BR" data-canonical-origin="https://configurador.redutoresibr.com.br">
+
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover" />
+  <meta name="gtm-id" content="GTM-P7QH65GR">
+  <meta name="ga-measurement-id" content="G-46RENX5RDK">
+
+  <script>
+    (function initializeImmediateLoader() {
+      const root = document.documentElement;
+      if (!root.hasAttribute('data-initial-loader-bg')) {
+        root.setAttribute('data-initial-loader-bg', root.style.backgroundColor || '');
+      }
+      if (!root.hasAttribute('data-initial-loader-aria')) {
+        const previousAriaBusy = root.getAttribute('aria-busy');
+        root.setAttribute('data-initial-loader-aria', previousAriaBusy == null ? '' : previousAriaBusy);
+      }
+      root.style.backgroundColor = '#ec4115';
+      root.classList.add('is-initial-loading');
+      root.setAttribute('data-loading', 'true');
+      root.setAttribute('aria-busy', 'true');
+    })();
+  </script>
+
+  <link rel="preconnect" href="https://cdn.jsdelivr.net">
+
+  <link href="/Imagens/Icone.ico" rel="shortcut icon" type="image/x-icon" />
+  <link href="/Imagens/Icone.ico" rel="icon" type="image/x-icon" />
+  <link rel="apple-touch-icon" href="/Imagens/LogotipoAplicativo192192.png">
+
+  <style>
+    .is-embed .header,
+    .is-embed footer {
+      display: none !important;
+    }
+
+    .embed-close-button {
+      position: fixed;
+      top: 16px;
+      right: 16px;
+      z-index: 1000001;
+      width: 36px;
+      height: 36px;
+      border-radius: 50%;
+      border: 1px solid rgba(0, 0, 0, 0.15);
+      background: rgba(255, 255, 255, 0.95);
+      color: #2d2d2d;
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 22px;
+      line-height: 1;
+      cursor: pointer;
+      box-shadow: 0 4px 12px rgba(0, 0, 0, 0.18);
+    }
+
+    .dark-mode .embed-close-button {
+      background: rgba(24, 24, 24, 0.95);
+      color: #f3f3f3;
+      border-color: rgba(255, 255, 255, 0.2);
+    }
+
+    #loader {
+      position: fixed;
+      z-index: 1000000;
+      inset: 0;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      background: #ec4115;
+    }
+
+    #loader .spinner {
+      width: 40px;
+      height: 40px;
+      background-color: #fff;
+      animation: loader-rotate 1.2s infinite ease-in-out;
+    }
+
+    @keyframes loader-rotate {
+      0% {
+        transform: perspective(120px) rotateX(0deg) rotateY(0deg);
+      }
+
+      50% {
+        transform: perspective(120px) rotateX(-180.1deg) rotateY(0deg);
+      }
+
+      100% {
+        transform: perspective(120px) rotateX(-180deg) rotateY(-179.9deg);
+      }
+    }
+
+    html.is-initial-loading body> :not(#loader) {
+      visibility: hidden;
+    }
+
+    #lgpdManageLinkBanner {
+      display: none;
+      background: #fff4ec;
+      border-bottom: 1px solid #ec4115;
+      color: #2d2d2d;
+      padding: 12px 16px;
+      text-align: center;
+      font-size: 0.95rem;
+      line-height: 1.4;
+    }
+
+    #lgpdManageLinkBanner.is-visible {
+      display: block;
+    }
+
+    #lgpdManageLinkBanner a {
+      color: #ec4115;
+      font-weight: 600;
+      text-decoration: underline;
+    }
+
+    #offline-status {
+      display: none;
+      background: #f6f6f6;
+      border-bottom: 1px solid #e0e0e0;
+      color: #2d2d2d;
+      padding: 8px 16px;
+      text-align: center;
+      font-size: 0.9rem;
+      line-height: 1.4;
+    }
+
+    #offline-status.is-visible {
+      display: block;
+    }
+
+    #offline-status .offline-status__count {
+      font-weight: 600;
+      margin-left: 4px;
+    }
+
+    :root {
+      --header-inline-padding: clamp(0px, .35vw, 6px);
+      --header-item-gap: clamp(8px, 1vw, 14px);
+    }
+
+    .header {
+      display: flex;
+      align-items: center;
+      position: sticky;
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      min-height: 84px;
+      height: auto;
+      background: var(--header-bg-color, #fff);
+      padding: clamp(8px, 1.8vw, 16px) var(--header-inline-padding, clamp(6px, 2.2vw, 26px));
+      box-shadow: 0 2px 6px rgba(0, 0, 0, 0.1);
+      z-index: 2000;
+      transition: transform 0.4s ease, opacity 0.4s ease, box-shadow 0.4s ease;
+      overflow: visible;
+    }
+
+    .dark-mode .header {
+      background: var(--header-bg-color, #1f1f1f);
+    }
+
+    .header__block {
+      display: flex;
+      align-items: center;
+      justify-content: flex-start;
+      flex-wrap: wrap;
+      gap: var(--header-item-gap, clamp(8px, .9vw, 14px));
+      width: 100%;
+      min-height: 56px;
+      transition: 0.3s ease-in-out;
+    }
+
+    .header__block.container-fluid {
+      padding-left: 0;
+      padding-right: 0;
+      margin-left: 0;
+      margin-right: 0;
+      max-width: none;
+    }
+
+    .header__left {
+      display: flex;
+      align-items: center;
+      gap: var(--header-item-gap, clamp(10px, 1.2vw, 16px));
+      flex: 0 0 auto;
+      flex-shrink: 0;
+      min-width: 0;
+    }
+
+    .logo {
+      background: var(--logo) center top no-repeat;
+      background-size: contain;
+      width: clamp(148px, 16vw, 176px);
+      height: clamp(74px, 9.2vw, 102px);
+      display: flex;
+      max-width: 100%;
+      transition: 0.3s ease-in-out;
+      position: relative;
+      z-index: 999;
+      margin-bottom: -14px;
+    }
+
+    .header.scrolled .logo {
+      width: clamp(148px, 16vw, 176px);
+      height: clamp(74px, 9.2vw, 102px);
+      margin-bottom: -10px;
+    }
+
+    @media (max-width: 991.98px) {
+      :root {
+        --header-inline-padding: clamp(0px, .9vw, 4px);
+      }
+
+      .logo {
+        width: clamp(132px, 34vw, 166px);
+        height: clamp(64px, 17vw, 94px);
+        margin-bottom: -8px;
+      }
+
+      .header.scrolled .logo {
+        width: clamp(140px, 16vw, 168px);
+        height: clamp(66px, 9.5vw, 98px);
+        transform: scale(0.96);
+        transform-origin: left center;
+        margin-bottom: -8px;
+      }
+    }
+
+    .menu-icons-desktop {
+      display: flex;
+      align-items: center;
+      justify-content: flex-start;
+      margin-inline-start: clamp(8px, 1vw, 16px);
+      gap: var(--header-item-gap, clamp(8px, .9vw, 14px));
+    }
+
+    @media (min-width: 992px) and (max-width: 1199.98px) {
+      :root {
+        --header-inline-padding: clamp(3px, .85vw, 10px);
+      }
+
+      .header__block {
+        flex-wrap: nowrap;
+        align-items: center;
+      }
+
+      .menu-icons-desktop {
+        flex-wrap: nowrap;
+        gap: clamp(6px, 0.8vw, 12px);
+      }
+
+      .menu-icons-desktop a,
+      .menu-icons-desktop__button {
+        white-space: nowrap;
+        font-size: 14px;
+      }
+
+      .menu-icons-desktop .header__menu__search {
+        margin-inline-start: clamp(10px, 1.4vw, 22px);
+      }
+    }
+
+    .menu-icons-desktop a,
+    .menu-icons-desktop__button {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      gap: var(--header-item-gap, clamp(10px, 1.2vw, 16px));
+      line-height: 1;
+      min-height: 40px;
+    }
+
+    .menu-icons-desktop a svg,
+    .menu-icons-desktop__button svg,
+    .menu__block .submenu-toggle svg,
+    .menu__block a svg {
+      display: block;
+      width: 20px !important;
+      height: 20px !important;
+      flex: 0 0 20px;
+    }
+
+    .menu-icons-desktop .site-search-form .input-group {
+      margin-bottom: 0 !important;
+      border-bottom-width: 2px;
+    }
+
+    .menu-icons-desktop .header__menu__search {
+      margin-inline-start: clamp(10px, 1.4vw, 22px);
+    }
+
+    .titulo-pagina {
+      color: var(--color-text, #2d2d2d);
+      text-align: center;
+      font-weight: 700;
+      font-size: clamp(1.5rem, 2.5vw, 2rem);
+      margin-top: 0;
+      margin-bottom: 24px;
+    }
+
+    .home-botoes {
+      display: grid;
+      gap: 20px;
+      padding: 0 5vw;
+      width: 100%;
+      justify-items: center;
+      justify-content: center;
+      margin-top: 120px;
+      grid-template-columns: repeat(5, minmax(0, 1fr));
+      grid-auto-rows: 1fr;
+    }
+
+    .home-botoes .botao-home {
+      width: 100%;
+      box-sizing: border-box;
+    }
+
+    .botao-linha {
+      width: 100%;
+      height: 100%;
+      opacity: 0;
+      animation: fadeInHomeButtons 0.6s ease forwards;
+    }
+
+    .botao-home {
+      position: relative;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: space-between;
+      border: 2px solid #ec4115;
+      color: #ec4115;
+      text-decoration: none;
+      background: none;
+      border-radius: 12px;
+      padding: 24px;
+      font-size: 22px;
+      font-weight: 700;
+      width: 90%;
+      word-break: break-word;
+      transition: all 0.3s ease, transform 0.2s ease;
+      box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+      text-align: center;
+      gap: 12px;
+      height: 100%;
+      min-height: 340px;
+    }
+
+    .botao-home:hover {
+      background-color: transparent;
+      color: #ec4115;
+      box-shadow: 0 6px 12px rgba(0, 0, 0, 0.15);
+      transform: translateY(-4px);
+    }
+
+    .botao-home:active {
+      transform: scale(0.97);
+    }
+
+    .botao-home span {
+      display: block;
+      margin-bottom: 16px;
+    }
+
+    @media (max-width: 1500px) {
+      .home-botoes {
+        grid-template-columns: repeat(4, minmax(0, 1fr));
+      }
+    }
+
+    @media (max-width: 1200px) {
+      .home-botoes {
+        grid-template-columns: repeat(3, minmax(0, 1fr));
+      }
+    }
+
+    @media (max-width: 900px) {
+      .home-botoes {
+        grid-template-columns: repeat(2, minmax(0, 1fr));
+      }
+
+      .botao-home {
+        min-height: clamp(260px, 35vw, 340px);
+        padding: 18px;
+      }
+    }
+
+    @media (max-width: 576px) {
+      .home-botoes {
+        grid-template-columns: 1fr;
+      }
+
+      .botao-home {
+        min-height: auto;
+        padding: 16px;
+      }
+
+      .botao-home img {
+        max-width: 280px;
+      }
+    }
+
+    @media (min-width: 992px) {
+      .header {
+        min-height: 80px;
+        padding: clamp(10px, 1.5vw, 18px) var(--header-inline-padding, clamp(6px, 2.2vw, 26px));
+      }
+
+      .header__block {
+        flex-wrap: nowrap;
+        align-items: center;
+        gap: var(--header-item-gap, clamp(10px, 1.2vw, 16px));
+        max-height: none;
+        transition: 0.1s ease-in-out;
+      }
+
+      .header__left {
+        flex: 0 0 auto;
+        min-width: 0;
+      }
+
+      .logo {
+        width: clamp(154px, 17vw, 186px);
+        height: clamp(82px, 10.8vw, 118px);
+        margin-top: 0;
+        margin-bottom: -14px;
+      }
+    }
+  </style>
+
+  <!-- Fontes locais -->
+  <link rel="preload" href="/Fontes/Sarabun-Regular.woff2" as="font" type="font/woff2" crossorigin>
+  <link rel="preload" href="/Fontes/Sarabun-SemiBold.woff2" as="font" type="font/woff2" crossorigin>
+  <link rel="preload" href="/Fontes/Sarabun-Bold.woff2" as="font" type="font/woff2" crossorigin>
+  <style id="font-face-inline">
+    @font-face {
+      font-family: 'Sarabun';
+      src: url('/Fontes/Sarabun-Regular.woff2') format('woff2');
+      font-weight: 400;
+      font-style: normal;
+      font-display: swap;
+    }
+
+    @font-face {
+      font-family: 'Sarabun';
+      src: url('/Fontes/Sarabun-SemiBold.woff2') format('woff2');
+      font-weight: 600;
+      font-style: normal;
+      font-display: swap;
+    }
+
+    @font-face {
+      font-family: 'Sarabun';
+      src: url('/Fontes/Sarabun-Bold.woff2') format('woff2');
+      font-weight: 700;
+      font-style: normal;
+      font-display: swap;
+    }
+
+    @font-face {
+      font-family: 'Sora';
+      src: url('/Fontes/Sora-Bold.woff2') format('woff2');
+      font-weight: 700;
+      font-style: normal;
+      font-display: swap;
+    }
+  </style>
+
+  <!-- Estilos globais -->
+  <link rel="preload" href="/Layout/Layout.min.css" data-versioned-href="/Layout/Layout.min.css" as="style">
+
+  <link rel="stylesheet" href="/Layout/Layout.min.css" data-versioned-href="/Layout/Layout.min.css">
+  <link rel="preload" href="/Acessibilidade/LayoutAcessibilidade.css"
+    data-versioned-href="/Acessibilidade/LayoutAcessibilidade.css" as="style">
+  <link rel="stylesheet" href="/Acessibilidade/LayoutAcessibilidade.css"
+    data-versioned-href="/Acessibilidade/LayoutAcessibilidade.css">
+  <link rel="stylesheet" href="/Layout/LayoutAjudaSeletores.min.css"
+    data-versioned-href="/Layout/LayoutAjudaSeletores.min.css">
+  <!-- Bootstrap -->
+  <!-- Carrega o JavaScript apenas uma vez ao final da página -->
+  <link rel="prefetch" href="/Layout/Layout.min.js" data-versioned-href="/Layout/Layout.min.js" as="script">
+
+  <link rel="manifest" href="/Manifest.json">
+  <script>
+    window.APP_VERSION = 'versao.8.7.2';
+    window.__APP_VERSION_SOURCE__ = 'inline';
+  </script>
+  <script src="/Versionamento/CarregarVersao.js" defer></script>
+  <meta name="theme-color" content="#ec4115">
+  <meta name="msapplication-TileColor" content="#ec4115">
+  <meta name="color-scheme" content="light dark">
+  <meta name="mobile-web-app-capable" content="yes">
+  <meta name="apple-mobile-web-app-capable" content="yes">
+  <meta name="apple-mobile-web-app-title" content="Configurador IBR">
+  <meta name="application-name" content="Configurador de Produtos IBR">
+  <meta name="apple-mobile-web-app-status-bar-style" content="default">
+  <meta name="author" content="Redutores IBR">
+  <meta name="referrer" content="strict-origin-when-cross-origin">
+  <meta name="robots" content="index, follow">
+  <link rel="canonical" href="https://configurador.redutoresibr.com.br/">
+  <link rel="alternate" href="https://configurador.redutoresibr.com.br/" hreflang="pt-BR">
+  <link rel="alternate" href="https://configurador.redutoresibr.com.br/" hreflang="x-default">
+  <title>Layout Base | Configurador de Produtos IBR</title>
+  <meta name="description"
+    content="Ferramenta online para configuração de redutores, motorredutores e motores. Configure as linhas IBR C, IBR X, IBR H, IBR M, IBR P, IBR R, IBR Q, IBR QDR, IBR QP, IBR PB, IBR PBL, IBR SA, IBR SB, IBR SBL, IBR SD, IBR GR, IBR GS, IBR RIC, IBR APM, IBR SPM, IBR T3A, IBR MS/ML, IBR WEG ALTO RENDIMENTO, IBR VFN, IBR Z, IBR INVEOR M e IBR Variador Mecânico.">
+  <meta name="keywords"
+    content="IBR, IBR C, IBR X, IBR H, IBR M, IBR P, IBR R, IBR Q, IBR QDR, IBR QP, IBR PB, IBR PBL, IBR SA, IBR SB, IBR SBL, IBR SD, IBR GR, IBR GS, IBR RIC, IBR APM, IBR SPM, IBR T3A, IBR MS/ML, IBR WEG ALTO RENDIMENTO, IBR VFN, IBR Z, IBR INVEOR M, IBR Variador Mecânico, redutores, configurador, motores, variadores, planetários, desenhos, cotações, 3D Download, Download, 3D, PDF, PDF Download, Desenhos Download, Cotação, Orçamento">
+  <meta property="og:title" content="Configurador de Produtos IBR">
+  <meta property="og:description"
+    content="Ferramenta online para configuração de redutores, motorredutores e motores das diversas linhas IBR.">
+  <meta property="og:type" content="website">
+  <meta property="og:url" content="https://configurador.redutoresibr.com.br/">
+  <meta property="og:image" content="https://configurador.redutoresibr.com.br/Imagens/LogotipoAplicativo512512.png">
+  <meta property="og:image:secure_url"
+    content="https://configurador.redutoresibr.com.br/Imagens/LogotipoAplicativo512512.png">
+  <meta property="og:image:width" content="512">
+  <meta property="og:image:height" content="512">
+  <meta property="og:image:type" content="image/png">
+  <meta property="og:image:alt" content="Logotipo">
+  <meta property="og:locale" content="pt_BR">
+  <meta property="og:site_name" content="Configurador de Produtos IBR">
+
+  <meta name="twitter:card" content="summary_large_image">
+  <meta name="twitter:title" content="Configurador de Produtos IBR">
+  <meta name="twitter:description"
+    content="Ferramenta online para configuração de redutores, motorredutores e motores das diversas linhas IBR.">
+  <meta name="twitter:url" content="https://configurador.redutoresibr.com.br/">
+  <meta name="twitter:image" content="https://configurador.redutoresibr.com.br/Imagens/LogotipoAplicativo512512.png">
+  <meta name="twitter:image:alt" content="Logotipo">
+
+  <script>
+
+    (function configureStyleLoading() {
+      const toVersioned = typeof window.buildVersionedAssetUrl === 'function'
+        ? window.buildVersionedAssetUrl
+        : function passthrough(url) { return url; };
+
+      const defaultConfig = {
+        loadMainLayout: true,
+        loadBootstrap: true,
+        loadHomeStyles: false,
+        autoLoadDeferred: true,
+        homeStylesHref: toVersioned('/Layout/Layout.min.css')
+      };
+
+      const globalConfig = window.__layoutStylesConfig || {};
+      const config = Object.assign({}, defaultConfig, globalConfig);
+      delete window.__layoutStylesConfig;
+
+      const loadedStyles = new Set();
+
+      function normalizeHref(href) {
+        if (!href) return '';
+        try {
+          return new URL(href, document.baseURI).href;
+        } catch (error) {
+          return href;
+        }
+      }
+
+      document.querySelectorAll('link[rel="stylesheet"][href]').forEach(link => {
+        const sourceHref = link.getAttribute('data-versioned-href') || link.getAttribute('href');
+        const normalized = normalizeHref(sourceHref);
+        if (normalized) {
+          loadedStyles.add(normalized);
+        }
+      });
+
+      function findExistingStylesheet(normalizedHref) {
+        if (!normalizedHref) {
+          return null;
+        }
+        const candidates = document.querySelectorAll('link[rel="stylesheet"][href], link[rel="stylesheet"][data-versioned-href]');
+        for (const link of candidates) {
+          const sourceHref = link.getAttribute('data-versioned-href') || link.getAttribute('href');
+          if (normalizeHref(sourceHref) === normalizedHref) {
+            return link;
+          }
+        }
+        return null;
+      }
+
+      function waitForStylesheetLink(link) {
+        if (!link) {
+          return Promise.resolve();
+        }
+        if (link.sheet) {
+          return Promise.resolve(link);
+        }
+        return new Promise(resolve => {
+          link.addEventListener('load', () => resolve(link), { once: true });
+          link.addEventListener('error', () => resolve(link), { once: true });
+        });
+      }
+
+      function createStylesheetLink(entry) {
+        const normalizedHref = normalizeHref(entry && entry.href);
+        if (!entry || !entry.href || loadedStyles.has(normalizedHref)) {
+          return null;
+        }
+
+        const link = document.createElement('link');
+        link.rel = 'stylesheet';
+        link.href = entry.href;
+        const isBlocking = Boolean(entry.blocking);
+        link.media = isBlocking ? 'all' : 'print';
+        if (entry.integrity) {
+          link.integrity = entry.integrity;
+        }
+        if (entry.crossorigin) {
+          link.crossOrigin = entry.crossorigin;
+        }
+        let loadPromise = Promise.resolve(link);
+        if (isBlocking) {
+          loadPromise = new Promise(resolve => {
+            if (link.sheet) {
+              resolve(link);
+              return;
+            }
+            link.onload = () => resolve(link);
+            link.onerror = () => resolve(link);
+          });
+        } else {
+          loadPromise = new Promise(resolve => {
+            link.onload = () => {
+              link.media = 'all';
+              resolve(link);
+            };
+            link.onerror = () => resolve(link);
+          });
+        }
+
+        document.head.appendChild(link);
+        loadedStyles.add(normalizedHref);
+        return { link, loadPromise };
+      }
+
+      function ensureHomeStyles() {
+        if (!config.loadHomeStyles || !config.homeStylesHref) {
+          return;
+        }
+        if (loadedStyles.has(config.homeStylesHref)) {
+          return;
+        }
+        const preload = document.createElement('link');
+        preload.rel = 'preload';
+        preload.as = 'style';
+        preload.href = config.homeStylesHref;
+        document.head.appendChild(preload);
+        createStylesheetLink({ href: config.homeStylesHref, blocking: true });
+      }
+
+      ensureHomeStyles();
+
+      const deferredEntries = [
+        {
+          href: toVersioned('/Layout/Layout.min.css'),
+          optional: config.loadMainLayout === false,
+          blocking: true
+        },
+        {
+          href: toVersioned('/Layout/BibliotecasBootstrap.min.css'),
+          optional: config.loadBootstrap === false
+        }
+      ];
+
+      const mandatory = deferredEntries.filter(entry => !entry.optional);
+      const optional = deferredEntries.filter(entry => entry.optional);
+
+      function loadStyles({ includeOptional = false } = {}) {
+        const targets = includeOptional ? mandatory.concat(optional) : mandatory;
+        let loadedAny = false;
+        const pending = [];
+        for (const entry of targets) {
+          const existing = findExistingStylesheet(normalizeHref(entry && entry.href));
+          if (existing) {
+            pending.push(waitForStylesheetLink(existing));
+            continue;
+          }
+          const result = createStylesheetLink(entry);
+          if (result) {
+            loadedAny = true;
+            pending.push(result.loadPromise);
+          }
+        }
+        const loadPromise = pending.length ? Promise.all(pending) : Promise.resolve();
+        if (loadedAny && window.__layoutStylesState) {
+          loadPromise.then(() => {
+            window.__layoutStylesState.hasLoadedAll = optional.every(entry => loadedStyles.has(entry.href));
+          });
+        }
+        return loadPromise;
+      }
+
+      const scheduleInitialLoad = () => {
+        if ('requestIdleCallback' in window) {
+          window.requestIdleCallback(() => loadStyles({ includeOptional: false }), { timeout: 2000 });
+        } else {
+          window.setTimeout(() => loadStyles({ includeOptional: false }), 200);
+        }
+      };
+
+      const state = {
+        config,
+        loadedStyles,
+        loadStyles,
+        ensureHomeStyles,
+        get pendingOptional() {
+          return optional.filter(entry => !loadedStyles.has(entry.href));
+        }
+      };
+
+      state.hasLoadedAll = optional.length === 0;
+      window.__layoutStylesState = state;
+      window.__loadDeferredLayoutStyles = (options = {}) => {
+        const includeOptional = options.includeOptional !== undefined ? options.includeOptional : true;
+        if (options.forceHomeStyles) {
+          ensureHomeStyles();
+        }
+        loadStyles({ includeOptional });
+      };
+
+      if (config.autoLoadDeferred !== false && mandatory.length) {
+        if (document.readyState === 'complete') {
+          scheduleInitialLoad();
+        } else {
+          window.addEventListener('load', scheduleInitialLoad, { once: true });
+        }
+      }
+    })();
+  </script>
+
+  <noscript>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.1/dist/css/bootstrap.min.css"
+      integrity="sha384-4bw+/aepP/YC94hEpVNVgiZdgIC5+VKNBQNGCHeKRQN+PtmoHDEXuppvnDJzQIu9" crossorigin="anonymous">
+  </noscript>
+
+  <script type="application/ld+json">
+
+    {
+      "@context": "https://schema.org",
+      "@graph": [
+        {
+          "@type": "Organization",
+          "@id": "https://configurador.redutoresibr.com.br/#organization",
+          "name": "Redutores IBR",
+          "url": "https://configurador.redutoresibr.com.br",
+          "logo": "https://configurador.redutoresibr.com.br/Imagens/LogotipoAplicativo512512.png",
+          "sameAs": [
+            "https://www.linkedin.com/company/redutoresibr/",
+            "https://www.facebook.com/RedutoresIBR/",
+            "https://www.instagram.com/redutoresibr/",
+            "https://www.youtube.com/@redutoresibr4475"
+          ],
+          "contactPoint": [
+            {
+              "@type": "ContactPoint",
+              "contactType": "sales",
+              "telephone": "+55-54-3028-9200",
+              "areaServed": "BR",
+              "availableLanguage": "pt-BR"
+            },
+            {
+              "@type": "ContactPoint",
+              "contactType": "sales",
+              "telephone": "+55-19-3014-8604",
+              "areaServed": "BR",
+              "availableLanguage": "pt-BR"
+            }
+          ],
+          "address": [
+            {
+              "@type": "PostalAddress",
+              "streetAddress": "R. Jacob Luchesi, 2781, Bairro Santa Catarina",
+              "addressLocality": "Caxias do Sul",
+              "addressRegion": "RS",
+              "postalCode": "95032-000",
+              "addressCountry": "BR"
+            },
+            {
+              "@type": "PostalAddress",
+              "streetAddress": "Avenida Comendador Dr. Santoro Mirone, 833, Recreio Campestre Joia",
+              "addressLocality": "Indaiatuba",
+              "addressRegion": "SP",
+              "postalCode": "13347-662",
+              "addressCountry": "BR"
+            }
+          ]
+        },
+        {
+          "@type": "WebSite",
+          "@id": "https://configurador.redutoresibr.com.br/#website",
+          "name": "Configurador de Produtos IBR",
+          "url": "https://configurador.redutoresibr.com.br",
+          "publisher": {
+            "@id": "https://configurador.redutoresibr.com.br/#organization"
+          },
+          "inLanguage": "pt-BR",
+          "hasPart": [
+            {
+              "@id": "https://configurador.redutoresibr.com.br/#site-navigation"
+            }
+          ],
+          "potentialAction": {
+            "@type": "SearchAction",
+            "@id": "https://configurador.redutoresibr.com.br/#search-action",
+            "target": "https://configurador.redutoresibr.com.br/PaginasPrincipal/PaginaProdutos.html?termo={search_term_string}",
+            "query-input": "required name=search_term_string"
+          }
+        }
+      ]
+    }
+  </script>
+
+  <script type="application/ld+json">
+    {
+      "@context": "https://schema.org",
+      "@type": "WebPage",
+      "@id": "https://configurador.redutoresibr.com.br/#webpage",
+      "url": "https://configurador.redutoresibr.com.br/",
+      "name": "Configurador de Produtos IBR",
+      "description": "Configure redutores, motorredutores e motores IBR online, gere desenhos técnicos e solicite orçamentos com suporte especializado.",
+      "inLanguage": "pt-BR",
+      "isPartOf": {
+        "@id": "https://configurador.redutoresibr.com.br/#website"
+      },
+      "about": {
+        "@id": "https://configurador.redutoresibr.com.br/#organization"
+      },
+      "primaryImageOfPage": {
+        "@type": "ImageObject",
+        "url": "https://configurador.redutoresibr.com.br/Imagens/LogotipoAplicativo512512.png",
+        "width": 512,
+        "height": 512
+      },
+      "breadcrumb": {
+        "@id": "https://configurador.redutoresibr.com.br/#breadcrumb"
+      }
+    }
+  </script>
+  <script type="application/ld+json">
+    {
+      "@context": "https://schema.org",
+      "@type": "BreadcrumbList",
+      "@id": "https://configurador.redutoresibr.com.br/#breadcrumb",
+      "itemListElement": [
+        {
+          "@type": "ListItem",
+          "position": 1,
+          "name": "Home",
+          "item": "https://configurador.redutoresibr.com.br/"
+        }
+      ]
+    }
+  </script>
+  <script type="application/ld+json">
+
+    {
+      "@context": "https://schema.org",
+      "@type": "ItemList",
+      "@id": "https://configurador.redutoresibr.com.br/#site-navigation",
+      "name": "Navegação principal do Configurador de Produtos IBR",
+      "itemListElement": [
+        {
+          "@type": "SiteNavigationElement",
+          "position": 1,
+          "name": "Home",
+          "url": "https://configurador.redutoresibr.com.br/"
+        },
+        {
+          "@type": "SiteNavigationElement",
+          "position": 3,
+          "name": "Cliente IBR",
+          "url": "https://www.redutoresibr.com.br/AreaRestrita/Login"
+        },
+        {
+          "@type": "SiteNavigationElement",
+          "position": 4,
+          "name": "Privacidade",
+          "url": "https://configurador.redutoresibr.com.br/PoliticaPrivacidade"
+        },
+        {
+          "@type": "SiteNavigationElement",
+          "position": 5,
+          "name": "Aplicativo",
+          "url": "https://play.google.com/store/apps/details?id=com.configuradordeprodutos.redutoresibr.android"
+        },
+        {
+          "@type": "SiteNavigationElement",
+          "position": 6,
+          "name": "Área do Cliente",
+          "url": "https://configurador.redutoresibr.com.br/AreaCliente"
+        },
+        {
+          "@type": "SiteNavigationElement",
+          "position": 7,
+          "name": "Carrinho de Produtos",
+          "url": "https://configurador.redutoresibr.com.br/CarrinhoProdutos"
+        },
+        {
+          "@type": "SiteNavigationElement",
+          "position": 8,
+          "name": "Ferramentas Auxiliares",
+          "url": "https://configurador.redutoresibr.com.br/Intercambialidade"
+        }
+      ]
+    }
+</script>
+
+  <script defer data-versioned-src="/SEO/SeoMetadataLinhas.js"></script>
+  <script defer data-versioned-src="/SEO/RegraLinksCanonicos.js"></script>
+  <script defer data-versioned-src="/CSRFInicia.js"></script>
+  <script id="lgpd-key" key="5597f342-63ef-4434-bfcd-a4dcf41c6faf" prefix="COOKIES"></script>
+  <!-- Google tag (gtag.js) -->
+  <script defer data-versioned-src="/SEO/TagsGoogle.min.js"></script>
+
+</head>
+
+<body>
+
+  <h1
+    style="position:absolute;width:1px;height:1px;padding:0;margin:-1px;overflow:hidden;clip:rect(0,0,0,0);white-space:nowrap;border:0;">
+    Configurador de Produtos IBR</h1>
+  <div id="lgpdManageLinkBanner" role="status" aria-live="polite" aria-hidden="true">
+    <span id="configurar-cookies" aria-hidden="true"></span>
+    <strong>Gerenciar consentimento de cookies:</strong>
+    <a id="lgpdManageLink" href="#configurar-cookies" data-gtag-event="lgpd-abrir-config" data-gtag-category="Cookies"
+      data-gtag-label="banner_top">Abrir configurações</a>
+  </div>
+
+  <div id="offline-status" role="status" aria-live="polite" aria-hidden="true">
+    <span class="offline-status__message" data-offline-status-message>Você está Offline</span>
+    <span class="offline-status__count" data-offline-status-count></span>
+  </div>
+
+  <div id="loader" class="loader" role="status" aria-live="polite" aria-label="Carregando"
+    style="position: fixed; inset: 0; display: flex; align-items: center; justify-content: center; background: #ec4115; z-index: 1000000;">
+    <div class="spinner" aria-hidden="true"
+      style="width: 40px; height: 40px; background-color: #fff; animation: loader-rotate 1.2s infinite ease-in-out;">
+    </div>
+  </div>
+
+  <header class="header bg-header bg-opacity-100 shadow-sm py-2 py-lg-0 top-0">
+    <div class="container-fluid header__block">
+      <div class="header__left">
+        <a class="navbar-brand" href="https://configurador.redutoresibr.com.br/" data-gtag-event="logo-cabecalho"
+          data-gtag-category="Navegacao" data-gtag-label="cabecalho">
+          <div class="logo" id="logo"></div>
+          <span class="sr-only">Redutores IBR - Página Inicial</span>
+        </a>
+        <button class="theme-toggle desktop-only" onclick="toggleDarkMode()" aria-label="Alternar Tema">
+          <svg class="theme-icon" viewBox="0 0 24 24" width="24" height="24" fill="none" stroke-width="3"
+            stroke-linecap="round" xmlns="http://www.w3.org/2000/svg">
+            <circle class="icon-bg" cx="12" cy="12" r="11" />
+            <circle class="sun" cx="12" cy="12" r="5" />
+            <circle class="sun-inner" cx="12" cy="12" r="2" />
+            <g class="sun-rays">
+              <line x1="12" y1="1" x2="12" y2="4" />
+              <line x1="12" y1="20" x2="12" y2="23" />
+              <line x1="4.22" y1="4.22" x2="5.64" y2="5.64" />
+              <line x1="18.36" y1="18.36" x2="19.78" y2="19.78" />
+              <line x1="1" y1="12" x2="4" y2="12" />
+              <line x1="20" y1="12" x2="23" y2="12" />
+              <line x1="4.22" y1="19.78" x2="5.64" y2="18.36" />
+              <line x1="18.36" y1="5.64" x2="19.78" y2="4.22" />
+            </g>
+            <path class="moon" d="M21 12.79A9 9 0 1 1 11.21 3A7 7 0 0 0 21 12.79z" />
+          </svg>
+          <span class="tooltip"></span>
+        </button>
+      </div>
+      <nav class="menu-icons-desktop d-none d-lg-flex" aria-label="Página Home">
+        <a href="https://configurador.redutoresibr.com.br/" data-gtag-event="home-cabecalho"
+          data-gtag-category="Navegacao" data-gtag-label="cabecalho">Home</a>
+
+        <div class="menu-icons-desktop__item menu-icons-desktop__item--dropdown">
+          <button class="menu-icons-desktop__button" type="button" aria-expanded="false" aria-haspopup="true"
+            aria-controls="institucionalMenuDesktop" data-submenu-toggle="institucionalMenuDesktop"
+            data-gtag-event="institucional-cabecalho" data-gtag-category="Navegacao" data-gtag-label="cabecalho">
+            <span>Institucional</span>
+          </button>
+          <div id="institucionalMenuDesktop" class="menu-dropdown dropdown-menu nivel-2__block" role="menu"
+            data-popper-placement="bottom">
+            <a href="https://www.redutoresibr.com.br/pt/institucional/quem-somos" target="_blank"
+              data-gtag-event="quem-somos-cabecalho" data-gtag-category="Navegacao" data-gtag-label="cabecalho"
+              rel="noopener noreferrer" class=" nivel-2__link fs-6 fw-light py-2 ps-5 ps-xl-4 px-4 d-flex text-decoration-none
+              link-opacity-50-hover text-dark text-nowrap" role="menuitem">Quem Somos</a>
+            <a href="https://www.redutoresibr.com.br/pt/institucional/qualidade" target="_blank"
+              data-gtag-event="qualidade-cabecalho" data-gtag-category="Navegacao" data-gtag-label="cabecalho"
+              rel="noopener noreferrer" class=" nivel-2__link fs-6 fw-light py-2 ps-5 ps-xl-4 px-4 d-flex text-decoration-none
+              link-opacity-50-hover text-dark text-nowrap" role="menuitem">Qualidade</a>
+            <a href="https://configurador.redutoresibr.com.br/PoliticaPrivacidade" target="_self"
+              data-gtag-event="politica-privacidade-cabecalho" data-gtag-category="Navegacao"
+              data-gtag-label="cabecalho"
+              class="nivel-2__link fs-6 fw-light py-2 ps-5 ps-xl-4 px-4 d-flex text-decoration-none link-opacity-50-hover text-dark text-nowrap active"
+              role="menuitem">Política de Privacidade</a>
+          </div>
+        </div>
+        <a class="menu-icons-desktop__link--centered" href="https://www.redutoresibr.com.br/AreaRestrita/Login"
+          target="_blank" rel="noopener noreferrer" data-gtag-event="pedidos-financeiro-cabecalho"
+          data-gtag-category="Navegacao" data-gtag-label="cabecalho">Cliente IBR</a>
+        <div class="menu-icons-desktop__item menu-icons-desktop__item--dropdown">
+          <button class="menu-icons-desktop__button" type="button" aria-expanded="false" aria-haspopup="true"
+            aria-controls="aplicativoslMenuDesktop" data-submenu-toggle="aplicativoslMenuDesktop"
+            data-gtag-event="aplicativo-cabecalho" data-gtag-category="Navegacao" data-gtag-label="cabecalho">
+            <span>Aplicativos</span>
+          </button>
+          <div id="aplicativoslMenuDesktop" class="menu-dropdown dropdown-menu nivel-2__block" role="menu"
+            data-popper-placement="bottom">
+            <a href="https://play.google.com/store/apps/details?id=com.configuradordeprodutos.redutoresibr.android"
+              data-gtag-event="aplicativo-configurador-cabecalho" data-gtag-category="Aplicativo"
+              data-gtag-label="cabecalho" target="_blank" rel="noopener noreferrer" class=" nivel-2__link fs-6 fw-light py-2 ps-5 ps-xl-4 px-4 d-flex text-decoration-none
+              link-opacity-50-hover text-dark text-nowrap" role="menuitem">Configurador de Produtos IBR</a>
+            <a href="https://play.google.com/store/apps/details?id=com.site.redutoresibr.android" target="_blank"
+              data-gtag-event="aplicativo-financeiro-cabecalho" data-gtag-category="Aplicativo"
+              data-gtag-label="cabecalho" rel="noopener noreferrer" class=" nivel-2__link fs-6 fw-light py-2 ps-5 ps-xl-4 px-4 d-flex text-decoration-none
+              link-opacity-50-hover text-dark text-nowrap" role="menuitem">Cliente IBR IBR</a>
+          </div>
+        </div>
+
+        <div class="menu-icons-desktop__item menu-icons-desktop__item--dropdown">
+          <button class="menu-icons-desktop__button cart-link tools-link text-orange" type="button"
+            aria-expanded="false" aria-haspopup="true" aria-controls="ferramentasAuxiliaresMenuDesktop"
+            data-submenu-toggle="ferramentasAuxiliaresMenuDesktop" data-gtag-event="ferramentas-auxiliares-cabecalho"
+            data-gtag-category="Ferramentas" data-gtag-label="menu_desktop">
+            <svg class="tool-icon" viewBox="0 0 16 16" width="20" height="20" fill="currentColor" aria-hidden="true"
+              xmlns="http://www.w3.org/2000/svg">
+              <path fill-rule="evenodd" clip-rule="evenodd"
+                d="M14.773 3.485l-.78-.184-2.108 2.096-1.194-1.216 2.056-2.157-.18-.792a4.42 4.42 0 0 0-1.347-.228 3.64 3.64 0 0 0-1.457.28 3.824 3.824 0 0 0-1.186.84 3.736 3.736 0 0 0-.875 1.265 3.938 3.938 0 0 0 0 2.966 335.341 335.341 0 0 0-6.173 6.234c-.21.275-.31.618-.284.963a1.403 1.403 0 0 0 .464.967c.124.135.272.247.437.328.17.075.353.118.538.127.316-.006.619-.126.854-.337 1.548-1.457 4.514-4.45 6.199-6.204.457.194.948.294 1.444.293a3.736 3.736 0 0 0 2.677-1.133 3.885 3.885 0 0 0 1.111-2.73 4.211 4.211 0 0 0-.196-1.378zM2.933 13.928a.31.31 0 0 1-.135.07.437.437 0 0 1-.149 0 .346.346 0 0 1-.144-.057.336.336 0 0 1-.114-.11c-.14-.143-.271-.415-.14-.568 1.37-1.457 4.191-4.305 5.955-6.046.1.132.21.258.328.376.118.123.245.237.38.341-1.706 1.75-4.488 4.564-5.98 5.994zm11.118-9.065c.002.765-.296 1.5-.832 2.048a2.861 2.861 0 0 1-4.007 0 2.992 2.992 0 0 1-.635-3.137A2.748 2.748 0 0 1 10.14 2.18a2.76 2.76 0 0 1 1.072-.214h.254L9.649 3.839v.696l1.895 1.886h.66l1.847-1.816v.258zM3.24 6.688h1.531l.705.717.678-.674-.665-.678V6.01l.057-1.649-.22-.437-2.86-1.882-.591.066-.831.849-.066.599 1.838 2.918.424.215zm-.945-3.632L4.609 4.58 4.57 5.703H3.494L2.002 3.341l.293-.285zm7.105 6.96l.674-.673 3.106 3.185a1.479 1.479 0 0 1 0 2.039 1.404 1.404 0 0 1-1.549.315 1.31 1.31 0 0 1-.437-.315l-3.142-3.203.679-.678 3.132 3.194a.402.402 0 0 0 .153.105.477.477 0 0 0 .359 0 .403.403 0 0 0 .153-.105.436.436 0 0 0 .1-.153.525.525 0 0 0 .036-.184.547.547 0 0 0-.035-.184.436.436 0 0 0-.1-.153L9.4 10.016z" />
+            </svg>
+            <span class="cart-text">Ferramentas Auxiliares</span>
+          </button>
+          <div id="ferramentasAuxiliaresMenuDesktop" class="menu-dropdown dropdown-menu nivel-2__block" role="menu"
+            data-popper-placement="bottom">
+            <a href="https://configurador.redutoresibr.com.br/Intercambialidade"
+              data-gtag-event="ferramentas-auxiliares-guia-intercambialidade-cabecalho" data-gtag-category="Ferramentas"
+              data-gtag-label="cabecalho" class="nivel-2__link fs-6 fw-light py-2 ps-5 ps-xl-4 px-4 d-flex text-decoration-none
+              link-opacity-50-hover text-dark text-nowrap" role="menuitem">Guia de Intercambialidade IBR</a>
+            <a href="https://configurador.redutoresibr.com.br/PaginaSimuladorConsumo"
+              data-gtag-event="ferramentas-auxiliares-simulador-consumo-cabecalho" data-gtag-category="Ferramentas"
+              data-gtag-label="cabecalho" class="nivel-2__link fs-6 fw-light py-2 ps-5 ps-xl-4 px-4 d-flex text-decoration-none
+              link-opacity-50-hover text-dark text-nowrap" role="menuitem">Simulador de Consumo</a>
+          </div>
+        </div>
+
+        <a href="/CarrinhoProdutos" class="cart-link text-orange cart-link--carrinho" aria-label="Carrinho de Produtos"
+          data-gtag-event="carrinho-cabecalho" data-gtag-category="Carrinho" data-gtag-label="menu_desktop">
+          <svg class="cart-icon" viewBox="0 0 24 24" width="20" height="20" fill="none"
+            xmlns="http://www.w3.org/2000/svg" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"
+            stroke-linejoin="round">
+            <path
+              d="M6.29977 5H21L19 12H7.37671M20 16H8L6 3H3M9 20C9 20.5523 8.55228 21 8 21C7.44772 21 7 20.5523 7 20C7 19.4477 7.44772 19 8 19C8.55228 19 9 19.4477 9 20ZM20 20C20 20.5523 19.5523 21 19 21C18.4477 21 18 20.5523 18 20C18 19.4477 18.4477 19 19 19C19.5523 19 20 19.4477 20 20Z" />
+          </svg>
+          <span class="cart-text">Carrinho de Produtos</span>
+        </a>
+
+        <div id="areaClienteDesktop" class="menu-icons-desktop__item area-cliente-nav area-cliente-loading">
+          <a href="/AreaCliente" class="area-cliente-trigger text-decoration-none"
+            data-gtag-event="areacliente-cabecalho" data-gtag-category="Navegacao" data-gtag-label="menu_desktop"
+            aria-label="Área do Cliente - Entre ou Cadastre-se">
+            <span class="area-cliente-title">Área do Cliente</span>
+            <span class="area-cliente-status">Entre | Cadastre-se</span>
+          </a>
+        </div>
+
+        <div class="menu-icons-desktop__item header__menu__search">
+          <div class="header__menu__search autocomplete-wrapper">
+            <form id="site-search-desktop" class="site-search-form" name="formBusca"
+              action="/PaginasPrincipal/PaginaProdutos.html" method="get" role="search" aria-label="Buscar produtos"
+              data-gtag-event="pesquisar-produto-cabecalho-manual" data-gtag-category="Busca" data-gtag-label="desktop">
+              <div class="input-group border-bottom border-dark mb-2">
+                <label class="visually-hidden" for="site-search-desktop-input">Buscar produtos</label>
+                <input type="search" id="site-search-desktop-input" name="termo" role="combobox"
+                  class="form-control bg-transparent border-0 rounded-0 site-search-input"
+                  placeholder="Pesquise um Produto" maxlength="100" inputmode="search" pattern="[A-Za-z0-9. ]+"
+                  title="Digite apenas letras, números, pontos e espaços" spellcheck="false" enterkeyhint="search"
+                  data-gtag-event="pesquisar-produto-cabecalho" data-gtag-category="Busca" data-gtag-label="desktop"
+                  required>
+                <button type="submit" class="btn rounded-0 site-search-submit" aria-label="Buscar produtos">
+                  <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor"
+                    class="bi bi-search" viewBox="0 0 16 16" aria-hidden="true">
+                    <path
+                      d="M11.742 10.344a6.5 6.5 0 1 0-1.397 1.398h-.001c.03.04.062.078.098.115l3.85 3.85a1 1 0 0 0 1.415-1.414l-3.85-3.85a1.007 1.007 0 0 0-.115-.1zM12 6.5a5.5 5.5 0 1 1-11 0 5.5 5.5 0 0 1 11 0z" />
+                  </svg>
+                  <span class="visually-hidden">Buscar</span>
+                </button>
+              </div>
+            </form>
+            <div id="site-search-autocomplete-desktop" class="site-search-autocomplete resultado-busca-autocomplete"
+              data-search-context="desktop" role="listbox" aria-label="Sugestões de Produtos"> </div>
+          </div>
+        </div>
+      </nav>
+
+      <button
+        class="navbar-toggler btn__menu ps-3 py-2 d-flex flex-column gap-2 justify-content-between align-items-end d-lg-none"
+        onclick="toggleMenu()" onkeydown="if(event.key==='Enter'||event.key===' '){toggleMenu()}"
+        aria-label="Abrir menu" aria-expanded="false">
+        <span class="bar"></span>
+        <span class="bar"></span>
+        <span class="bar"></span>
+      </button>
+    </div>
+  </header>
+
+
+  <div id="mobileMenu" class="menu__block--overlay">
+    <div class="menu__block pt-3 pt-lg-0 bg-header bg-opacity-100">
+
+      <button
+        class="navbar-toggler btn__menu ps-3 py-2 d-flex flex-column gap-2 justify-content-between align-items-end d-lg-none mb-4 me-4 ms-auto show"
+        onclick="toggleMenu()" onkeydown="if(event.key==='Enter'||event.key===' '){toggleMenu()}"
+        aria-label="Abrir menu">
+        <span class="bar"></span>
+        <span class="bar"></span>
+        <span class="bar"></span>
+      </button>
+
+      <hr class="menu-divider" />
+      <nav class="navbar-nav w-100 d-flex flex-column gap-2">
+        <div class="header__menu__search px-lg-0 p-2 autocomplete-wrapper">
+          <form id="site-search-mobile" class="site-search-form" name="formBusca"
+            action="/PaginasPrincipal/PaginaProdutos.html" method="get" role="search" aria-label="Buscar produtos"
+            data-gtag-event="pesquisar-produto-cabecalho-manual" data-gtag-category="Busca" data-gtag-label="mobile">
+            <div class="input-group border-bottom border-dark mb-2">
+              <label class="visually-hidden" for="site-search-mobile-input">Buscar produtos</label>
+              <input type="search" id="site-search-mobile-input" name="termo" role="combobox"
+                class="form-control bg-transparent border-0 rounded-0 site-search-input"
+                placeholder="Pesquise um Produto" maxlength="100" inputmode="search" pattern="[A-Za-z0-9. ]+"
+                title="Digite apenas letras, números, pontos e espaços" spellcheck="false" enterkeyhint="search"
+                data-gtag-event="pesquisar-produto-cabecalho" data-gtag-category="Busca" data-gtag-label="mobile"
+                required>
+              <button type="submit" class="btn rounded-0 site-search-submit" aria-label="Buscar produtos">
+                <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-search"
+                  viewBox="0 0 16 16" aria-hidden="true">
+                  <path
+                    d="M11.742 10.344a6.5 6.5 0 1 0-1.397 1.398h-.001c.03.04.062.078.098.115l3.85 3.85a1 1 0 0 0 1.415-1.414l-3.85-3.85a1.007 1.007 0 0 0-.115-.1zM12 6.5a5.5 5.5 0 1 1-11 0 5.5 5.5 0 0 1 11 0z" />
+                </svg>
+                <span class="visually-hidden">Buscar</span>
+              </button>
+            </div>
+          </form>
+          <div id="site-search-autocomplete-mobile" class="site-search-autocomplete resultado-busca-autocomplete"
+            data-search-context="mobile" role="listbox" aria-label="Sugestões de Produtos"></div>
+        </div>
+
+        <a href="https://configurador.redutoresibr.com.br/"
+          class="nivel-1__link fs-6 fw-bold px-lg-0 py-2 px-3 d-flex text-decoration-none link-opacity-50-hover"
+          data-gtag-event="home-cabecalho" data-gtag-category="Navegacao" data-gtag-label="cabecalho">Home</a>
+        <div class="menu__item--submenu">
+          <button type="button"
+            class="nivel-1__link fs-6 fw-bold px-lg-0 py-2 px-3 d-flex text-decoration-none link-opacity-50-hover submenu-toggle"
+            aria-expanded="false" aria-haspopup="true" aria-controls="institucionalMenuMobile"
+            data-submenu-toggle="institucionalMenuMobile" data-gtag-event="institucional-cabecalho"
+            data-gtag-category="Navegacao" data-gtag-label="cabecalho">
+            <span class="submenu-toggle__label">Institucional</span>
+          </button>
+          <div id="institucionalMenuMobile" class="menu-dropdown-mobile" role="menu">
+            <a href="https://www.redutoresibr.com.br/pt/institucional/quem-somos" target="_blank"
+              data-gtag-event="quem-somos-cabecalho" data-gtag-category="Navegacao" data-gtag-label="cabecalho"
+              rel="noopener noreferrer" class="menu-dropdown__link submenu-link" role="menuitem">Quem Somos</a>
+            <a href="https://www.redutoresibr.com.br/pt/institucional/qualidade" target="_blank"
+              data-gtag-event="qualidade-cabecalho" data-gtag-category="Navegacao" data-gtag-label="cabecalho"
+              rel="noopener noreferrer" class="menu-dropdown__link submenu-link" role="menuitem">Qualidade</a>
+            <a href="/PoliticaPrivacidade" class="menu-dropdown__link submenu-link" role="menuitem"
+              data-gtag-event="politica-privacidade-cabecalho" data-gtag-category="Navegacao"
+              data-gtag-label="cabecalho">Política de
+              Privacidade</a>
+          </div>
+        </div>
+        <a href="https://www.redutoresibr.com.br/pt" target="_blank" rel="noopener noreferrer"
+          class="nivel-1__link fs-6 fw-bold px-lg-0 py-2 px-3 d-flex text-decoration-none link-opacity-50-hover"
+          data-gtag-event="pedidos-financeiro-cabecalho" data-gtag-category="Navegacao"
+          data-gtag-label="cabecalho">Pedidos
+          e Financeiro</a>
+        <div class="menu__item--submenu">
+          <button type="button"
+            class="nivel-1__link fs-6 fw-bold px-lg-0 py-2 px-3 d-flex text-decoration-none link-opacity-50-hover submenu-toggle"
+            aria-expanded="false" aria-haspopup="true" aria-controls="aplicativoMenuMobile"
+            data-submenu-toggle="aplicativoMenuMobile" data-gtag-event="aplicativo-cabecalho"
+            data-gtag-category="Navegacao" data-gtag-label="cabecalho">
+            <span class="submenu-toggle__label">Aplicativos</span>
+          </button>
+          <div id="aplicativoMenuMobile" class="menu-dropdown-mobile" role="menu">
+            <a href="https://play.google.com/store/apps/details?id=com.configuradordeprodutos.redutoresibr.android"
+              target="_blank" rel="noopener noreferrer" class="menu-dropdown__link submenu-link" role="menuitem"
+              data-gtag-event="aplicativo-configurador-cabecalho" data-gtag-category="Aplicativo"
+              data-gtag-label="cabecalho">Configurador de Produtos IBR</a>
+            <a href="https://play.google.com/store/apps/details?id=com.site.redutoresibr.android" target="_blank"
+              rel="noopener noreferrer" class="menu-dropdown__link submenu-link" role="menuitem"
+              data-gtag-event="aplicativo-financeiro-cabecalho" data-gtag-category="Aplicativo"
+              data-gtag-label="cabecalho">Cliente IBR
+              IBR</a>
+          </div>
+        </div>
+        <div class="menu__item--submenu">
+          <button type="button"
+            class="cart-link nivel-1__link fs-6 fw-bold px-lg-0 py-2 px-3 d-flex text-decoration-none link-opacity-50-hover text-orange submenu-toggle"
+            aria-expanded="false" aria-haspopup="true" aria-controls="ferramentasAuxiliaresMenuMobile"
+            data-submenu-toggle="ferramentasAuxiliaresMenuMobile" data-gtag-event="ferramentas-auxiliares-cabecalho"
+            data-gtag-category="Ferramentas" data-gtag-label="menu_mobile">
+            <svg class="tool-icon" viewBox="0 0 16 16" width="20" height="20" fill="currentColor" aria-hidden="true"
+              xmlns="http://www.w3.org/2000/svg">
+              <path fill-rule="evenodd" clip-rule="evenodd"
+                d="M14.773 3.485l-.78-.184-2.108 2.096-1.194-1.216 2.056-2.157-.18-.792a4.42 4.42 0 0 0-1.347-.228 3.64 3.64 0 0 0-1.457.28 3.824 3.824 0 0 0-1.186.84 3.736 3.736 0 0 0-.875 1.265 3.938 3.938 0 0 0 0 2.966 335.341 335.341 0 0 0-6.173 6.234c-.21.275-.31.618-.284.963a1.403 1.403 0 0 0 .464.967c.124.135.272.247.437.328.17.075.353.118.538.127.316-.006.619-.126.854-.337 1.548-1.457 4.514-4.45 6.199-6.204.457.194.948.294 1.444.293a3.736 3.736 0 0 0 2.677-1.133 3.885 3.885 0 0 0 1.111-2.73 4.211 4.211 0 0 0-.196-1.378zM2.933 13.928a.31.31 0 0 1-.135.07.437.437 0 0 1-.149 0 .346.346 0 0 1-.144-.057.336.336 0 0 1-.114-.11c-.14-.143-.271-.415-.14-.568 1.37-1.457 4.191-4.305 5.955-6.046.1.132.21.258.328.376.118.123.245.237.38.341-1.706 1.75-4.488 4.564-5.98 5.994zm11.118-9.065c.002.765-.296 1.5-.832 2.048a2.861 2.861 0 0 1-4.007 0 2.992 2.992 0 0 1-.635-3.137A2.748 2.748 0 0 1 10.14 2.18a2.76 2.76 0 0 1 1.072-.214h.254L9.649 3.839v.696l1.895 1.886h.66l1.847-1.816v.258zM3.24 6.688h1.531l.705.717.678-.674-.665-.678V6.01l.057-1.649-.22-.437-2.86-1.882-.591.066-.831.849-.066.599 1.838 2.918.424.215zm-.945-3.632L4.609 4.58 4.57 5.703H3.494L2.002 3.341l.293-.285zm7.105 6.96l.674-.673 3.106 3.185a1.479 1.479 0 0 1 0 2.039 1.404 1.404 0 0 1-1.549.315 1.31 1.31 0 0 1-.437-.315l-3.142-3.203.679-.678 3.132 3.194a.402.402 0 0 0 .153.105.477.477 0 0 0 .359 0 .403.403 0 0 0 .153-.105.436.436 0 0 0 .1-.153.525.525 0 0 0 .036-.184.547.547 0 0 0-.035-.184.436.436 0 0 0-.1-.153L9.4 10.016z" />
+            </svg>
+            <span class="cart-text">Ferramentas Auxiliares</span>
+          </button>
+          <div id="ferramentasAuxiliaresMenuMobile" class="menu-dropdown-mobile" role="menu">
+            <a href="https://configurador.redutoresibr.com.br/Intercambialidade"
+              class="menu-dropdown__link submenu-link" role="menuitem"
+              data-gtag-event="ferramentas-auxiliares-guia-intercambialidade-cabecalho" data-gtag-category="Ferramentas"
+              data-gtag-label="cabecalho">Guia de Intercambialidade IBR</a>
+            <a href="https://configurador.redutoresibr.com.br/PaginaSimuladorConsumo"
+              class="menu-dropdown__link submenu-link" role="menuitem"
+              data-gtag-event="ferramentas-auxiliares-simulador-consumo-cabecalho" data-gtag-category="Ferramentas"
+              data-gtag-label="cabecalho">Simulador de Consumo</a>
+          </div>
+        </div>
+
+        <a href="/CarrinhoProdutos"
+          class="cart-link nivel-1__link fs-6 fw-bold px-lg-0 py-2 px-3 d-flex text-decoration-none link-opacity-50-hover text-orange"
+          aria-label="Carrinho de produtos" data-gtag-event="carrinho-cabecalho" data-gtag-category="Carrinho"
+          data-gtag-label="menu_mobile">
+          <svg class="cart-icon" viewBox="0 0 24 24" width="20" height="20" fill="none"
+            xmlns="http://www.w3.org/2000/svg" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"
+            stroke-linejoin="round">
+            <path
+              d="M6.29977 5H21L19 12H7.37671M20 16H8L6 3H3M9 20C9 20.5523 8.55228 21 8 21C7.44772 21 7 20.5523 7 20C7 19.4477 7.44772 19 8 19C8.55228 19 9 19.4477 9 20ZM20 20C20 20.5523 19.5523 21 19 21C18.4477 21 18 20.5523 18 20C18 19.4477 18.4477 19 19 19C19.5523 19 20 19.4477 20 20Z" />
+          </svg>
+          <span class="cart-text">Carrinho de Produtos</span>
+        </a>
+
+        <div id="areaClienteMobile" class="area-cliente-nav area-cliente-loading">
+          <a href="/AreaCliente" class="area-cliente-trigger text-decoration-none"
+            data-gtag-event="areacliente-cabecalho" data-gtag-category="Navegacao" data-gtag-label="menu_mobile"
+            aria-label="Área do Cliente - Entre ou Cadastre-se">
+            <span class="area-cliente-title">Área do Cliente</span>
+            <span class="area-cliente-status">Entre | Cadastre-se</span>
+          </a>
+        </div>
+        <button class="theme-toggle-mobile mb-3" onclick="toggleDarkMode()" aria-label="Alternar Tema">
+          <svg class="theme-icon" viewBox="0 0 24 24" width="24" height="24" fill="none" stroke-width="3"
+            stroke-linecap="round" xmlns="http://www.w3.org/2000/svg">
+            <circle class="icon-bg" cx="12" cy="12" r="11" />
+            <circle class="sun" cx="12" cy="12" r="5" />
+            <circle class="sun-inner" cx="12" cy="12" r="2" />
+            <g class="sun-rays">
+              <line x1="12" y1="1" x2="12" y2="4" />
+              <line x1="12" y1="20" x2="12" y2="23" />
+              <line x1="4.22" y1="4.22" x2="5.64" y2="5.64" />
+              <line x1="18.36" y1="18.36" x2="19.78" y2="19.78" />
+              <line x1="1" y1="12" x2="4" y2="12" />
+              <line x1="20" y1="12" x2="23" y2="12" />
+              <line x1="4.22" y1="19.78" x2="5.64" y2="18.36" />
+              <line x1="18.36" y1="5.64" x2="19.78" y2="4.22" />
+            </g>
+            <path class="moon" d="M21 12.79A9 9 0 1 1 11.21 3A7 7 0 0 0 21 12.79z" />
+          </svg>
+          <span class="tooltip"></span>
+        </button>
+      </nav>
+    </div>
+  </div>
+
+  <main id="main-content">
+    <div class="pagina__titulo--bloco fw-bold mt-5 mb-4">
+      <div class="container">
+        <div class="row">
+          <div class="col-12">
+          </div>
+        </div>
+      </div>
+    </div>
+  </main>
+
+  <div id="alerta-validacao" class="alerta-validacao" role="alert" aria-live="assertive" tabindex="-1">
+    <span id="alerta-texto"></span>
+    <button class="fechar-alerta" onclick="fecharAlerta()" aria-label="Fechar">×</button>
+  </div>
+
+  <button id="voltar-topo" title="Voltar ao Topo" aria-label="Voltar ao Topo" data-gtag-event="seta-topo"
+    data-gtag-category="Navegacao" data-gtag-label="geral">
+    <svg class="seta-topo" viewBox="0 0 24 24" width="28" height="28" xmlns="http://www.w3.org/2000/svg" fill="none"
+      stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+      <path d="M12 19V5" />
+      <path d="M5 12l7-7 7 7" />
+      <animateTransform attributeName="transform" type="translate" values="0 0; 0 -3; 0 0" dur="1s"
+        repeatCount="indefinite" />
+    </svg>
+  </button>
+
+  <button id="chat-especialista" type="button" aria-label="Especialista Técnico IBR"
+    data-tooltip="Especialista Técnico IBR" data-gtag-event="chat-especialista-abrir"
+    data-gtag-category="ChatEspecialista" data-gtag-label="abrir">
+    <svg viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg" aria-hidden="true" focusable="false">
+      <path d="M8 10.5H16" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"></path>
+      <path d="M8 14H13.5" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"></path>
+      <path
+        d="M17 3.33782C15.5291 2.48697 13.8214 2 12 2C6.47715 2 2 6.47715 2 12C2 13.5997 2.37562 15.1116 3.04346 16.4525C3.22094 16.8088 3.28001 17.2161 3.17712 17.6006L2.58151 19.8267C2.32295 20.793 3.20701 21.677 4.17335 21.4185L6.39939 20.8229C6.78393 20.72 7.19121 20.7791 7.54753 20.9565C8.88837 21.6244 10.4003 22 12 22C17.5228 22 22 17.5228 22 12C22 10.1786 21.513 8.47087 20.6622 7"
+        stroke="currentColor" stroke-width="1.5" stroke-linecap="round"></path>
+    </svg>
+  </button>
+
+  </script>
+
+  <footer class="footer bg-gray bg-opacity-100 py-5">
+    <div class="container py-5">
+      <div class="row justify-content-sm-between justify-content-center">
+        <div class="col-lg-3 col-sm-12 col-auto mb-5">
+          <div class="logo__footer">
+            <img loading="lazy" src="/Imagens/Logotipo.svg" alt="Redutores IBR" width="170" height="115">
+          </div>
+        </div>
+        <div class="col-lg-3 col-md-4 col-12">
+          <div class="contatos__footer mb-5 text-center text-sm-start">
+            <p class="nivel-1__footer fw-normal text-uppercase fs-5 mb-3">Redutores IBR LTDA</p>
+            <p class="nivel-1__footer fw-normal text-uppercase text-orange fs-6 mb-0">Unidade RS</p>
+            <a href="https://www.google.com/maps/place/Redutores+IBR+LTDA/@-29.1533067,-51.210406,15z/data=!4m15!1m8!3m7!1s0x951ea2ed673b27e7:0x3ea5dadb3d16c70e!2sRedutores+IBR+LTDA!8m2!3d-29.1531464!4d-51.210516!10e5!16s%2Fg%2F1tkrmzh6!3m5!1s0x951ea2ed673b27e7:0x3ea5dadb3d16c70e!8m2!3d-29.1531464!4d-51.210516!16s%2Fg%2F1tkrmzh6?entry=ttu&g_ep=EgoyMDI2MDEyNy4wIKXMDSoKLDEwMDc5MjA3MUgBUAM%3D"
+              target="_blank" rel="noopener noreferrer"
+              class="contato__link mb-3 fw-light text-decoration-none d-flex mx-auto ms-sm-0 link-dark"
+              data-gtag-event="endereco-rs-rodape" data-gtag-category="Contato" data-gtag-label="rodape">
+              <p class="fs-6">
+                R. Jacob Luchesi, 2781<br> Bairro Santa Catarina <br> Caxias do Sul - RS <br> 95032-000
+              </p>
+            </a>
+            <p class="nivel-1__footer fw-normal text-uppercase text-orange fs-6 mb-0">Unidade SP</p>
+            <a href="https://www.google.com/maps/place/Redutores+IBR+LTDA/@-23.1322446,-47.2238829,17z/data=!3m1!4b1!4m6!3m5!1s0x94cf4dc51a0ccbf3:0xa45aa0a1f6aa7870!8m2!3d-23.1322446!4d-47.221308!16s%2Fg%2F11ty18ghp4?entry=ttu&g_ep=EgoyMDI1MTIwOC4wIKXMDSoKLDEwMDc5MjA3MUgBUAM%3D"
+              target="_blank" rel="noopener noreferrer"
+              class="contato__link mb-3 fw-light text-decoration-none d-flex mx-auto ms-sm-0 link-dark"
+              data-gtag-event="endereco-sp-rodape" data-gtag-category="Contato" data-gtag-label="rodape">
+              <p class="fs-6">
+                Avenida Comendador Dr. Santoro Mirone, 833 <br> Recreio Campestre Joia <br> Indaiatuba - SP <br>
+                13347-662
+              </p>
+            </a>
+          </div>
+        </div>
+        <div class="col-lg-3 col-md-4 col-sm-6 col-12">
+          <div class="menu__footer mb-5 text-center text-sm-start">
+            <p class="nivel-1__footer text-uppercase fw-normal fs-5 mb-3">Navegue</p>
+            <div
+              class="nivel-2__block--footer d-flex flex-column gap-2 justify-content-sm-between justify-content-center">
+              <a href="https://configurador.redutoresibr.com.br/"
+                class="nivel-2__footer fw-normal fs-6 text-decoration-none link-dark link-opacity-50-hover"
+                data-gtag-event="home-rodape" data-gtag-category="Navegacao" data-gtag-label="rodape">Home</a>
+
+              <div class="menu__item--submenu">
+                <button type="button"
+                  class="submenu-toggle nivel-2__footer fw-normal fs-6 text-decoration-none link-dark link-opacity-50-hover text-start bg-transparent border-0 p-0"
+                  aria-expanded="false" aria-haspopup="true" aria-controls="institucionalMenuMobileRodape"
+                  data-submenu-toggle="institucionalMenuMobileRodape" data-gtag-event="institucional-rodape"
+                  data-gtag-category="Navegacao" data-gtag-label="rodape">
+                  <span class="submenu-toggle__label">Institucional</span>
+                </button>
+                <div id="institucionalMenuMobileRodape" class="menu-dropdown-mobile" role="menu">
+                  <a href="https://www.redutoresibr.com.br/pt/institucional/quem-somos" target="_blank"
+                    rel="noopener noreferrer" class="menu-dropdown__link submenu-link" role="menuitem"
+                    data-gtag-event="quem-somos-rodape" data-gtag-category="Navegacao" data-gtag-label="rodape">Quem
+                    Somos</a>
+                  <a href="https://www.redutoresibr.com.br/pt/institucional/qualidade" target="_blank"
+                    rel="noopener noreferrer" class="menu-dropdown__link submenu-link" role="menuitem"
+                    data-gtag-event="qualidade-rodape" data-gtag-category="Navegacao"
+                    data-gtag-label="rodape">Qualidade</a>
+                  <a href="/PoliticaPrivacidade" class="menu-dropdown__link submenu-link" role="menuitem"
+                    data-gtag-event="politica-privacidade-rodape" data-gtag-category="Navegacao"
+                    data-gtag-label="rodape">Política de
+                    Privacidade</a>
+                </div>
+              </div>
+
+              <a href="https://www.redutoresibr.com.br/AreaRestrita/Login" target="_blank" rel="noopener noreferrer"
+                class="nivel-2__footer fw-normal fs-6 text-decoration-none link-dark link-opacity-50-hover"
+                data-gtag-event="pedidos-financeiro-rodape" data-gtag-category="Navegacao"
+                data-gtag-label="rodape">Cliente IBR</a>
+
+              <div class="menu__item--submenu">
+                <button type="button"
+                  class="submenu-toggle nivel-2__footer fw-normal fs-6 text-decoration-none link-dark link-opacity-50-hover text-start bg-transparent border-0 p-0"
+                  aria-expanded="false" aria-haspopup="true" aria-controls="aplicativoMenuMobileRodape"
+                  data-submenu-toggle="aplicativoMenuMobileRodape" data-gtag-event="aplicativo-rodape"
+                  data-gtag-category="Navegacao" data-gtag-label="rodape">
+                  <span class="submenu-toggle__label">Aplicativos</span>
+                </button>
+                <div id="aplicativoMenuMobileRodape" class="menu-dropdown-mobile" role="menu">
+                  <a href="https://play.google.com/store/apps/details?id=com.configuradordeprodutos.redutoresibr.android"
+                    target="_blank" rel="noopener noreferrer" class="menu-dropdown__link submenu-link" role="menuitem"
+                    data-gtag-event="aplicativo-configurador-rodape" data-gtag-category="Aplicativo"
+                    data-gtag-label="rodape">Configurador de Produtos IBR</a>
+                  <a href="https://play.google.com/store/apps/details?id=com.site.redutoresibr.android" target="_blank"
+                    rel="noopener noreferrer" class="menu-dropdown__link submenu-link" role="menuitem"
+                    data-gtag-event="aplicativo-financeiro-rodape" data-gtag-category="Aplicativo"
+                    data-gtag-label="rodape">Cliente IBR</a>
+                </div>
+              </div>
+
+              <a href="https://configurador.redutoresibr.com.br/CarrinhoProdutos"
+                class="nivel-2__footer fw-normal fs-6 text-decoration-none link-dark link-opacity-50-hover"
+                data-gtag-event="carrinho-rodape" data-gtag-category="Carrinho" data-gtag-label="footer">Carrinho de
+                Produtos</a>
+
+              <div class="menu__item--submenu">
+                <button type="button"
+                  class="submenu-toggle nivel-2__footer fw-normal fs-6 text-decoration-none link-dark link-opacity-50-hover text-start bg-transparent border-0 p-0"
+                  aria-expanded="false" aria-haspopup="true" aria-controls="ferramentasAuxiliaresMenuMobileRodape"
+                  data-submenu-toggle="ferramentasAuxiliaresMenuMobileRodape"
+                  data-gtag-event="ferramentas-auxiliares-rodape" data-gtag-category="Ferramentas"
+                  data-gtag-label="rodape">
+                  <span class="submenu-toggle__label">Ferramentas Auxiliares</span>
+                </button>
+                <div id="ferramentasAuxiliaresMenuMobileRodape" class="menu-dropdown-mobile" role="menu">
+                  <a href="https://configurador.redutoresibr.com.br/Intercambialidade"
+                    class="menu-dropdown__link submenu-link" role="menuitem"
+                    data-gtag-event="ferramentas-auxiliares-guia-intercambialidade-rodape"
+                    data-gtag-category="Ferramentas" data-gtag-label="rodape">Guia de Intercambialidade IBR</a>
+                  <a href="https://configurador.redutoresibr.com.br/PaginaSimuladorConsumo"
+                    class="menu-dropdown__link submenu-link" role="menuitem"
+                    data-gtag-event="ferramentas-auxiliares-simulador-consumo-rodape" data-gtag-category="Ferramentas"
+                    data-gtag-label="rodape">Simulador de Consumo</a>
+                </div>
+              </div>
+
+              <a href="https://www.redutoresibr.com.br/AreaRestrita/Login" target="_blank" rel="noopener noreferrer"
+                class="area-cliente-footer-link area-cliente-trigger text-decoration-none"
+                data-gtag-event="pedidos-financeiro-rodape" data-gtag-category="Navegacao" data-gtag-label="rodape"
+                aria-label="Cliente IBR">Cliente IBR</a>
+              <a href="https://configurador.redutoresibr.com.br/AreaCliente"
+                class="area-cliente-footer-link area-cliente-trigger text-decoration-none"
+                data-gtag-event="areacliente-rodape" data-gtag-category="Navegacao" data-gtag-label="rodape"
+                aria-label="Área do Cliente">Área do Cliente</a>
+            </div>
+          </div>
+        </div>
+        <div class="col-lg-3 col-md-4 col-sm-6">
+          <div class="contatos__footer mb-5 text-center text-sm-start">
+            <p class="nivel-1__footer fw-normal text-uppercase fs-5 mb-3">Acesse</p>
+            <a href="tel:+555430289200"
+              class="contato__link my-3 fw-light text-decoration-none d-flex align-items-center gap-2 mx-auto ms-sm-0"
+              data-gtag-event="telefone-rs-rodape" data-gtag-category="Contato" data-gtag-label="rodape">
+              <p class="fs-4 fw-semibold text-orange mb-0 lh-1">RS</p>
+              <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" fill="currentColor"
+                class="bi bi-telephone-fill text-orange fs-5" viewBox="0 0 16 16">
+                <path fill-rule="evenodd"
+                  d="M1.885.511a1.745 1.745 0 0 1 2.61.163L6.29 2.98c.329.423.445.974.315 1.494l-.547 2.19a.678.678 0 0 0 .178.643l2.457 2.457a.678.678 0 0 0 .644.178l2.189-.547a1.745 1.745 0 0 1 1.494.315l2.306 1.794c.829.645.905 1.87.163 2.611l-1.034 1.034c-.74.74-1.516.087-2.261-.219a17.678 17.678 0 0 1-6.684-4.42 17.678 17.678 0 0 1-4.42-6.684c-.306-.745-.959-1.521-.219-2.261L3.272.674A1.745 1.745 0 0 1 5.883.511z" />
+              </svg>
+              <p class="ms-2 fs-5 mb-0 link-dark link-opacity-50-hover">(54) 3028 9200</p>
+            </a>
+            <a href="tel:+551930148604"
+              class="contato__link my-3 fw-light text-decoration-none d-flex align-items-center gap-2 mx-auto ms-sm-0"
+              data-gtag-event="telefone-sp-rodape" data-gtag-category="Contato" data-gtag-label="rodape">
+              <p class="fs-4 fw-semibold text-orange mb-0 lh-1">SP</p>
+              <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" fill="currentColor"
+                class="bi bi-telephone-fill text-orange fs-5" viewBox="0 0 16 16">
+                <path fill-rule="evenodd"
+                  d="M1.885.511a1.745 1.745 0 0 1 2.61.163L6.29 2.98c.329.423.445.974.315 1.494l-.547 2.19a.678.678 0 0 0 .178.643l2.457 2.457a.678.678 0 0 0 .644.178l2.189-.547a1.745 1.745 0 0 1 1.494.315l2.306 1.794c.829.645.905 1.87.163 2.611l-1.034 1.034c-.74.74-1.516.087-2.261-.219a17.678 17.678 0 0 1-6.684-4.42 17.678 17.678 0 0 1-4.42-6.684c-.306-.745-.959-1.521-.219-2.261L3.272.674A1.745 1.745 0 0 1 5.883.511z" />
+              </svg>
+              <p class="ms-2 fs-5 mb-0 link-dark link-opacity-50-hover">(19) 3014-8604</p>
+            </a>
+            <a href="https://api.whatsapp.com/send?phone=5519997061326" data-gtag-event="whatsapp-rodape"
+              data-gtag-category="Contato" data-gtag-label="rodape"
+              class="contato__link my-3 fw-light text-decoration-none d-flex align-items-center gap-3 mx-auto ms-sm-0">
+              <svg xmlns="http://www.w3.org/2000/svg" width="22" height="22" fill="currentColor"
+                class="bi bi-whatsapp text-orange fs-5" viewBox="0 0 16 16">
+                <path
+                  d="M13.601 2.326A7.854 7.854 0 0 0 7.994 0C3.627 0 .068 3.558.064 7.926c0 1.399.366 2.76 1.057 3.965L0 16l4.204-1.102a7.933 7.933 0 0 0 3.79.965h.004c4.368 0 7.926-3.558 7.93-7.93A7.898 7.898 0 0 0 13.6 2.326zM7.994 14.521a6.573 6.573 0 0 1-3.356-.92l-.24-.144-2.494.654.664-2.43-.157-.248A6.555 6.555 0 0 1 1.4 7.926a6.6 6.6 0 1 1 12.02 3.975 6.554 6.554 0 0 1-5.426 2.62zm3.419-4.509c-.047-.078-.176-.125-.37-.219-.195-.094-1.152-.568-1.33-.634-.178-.063-.308-.094-.437.094-.129.188-.503.633-.617.765-.113.129-.226.141-.42.047-.188-.094-.793-.292-1.51-.931-.557-.497-.933-1.105-1.041-1.293-.109-.188-.012-.29.082-.383.084-.083.188-.217.282-.326.094-.109.125-.188.188-.313.062-.125.031-.235-.016-.329-.047-.094-.437-1.054-.598-1.447-.157-.375-.316-.324-.437-.33l-.371-.007c-.125 0-.329.047-.502.235-.173.188-.656.641-.656 1.562s.672 1.813.765 1.938c.094.125 1.323 2.02 3.207 2.83 1.884.812 1.884.541 2.223.508.34-.031 1.094-.445 1.25-.875.156-.43.156-.797.11-.875z" />
+              </svg>
+              <p class="fs-5 mb-0 link-dark link-opacity-50-hover">(19) 9 9706-1326</p>
+            </a>
+            <div class="redes__footer mb-4">
+              <p class="nivel-1__footer fs-5 text-uppercase fw-normal mt-4">Acompanhe a IBR nas redes sociais
+              </p>
+              <div class="redes d-flex gap-3 justify-content-sm-start justify-content-center">
+                <a href="https://www.linkedin.com/company/redutoresibr/" target="_blank" rel="noopener noreferrer"
+                  class="rede__link text-decoration-none bg-orange p-2 text-white d-flex align-items-center justify-content-center"
+                  data-gtag-event="social-linkedin-rodape" data-gtag-category="Social" data-gtag-label="rodape"
+                  data-bs-toggle="tooltip" data-bs-title="Linkedin" aria-label="Linkedin">
+                  <img loading="lazy" src="/Imagens/linkedin.svg" alt="Linkedin" width="20" height="20">
+                </a>
+                <a href="https://www.facebook.com/RedutoresIBR/" target="_blank" rel="noopener noreferrer"
+                  class="rede__link text-decoration-none bg-orange p-2 text-white d-flex align-items-center justify-content-center"
+                  data-gtag-event="social-facebook-rodape" data-gtag-category="Social" data-gtag-label="rodape"
+                  data-bs-toggle="tooltip" data-bs-title="Facebook" aria-label="Facebook">
+                  <img loading="lazy" src="/Imagens/facebook.svg" alt="Facebook" width="20" height="20">
+                </a>
+                <a href="https://www.instagram.com/redutoresibr/" target="_blank" rel="noopener noreferrer"
+                  class="rede__link text-decoration-none bg-orange p-2 text-white d-flex align-items-center justify-content-center"
+                  data-gtag-event="social-instagram-rodape" data-gtag-category="Social" data-gtag-label="rodape"
+                  data-bs-toggle="tooltip" data-bs-title="Instagram" aria-label="Instagram">
+                  <img loading="lazy" src="/Imagens/instagram.svg" alt="Instagram" width="20" height="20">
+                </a>
+                <a href="https://www.youtube.com/@redutoresibr4475" target="_blank" rel="noopener noreferrer"
+                  class="rede__link text-decoration-none bg-orange p-2 text-white d-flex align-items-center justify-content-center"
+                  data-gtag-event="social-youtube-rodape" data-gtag-category="Social" data-gtag-label="rodape"
+                  data-bs-toggle="tooltip" data-bs-title="Youtube" aria-label="Youtube">
+                  <img loading="lazy" src="/Imagens/youtube.svg" alt="Youtube" width="20" height="20">
+                </a>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="footer__bottom">
+      <div class="container">
+        <div class="row footer-copy justify-content-center justify-content-md-between">
+          <div class="col-auto mb-5">
+            <a href="https://www.redutoresibr.com.br/" target="_blank" rel="noopener noreferrer"
+              class="assinatura__link lh-1" data-gtag-event="desenvolvido-por-rodape" data-gtag-category="Navegacao"
+              data-gtag-label="rodape">
+              Desenvolvido por <span class="assinatura__ibr"></span>
+            </a>
+            <p id="app-version" class="text-muted fst-italic small mb-0"></p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </footer>
+
+  <script defer src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.1/dist/js/bootstrap.bundle.min.js"
+    integrity="sha384-HwwvtgBNo3bZJJLYd8oVXjrBZt8cqVSpeBNS5n7C8IVInixGAoxmnlMuBnhbgrkm"
+    crossorigin="anonymous"></script>
+
+  <div id="lgpdDivFooter" data-lgpd-inline="true" hidden aria-hidden="true">
+    <section id="lgpdCookieFooter" role="region" aria-label="Preferências de cookies" hidden aria-hidden="true">
+      <div class="lgpd__cookie__footer">
+        <div class="lgpd__cookie__footer__text">
+          <p class="title">
+            Controle seus Cookies e sua Privacidade
+          </p>
+          <p class="text">
+            Usamos cookies e tecnologias semelhantes para manter sua navegação segura, medir o desempenho e
+            personalizar sua experiência.
+            Você decide o que compartilhar: ajuste suas preferências em “Configurar”. Para saber mais, consulte
+            nossa <a href="https://configurador.redutoresibr.com.br/PoliticaPrivacidade" target="_blank"
+              rel="noopener noreferrer" data-gtag-event="acesso-politica-cookies" data-gtag-category="Cookies"
+              data-gtag-label="banner_texto">Política de Cookies e Privacidade</a>.
+          </p>
+        </div>
+        <div class="lgpd__cookie__footer__buttons">
+          <button id="saveAllFooterLgpdCookies" class="btn__lgpd__cookie btn__lgpd__cookie100"
+            aria-label="Aceitar Todos os Cookies" data-gtag-event="lgpd-aceitar-todos" data-gtag-category="Cookies"
+            data-gtag-label="banner">Aceitar Todos</button>
+          <button id="openModalLgpdCookies" class="btn__lgpd__cookie btn__lgpd__cookie100"
+            aria-label="Abrir configurações de cookies e privacidade" data-gtag-event="lgpd-abrir-config"
+            data-gtag-category="Cookies" data-gtag-label="banner">Configurar</button>
+        </div>
+      </div>
+    </section>
+    <section id="lgpdShieldFooter" hidden aria-hidden="true">
+      <a id="openModalLgpdShield" href="#" onclick="return false;" data-gtag-event="lgpd-abrir-config"
+        data-gtag-category="Cookies" data-gtag-label="shield">
+        <div style="display: flex;align-items: center;height: 100%;padding: 0px 15px;">
+          <img loading="lazy" data-src="/Imagens/Cookies.svg" alt="Cookies" class="img-fluid" width="88" height="30"
+            style="width: 88px;margin-right: 6px;" src="/Imagens/Cookies.svg">
+          <span>Cookies e<br>Privacidade</span>
+        </div>
+      </a>
+    </section>
+
+    <section id="modalLgpdCookies">
+      <div id="modalLgpdCookiesContainer">
+        <div id="modalLgpdCookiesFechar" data-gtag-event="lgpd-fechar-modal" data-gtag-category="Cookies"
+          data-gtag-label="icone">
+          <svg xmlns="http://www.w3.org/2000/svg" width="1.5em" height="1.5em" fill="currentColor"
+            class="bi bi-x-circle" viewBox="0 0 16 16">
+            <path d="M8 15A7 7 0 1 1 8 1a7 7 0 0 1 0 14zm0 1A8 8 0 1 0 8 0a8 8 0 0 0 0 16z"></path>
+            <path
+              d="M4.646 4.646a.5.5 0 0 1 .708 0L8 7.293l2.646-2.647a.5.5 0 0 1 .708.708L8.707 8l2.647 2.646a.5.5 0 0 1-.708.708L8 8.707l-2.646 2.647a.5.5 0 0 1-.708-.708L7.293 8 4.646 5.354a.5.5 0 0 1 0-.708z">
+            </path>
+          </svg>
+        </div>
+        <div class="modal__lgpd__cookies__header">
+          <span><a href="https://configurador.redutoresibr.com.br/PoliticaPrivacidade" target="_blank"
+              rel="noopener noreferrer" data-gtag-event="acesso-politica-cookies" data-gtag-category="Cookies"
+              data-gtag-label="modal_header">Política de Cookies e Privacidade</a></span>
+        </div>
+        <div class="modal__lgpd__cookies__button__tabs">
+          <button class="active" id="modalLgpdCookiesButtonTab1" aria-label="Configurações"
+            data-gtag-event="lgpd-tab-configuracoes" data-gtag-category="Cookies"
+            data-gtag-label="configuracoes">Configurações</button>
+          <button id="modalLgpdCookiesButtonTab2" aria-label="Detalhes de uso" data-gtag-event="lgpd-tab-dados"
+            data-gtag-category="Cookies" data-gtag-label="como_usamos">Como Usamos os Dados</button>
+          <button id="modalLgpdCookiesButtonTab3" hidden="" style="visibility:hidden" aria-label="Política de cookies"
+            data-gtag-event="lgpd-tab-politica" data-gtag-category="Cookies" data-gtag-label="politica_cookies">Política
+            de Cookies</button>
+        </div>
+        <div class="modal__lgpd__cookies__body">
+          <div id="modalLgpdCookiesConfig">
+            <p class="info">Escolha quais dados podem ser coletados e compartilhados a partir da sua navegação.
+              O consentimento pode ser atualizado a qualquer momento.</p>
+
+            <div class="modalLgpdCookiesConfigText">
+              <p class="title">Necessário</p>
+              <div class="modal__lgpd__cookies__text__div">
+                <p class="text">
+                  Cookies essenciais para viabilizar funcionalidades básicas do site, garantir a segurança
+                  e prevenir fraudes. Não é possível desabilitá-los.
+                </p>
+                <button type="button" id="modalLgpdCheckboxNecessary" class="checkboxModalLgpdCookies on" role="switch"
+                  aria-checked="true" aria-disabled="true" data-locked="true"
+                  aria-label="Cookies necessários habilitados" data-gtag-event="lgpd-toggle-necessario"
+                  data-gtag-category="Cookies" data-gtag-label="necessario"></button>
+              </div>
+            </div>
+
+            <div class="modalLgpdCookiesConfigText">
+              <p class="title">Envio para CRM e ERP</p>
+              <div class="modal__lgpd__cookies__text__div">
+                <p class="text">
+                  Todas as informações fornecidas nos formulários são encaminhadas de forma segura para
+                  nossos sistemas CRM e ERP com criptografia, controle de acesso e trilhas de auditoria.
+                  Este compartilhamento é obrigatório para atender às solicitações dos usuários.
+                </p>
+                <button type="button" id="modalLgpdCheckboxCrmErp" class="checkboxModalLgpdCookies on" role="switch"
+                  aria-checked="true" aria-disabled="true" data-locked="true"
+                  aria-label="Envio obrigatório para CRM e ERP" data-gtag-event="lgpd-toggle-crm-erp"
+                  data-gtag-category="Cookies" data-gtag-label="crm_erp"></button>
+              </div>
+            </div>
+
+            <div class="modalLgpdCookiesConfigText">
+              <p class="title">Funcional</p>
+              <div class="modal__lgpd__cookies__text__div">
+                <p class="text">
+                  Permitem lembrar preferências e melhorar recursos personalizados, como salvar
+                  configurações e manter itens no carrinho.
+                </p>
+                <button type="button" id="modalLgpdCheckboxFunctional" class="checkboxModalLgpdCookies" role="switch"
+                  aria-checked="false" aria-label="Alternar cookies funcionais" data-gtag-event="lgpd-toggle-funcional"
+                  data-gtag-category="Cookies" data-gtag-label="funcional"></button>
+              </div>
+            </div>
+
+            <div class="modalLgpdCookiesConfigText">
+              <p class="title">Desempenho e Analytics</p>
+              <div class="modal__lgpd__cookies__text__div">
+                <p class="text">
+                  Coletam dados agregados para medir o uso do site, analisar falhas e gerar relatórios
+                  estatísticos (por exemplo, Google Analytics). As informações são utilizadas apenas para
+                  melhoria contínua.
+                </p>
+                <button type="button" id="modalLgpdCheckboxPerformance" class="checkboxModalLgpdCookies" role="switch"
+                  aria-checked="false" aria-label="Alternar cookies de desempenho e analytics"
+                  data-gtag-event="lgpd-toggle-desempenho" data-gtag-category="Cookies"
+                  data-gtag-label="desempenho_analytics"></button>
+              </div>
+            </div>
+
+            <div class="modalLgpdCookiesConfigText">
+              <p class="title">Treinamento de IA</p>
+              <div class="modal__lgpd__cookies__text__div">
+                <p class="text">
+                  Permite usar dados de uso do site para treinar e melhorar sistemas de inteligência artificial,
+                  aprimorando recomendações e suporte.
+                </p>
+                <button type="button" id="modalLgpdCheckboxAITraining" class="checkboxModalLgpdCookies on" role="switch"
+                  aria-checked="true" aria-label="Alternar consentimento de treinamento de IA"
+                  data-gtag-event="lgpd-toggle-treinamento-ia" data-gtag-category="Cookies"
+                  data-gtag-label="treinamento_ia"></button>
+              </div>
+            </div>
+
+            <div class="modalLgpdCookiesConfigText">
+              <p class="title">Marketing e Publicidade</p>
+              <div class="modal__lgpd__cookies__text__div">
+                <p class="text">
+                  Utilizados para personalizar campanhas, remarketing e medir a efetividade das
+                  comunicações. Compartilhamos dados apenas com parceiros certificados.
+                </p>
+                <button type="button" id="modalLgpdCheckboxAdvertising" class="checkboxModalLgpdCookies" role="switch"
+                  aria-checked="false" aria-label="Alternar cookies de marketing e publicidade"
+                  data-gtag-event="lgpd-toggle-marketing" data-gtag-category="Cookies"
+                  data-gtag-label="marketing_publicidade"></button>
+              </div>
+            </div>
+          </div>
+          <div id="modalLgpdCookiesCookie">
+            <div class="modal__lgpd__cookies__tab__text">
+              <h5>Como utilizamos os dados</h5>
+              <div class="item">
+                <p class="title"><strong>Necessário e CRM/ERP</strong></p>
+                <p>
+                  Responsáveis pela autenticação, segurança das sessões e pela transmissão segura das
+                  informações prestadas para o CRM e o ERP.
+                </p>
+              </div>
+              <div class="item">
+                <p class="title"><strong>Funcional</strong></p>
+                <p>
+                  Mantêm preferências, simplificam o preenchimento de formulários e oferecem experiências
+                  personalizadas sem compartilhar dados com terceiros.
+                </p>
+              </div>
+              <div class="item">
+                <p class="title"><strong>Desempenho e Analytics</strong></p>
+                <p>
+                  Medem acessos, páginas visitadas e eventos de navegação de maneira agregada e
+                  anonimizada para evolução do produto digital.
+                </p>
+              </div>
+              <div class="item">
+                <p class="title"><strong>Treinamento de IA</strong></p>
+                <p>
+                  Usamos informações do carrinho e da sua navegação para aprimorar sistemas de inteligência artificial,
+                  melhorar sugestões e personalizar a experiência de atendimento e recomendações.
+                </p>
+              </div>
+              <div class="item">
+                <p class="title"><strong>Marketing e Publicidade</strong></p>
+                <p>
+                  Apoiam campanhas e comunicações direcionadas. São enviados apenas se você optar pelo
+                  compartilhamento com plataformas de mídia.
+                </p>
+              </div>
+            </div>
+          </div>
+          <div id="modalLgpdCookiesPC">
+
+          </div>
+        </div>
+
+        <div class="modal__lgpd__cookies__button__footer">
+          <button id="saveAllModalLgpdCookies" class="btn btn__lgpd__cookie btn__lgpd__cookie50"
+            aria-label="Aceitar Todos" data-gtag-event="lgpd-aceitar-todos" data-gtag-category="Cookies"
+            data-gtag-label="modal">Aceitar Todos</button>
+          <button id="saveConfigModalLgpdCookies" class="btn__lgpd__cookie btn__lgpd__cookie50"
+            aria-label="Salvar configurações" data-gtag-event="lgpd-salvar-config" data-gtag-category="Cookies"
+            data-gtag-label="modal">Salvar Configurações</button>
+        </div>
+
+      </div>
+    </section>
+  </div>
+  <script id="lgpd-inline-consent-script" type="text/javascript">
+    LGPDINJECT = {
+      onReady: function () {
+        LGPDINJECT.includeModalEvents();
+        LGPDINJECT.includeEvents();
+        LGPDINJECT.includeScripts();
+      },
+      includeModalEvents: function () {
+        var open = document.getElementById('openModalLgpdCookies');
+        var openShield = document.getElementById('openModalLgpdShield');
+        var close = document.getElementById('modalLgpdCookiesFechar');
+        var fade = document.getElementById('modalLgpdCookies');
+        var managePath = '/Cookies';
+        var defaultPath = '/';
+        var origin = window.location.origin || (window.location.protocol + '//' + window.location.host);
+        var previousUrl = window.location.pathname === managePath
+          ? defaultPath
+          : (window.location.pathname + window.location.search);
+        var shouldRedirectAfterClose = window.location.pathname === managePath;
+
+        if (!previousUrl || previousUrl === managePath) {
+          previousUrl = defaultPath;
+        }
+
+        function changePath(path) {
+          if (!path) {
+            path = defaultPath;
+          }
+
+          if (path.indexOf('/') !== 0 && path.indexOf('http') !== 0) {
+            path = '/' + path;
+          }
+
+          var newUrl = path;
+          if (newUrl.indexOf('http') !== 0) {
+            newUrl = origin + newUrl;
+          }
+
+          try {
+            if (window.history && typeof window.history.replaceState === 'function') {
+              window.history.replaceState(null, '', newUrl);
+            }
+          } catch (error) {
+            /* ignore errors to avoid breaking modal */
+          }
+        }
+
+        function openModal(event) {
+          var evt = event && event.type ? event : null;
+
+          if (evt && typeof evt.preventDefault === 'function') {
+            evt.preventDefault();
+          }
+
+          if (window.location.pathname !== managePath) {
+            previousUrl = window.location.pathname + window.location.search;
+            if (!previousUrl || previousUrl === managePath) {
+              previousUrl = defaultPath;
+            }
+          }
+
+          if (fade) {
+            fade.style.display = 'flex';
+          }
+
+          LGPDINJECT.setBodyScrollLocked(true);
+
+          return false;
+        }
+
+        function closeModal() {
+          if (fade) {
+            fade.style.display = 'none';
+          }
+
+          LGPDINJECT.setBodyScrollLocked(false);
+
+          var redirectTarget = previousUrl || defaultPath;
+
+          changePath(previousUrl);
+
+          if (shouldRedirectAfterClose) {
+            try {
+              window.location.assign(redirectTarget);
+            } catch (error) {
+              window.location.href = redirectTarget;
+            }
+          }
+        }
+        function normalizeManagePath(path) {
+          var value = (path || '').trim();
+          if (!value) {
+            return '/';
+          }
+          if (value.length > 1 && value.charAt(value.length - 1) === '/') {
+            value = value.replace(/\/+$/, '');
+          }
+          return value || '/';
+        }
+
+        var normalizedManagePath = normalizeManagePath(managePath);
+
+        document.addEventListener('click', function (evt) {
+          if (!evt || evt.defaultPrevented) {
+            return;
+          }
+
+          if (evt.button !== 0) {
+            return;
+          }
+
+          if (evt.metaKey || evt.ctrlKey || evt.shiftKey || evt.altKey) {
+            return;
+          }
+
+          var target = evt.target;
+          if (!target || typeof target.closest !== 'function') {
+            return;
+          }
+
+          var anchor = target.closest('a[href]');
+          if (!anchor) {
+            return;
+          }
+
+          if (anchor.getAttribute('data-lgpd-allow-navigation') === 'true') {
+            return;
+          }
+
+          if (anchor.target && anchor.target !== '' && anchor.target.toLowerCase() !== '_self') {
+            return;
+          }
+
+          var href = anchor.getAttribute('href');
+          if (!href || href === '#') {
+            return;
+          }
+
+          var url;
+          try {
+            url = new URL(href, origin);
+          } catch (error) {
+            return;
+          }
+
+          if (url.origin !== origin) {
+            return;
+          }
+
+          var normalizedPath = normalizeManagePath(url.pathname);
+          if (normalizedPath !== normalizedManagePath) {
+            return;
+          }
+
+          evt.preventDefault();
+          openModal(evt);
+        }, true);
+
+
+        LGPDINJECT.closeModalLgpdCookies = closeModal;
+
+        var manageBanner = document.getElementById('lgpdManageLinkBanner');
+
+        function syncManageBannerVisibilityState() {
+          if (!manageBanner) {
+            return;
+          }
+
+          manageBanner.removeAttribute('hidden');
+
+          var isVisible = manageBanner.classList && manageBanner.classList.contains('is-visible');
+          manageBanner.setAttribute('aria-hidden', isVisible ? 'false' : 'true');
+        }
+
+        syncManageBannerVisibilityState();
+
+        if (typeof MutationObserver === 'function' && manageBanner) {
+          var manageBannerObserver = new MutationObserver(function (records) {
+            var shouldSync = records.some(function (mutation) {
+              return mutation.type === 'attributes'
+                && mutation.target === manageBanner
+                && (mutation.attributeName === 'class' || mutation.attributeName === 'hidden');
+            });
+
+            if (shouldSync) {
+              syncManageBannerVisibilityState();
+            }
+          });
+
+          manageBannerObserver.observe(manageBanner, { attributes: true, attributeFilter: ['class', 'hidden'] });
+        }
+
+        if (open && fade) {
+          open.onclick = openModal;
+        }
+
+        if (openShield && fade) {
+          openShield.onclick = openModal;
+        }
+
+        if (close && fade) {
+          close.onclick = closeModal;
+        }
+
+        function runAfterInitialLoaderHidden(callback) {
+          if (typeof callback !== 'function') {
+            return;
+          }
+
+          var root = document.documentElement;
+          var loaderAlreadyHidden = !root
+            || (root.getAttribute('data-loading') !== 'true'
+              && !root.classList.contains('is-initial-loading'));
+
+          if (loaderAlreadyHidden) {
+            callback();
+            return;
+          }
+
+          var once = function () {
+            window.removeEventListener('initial-loader-hidden', once);
+            callback();
+          };
+
+          window.addEventListener('initial-loader-hidden', once, { once: true });
+        }
+
+        if (window.location.pathname === managePath) {
+          runAfterInitialLoaderHidden(openModal);
+        }
+
+        ['modalLgpdCheckboxPerformance', 'modalLgpdCheckboxFunctional', 'modalLgpdCheckboxAdvertising', 'modalLgpdCheckboxAITraining'].forEach(function (id) {
+          var el = document.getElementById(id);
+          if (el) {
+            el.addEventListener('click', function () {
+              LGPDINJECT.modalLgpdCookiesConfigBtnCheckbox(el);
+            });
+          }
+        });
+
+        var tab1 = document.getElementById('modalLgpdCookiesConfig');
+        var tab2 = document.getElementById('modalLgpdCookiesCookie');
+        var tab3 = document.getElementById('modalLgpdCookiesPC');
+
+        var tabButton1 = document.getElementById("modalLgpdCookiesButtonTab1");
+        var tabButton2 = document.getElementById("modalLgpdCookiesButtonTab2");
+        var tabButton3 = document.getElementById("modalLgpdCookiesButtonTab3");
+
+        if (tabButton1 && tabButton2 && tabButton3) {
+          tabButton1.onclick = function () {
+            tabButton1.classList.add('active');
+            tabButton2.classList.remove('active');
+            tabButton3.classList.remove('active');
+            if (tab1) tab1.style.display = "block";
+            if (tab3) tab3.style.display = "none";
+            if (tab2) tab2.style.display = "none";
+          };
+
+          tabButton2.onclick = function () {
+            tabButton1.classList.remove('active');
+            tabButton2.classList.add('active');
+            tabButton3.classList.remove('active');
+            if (tab1) tab1.style.display = "none";
+            if (tab3) tab3.style.display = "none";
+            if (tab2) tab2.style.display = "block";
+          };
+
+          tabButton3.onclick = function () {
+            tabButton1.classList.remove('active');
+            tabButton2.classList.remove('active');
+            tabButton3.classList.add('active');
+            if (tab1) tab1.style.display = "none";
+            if (tab2) tab2.style.display = "none";
+            if (tab3) tab3.style.display = "block";
+          };
+        }
+      },
+      setBodyScrollLocked: function (shouldLock) {
+        var body = document.body;
+        if (!body) {
+          return;
+        }
+
+        var docEl = document.documentElement;
+
+        if (shouldLock) {
+          body.classList.add('lgpd-modal-open');
+          body.setAttribute('data-lgpd-modal-scroll-locked', 'true');
+          if (docEl) {
+            docEl.classList.add('lgpd-modal-open');
+            docEl.setAttribute('data-lgpd-modal-scroll-locked', 'true');
+          }
+        } else {
+          body.classList.remove('lgpd-modal-open');
+          body.removeAttribute('data-lgpd-modal-scroll-locked');
+          if (docEl) {
+            docEl.classList.remove('lgpd-modal-open');
+            docEl.removeAttribute('data-lgpd-modal-scroll-locked');
+          }
+        }
+      },
+
+      includeEvents: function () {
+        var saveAllFooter = document.getElementById("saveAllFooterLgpdCookies");
+        var saveAllModal = document.getElementById("saveAllModalLgpdCookies");
+        var saveConfig = document.getElementById("saveConfigModalLgpdCookies");
+
+        if (saveAllFooter) {
+          saveAllFooter.onclick = function () {
+            if (typeof LGPDINJECT.closeModalLgpdCookies === 'function') {
+              LGPDINJECT.closeModalLgpdCookies();
+            }
+            LGPDCOOKIES.saveConsent(true);
+          };
+        }
+        if (saveAllModal) {
+          saveAllModal.onclick = function () {
+            if (typeof LGPDINJECT.closeModalLgpdCookies === 'function') {
+              LGPDINJECT.closeModalLgpdCookies();
+            }
+            LGPDCOOKIES.saveConsent(true);
+          };
+        }
+
+        if (saveConfig) {
+          saveConfig.onclick = function () {
+            if (typeof LGPDINJECT.closeModalLgpdCookies === 'function') {
+              LGPDINJECT.closeModalLgpdCookies();
+            }
+            LGPDCOOKIES.saveConsent(false);
+          };
+        }
+      },
+      modalLgpdCookiesConfigBtnCheckbox: function (element) {
+        if (!element || element.getAttribute('aria-disabled') === 'true' || element.dataset.locked === 'true') {
+          return;
+        }
+
+        if (element.classList.contains('on')) {
+          element.classList.remove('on');
+          element.setAttribute('aria-checked', 'false');
+        } else {
+          element.classList.add('on');
+          element.setAttribute('aria-checked', 'true');
+        }
+      },
+      includeScripts: function () {
+        var d = document;
+        var selectors = [
+          'script[data-lgpd-category]',
+          'script[data-cookie-category]',
+          'script[data-consent-category]'
+        ].join(',');
+        var nodes = Array.prototype.slice.call(d.querySelectorAll(selectors));
+        if (!nodes.length) {
+          return;
+        }
+
+        var consentState = LGPDCOOKIES.getConsentWithDefaults ? LGPDCOOKIES.getConsentWithDefaults() : {
+          'Necessary': true,
+          'Functional': true,
+          'Advertising': true,
+          'Performance': true
+        };
+
+        var categoryMap = {
+          'necessary': 'Necessary',
+          'necessario': 'Necessary',
+          'necessaria': 'Necessary',
+          'functional': 'Functional',
+          'funcional': 'Functional',
+          'advertising': 'Advertising',
+          'marketing': 'Advertising',
+          'publicidade': 'Advertising',
+          'ads': 'Advertising',
+          'performance': 'Performance',
+          'desempenho': 'Performance',
+          'analytics': 'Performance',
+          'analitico': 'Performance'
+        };
+
+        function normalizeCategory(category) {
+          var value = category || '';
+          if (typeof value.normalize === 'function') {
+            value = value.normalize('NFD').replace(/[\u0300-\u036f]/g, '');
+          }
+          return value.trim().toLowerCase();
+        }
+
+        function hasConsent(categories) {
+          if (!categories.length) {
+            return true;
+          }
+
+          return categories.every(function (category) {
+            var normalized = normalizeCategory(category);
+            var mapped = categoryMap[normalized] || categoryMap[normalized.replace(/\s+/g, '')];
+            if (!mapped) {
+              mapped = normalized.charAt(0).toUpperCase() + normalized.slice(1);
+            }
+            if (mapped === 'Necessary') {
+              return true;
+            }
+            return !!consentState[mapped];
+          });
+        }
+
+        var booleanAttributes = ['async', 'defer', 'nomodule'];
+
+        nodes.forEach(function (script) {
+          if (script.dataset && script.dataset.lgpdProcessed === '1') {
+            return;
+          }
+
+          var rawCategories = script.getAttribute('data-lgpd-category') ||
+            script.getAttribute('data-cookie-category') ||
+            script.getAttribute('data-consent-category') || '';
+
+          var categories = rawCategories.split(/[\s,;|]+/).filter(function (c) { return c; });
+          if (!hasConsent(categories)) {
+            return;
+          }
+
+          var attributes = {};
+
+          Array.prototype.slice.call(script.attributes).forEach(function (attr) {
+            if (attr.name.indexOf('data-') !== 0) {
+              return;
+            }
+
+            var rawName = attr.name.slice(5).toLowerCase();
+            if (!rawName || /^(lgpd-category|cookie-category|consent-category|target|callback|head)$/.test(rawName)) {
+              return;
+            }
+
+            var name = rawName.replace(/-([a-z])/g, function (_, char) { return char; });
+
+            if (booleanAttributes.indexOf(name) > -1) {
+              if (attr.value === '' || attr.value === 'true' || attr.value === '1') {
+                attributes[name] = '';
+              }
+              return;
+            }
+
+            if (name === 'type' && attr.value === 'text/plain') {
+              return;
+            }
+
+            attributes[name] = attr.value;
+          });
+
+          ['src', 'type', 'async', 'defer', 'crossorigin', 'integrity', 'referrerpolicy', 'nomodule', 'id', 'charset', 'nonce']
+            .forEach(function (name) {
+              if (attributes[name] != null) {
+                return;
+              }
+
+              var original = script.getAttribute(name);
+              if (original == null) {
+                return;
+              }
+
+              if (booleanAttributes.indexOf(name) > -1) {
+                attributes[name] = '';
+                return;
+              }
+
+              if (name === 'type' && original === 'text/plain') {
+                return;
+              }
+
+              attributes[name] = original;
+            });
+
+          var callbackName = script.getAttribute('data-callback');
+          var callback = null;
+          if (callbackName && typeof window[callbackName] === 'function') {
+            callback = window[callbackName];
+          }
+
+          var target = (script.getAttribute('data-target') || '').toLowerCase();
+          var headAttribute = script.getAttribute('data-head');
+          var head = target ? target === 'head' : (script.parentNode && script.parentNode.tagName === 'HEAD');
+          if (!target && headAttribute != null) {
+            head = headAttribute === '' || headAttribute === 'true' || headAttribute === '1';
+          }
+
+          LGPDINJECT.addScript(head, attributes, script.textContent || '', callback);
+
+          if (script.dataset) {
+            script.dataset.lgpdProcessed = '1';
+          }
+
+          if (script.parentNode) {
+            script.parentNode.removeChild(script);
+          }
+        });
+      },
+      addScript: function (head, attributes, text, callback) {
+        var s = document.createElement('script');
+        for (var attr in attributes) {
+          if (attributes[attr] != null) {
+            s.setAttribute(attr, attributes[attr]);
+          }
+        }
+
+        s.innerHTML = text;
+        s.onload = callback;
+        if (head) {
+          document.head.appendChild(s);
+        } else {
+          document.body.appendChild(s);
+        }
+      },
+    };
+
+    (function () {
+      LGPDINJECT.onReady();
+    })();
+  </script>
+  <template id="lgpd-consent-template" hidden aria-hidden="true">
+    <!-- Template reservado para fallback remoto -->
+  </template>
+
+
+  <script defer data-versioned-src="/Acessibilidade/LayoutAcessibilidade.js"></script>
+  <script defer data-versioned-src="/Layout/Layout.min.js"></script>
+
+  <script>
+    (function enableEmbedMode() {
+      var params = new URLSearchParams(window.location.search || '');
+      var embedParam = (params.get('embed') || '').toLowerCase();
+      var isEmbed = embedParam === '1' || embedParam === 'true' || embedParam === 'yes';
+      if (!isEmbed) {
+        return;
+      }
+
+      var applyEmbedMode = function () {
+        document.documentElement.classList.add('is-embed');
+        if (document.body) {
+          document.body.classList.add('is-embed');
+        }
+
+        var hideCloseParam = (params.get('hideEmbedClose') || '').toLowerCase();
+        var hideEmbedClose = hideCloseParam === '1' || hideCloseParam === 'true' || hideCloseParam === 'yes';
+        if (!hideEmbedClose && !document.querySelector('.embed-close-button')) {
+          var closeButton = document.createElement('button');
+          closeButton.type = 'button';
+          closeButton.className = 'embed-close-button';
+          closeButton.setAttribute('aria-label', 'Fechar');
+          closeButton.textContent = '×';
+          closeButton.addEventListener('click', function () {
+            if (window.parent && window.parent !== window) {
+              window.parent.postMessage({ type: 'embed-close', source: 'configurador' }, '*');
+            } else {
+              window.close();
+            }
+          });
+          if (document.body) {
+            document.body.appendChild(closeButton);
+          }
+        }
+
+        var originalOpen = window.open;
+        if (typeof originalOpen === 'function' && !window.__embedOpenPatched) {
+          window.__embedOpenPatched = true;
+          window.open = function (url, target, features) {
+            var normalizedTarget = (target || '_self').toLowerCase();
+            if (normalizedTarget === '_top' || normalizedTarget === '_parent') {
+              window.location.href = url;
+              return window;
+            }
+            return originalOpen.call(window, url, target, features);
+          };
+        }
+
+        document.addEventListener('click', function (event) {
+          var anchor = event.target.closest ? event.target.closest('a') : null;
+          if (!anchor) {
+            return;
+          }
+          var target = (anchor.getAttribute('target') || '').toLowerCase();
+          if (target === '_top' || target === '_parent') {
+            anchor.setAttribute('target', '_self');
+          }
+        });
+
+        document.addEventListener('submit', function (event) {
+          var form = event.target;
+          if (!form || !form.getAttribute) {
+            return;
+          }
+          var formTarget = (form.getAttribute('target') || '').toLowerCase();
+          if (formTarget === '_top' || formTarget === '_parent') {
+            form.setAttribute('target', '_self');
+          }
+        });
+      };
+
+      if (document.readyState === 'loading') {
+        document.addEventListener('DOMContentLoaded', applyEmbedMode);
+      } else {
+        applyEmbedMode();
+      }
+    })();
+  </script>
+
+</body>
+
+</html>

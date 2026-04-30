@@ -1,0 +1,173 @@
+Endpoint: POST /api/admin/customer
+
+Header: Authorization = Auth+ {token}
+Header: X-Session-Id = {sessionId}
+Header: Content-Type = application/json
+
+camponovo (boolean) – indica se é um novo cadastro/campo novo
+id (string, opcional) – código do cliente
+type (number) – tipo da pessoa (0-jurídica, 1-física, 2-estrangeiro)
+typeDescription (string) – descrição do tipo da pessoa
+legalId (string) – CNPJ ou CPF formatado
+name (string) – nome do cliente
+stateId (string) – inscrição estadual
+fantasyName (string) – nome fantasia
+site (string) – site
+telephone (string) – telefone
+cellphone (string) – celular
+email (string) – e-mail
+notes (string) – observações
+
+financial (object) – detalhes financeiros
+financial.partialBilling (boolean) – faturamento parcial
+financial.earlyBilling (boolean) – faturamento antecipado
+financial.fractionalDelivery (boolean) – entrega fracionada
+financial.earlyDelivery (boolean) – entrega antecipada
+financial.vendor (boolean) – indica se é vendor
+financial.accountingAccount (number) – conta contábil
+financial.graceDays (number) – dias de carência
+financial.billingCustomer (string) – código do cliente cobrança
+financial.usedCredit (string) – crédito utilizado
+financial.fullCredit (string|null) – total de crédito
+financial.availableCredit (string|null) – crédito disponível
+financial.lastPurchase (string) – última compra
+financial.biggestPurchase (string) – maior compra
+financial.averageTerm (string) – prazo médio
+financial.overdueBonds (string) – títulos atrasados
+
+locationAddress (object) – endereço
+locationAddress.zipCode (string) – CEP
+locationAddress.streetName (string) – endereço/logradouro
+locationAddress.streetNumber (string) – número
+locationAddress.complement (string) – complemento
+locationAddress.district (string) – bairro
+locationAddress.referencePoint (string) – ponto de referência
+locationAddress.country (string) – código do país
+locationAddress.state (string) – código do estado
+locationAddress.city (string) – código da cidade
+
+contacts (array) – lista de contatos
+contacts[].seq (number) – sequência do contato
+contacts[].name (string) – nome do contato
+contacts[].telephone (string) – telefone do contato
+contacts[].cellphone (string) – celular do contato
+contacts[].email (string) – e-mail do contato
+contacts[].notes (string) – observações do contato
+contacts[].occupation (string) – código da função
+contacts[].occupationDescription (string) – descrição da função
+
+categoryCode (string) – código da categoria
+representativeCode (string) – código do representante
+conveyorCode (string) – código do transportador
+paymentConditionCode (string) – código da condição de pagamento
+carrierCode (string) – código do portador
+fiscalNatureCode (string) – código da natureza fiscal
+
+freightType (number) – tipo de frete (0-CIF, 1-FOB, 2-Terceiros, 3-Sem Frete, 4-Não Informado)
+nonContributor (boolean) – consumidor final / não contribuinte
+taxRegime (number) – regime tributário (0-Simples Nacional, 1-SN Excesso Sublimite, 2-Lucro Presumido, 3-Lucro Real, 4-MEI)
+suframa (string) – código SUFRAMA
+fiscalText (string) – texto fiscal
+
+attribute1 (string) – atributo 1 da pessoa
+attribute2 (string) – atributo 2 da pessoa
+attribute3 (string) – atributo 3 da pessoa
+attribute4 (string) – atributo 4 da pessoa
+attribute5 (string) – atributo 5 da pessoa
+attribute6 (string) – atributo 6 da pessoa
+attribute7 (string) – atributo 7 da pessoa
+attribute8 (string) – atributo 8 da pessoa
+
+Response: JSON com situação da resposta e código do cliente criado
+
+Exemplo: 
+POST /api/admin/customer HTTP/1.1
+Host: 
+Authorization: Auth+ AEA0F9C31F49C9E9EF770F7819F8B3E81F49C9E9E479E42B1AD418334CF486A3
+X-Session-Id: kot1krepe2clq1qnu3pqtvhe
+Content-Length: 2435
+
+{
+    "camponovo": false,
+    "id": "", 
+    "type": 0,
+    "typeDescription": "",
+    "legalId": "31143718000160",
+    "name": "EDNEY SAMPAIO",
+    "stateId": "ISENTO",
+    "fantasyName": "EDNEY SAMPAIO EMPRESA",
+    "site": "edney@edney.com.br",
+    "telephone": "5433333333",
+    "cellphone": "54999999999",
+    "email": "ed@gmail.com",
+    "notes": "CLIENTE EDNEY",
+    "financial": {
+        "partialBilling": true,
+        "earlyBilling": true,
+        "fractionalDelivery": true,
+        "earlyDelivery": true,
+        "vendor": false,
+        "accountingAccount": 1,
+        "graceDays": 0,
+        "billingCustomer": "",
+        "usedCredit": "R$ 0,00",
+        "fullCredit": null,
+        "availableCredit": null,
+        "lastPurchase": "R$ 455,40 - 08/06/2022",
+        "biggestPurchase": "R$ 455,40 - 08/06/2022",
+        "averageTerm": "21,0 dias",
+        "overdueBonds": "Nenhum"
+    },
+    "locationAddress": {
+        "zipCode": "95097751",
+        "streetName": "RUA FREZZA",
+        "streetNumber": "111",
+        "complement": "AP 301",
+        "district": "SÃO LEOPOLDO",
+        "referencePoint": "PRÓX. AO POSTO",
+        "country": "1058",
+        "state": "43",
+        "city": "4305108"
+    },
+    "contacts": [
+        {
+            "seq": 1,
+            "name": "CONTATO 1",
+            "telephone": "5433333333",
+            "cellphone": "54999999999",
+            "email": "contato1@gmail.com",
+            "notes": "CONTATO 1",
+            "occupation": "7",
+            "occupationDescription": "CADASTRO"
+        },
+        {
+            "seq": 2,
+            "name": "CONTATO 2",
+            "telephone": "5433333333",
+            "cellphone": "54999999999",
+            "email": "contato2@gmail.com",
+            "notes": "CONTATO 2",
+            "occupation": "7",
+            "occupationDescription": "CADASTRO"
+        }
+    ],
+    "categoryCode": "01",
+    "representativeCode": "1926",
+    "conveyorCode": "4692",
+    "paymentConditionCode": "1",
+    "carrierCode": "041",
+    "fiscalNatureCode": "5101",
+    "freightType": 2,
+    "nonContributor": false,
+    "taxRegime": 1,
+    "suframa": "123456",
+    "fiscalText": "TEXTO FISCAL",
+    "attribute1": "",
+    "attribute2": "",
+    "attribute3": "",
+    "attribute4": "",
+    "attribute5": "",
+    "attribute6": "",
+    "attribute7": "",
+    "attribute8": ""
+}

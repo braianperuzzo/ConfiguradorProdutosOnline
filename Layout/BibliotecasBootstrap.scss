@@ -1,0 +1,61 @@
+// Bootstrap bundle with only the modules currently used across the site.
+// Add new imports here if additional Bootstrap components are adopted.
+@import "bootstrap/scss/functions";
+@import "bootstrap/scss/variables";
+@import "bootstrap/scss/variables-dark";
+@import "bootstrap/scss/maps";
+@import "bootstrap/scss/mixins";
+@import "bootstrap/scss/utilities";
+
+// Core styles
+@import "bootstrap/scss/root";
+@import "bootstrap/scss/reboot";
+@import "bootstrap/scss/type";
+@import "bootstrap/scss/images";
+@import "bootstrap/scss/containers";
+@import "bootstrap/scss/grid";
+
+// Components in use
+@import "bootstrap/scss/forms";
+@import "bootstrap/scss/buttons";
+@import "bootstrap/scss/close";
+@import "bootstrap/scss/nav";
+@import "bootstrap/scss/navbar";
+@import "bootstrap/scss/dropdown";
+
+// Restrict generated utilities to only the variants used in the project
+$utilities: map-get-multiple($utilities,
+        ("display",
+            "flex",
+            "flex-direction",
+            "flex-grow",
+            "flex-shrink",
+            "flex-wrap",
+            "justify-content",
+            "align-items",
+            "order",
+            "gap",
+            "position",
+            "width",
+            "height",
+            "margin",
+            "padding",
+            "text-align",
+            "text-decoration",
+            "text-transform",
+            "font-weight",
+            "text-color",
+            "background-color",
+            "border",
+            "border-color",
+            "border-radius",
+            "border-top",
+            "border-bottom",
+            "border-start",
+            "border-end",
+            "shadow"
+        ));
+
+// Helpers & utilities API
+@import "bootstrap/scss/helpers";
+@import "bootstrap/scss/utilities/api";

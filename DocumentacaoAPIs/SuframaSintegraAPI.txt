@@ -1,0 +1,71 @@
+GET
+/consultas/v2/suframa/{cnpj}
+curl -G https://api.sintegrapi.com.br/consultas/v2/suframa/04301024000131 \
+  -H "x-api-key: {apiKey}" \
+  -H "cache: 25"
+
+     {
+       "atualizado_em": "2025-11-02T21:39:23.431Z",
+       "cnpj": "04301024000131",
+       "inscricao": "200100408",
+       "nome": "CALOI NORTE S/A",
+       "desde": "2018-02-19",
+       "matriz": true,
+       "aprovado": true,
+       "data_aprovacao": "2017-08-10",
+       "status": {
+           "codigo": 1,
+           "descricao": "Ativa"
+       },
+       "natureza_juridica": {
+           "codigo": 2054,
+           "descricao": "Sociedade Anônima Fechada"
+       },
+       "endereco": {
+           "codigo_municipio": 1302603,
+           "logradouro": "Avenida Abiurana",
+           "numero": "150",
+           "bairro": "Distrito Industrial I",
+           "cidade": "Manaus",
+           "estado": "AM",
+           "cep": "69075010",
+           "pais": {
+               "nome": "Brasil"
+           }
+       },
+       "telefones": [
+           {
+               "ddd": "92",
+               "numero": "36171104"
+           }
+       ],
+       "emails": [
+           {
+               "endereco": "anogueira@caloi.com",
+               "dominio": "caloi.com"
+           }
+       ],
+       "atividade_principal": {
+           "codigo": 3092000,
+           "atividade_exercida": true,
+           "descricao": "Fabricação de bicicletas e triciclos não-motorizados, peças e acessórios"
+       },
+       "atividades_secundarias": [],
+       "incentivos": [
+           {
+               "fundamento_legal": "Decreto 7.212 de 2010 (Art. 81)",
+               "beneficio": "Isenção",
+               "finalidade": "Consumo Interno, Industrialização e Utilização",
+               "tributo": "IPI"
+           },
+           {
+               "fundamento_legal": "Convênio ICMS n° 65 de 1988",
+               "beneficio": "Isenção",
+               "finalidade": "Industrialização e Comercialização",
+               "tributo": "ICMS"
+           }
+       ],
+       "request_id": "d051632a-d86d-4beb-8bb9-45c476d93339",
+       "success": true,
+       "error": false
+   }
