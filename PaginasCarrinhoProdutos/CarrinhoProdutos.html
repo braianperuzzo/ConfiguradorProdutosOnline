@@ -1,0 +1,339 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+
+<head>
+    <meta charset="utf-8" />
+    <meta content="width=device-width, initial-scale=1.0, viewport-fit=cover" name="viewport" />
+
+    <script nonce="<?= htmlspecialchars(csp_nonce(), ENT_QUOTES, 'UTF-8'); ?>">
+        (function suppressExtensionMessagingNoise() {
+            if (typeof window === 'undefined' || typeof window.addEventListener !== 'function') {
+                return;
+            }
+
+            var KNOWN_ERROR_FRAGMENTS = [
+                'A listener indicated an asynchronous response by returning true, but the message channel closed before a response was received',
+                'The message port closed before a response was received',
+                'Could not establish connection. Receiving end does not exist',
+                'The deferred DOM Node could not be resolved to a valid node'
+            ];
+            var KNOWN_ERROR_MATCHER_PROPS = ['message', 'stack', 'reason', 'error', 'cause'];
+            var warningLogged = false;
+
+            function containsKnownFragment(value) {
+                if (!value) {
+                    return false;
+                }
+
+                function hasFragment(candidate) {
+                    if (typeof candidate !== 'string') {
+                        return false;
+                    }
+
+                    for (var i = 0; i < KNOWN_ERROR_FRAGMENTS.length; i += 1) {
+                        if (candidate.indexOf(KNOWN_ERROR_FRAGMENTS[i]) !== -1) {
+                            return true;
+                        }
+                    }
+
+                    return false;
+                }
+
+                if (hasFragment(value)) {
+                    return true;
+                }
+
+                for (var i = 0; i < KNOWN_ERROR_MATCHER_PROPS.length; i += 1) {
+                    var propName = KNOWN_ERROR_MATCHER_PROPS[i];
+                    var propValue = value && value[propName];
+                    if (hasFragment(propValue)) {
+                        return true;
+                    }
+                }
+
+                if (value && typeof value.toString === 'function' && value.toString !== Object.prototype.toString) {
+                    var asString = value.toString();
+                    if (hasFragment(asString)) {
+                        return true;
+                    }
+                }
+
+                return false;
+            }
+
+            function blockNoise(event) {
+                if (!event || typeof event.preventDefault !== 'function') {
+                    return false;
+                }
+
+                if (!warningLogged && typeof console !== 'undefined' && typeof console.warn === 'function') {
+                    console.warn('Ignorando erro de extensão do navegador relacionado a mensagens assíncronas.');
+                    warningLogged = true;
+                }
+
+                event.preventDefault();
+                if (typeof event.stopImmediatePropagation === 'function') {
+                    event.stopImmediatePropagation();
+                }
+
+                return true;
+            }
+
+            function shouldIgnoreConsoleMessage(args) {
+                if (!args || !args.length) {
+                    return false;
+                }
+
+                for (var i = 0; i < args.length; i += 1) {
+                    if (containsKnownFragment(args[i])) {
+                        return true;
+                    }
+                }
+
+                return false;
+            }
+
+            function wrapConsoleMethod(methodName) {
+                if (typeof console === 'undefined' || typeof console[methodName] !== 'function') {
+                    return;
+                }
+
+                var originalMethod = console[methodName];
+                console[methodName] = function () {
+                    if (shouldIgnoreConsoleMessage(arguments)) {
+                        if (!warningLogged && typeof console.warn === 'function') {
+                            console.warn('Ignorando erro de extensão do navegador relacionado a mensagens assíncronas.');
+                            warningLogged = true;
+                        }
+                        return;
+                    }
+
+                    return originalMethod.apply(console, arguments);
+                };
+            }
+
+            wrapConsoleMethod('error');
+
+            window.addEventListener('unhandledrejection', function (event) {
+                var reason = event && event.reason;
+
+                if (!containsKnownFragment(reason)) {
+                    return;
+                }
+
+                blockNoise(event);
+            }, true);
+
+            window.addEventListener('error', function (event) {
+                var message = event && event.message;
+                var error = event && event.error;
+
+                if (!containsKnownFragment(message) && !containsKnownFragment(error)) {
+                    return;
+                }
+
+                blockNoise(event);
+            });
+        })();
+    </script>
+
+    <script nonce="<?= htmlspecialchars(csp_nonce(), ENT_QUOTES, 'UTF-8'); ?>"
+        data-versioned-src="/PaginasCarregarPagina/CarregamentoInicial.min.js"></script>
+    <link href="/Imagens/Icone.ico" rel="shortcut icon" type="image/x-icon" />
+    <link href="/Imagens/Icone.ico" rel="icon" type="image/x-icon" />
+    <link rel="apple-touch-icon" href="/Imagens/LogotipoAplicativo192192.png">
+    <link rel="manifest" href="/Manifest.json">
+    <script nonce="<?= htmlspecialchars(csp_nonce(), ENT_QUOTES, 'UTF-8'); ?>">
+        window.APP_VERSION = 'versao.8.7.2';
+        window.__APP_VERSION_SOURCE__ = 'inline';
+    </script>
+    <script nonce="<?= htmlspecialchars(csp_nonce(), ENT_QUOTES, 'UTF-8'); ?>" src="/Versionamento/CarregarVersao.js"
+        defer></script>
+    <link rel="preconnect" href="https://cdn.jsdelivr.net">
+    <meta name="theme-color" content="#ec4115">
+    <meta name="color-scheme" content="light dark">
+    <meta name="mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <title>Carrinho de Produtos | Configurador de Produtos IBR</title>
+    <meta name="description" content="Execute ações em vários produtos simultaneamente." />
+    <meta property="og:title" content="Carrinho de Produtos - Redutores IBR" />
+    <meta property="og:description" content="Execute ações em vários produtos simultaneamente." />
+    <meta property="og:type" content="website" />
+    <meta name="robots" content="noindex, nofollow" />
+    <meta property="og:image" content="https://configurador.redutoresibr.com.br/Imagens/LogotipoAplicativo512512.png" />
+    <meta name="twitter:card" content="summary_large_image" />
+    <meta name="twitter:title" content="Carrinho de Produtos - Redutores IBR" />
+    <meta name="twitter:description" content="Execute ações em vários produtos simultaneamente." />
+    <meta name="twitter:image"
+        content="https://configurador.redutoresibr.com.br/Imagens/LogotipoAplicativo512512.png" />
+    <meta property="og:locale" content="pt_BR">
+    <meta property="og:site_name" content="Configurador de Produtos IBR">
+    <meta property="og:url" content="https://configurador.redutoresibr.com.br/CarrinhoProdutos" />
+    <meta name="twitter:url" content="https://configurador.redutoresibr.com.br/CarrinhoProdutos" />
+    <link rel="canonical" href="https://configurador.redutoresibr.com.br/CarrinhoProdutos">
+    <link rel="alternate" href="https://configurador.redutoresibr.com.br/CarrinhoProdutos" hreflang="pt-BR">
+    <link rel="alternate" href="https://configurador.redutoresibr.com.br/CarrinhoProdutos" hreflang="x-default">
+
+    <script nonce="<?= htmlspecialchars(csp_nonce(), ENT_QUOTES, 'UTF-8'); ?>">
+        (function preloadCarregarPagina() {
+            try {
+                var head = document.head || document.getElementsByTagName('head')[0];
+                if (!head || head.querySelector('link[data-preload-carregar-pagina]')) {
+                    return;
+                }
+                var supportCheck = document.createElement('link');
+                if (supportCheck.relList && typeof supportCheck.relList.supports === 'function' &&
+                    !supportCheck.relList.supports('preload')) {
+                    return;
+                }
+                var link = document.createElement('link');
+                link.rel = 'preload';
+                link.as = 'script';
+                link.setAttribute('data-preload-carregar-pagina', 'true');
+                var resolver = typeof buildVersionedAssetUrl === 'function'
+                    ? buildVersionedAssetUrl
+                    : function fallbackResolver(url) {
+                        if (typeof window !== 'undefined') {
+                            var version = window.APP_VERSION;
+                            if (typeof version === 'string') {
+                                version = version.trim();
+                            } else if (version != null) {
+                                version = String(version);
+                            }
+                            if (version) {
+                                var normalizedUrl = url;
+                                var hashIndex = normalizedUrl.indexOf('#');
+                                var hash = '';
+                                if (hashIndex >= 0) {
+                                    hash = normalizedUrl.slice(hashIndex);
+                                    normalizedUrl = normalizedUrl.slice(0, hashIndex);
+                                }
+                                var separator = normalizedUrl.indexOf('?') >= 0 ? '&' : '?';
+                                return normalizedUrl + separator + 'versao=' + encodeURIComponent(version) + hash;
+                            }
+                        }
+                        return url;
+                    };
+                link.href = resolver('/PaginasCarregarPagina/CarregarPagina.min.js');
+                head.appendChild(link);
+            } catch (error) {
+                console.warn('CarregarPagina preload setup failed.', error);
+            }
+        })();
+    </script>
+    <script nonce="<?= htmlspecialchars(csp_nonce(), ENT_QUOTES, 'UTF-8'); ?>"
+        data-versioned-src="/SEO/RegraLinksCanonicos.js" defer></script>
+    <script nonce="<?= htmlspecialchars(csp_nonce(), ENT_QUOTES, 'UTF-8'); ?>" type="application/ld+json">
+      {
+        "@context": "https://schema.org",
+        "@type": "WebPage",
+        "name": "Carrinho de Produtos - Redutores IBR",
+        "description": "Execute ações em vários produtos simultaneamente."
+      }
+    </script>
+    <style>
+        body {
+            margin: 0;
+            background: #fff;
+        }
+
+        @media (prefers-color-scheme: dark) {
+            body {
+                background: #121212;
+            }
+        }
+    </style>
+<?php require_once __DIR__ . '/../SEO/HiddenSeoText.php'; ?>
+</head>
+
+<body>
+  <main id="main-content">
+    <h1
+        style="position:absolute;width:1px;height:1px;padding:0;margin:-1px;overflow:hidden;clip:rect(0,0,0,0);white-space:nowrap;border:0;">
+        Carrinho de Produtos - Redutores IBR</h1>
+        <?php echo renderHiddenSeoText('Gestão de itens para orçamento e compartilhamento técnico no carrinho', [
+            'Esta página concentra os produtos selecionados durante a navegação no configurador para facilitar análise conjunta, comparação de especificações e preparação do orçamento final. O usuário pode revisar combinações de itens, validar escolhas e organizar o envio das informações comerciais para atendimento mais rápido.',
+            'O carrinho também apoia o fluxo de decisão entre engenharia, compras e manutenção ao reunir dados de aplicação em uma única etapa. Com essa visão consolidada, fica mais simples confirmar compatibilidade entre componentes e reduzir retrabalho na definição da solução desejada.',
+            'Depois da revisão, o próximo passo é compartilhar ou solicitar o contato da equipe técnica, garantindo continuidade no processo de cotação e registro do histórico de seleção.'
+        ]); ?>
+        <div id="pagina-completa"></div>
+  </main>
+    <script nonce="<?= htmlspecialchars(csp_nonce(), ENT_QUOTES, 'UTF-8'); ?>"
+        data-versioned-src="/PaginasCarregarPagina/CarregarPagina.min.js"></script>
+    <script nonce="<?= htmlspecialchars(csp_nonce(), ENT_QUOTES, 'UTF-8'); ?>">
+        window.keepLoading = true;
+        const LOADING_FAILSAFE_MS = 45000;
+        let loaderFailsafeTimer = window.setTimeout(() => {
+            if (!window.keepLoading) {
+                return;
+            }
+            console.warn('Carrinho: carregamento demorou mais do que o esperado, liberando tela.');
+            window.keepLoading = false;
+            if (typeof window.hideLoadingScreen === 'function') {
+                window.hideLoadingScreen();
+            }
+        }, LOADING_FAILSAFE_MS);
+
+        const limparFailsafeLoading = () => {
+            window.keepLoading = false;
+            if (!loaderFailsafeTimer) {
+                return;
+            }
+            window.clearTimeout(loaderFailsafeTimer);
+            loaderFailsafeTimer = null;
+        };
+
+        window.addEventListener('initial-loader-hidden', limparFailsafeLoading);
+        const exibirFalhaCarregarPagina = (erro) => {
+            try {
+                console.error('Carrinho: falha ao carregar a página do carrinho.', erro);
+            } catch { }
+            const container = document.getElementById('pagina-completa');
+            if (container) {
+                container.innerHTML = `
+                    <main class="main mb-0 pb-0">
+                        <div class="container pt-3 pb-5 text-center">
+                            <h2 class="mb-3">Carrinho de <span class="text-orange">Produtos</span></h2>
+                            <p>Não foi possível carregar o carrinho agora. Atualize a página ou tente novamente em alguns instantes.</p>
+                            <button type="button" class="botao-ibr botao-primario" onclick="location.reload()"
+                                data-gtag-event="carrinho-recarregar" data-gtag-category="Carrinho"
+                                data-gtag-label="fallback">Recarregar</button>
+                        </div>
+                    </main>
+                `;
+            }
+        };
+
+        const MAX_WAIT_CARREGAR_PAGINA_MS = 12000;
+        const carregarPaginaStart = Date.now();
+
+        (function waitForCarregarPagina() {
+            if (typeof carregarPagina === 'function') {
+                carregarPagina('/PaginasCarrinhoProdutos/PaginaCarrinhoProdutos.html', false)
+                    .then(() => { })
+                    .catch((erro) => {
+                        exibirFalhaCarregarPagina(erro);
+                        window.keepLoading = false;
+                        if (typeof window.hideLoadingScreen === 'function') {
+                            window.hideLoadingScreen();
+                        }
+                        limparFailsafeLoading();
+                    })
+                    .finally(() => { });
+            } else {
+                if (Date.now() - carregarPaginaStart >= MAX_WAIT_CARREGAR_PAGINA_MS) {
+                    exibirFalhaCarregarPagina(new Error('CarregarPagina indisponível.'));
+                    window.keepLoading = false;
+                    if (typeof window.hideLoadingScreen === 'function') {
+                        window.hideLoadingScreen();
+                    }
+                    limparFailsafeLoading();
+                    return;
+                }
+                window.setTimeout(waitForCarregarPagina, 50);
+            }
+        })();
+    </script>
+</body>
+
+</html>

@@ -1,0 +1,12 @@
+{
+  "global": 0.55,
+  "segmentos": {
+    "segmentoCliente:cliente_identificado": 0.52,
+    "segmentoCliente:cliente_anonimo": 0.58,
+    "faixaValorCarrinho:acima_600": 0.5,
+    "faixaValorCarrinho:300_599": 0.53,
+    "faixaValorCarrinho:100_299": 0.56,
+    "faixaValorCarrinho:ate_100": 0.6,
+    "segmentoCliente:cliente_identificado|faixaValorCarrinho:acima_600": 0.48
+  }
+}

@@ -1,0 +1,2556 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+
+<head>
+    <meta charset="utf-8" />
+    <meta content="width=device-width, initial-scale=1.0, viewport-fit=cover" name="viewport" />
+    <link href="/Imagens/Icone.ico" rel="shortcut icon" type="image/x-icon" />
+    <link href="/Imagens/Icone.ico" rel="icon" type="image/x-icon" />
+    <link rel="apple-touch-icon" href="/Imagens/LogotipoAplicativo192192.png">
+    <link rel="manifest" href="/Manifest.json">
+    <script nonce="<?= htmlspecialchars(csp_nonce(), ENT_QUOTES, 'UTF-8'); ?>">
+        window.APP_VERSION = 'versao.8.7.2';
+        window.__APP_VERSION_SOURCE__ = 'inline';
+    </script>
+    <script nonce="<?= htmlspecialchars(csp_nonce(), ENT_QUOTES, 'UTF-8'); ?>" src="/Versionamento/CarregarVersao.js"
+        defer></script>
+    <link rel="preconnect" href="https://cdn.jsdelivr.net">
+    <meta name="theme-color" content="#ec4115">
+    <meta name="color-scheme" content="light dark">
+    <meta name="mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <title>Área do Cliente | Configurador de Produtos IBR</title>
+    <meta name="description" content="Acesse a área do cliente para o Configurador Online" />
+    <meta property="og:title" content="Área do Cliente - Redutores IBR" />
+    <meta property="og:description" content="Acesse a área do cliente para o Configurador Online" />
+    <meta property="og:type" content="website" />
+    <meta name="robots" content="index, follow" />
+    <meta property="og:url" content="https://configurador.redutoresibr.com.br/AreaCliente">
+    <meta property="og:image" content="https://configurador.redutoresibr.com.br/Imagens/LogotipoAplicativo512512.png" />
+    <meta property="og:locale" content="pt_BR">
+    <meta property="og:site_name" content="Configurador de Produtos IBR">
+    <script nonce="<?= htmlspecialchars(csp_nonce(), ENT_QUOTES, 'UTF-8'); ?>" type="application/ld+json">
+      {
+        "@context": "https://schema.org",
+        "@type": "WebPage",
+        "name": "Área do Cliente - Redutores IBR",
+        "description": "Acesse a área do cliente para o Configurador Online"
+      }
+    </script>
+
+    <base href="/PaginasAreaClienteAcessoCadastro/" />
+
+    <link href="/Layout/TipografiaAreaCliente.min.css" data-versioned-href="/Layout/TipografiaAreaCliente.min.css"
+        rel="stylesheet">
+    <link href="/Layout/LayoutCadastroAreaCliente.min.css"
+        data-versioned-href="/Layout/LayoutCadastroAreaCliente.min.css" rel="stylesheet" as="style"
+        onload="this.onload=null;">
+    <link href="/Layout/LayoutAreaCliente.min.css" data-versioned-href="/Layout/LayoutAreaCliente.min.css"
+        rel="stylesheet" as="style" onload="this.onload=null;">
+    <link href="/Acessibilidade/LayoutAcessibilidade.css" data-versioned-href="/Acessibilidade/LayoutAcessibilidade.css"
+        rel="stylesheet">
+
+
+    <script nonce="<?= htmlspecialchars(csp_nonce(), ENT_QUOTES, 'UTF-8'); ?>"
+        data-versioned-src="/CSRFInicia.js"></script>
+    <script nonce="<?= htmlspecialchars(csp_nonce(), ENT_QUOTES, 'UTF-8'); ?>" id="lgpd-key" prefix="COOKIES"></script>
+    <script nonce="<?= htmlspecialchars(csp_nonce(), ENT_QUOTES, 'UTF-8'); ?>"
+        data-versioned-src="/AcessosConsultas/ValidacaoDocumento.min.js"></script>
+    <script nonce="<?= htmlspecialchars(csp_nonce(), ENT_QUOTES, 'UTF-8'); ?>"
+        data-versioned-src="/Layout/TemasCor.min.js"></script>
+    <script nonce="<?= htmlspecialchars(csp_nonce(), ENT_QUOTES, 'UTF-8'); ?>" defer
+        data-versioned-src="/SEO/TagsGoogle.min.js"></script>
+    <script nonce="<?= htmlspecialchars(csp_nonce(), ENT_QUOTES, 'UTF-8'); ?>" defer
+        data-versioned-src="/Acessibilidade/LayoutAcessibilidade.js"></script>
+</head>
+
+<body>
+    <div id="loading-area" class="d-flex justify-content-center align-items-center" style="height:100vh;">
+        <span class="loading-spinner"></span>
+    </div>
+    <main id="main-content" style="display:none;">
+        <div class="container-fluid" id="content">
+            <div class="row justify-content-end">
+                <div class="col-xl-4 col-lg-6 col-12 me-xl-5">
+                    <div
+                        class="header__login d-flex gap-3 gap-lg-5 flex-nowrap align-items-center my-5 mx-3 mx-lg-0 justify-content-between">
+                        <svg xmlns="http://www.w3.org/2000/svg" width="135.078" height="91.522"
+                            viewBox="0 0 135.078 91.522">
+                            <g id="logo" transform="translate(-189.856 -139.634)">
+                                <path id="Caminho_1" data-name="Caminho 1"
+                                    d="M215.662,139.634,189.856,164.9v66.254H324.935V139.634Z"
+                                    transform="translate(0 0)" fill="#ec4115" fill-rule="evenodd"></path>
+                                <path id="Caminho_2" data-name="Caminho 2"
+                                    d="M328.963,236.475q7.391,0,11.752,3.809t4.361,11.426a14.973,14.973,0,0,1-2.625,8.818q2.625,3.532,2.625,9.338a14.744,14.744,0,0,1-4.324,10.855q-4.324,4.334-11.42,4.334H319.5v-12.2h9.535a3.177,3.177,0,0,0,3.252-3.218,2.816,2.816,0,0,0-.739-1.946,3.139,3.139,0,0,0-2.439-.824H319.5V255.045l9.461-.074a3.2,3.2,0,0,0,2.434-.9,3.071,3.071,0,0,0,.892-2.252,2.77,2.77,0,0,0-.817-2.027,3.3,3.3,0,0,0-2.451-.826H316.1v36.088H302.8V249.825l13.305-13.35Zm-42.168,13.35,13.3-13.35v12.181l-13.3,13.218Z"
+                                    transform="translate(-80.953 -80.872)" fill="#fff" fill-rule="evenodd"></path>
+                                <path id="Caminho_3" data-name="Caminho 3"
+                                    d="M369.716,295.995v-7.781h8.6v.768h-7.1v2.656h6.8v.726h-6.8v2.864h7.1v.767Zm-5.575-7.781a6.273,6.273,0,0,1,3.14.57,1.882,1.882,0,0,1,.784,1.743,1.79,1.79,0,0,1-.518,1.454,3.432,3.432,0,0,1-1.8.53,4.664,4.664,0,0,1,1.126.248,1.912,1.912,0,0,1,.763.486.975.975,0,0,1,.268.666v2.084h-1.533v-1.7a1.175,1.175,0,0,0-.5-1.079,3.546,3.546,0,0,0-1.834-.322H359.22v3.1h-1.5v-7.781Zm.035.768h-4.922V292.1H364a8.217,8.217,0,0,0,1.222-.076,2.215,2.215,0,0,0,.83-.286,1.219,1.219,0,0,0,.5-1.122v-.258a1.188,1.188,0,0,0-.357-1.019,3.947,3.947,0,0,0-2.016-.362Zm-13.686-.83q1.089,0,1.882.037a9.439,9.439,0,0,1,1.535.2,2.667,2.667,0,0,1,1.152.495,1.518,1.518,0,0,1,.434.555,3.213,3.213,0,0,1,.259,1.5v2.676a2.031,2.031,0,0,1-.693,1.7,2.285,2.285,0,0,1-.991.489,7.183,7.183,0,0,1-1.335.213q-.692.046-1.511.046H349.69a15.274,15.274,0,0,1-2.043-.121,3.952,3.952,0,0,1-1.507-.492,2.034,2.034,0,0,1-.875-1.856v-2.76a6.332,6.332,0,0,1,.037-.738,2,2,0,0,1,.183-.622,1.792,1.792,0,0,1,.438-.57,2.6,2.6,0,0,1,1.041-.5,7.266,7.266,0,0,1,1.346-.208q.7-.043,1.7-.043Zm-.035.768H349.9q-.736,0-1.248.034a4.324,4.324,0,0,0-.911.15,1.412,1.412,0,0,0-.625.343,1.246,1.246,0,0,0-.3.709l-.054.547v2.844a1.775,1.775,0,0,0,.444,1.277,1.5,1.5,0,0,0,.866.365,14.068,14.068,0,0,0,1.581.1h.871q1.437,0,2.145-.066a2.108,2.108,0,0,0,1.069-.337,1.524,1.524,0,0,0,.514-1.277v-2.99a1.432,1.432,0,0,0-.588-1.328,2.789,2.789,0,0,0-1.3-.332q-.335-.022-1.017-.027l-.891-.013Zm-11.835,7.076v-7.013H334.3v-.768h10.17v.768h-4.318v7.013Zm-10.914-.707a2.67,2.67,0,0,1,.4.023q1.184-.025,1.831-.087a2.385,2.385,0,0,0,.986-.267.823.823,0,0,0,.46-.509,3.221,3.221,0,0,0,.093-.859v-5.374h1.534v5.572a1.846,1.846,0,0,1-1.089,1.783,5.6,5.6,0,0,1-1.812.406q-1.071.082-2.7.082-1.271,0-2.092-.058a6.626,6.626,0,0,1-1.548-.287,1.981,1.981,0,0,1-.777-.434,1.721,1.721,0,0,1-.44-.646,2.077,2.077,0,0,1-.137-.743v-5.676h1.5v5.653a1.087,1.087,0,0,0,.623,1.152,3.8,3.8,0,0,0,1.056.21q.642.051,1.744.081a2.285,2.285,0,0,1,.375-.023Zm-11.6.707h-6.919v-7.781h6.545a8.361,8.361,0,0,1,2.463.3,3.49,3.49,0,0,1,1.461.834,2.716,2.716,0,0,1,.644,1.91v1.659a2.677,2.677,0,0,1-2.034,2.781,6.348,6.348,0,0,1-2.16.3Zm-.513-.767a8.042,8.042,0,0,0,1.552-.124,2.2,2.2,0,0,0,.977-.425,1.522,1.522,0,0,0,.553-.839,4.708,4.708,0,0,0,.126-1.145v-1.72a1.786,1.786,0,0,0-1.134-1.7,3.93,3.93,0,0,0-1.665-.3h-5.3v6.246Zm-16.8.767v-7.781h8.6v.768h-7.1v2.656h6.8v.726h-6.8v2.864h7.1v.767Zm-5.575-7.781a6.276,6.276,0,0,1,3.141.57,1.882,1.882,0,0,1,.784,1.743,1.79,1.79,0,0,1-.519,1.454,3.431,3.431,0,0,1-1.8.53,4.662,4.662,0,0,1,1.126.248,1.909,1.909,0,0,1,.762.486.974.974,0,0,1,.268.666v2.084h-1.533v-1.7a1.175,1.175,0,0,0-.5-1.079,3.546,3.546,0,0,0-1.834-.322h-4.817v3.1h-1.5v-7.781Zm.035.768h-4.922V292.1h4.743a8.21,8.21,0,0,0,1.222-.076,2.215,2.215,0,0,0,.83-.286,1.219,1.219,0,0,0,.5-1.122v-.258a1.188,1.188,0,0,0-.357-1.019,3.947,3.947,0,0,0-2.016-.362Zm6.849-36.444v32.517h-13.3v-19.3l13.3-13.218Zm73.816-16.063q7.391,0,11.753,3.809t4.361,11.426a14.7,14.7,0,0,1-4.324,10.835,14.321,14.321,0,0,1-1.69,1.45l5.645,5.782v15.555l-25.723-25.778h6.43a6.076,6.076,0,0,0,4.509-1.566,5.383,5.383,0,0,0,1.552-3.952,4.984,4.984,0,0,0-1.368-3.728q-1.367-1.342-4.694-1.342h-9.313v36.014h-13.3V249.8l13.3-13.33Zm10.677,51.676q1.406,0,2.373.1a4.78,4.78,0,0,1,1.464.327,1.6,1.6,0,0,1,.945,1.547v.217h-1.5a5.01,5.01,0,0,0-.1-.7.652.652,0,0,0-.307-.392,1.454,1.454,0,0,0-.593-.22,6.556,6.556,0,0,0-.906-.091q-.518-.02-1.377-.02h-.375a7.17,7.17,0,0,0-2.622.309.659.659,0,0,0-.351.366,1.833,1.833,0,0,0-.093.642,1.1,1.1,0,0,0,.767,1.183,3.9,3.9,0,0,0,.884.161q.518.042,1.1.047l1.2.01q1.755.073,2.378.124a3.87,3.87,0,0,1,1.137.259,1.348,1.348,0,0,1,.83.7,3.733,3.733,0,0,1,.22,1.063,2.3,2.3,0,0,1-.285,1.165,1.743,1.743,0,0,1-.874.742,6,6,0,0,1-1.662.3q-1,.062-2.51.062h-.553a17.308,17.308,0,0,1-1.869-.09,4.283,4.283,0,0,1-1.38-.358,1.487,1.487,0,0,1-.738-.626,2.239,2.239,0,0,1-.242-.948,2.387,2.387,0,0,0,.035-.466h1.531a.455.455,0,0,1-.035.175,3.526,3.526,0,0,0,.135.83.786.786,0,0,0,.418.468,2.941,2.941,0,0,0,1.158.228q.484.021,1.464.02.662,0,1.019.023a7.446,7.446,0,0,0,2.23-.271.832.832,0,0,0,.5-.441,1.944,1.944,0,0,0,.124-.753v-.124a1.027,1.027,0,0,0-.462-.985,1.888,1.888,0,0,0-.786-.218q-.512-.051-1.553-.094l-1.276-.025q-.627-.013-1.311-.055a12.011,12.011,0,0,1-1.239-.134,4.335,4.335,0,0,1-.939-.252,1.438,1.438,0,0,1-.7-.594,2.236,2.236,0,0,1-.241-.921,1.834,1.834,0,0,1,.984-1.825,4.5,4.5,0,0,1,1.559-.383q.945-.085,2.435-.085Z"
+                                    transform="translate(-80.953 -80.872)" fill="#fff" fill-rule="evenodd"></path>
+                            </g>
+                        </svg>
+
+                        <a href="https://configurador.redutoresibr.com.br/" target="_self"
+                            class="fs-5 fw-semibold link-dark link-opacity-50-hover d-flex gap-2 align-items-center link-voltar-configurador"
+                            data-gtag-event="areacliente-voltar-configurador" data-gtag-category="Navegacao"
+                            data-gtag-label="area_cliente_login">
+                            Voltar Para o Configurador de Produtos
+                            <svg xmlns="http://www.w3.org/2000/svg" width="19.057" height="19.183"
+                                viewBox="0 0 19.057 19.183">
+                                <line id="Linha_17" data-name="Linha 17" x1="11.65" y2="11.788"
+                                    transform="translate(0.711 6.692)" fill="none" stroke="currentColor"
+                                    stroke-width="2">
+                                </line>
+                                <path id="Caminho_938" data-name="Caminho 938" d="M0,0l7.18,7.178L0,14.357"
+                                    transform="translate(2.331 6.574) rotate(-45)" fill="none" stroke="currentColor"
+                                    stroke-width="2"></path>
+                            </svg>
+                        </a>
+
+                    </div>
+
+                    <div class="login__box my-5">
+                        <h1 class="fs-1 fw-normal text-dark text-center mb-1">
+                            Área do Cliente<br>
+                            <span style="color: #ec4115;">Configurador Online</span>
+                        </h1>
+                        <br>
+                        <p class="fs-6 fw-normal text-dark text-center mb-3">Preencha seus dados para acessar sua conta.
+                        </p>
+
+                        <ul class="pills-login nav nav-pills mb-3 p-1 rounded-2 bg-white mx-auto" id="login-tab"
+                            role="tablist">
+                            <li class="nav-item" role="presentation">
+                                <button class="nav-link px-5 text-dark active" id="pills-entrar-tab"
+                                    data-bs-toggle="pill" data-bs-target="#pills-entrar" type="button" role="tab"
+                                    aria-controls="pills-entrar" aria-selected="true">Entrar</button>
+                            </li>
+                            <li class="nav-item" role="presentation">
+                                <button class="nav-link px-5 text-dark" id="pills-cadastrar-tab" data-bs-toggle="pill"
+                                    data-bs-target="#pills-cadastrar" type="button" role="tab"
+                                    aria-controls="pills-cadastrar" aria-selected="false"
+                                    tabindex="-1">Cadastrar</button>
+                            </li>
+                        </ul>
+                        <div class="tab-content p-3 px-md-5 py-md-4" id="login-tabContent">
+                            <div class="tab-pane fade show active" id="pills-entrar" role="tabpanel"
+                                aria-labelledby="pills-entrar-tab">
+                                <div class="default-messages-content"></div>
+                                <form id="formLogin">
+                                    <div class="mb-3">
+                                        <div class="input-group bg-white border rounded py-2 input-form">
+                                            <span
+                                                class="input-group-text bg-transparent px-4 border-top-0 border-bottom-0 border-start-0">
+                                                <svg xmlns="http://www.w3.org/2000/svg" width="20" height="16"
+                                                    viewBox="0 0 20.769 15.544">
+                                                    <g id="noun-envelope-1071784" transform="translate(-8 -21.1)">
+                                                        <g id="Grupo_168" data-name="Grupo 168"
+                                                            transform="translate(8 21.1)">
+                                                            <path id="Caminho_930" data-name="Caminho 930"
+                                                                d="M27.088,21.1H9.681A1.762,1.762,0,0,0,8,22.929V34.816a1.761,1.761,0,0,0,1.681,1.829H27.088a1.762,1.762,0,0,0,1.681-1.829V22.929A1.761,1.761,0,0,0,27.088,21.1Zm-.321,1.076-7.216,5.189a1.486,1.486,0,0,1-1.113.484,1.591,1.591,0,0,1-1.113-.484L10,22.176Zm1.014,12.64a.723.723,0,0,1-.692.753H9.681a.724.724,0,0,1-.692-.753V22.929a1.234,1.234,0,0,1,.049-.3l.025.027,7.57,5.458a2.442,2.442,0,0,0,1.8.807,2.483,2.483,0,0,0,1.8-.807l7.463-5.458.025-.027a1.043,1.043,0,0,1,.049.3V34.816Z"
+                                                                transform="translate(-8 -21.1)"></path>
+                                                        </g>
+                                                    </g>
+                                                </svg>
+                                            </span>
+
+                                            <div class="form-floating">
+                                                <input type="email" class="form-control bg-transparent border-0"
+                                                    id="email" name="email" placeholder="Digite seu E-mail*"
+                                                    autocomplete="email" required aria-required="true"
+                                                    aria-invalid="false" aria-describedby="email-error">
+                                                <label for="email">E-mail</label>
+                                            </div>
+                                        </div>
+
+                                        <div
+                                            class="input-group bg-white border rounded py-2 mt-3 input-form position-relative">
+                                            <span
+                                                class="input-group-text bg-transparent px-4 border-top-0 border-bottom-0 border-start-0">
+                                                <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20"
+                                                    viewBox="0 0 13.216 15.419">
+                                                    <g id="noun-lock-6031914" transform="translate(-4 -2)">
+                                                        <g id="Layer_2" data-name="Layer 2" transform="translate(4 2)">
+                                                            <path id="Caminho_932" data-name="Caminho 932"
+                                                                d="M15.564,6.956h-1.1V5.3a3.3,3.3,0,0,0-3.3-3.3h-1.1a3.3,3.3,0,0,0-3.3,3.3V6.956h-1.1A1.652,1.652,0,0,0,4,8.608v7.159a1.652,1.652,0,0,0,1.652,1.652h9.912a1.652,1.652,0,0,0,1.652-1.652V8.608a1.652,1.652,0,0,0-1.652-1.652ZM7.855,5.3a2.2,2.2,0,0,1,2.2-2.2h1.1a2.2,2.2,0,0,1,2.2,2.2V6.956H7.855Zm8.26,10.463a.551.551,0,0,1-.551.551H5.652a.551.551,0,0,1-.551-.551V8.608a.551.551,0,0,1,.551-.551h9.912a.551.551,0,0,1,.551.551Zm-4.956-2.2v1.1a.551.551,0,1,1-1.1,0v-1.1a.551.551,0,0,1,1.1,0Z"
+                                                                transform="translate(-4 -2)"></path>
+                                                        </g>
+                                                    </g>
+                                                </svg>
+                                            </span>
+                                            <div class="form-floating flex-grow-1">
+                                                <input type="password" class="form-control bg-transparent border-0"
+                                                    id="senhaLogin" name="senha" placeholder="Senha"
+                                                    autocomplete="current-password" required>
+                                                <label for="senhaLogin">Senha</label>
+                                            </div>
+                                            <button type="button"
+                                                class="btn btn-outline-secondary border-0 toggle-password"
+                                                data-target="#senhaLogin" data-tag-show="exibir-senha-login"
+                                                data-tag-hide="ocultar-senha-login"><svg
+                                                    xmlns="http://www.w3.org/2000/svg">
+                                                    <path
+                                                        d="M3.97993 8.22257C3.05683 9.31382 2.35242 10.596 1.93436 12.0015C3.22565 16.338 7.24311 19.5 11.9991 19.5C12.9917 19.5 13.9521 19.3623 14.8623 19.1049M6.22763 6.22763C7.88389 5.13558 9.86771 4.5 12 4.5C16.756 4.5 20.7734 7.66205 22.0647 11.9985C21.3528 14.3919 19.8106 16.4277 17.772 17.772M6.22763 6.22763L3 3M6.22763 6.22763L9.87868 9.87868M17.772 17.772L21 21M17.772 17.772L14.1213 14.1213M14.1213 14.1213C14.6642 13.5784 15 12.8284 15 12C15 10.3431 13.6569 9 12 9C11.1716 9 10.4216 9.33579 9.87868 9.87868M14.1213 14.1213L9.87868 9.87868"
+                                                        stroke="currentColor" stroke-width="1.5" stroke-linecap="round"
+                                                        stroke-linejoin="round" />
+                                                </svg></button>
+                                        </div>
+
+                                        <div class="input-group justify-content-between gap-2 flex-wrap mt-3">
+                                            <div class="form-check">
+                                                <input type="checkbox" class="form-check-input" id="lembrar"
+                                                    name="lembrar">
+                                                <label class="form-check-label" for="lembrar">Lembrar-me</label>
+                                            </div>
+                                            <a href="#" id="forgotPassword"
+                                                class="link-secondary link-offset-2 link-underline-opacity-25 link-underline-opacity-100-hover">Esqueceu
+                                                a Senha?</a>
+                                        </div>
+                                        <style>
+                                            .aceite-label {
+                                                text-align: justify;
+                                            }
+                                        </style>
+
+                                        <p class="mt-3 aceite-label" lang="pt-BR">
+                                            Ao acessar a Área do Cliente do Configurador Online, estou
+                                            ciente e concordo com <a href="/PoliticaPrivacidade" target="_blank"
+                                                rel="noopener">
+                                                a Política de Privacidade, os Termos de Uso e de Serviço, a Política de
+                                                Coleta de Dados e a Política de Cookies.
+                                            </a>
+                                        </p>
+
+
+                                        <button type="submit" class="btn btn-orange btn-lg w-100 mt-4 py-3 rounded-0"
+                                            data-gtag-event="entrar-area-cliente" data-gtag-category="Conta"
+                                            data-gtag-label="form_login">Entrar</button>
+
+                                        <div class="social-login-container">
+                                            <button type="button" id="btnMicrosoftLogin"
+                                                class="btn btn-outline-orange btn-social btn-microsoft rounded-2 px-4 d-flex align-items-center justify-content-center">
+                                                <span class="brand-label">
+                                                    <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20"
+                                                        viewBox="0 0 23 23" aria-hidden="true" focusable="false"
+                                                        class="microsoft-logo">
+                                                        <path class="microsoft-logo__red" fill="#f25022"
+                                                            d="M1 1h10v10H1z">
+                                                        </path>
+                                                        <path class="microsoft-logo__blue" fill="#00a4ef"
+                                                            d="M1 12h10v10H1z"></path>
+                                                        <path class="microsoft-logo__green" fill="#7fba00"
+                                                            d="M12 1h10v10H12z"></path>
+                                                        <path class="microsoft-logo__yellow" fill="#ffb900"
+                                                            d="M12 12h10v10H12z"></path>
+                                                    </svg>
+                                                    <span>Microsoft</span>
+                                                </span>
+                                            </button>
+                                            <button type="button" id="btnGoogleLogin"
+                                                class="btn btn-outline-orange btn-social btn-google rounded-2 px-4 d-flex align-items-center justify-content-center">
+                                                <span class="brand-label">
+                                                    <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20"
+                                                        viewBox="0 0 533.5 544.3" aria-hidden="true" focusable="false"
+                                                        class="google-logo" role="img">
+                                                        <path fill="#4285f4"
+                                                            d="M533.5 278.4c0-17.4-1.5-34-4.4-50.2H272.1v95.1h147c-6.3 33.9-25 62.6-53.5 81.7v68.1h86.4c50.6-46.6 81.5-115.4 81.5-194.7z">
+                                                        </path>
+                                                        <path fill="#34a853"
+                                                            d="M272.1 544.3c72.7 0 133.6-24 178.1-65.2l-86.4-68.1c-24 16.1-54.7 25.6-91.7 25.6-70.5 0-130.3-47.6-151.7-111.4H29.9v69.8c44.2 88 134.8 149.3 242.2 149.3z">
+                                                        </path>
+                                                        <path fill="#fbbc04"
+                                                            d="M120.4 324.9c-10.9-32.6-10.9-67.8 0-100.4V154.7H29.9c-39.8 79.5-39.8 173.9 0 253.4z">
+                                                        </path>
+                                                        <path fill="#ea4335"
+                                                            d="M272.1 107.7c38.3-.6 74.9 13.5 103 38.9l76.9-76.9C404.6 24.3 343.9-.5 272.1 0 164.6 0 74 61.3 29.9 149.3l90.5 69.8C141.8 155.3 201.6 107.7 272.1 107.7z">
+                                                        </path>
+                                                    </svg>
+                                                    <span>Google</span>
+                                                </span>
+                                            </button>
+                                        </div>
+                                </form>
+                            </div>
+                            <form id="formRecuperarSenha" class="login-form d-none" novalidate>
+                                <h3 class="mb-3 text-center">Esqueceu a Senha?</h3>
+                                <p class="mb-4 text-center">Digite seu e-mail para receber o link de redefinição.</p>
+                                <div class="mb-3">
+                                    <div class="input-group bg-white border rounded py-2 input-form">
+                                        <span
+                                            class="input-group-text bg-transparent px-4 border-top-0 border-bottom-0 border-start-0">
+                                            <svg xmlns="http://www.w3.org/2000/svg" width="20" height="16"
+                                                viewBox="0 0 20.769 15.544">
+                                                <g id="noun-envelope-1071784" transform="translate(-8 -21.1)">
+                                                    <g id="Grupo_168" data-name="Grupo 168"
+                                                        transform="translate(8 21.1)">
+                                                        <path id="Caminho_930" data-name="Caminho 930"
+                                                            d="M27.088,21.1H9.681A1.762,1.762,0,0,0,8,22.929V34.816a1.761,1.761,0,0,0,1.681,1.829H27.088a1.762,1.762,0,0,0,1.681-1.829V22.929A1.761,1.761,0,0,0,27.088,21.1Zm-.321,1.076-7.216,5.189a1.486,1.486,0,0,1-1.113.484,1.591,1.591,0,0,1-1.113-.484L10,22.176Zm1.014,12.64a.723.723,0,0,1-.692.753H9.681a.724.724,0,0,1-.692-.753V22.929a1.234,1.234,0,0,1,.049-.3l.025.027,7.57,5.458a2.442,2.442,0,0,0,1.8.807,2.483,2.483,0,0,0,1.8-.807l7.463-5.458.025-.027a1.043,1.043,0,0,1,.049.3V34.816Z"
+                                                            transform="translate(-8 -21.1)"></path>
+                                                    </g>
+                                                </g>
+                                            </svg>
+                                        </span>
+
+                                        <div class="form-floating">
+                                            <input type="email" class="form-control bg-transparent border-0"
+                                                id="emailRecuperar" name="emailRecuperar"
+                                                placeholder="Digite seu E-mail*" autocomplete="email" required>
+                                            <label for="emailRecuperar">E-mail</label>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div id="mensagemRecuperar" style="margin-bottom:1rem;color:#ec4115;font-weight:bold">
+                                </div>
+                                <button type="submit" class="btn btn-orange w-100 py-3">Enviar</button>
+                            </form>
+                            <form id="formCodigoLogin" class="login-form d-none" novalidate>
+                                <h3 class="mb-3 text-center">Código de Validação - Primeiro Acesso do Dispositivo</h3>
+                                <p class="mb-4 text-center">Como este é seu primeiro acesso neste dispositivo, é
+                                    necessário digitar o código de verificação que enviamos para o e-mail cadastrado.
+                                </p>
+                                <input type="hidden" id="emailCodigo" name="email">
+                                <div class="mb-3">
+                                    <div class="input-group bg-white border rounded py-2 input-form">
+                                        <span
+                                            class="input-group-text bg-transparent px-4 border-top-0 border-bottom-0 border-start-0">
+                                            <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20"
+                                                fill="currentColor" class="bi bi-file-binary" viewBox="0 0 16 16">
+                                                <path
+                                                    d="M5.526 13.09c.976 0 1.524-.79 1.524-2.205 0-1.412-.548-2.203-1.524-2.203-.978 0-1.526.79-1.526 2.203 0 1.415.548 2.206 1.526 2.206zm-.832-2.205c0-1.05.29-1.612.832-1.612.358 0 .607.247.733.721L4.7 11.137a6.749 6.749 0 0 1-.006-.252zm.832 1.614c-.36 0-.606-.246-.732-.718l1.556-1.145c.003.079.005.164.005.249 0 1.052-.29 1.614-.829 1.614zm5.329.501v-.595H9.73V8.772h-.69l-1.19.786v.688L8.986 9.5h.05v2.906h-1.18V13h3z">
+                                                </path>
+                                                <path
+                                                    d="M4 0a2 2 0 0 0-2 2v12a2 2 0 0 0 2 2h8a2 2 0 0 0 2-2V2a2 2 0 0 0-2-2H4zm0 1h8a1 1 0 0 1 1 1v12a1 1 0 0 1-1 1H4a1 1 0 0 1-1-1V2a1 1 0 0 1 1-1z">
+                                                </path>
+                                            </svg>
+                                        </span>
+                                        <div class="form-floating">
+                                            <input type="text" class="form-control bg-transparent border-0"
+                                                id="codigoValidacao" name="codigo" placeholder="Código"
+                                                autocomplete="one-time-code" required>
+                                            <label for="codigoValidacao">Código</label>
+                                        </div>
+                                    </div>
+                                </div>
+                                <button type="submit" class="btn btn-orange w-100 py-3"
+                                    data-gtag-event="areacliente-validar-dispositivo" data-gtag-category="Seguranca"
+                                    data-gtag-label="codigo_email">Validar</button>
+                                <button type="button" id="btnReenviar" class="btn btn-outline-orange w-100 mt-3"
+                                    data-gtag-event="areacliente-reenviar-codigo" data-gtag-category="Seguranca"
+                                    data-gtag-label="codigo_email">Reenviar
+                                    Código</button>
+                            </form>
+                        </div>
+                        <div class="tab-pane fade" id="pills-cadastrar" role="tabpanel"
+                            aria-labelledby="pills-cadastrar-tab" tabindex="0">
+                            <form id="cadastro" class="login-form" novalidate="novalidate">
+                                <div class="mb-3">
+                                    <div class="d-flex column-gap-3 flex-wrap bg-white border rounded py-2 px-3">
+                                        <p class="fs-6 fw-normal text-dark w-100 mb-1">Tipo:</p>
+                                        <div class="form-check">
+                                            <input class="form-check-input" type="radio" name="Tipo" ax-control="text"
+                                                value="2" id="tipoPF" checked="">
+                                            <label class="form-check-label" for="tipoPF">
+                                                Pessoa Física
+                                            </label>
+                                        </div>
+                                        <div class="form-check">
+                                            <input class="form-check-input" type="radio" name="Tipo" ax-control="text"
+                                                value="1" id="tipoPJ">
+                                            <label class="form-check-label" for="tipoPJ">
+                                                Pessoa Jurídica
+                                            </label>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="mb-3">
+                                    <div class="input-group bg-white border rounded py-2 input-form position-relative">
+                                        <span
+                                            class="input-group-text bg-transparent px-4 border-top-0 border-bottom-0 border-start-0">
+                                            <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20"
+                                                fill="currentColor" class="bi bi-person" viewBox="0 0 14 14">
+                                                <path
+                                                    d="M8 8a3 3 0 1 0 0-6 3 3 0 0 0 0 6Zm2-3a2 2 0 1 1-4 0 2 2 0 0 1 4 0Zm4 8c0 1-1 1-1 1H3s-1 0-1-1 1-4 6-4 6 3 6 4Zm-1-.004c-.001-.246-.154-.986-.832-1.664C11.516 10.68 10.289 10 8 10c-2.29 0-3.516.68-4.168 1.332-.678.678-.83 1.418-.832 1.664h10Z">
+                                                </path>
+                                            </svg>
+                                        </span>
+                                        <div class="form-floating">
+                                            <input type="text" class="form-control bg-transparent border-0"
+                                                id="NomeCompleto" name="NomeCompleto" placeholder="Username">
+                                            <label for="NomeCompleto">Nome</label>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="mb-3">
+                                    <div class="input-group bg-white border rounded py-2 pessoaFisica input-form">
+                                        <span
+                                            class="input-group-text bg-transparent px-4 border-top-0 border-bottom-0 border-start-0">
+                                            <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20"
+                                                fill="currentColor" class="bi bi-file-binary" viewBox="0 0 16 16">
+                                                <path
+                                                    d="M5.526 13.09c.976 0 1.524-.79 1.524-2.205 0-1.412-.548-2.203-1.524-2.203-.978 0-1.526.79-1.526 2.203 0 1.415.548 2.206 1.526 2.206zm-.832-2.205c0-1.05.29-1.612.832-1.612.358 0 .607.247.733.721L4.7 11.137a6.749 6.749 0 0 1-.006-.252zm.832 1.614c-.36 0-.606-.246-.732-.718l1.556-1.145c.003.079.005.164.005.249 0 1.052-.29 1.614-.829 1.614zm5.329.501v-.595H9.73V8.772h-.69l-1.19.786v.688L8.986 9.5h.05v2.906h-1.18V13h3z">
+                                                </path>
+                                                <path
+                                                    d="M4 0a2 2 0 0 0-2 2v12a2 2 0 0 0 2 2h8a2 2 0 0 0 2-2V2a2 2 0 0 0-2-2H4zm0 1h8a1 1 0 0 1 1 1v12a1 1 0 0 1-1 1H4a1 1 0 0 1-1-1V2a1 1 0 0 1 1-1z">
+                                                </path>
+                                            </svg>
+                                        </span>
+                                        <div class="form-floating">
+                                            <input type="text" class="form-control bg-transparent border-0" id="Cpf"
+                                                name="Cpf" placeholder="CPF" maxlength="14" autocomplete="off"
+                                                aria-describedby="cpfFeedback">
+                                            <label for="Cpf">CPF</label>
+                                        </div>
+                                    </div>
+                                    <div id="cpfFeedback" class="invalid-feedback d-none w-100 mt-1" aria-live="polite">
+                                    </div>
+                                </div>
+
+                                <div class="mb-3 pessoaJuridica d-none position-relative">
+                                    <div class="input-group bg-white border rounded py-2 input-form">
+                                        <span
+                                            class="input-group-text bg-transparent px-4 border-top-0 border-bottom-0 border-start-0">
+                                            <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20"
+                                                fill="currentColor" class="bi bi-file-binary" viewBox="0 0 16 16">
+                                                <path
+                                                    d="M5.526 13.09c.976 0 1.524-.79 1.524-2.205 0-1.412-.548-2.203-1.524-2.203-.978 0-1.526.79-1.526 2.203 0 1.415.548 2.206 1.526 2.206zm-.832-2.205c0-1.05.29-1.612.832-1.612.358 0 .607.247.733.721L4.7 11.137a6.749 6.749 0 0 1-.006-.252zm.832 1.614c-.36 0-.606-.246-.732-.718l1.556-1.145c.003.079.005.164.005.249 0 1.052-.29 1.614-.829 1.614zm5.329.501v-.595H9.73V8.772h-.69l-1.19.786v.688L8.986 9.5h.05v2.906h-1.18V13h3z">
+                                                </path>
+                                                <path
+                                                    d="M4 0a2 2 0 0 0-2 2v12a2 2 0 0 0 2 2h8a2 2 0 0 0 2-2V2a2 2 0 0 0-2-2H4zm0 1h8a1 1 0 0 1 1 1v12a1 1 0 0 1-1 1H4a1 1 0 0 1-1-1V2a1 1 0 0 1 1-1z">
+                                                </path>
+                                            </svg>
+                                        </span>
+                                        <div class="form-floating">
+                                            <input type="text" class="form-control bg-transparent border-0" id="Cnpj"
+                                                name="Cnpj" placeholder="CNPJ" maxlength="18" autocomplete="off"
+                                                aria-describedby="cnpjFeedback">
+                                            <label for="Cnpj">CNPJ</label>
+                                        </div>
+                                    </div>
+                                    <div id="cnpjFeedback" class="invalid-feedback d-none w-100 mt-1"
+                                        aria-live="polite">
+                                    </div>
+                                </div>
+
+                                <div class="mb-3">
+                                    <div id="empresaCadastroWrapper"
+                                        class="input-group bg-white border rounded py-2 pessoaJuridica d-none input-form">
+                                        <span
+                                            class="input-group-text bg-transparent px-4 border-top-0 border-bottom-0 border-start-0">
+                                            <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20"
+                                                fill="currentColor" class="bi bi-briefcase" viewBox="0 0 16 16">
+                                                <path
+                                                    d="M6.5 1A1.5 1.5 0 0 0 5 2.5V3H1.5A1.5 1.5 0 0 0 0 4.5v8A1.5 1.5 0 0 0 1.5 14h13a1.5 1.5 0 0 0 1.5-1.5v-8A1.5 1.5 0 0 0 14.5 3H11v-.5A1.5 1.5 0 0 0 9.5 1h-3zm0 1h3a.5.5 0 0 1 .5.5V3H6v-.5a.5.5 0 0 1 .5-.5zm1.886 6.914L15 7.151V12.5a.5.5 0 0 1-.5.5h-13a.5.5 0 0 1-.5-.5V7.15l6.614 1.764a1.5 1.5 0 0 0 .772 0zM1.5 4h13a.5.5 0 0 1 .5.5v1.616L8.129 7.948a.5.5 0 0 1-.258 0L1 6.116V4.5a.5.5 0 0 1 .5-.5z">
+                                                </path>
+                                            </svg>
+                                        </span>
+                                        <div class="form-floating">
+                                            <input type="text" class="form-control bg-transparent border-0" readonly
+                                                id="NomeEmpresa" name="NomeEmpresa" placeholder="Nome da empresa">
+                                            <label for="NomeEmpresa">Nome da Empresa</label>
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <div class="mb-3">
+                                    <div class="input-group bg-white border rounded py-2 input-form position-relative">
+                                        <span
+                                            class="input-group-text bg-transparent px-4 border-top-0 border-bottom-0 border-start-0">
+                                            <svg xmlns="http://www.w3.org/2000/svg" width="20" height="16"
+                                                viewBox="0 0 20.769 15.544">
+                                                <g id="noun-envelope-1071784" transform="translate(-8 -21.1)">
+                                                    <g id="Grupo_168" data-name="Grupo 168"
+                                                        transform="translate(8 21.1)">
+                                                        <path id="Caminho_930" data-name="Caminho 930"
+                                                            d="M27.088,21.1H9.681A1.762,1.762,0,0,0,8,22.929V34.816a1.761,1.761,0,0,0,1.681,1.829H27.088a1.762,1.762,0,0,0,1.681-1.829V22.929A1.761,1.761,0,0,0,27.088,21.1Zm-.321,1.076-7.216,5.189a1.486,1.486,0,0,1-1.113.484,1.591,1.591,0,0,1-1.113-.484L10,22.176Zm1.014,12.64a.723.723,0,0,1-.692.753H9.681a.724.724,0,0,1-.692-.753V22.929a1.234,1.234,0,0,1,.049-.3l.025.027,7.57,5.458a2.442,2.442,0,0,0,1.8.807,2.483,2.483,0,0,0,1.8-.807l7.463-5.458.025-.027a1.043,1.043,0,0,1,.049.3V34.816Z"
+                                                            transform="translate(-8 -21.1)"></path>
+                                                    </g>
+                                                </g>
+                                            </svg>
+                                        </span>
+                                        <div class="form-floating">
+                                            <input type="text" class="form-control bg-transparent border-0" id="Email"
+                                                name="Email" placeholder="Email" autocomplete="email">
+                                            <label for="Email">E-mail</label>
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <div class="mb-3">
+                                    <div class="input-group bg-white border rounded py-2 input-form">
+                                        <span
+                                            class="input-group-text bg-transparent px-4 border-top-0 border-bottom-0 border-start-0">
+                                            <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20"
+                                                viewBox="0 0 13.216 15.419">
+                                                <g id="noun-lock-6031914" transform="translate(-4 -2)">
+                                                    <g id="Layer_2" data-name="Layer 2" transform="translate(4 2)">
+                                                        <path id="Caminho_932" data-name="Caminho 932"
+                                                            d="M15.564,6.956h-1.1V5.3a3.3,3.3,0,0,0-3.3-3.3h-1.1a3.3,3.3,0,0,0-3.3,3.3V6.956h-1.1A1.652,1.652,0,0,0,4,8.608v7.159a1.652,1.652,0,0,0,1.652,1.652h9.912a1.652,1.652,0,0,0,1.652-1.652V8.608a1.652,1.652,0,0,0-1.652-1.652ZM7.855,5.3a2.2,2.2,0,0,1,2.2-2.2h1.1a2.2,2.2,0,0,1,2.2,2.2V6.956H7.855Zm8.26,10.463a.551.551,0,0,1-.551.551H5.652a.551.551,0,0,1-.551-.551V8.608a.551.551,0,0,1,.551-.551h9.912a.551.551,0,0,1,.551.551Zm-4.956-2.2v1.1a.551.551,0,1,1-1.1,0v-1.1a.551.551,0,0,1,1.1,0Z"
+                                                            transform="translate(-4 -2)"></path>
+                                                    </g>
+                                                </g>
+                                            </svg>
+                                        </span>
+                                        <div class="form-floating flex-grow-1">
+                                            <input type="password" class="form-control bg-transparent border-0"
+                                                id="senhaCadastro" name="senha" placeholder="Senha"
+                                                autocomplete="new-password" required>
+                                            <label for="senhaCadastro">Senha</label>
+                                        </div>
+                                        <button type="button" class="btn btn-outline-secondary border-0 toggle-password"
+                                            data-target="#senhaCadastro" data-tag-show="exibir-senha-cadastro"
+                                            data-tag-hide="ocultar-senha-cadastro">Exibir</button>
+                                    </div>
+                                </div>
+                                <ul id="passwordCriteria" class="password-popover list-unstyled small d-none">
+                                    <li id="criterion-length" class="text-danger">Mínimo 8 caracteres</li>
+                                    <li id="criterion-upper" class="text-danger">Uma letra maiúscula</li>
+                                    <li id="criterion-lower" class="text-danger">Uma letra minúscula</li>
+                                    <li id="criterion-digit" class="text-danger">Um número</li>
+                                    <li id="criterion-special" class="text-danger">Um caractere especial</li>
+                                </ul>
+
+                                <div class="mb-3">
+                                    <div class="input-group bg-white border rounded py-2 input-form">
+                                        <span
+                                            class="input-group-text bg-transparent px-4 border-top-0 border-bottom-0 border-start-0">
+                                            <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20"
+                                                viewBox="0 0 13.216 15.419">
+                                                <g id="noun-lock-6031914" transform="translate(-4 -2)">
+                                                    <g id="Layer_2" data-name="Layer 2" transform="translate(4 2)">
+                                                        <path id="Caminho_932" data-name="Caminho 932"
+                                                            d="M15.564,6.956h-1.1V5.3a3.3,3.3,0,0,0-3.3-3.3h-1.1a3.3,3.3,0,0,0-3.3,3.3V6.956h-1.1A1.652,1.652,0,0,0,4,8.608v7.159a1.652,1.652,0,0,0,1.652,1.652h9.912a1.652,1.652,0,0,0,1.652-1.652V8.608a1.652,1.652,0,0,0-1.652-1.652ZM7.855,5.3a2.2,2.2,0,0,1,2.2-2.2h1.1a2.2,2.2,0,0,1,2.2,2.2V6.956H7.855Zm8.26,10.463a.551.551,0,0,1-.551.551H5.652a.551.551,0,0,1-.551-.551V8.608a.551.551,0,0,1,.551-.551h9.912a.551.551,0,0,1,.551.551Zm-4.956-2.2v1.1a.551.551,0,1,1-1.1,0v-1.1a.551.551,0,0,1,1.1,0Z"
+                                                            transform="translate(-4 -2)"></path>
+                                                    </g>
+                                                </g>
+                                            </svg>
+                                        </span>
+                                        <div class="form-floating flex-grow-1">
+                                            <input type="password" class="form-control bg-transparent border-0"
+                                                id="senhaRepetida" name="senhaRepetida" placeholder="Repita a Senha"
+                                                autocomplete="new-password" required>
+                                            <label for="senhaRepetida">Repita a Senha</label>
+                                        </div>
+                                        <button type="button" class="btn btn-outline-secondary border-0 toggle-password"
+                                            data-target="#senhaRepetida" data-tag-show="exibir-senha-cadastro-repetir"
+                                            data-tag-hide="ocultar-senha-cadastro-repetir">Exibir</button>
+                                    </div>
+                                </div>
+                                <div id="passwordMatch" class="mt-2"></div>
+
+                                <div class="form-check mt-3">
+                                    <input type="checkbox" class="form-check-input" id="aceitoNovidades"
+                                        name="aceitoNovidades">
+                                    <label class="form-check-label" for="aceitoNovidades">Aceito Receber Novidades da
+                                        IBR</label>
+                                </div>
+
+                                <style>
+                                    .aceite-label {
+                                        text-align: justify;
+                                    }
+                                </style>
+
+                                <p class="mt-3 aceite-label" lang="pt-BR">
+                                    Ao acessar a Área do Cliente do Configurador Online, estou
+                                    ciente e concordo com <a href="/PoliticaPrivacidade" target="_blank" rel="noopener">
+                                        a Política de Privacidade, os Termos de Uso e de Serviço, a Política de
+                                        Coleta de Dados e a Política de Cookies.
+                                    </a>
+                                </p>
+
+                                <button id="validation__code" type="submit"
+                                    class="btn btn-orange btn-lg w-100 mt-4 py-3 rounded-0"
+                                    data-gtag-event="cadastro-area-cliente" data-gtag-category="Conta"
+                                    data-gtag-label="form_cadastro">Cadastrar</button>
+
+                            </form>
+                        </div>
+                    </div>
+                    <div id="redefinirSenhaContainer" class="login-form d-none">
+                        <h3 class="mb-3 text-center">Redefinir Senha</h3>
+                        <form id="formRedefinirSenha" novalidate>
+                            <input type="hidden" id="tokenRedef" name="token">
+                            <input type="text" name="username" autocomplete="username" class="visually-hidden">
+                            <div class="mb-3">
+                                <div class="input-group bg-white border rounded py-2 input-form">
+                                    <span
+                                        class="input-group-text bg-transparent px-4 border-top-0 border-bottom-0 border-start-0">
+                                        <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20"
+                                            viewBox="0 0 13.216 15.419">
+                                            <g id="noun-lock-6031914" transform="translate(-4 -2)">
+                                                <g id="Layer_2" data-name="Layer 2" transform="translate(4 2)">
+                                                    <path id="Caminho_932" data-name="Caminho 932"
+                                                        d="M15.564,6.956h-1.1V5.3a3.3,3.3,0,0,0-3.3-3.3h-1.1a3.3,3.3,0,0,0-3.3,3.3V6.956h-1.1A1.652,1.652,0,0,0,4,8.608v7.159a1.652,1.652,0,0,0,1.652,1.652h9.912a1.652,1.652,0,0,0,1.652-1.652V8.608a1.652,1.652,0,0,0-1.652-1.652ZM7.855,5.3a2.2,2.2,0,0,1,2.2-2.2h1.1a2.2,2.2,0,0,1,2.2,2.2V6.956H7.855Zm8.26,10.463a.551.551,0,0,1-.551.551H5.652a.551.551,0,0,1-.551-.551V8.608a.551.551,0,0,1,.551-.551h9.912a.551.551,0,0,1,.551.551Zm-4.956-2.2v1.1a.551.551,0,1,1-1.1,0v-1.1a.551.551,0,0,1,1.1,0Z"
+                                                        transform="translate(-4 -2)"></path>
+                                                </g>
+                                            </g>
+                                        </svg>
+                                    </span>
+                                    <div class="form-floating flex-grow-1">
+                                        <input type="password" class="form-control bg-transparent border-0"
+                                            id="senhaRedefinir" placeholder="Senha" autocomplete="new-password"
+                                            required>
+                                        <label for="senhaRedefinir">Senha</label>
+                                    </div>
+                                    <button type="button" class="btn btn-outline-secondary border-0 toggle-password"
+                                        data-target="#senhaRedefinir" data-tag-show="exibir-senha-redefinir"
+                                        data-tag-hide="ocultar-senha-redefinir">Exibir</button>
+                                </div>
+                            </div>
+                            <ul id="passwordCriteriaRedef" class="password-popover list-unstyled small d-none">
+                                <li id="criterion-length-red" class="text-danger">Mínimo 8 caracteres</li>
+                                <li id="criterion-upper-red" class="text-danger">Uma letra maiúscula</li>
+                                <li id="criterion-lower-red" class="text-danger">Uma letra minúscula</li>
+                                <li id="criterion-digit-red" class="text-danger">Um número</li>
+                                <li id="criterion-special-red" class="text-danger">Um caractere especial</li>
+                            </ul>
+                            <div class="mb-3">
+                                <div class="input-group bg-white border rounded py-2 input-form">
+                                    <span
+                                        class="input-group-text bg-transparent px-4 border-top-0 border-bottom-0 border-start-0">
+                                        <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20"
+                                            viewBox="0 0 13.216 15.419">
+                                            <g id="noun-lock-6031914" transform="translate(-4 -2)">
+                                                <g id="Layer_2" data-name="Layer 2" transform="translate(4 2)">
+                                                    <path id="Caminho_932" data-name="Caminho 932"
+                                                        d="M15.564,6.956h-1.1V5.3a3.3,3.3,0,0,0-3.3-3.3h-1.1a3.3,3.3,0,0,0-3.3,3.3V6.956h-1.1A1.652,1.652,0,0,0,4,8.608v7.159a1.652,1.652,0,0,0,1.652,1.652h9.912a1.652,1.652,0,0,0,1.652-1.652V8.608a1.652,1.652,0,0,0-1.652-1.652ZM7.855,5.3a2.2,2.2,0,0,1,2.2-2.2h1.1a2.2,2.2,0,0,1,2.2,2.2V6.956H7.855Zm8.26,10.463a.551.551,0,0,1-.551.551H5.652a.551.551,0,0,1-.551-.551V8.608a.551.551,0,0,1,.551-.551h9.912a.551.551,0,0,1,.551.551Zm-4.956-2.2v1.1a.551.551,0,1,1-1.1,0v-1.1a.551.551,0,0,1,1.1,0Z"
+                                                        transform="translate(-4 -2)"></path>
+                                                </g>
+                                            </g>
+                                        </svg>
+                                    </span>
+                                    <div class="form-floating flex-grow-1">
+                                        <input type="password" class="form-control bg-transparent border-0"
+                                            id="senhaRedefinirRep" placeholder="Repita a Senha"
+                                            autocomplete="new-password" required>
+                                        <label for="senhaRedefinirRep">Repita a Senha</label>
+                                    </div>
+                                    <button type="button" class="btn btn-outline-secondary border-0 toggle-password"
+                                        data-target="#senhaRedefinirRep" data-tag-show="exibir-senha-redefinir-repetir"
+                                        data-tag-hide="ocultar-senha-redefinir-repetir">Exibir</button>
+                                </div>
+                            </div>
+                            <div id="passwordMatchRedef" class="mt-2"></div>
+                            <div id="mensagemRedefinir" style="margin-top:1rem;color:#ec4115;font-weight:bold"></div>
+                            <button type="submit" class="btn btn-orange btn-lg w-100 mt-4 py-3 rounded-0"
+                                data-gtag-event="areacliente-alterar-senha-tempo" data-gtag-category="Conta"
+                                data-gtag-label="senha_expirada">Salvar Nova
+                                Senha</button>
+                        </form>
+                    </div>
+
+                    <div id="mensagemRetorno" aria-live="assertive"
+                        style="margin-top: 16px; font-weight: bold; color: #ec4115; min-height: 20px;">
+                    </div>
+                </div>
+            </div>
+
+            <div class="col-xl-7 col-lg-6 col-12 d-none d-lg-block position-relative pe-0">
+                <div class="img__login position-sticky top-0 start-0">
+                    <picture>
+                        <source data-srcset="/Imagens/ImagemAreaCliente.webp" type="image/webp"
+                            srcset="/Imagens/ImagemAreaCliente.webp">
+                        <img data-src="/Imagens/ImagemAreaCliente.webp" class="img-fluid lazyloaded"
+                            alt="Foto Área do Cliente IBR" src="/Imagens/ImagemAreaCliente.webp">
+                    </picture>
+                </div>
+            </div>
+        </div>
+    </main>
+
+    <script nonce="<?= htmlspecialchars(csp_nonce(), ENT_QUOTES, 'UTF-8'); ?>" type="text/javascript"
+        data-versioned-src="/Cookies/Cookies.min.js"></script>
+
+    <script nonce="<?= htmlspecialchars(csp_nonce(), ENT_QUOTES, 'UTF-8'); ?>">
+        const parametrosIniciais = new URLSearchParams(window.location.search);
+
+        function exibirMensagem(texto, cor) {
+            const mensagem = document.getElementById('mensagemRetorno');
+            if (!mensagem) return;
+            mensagem.textContent = texto || '';
+            if (cor) mensagem.style.color = cor;
+            if (mensagem.textContent.trim()) {
+                mensagem.scrollIntoView({ behavior: 'smooth', block: 'center' });
+            }
+        }
+
+        const normalizarTexto = (valor) => String(valor ?? '').trim().toLowerCase();
+
+        const lerCookie = (nome) => {
+            try {
+                const cookies = document.cookie ? document.cookie.split(';') : [];
+                for (const entrada of cookies) {
+                    const [chave, ...resto] = entrada.split('=');
+                    if (chave && chave.trim() === nome) {
+                        return decodeURIComponent(resto.join('=')).trim();
+                    }
+                }
+            } catch { }
+            return '';
+        };
+
+        const removerCookie = (nome) => {
+            try {
+                document.cookie = `${nome}=; expires=${new Date(0).toUTCString()}; path=/;`;
+            } catch { }
+        };
+
+        const lerFlagBooleana = (valor) => {
+            if (valor === null || valor === undefined) return null;
+            const texto = String(valor).trim().toLowerCase();
+            if (!texto) return null;
+            if (["1", "true", "sim", "yes", "on"].includes(texto)) return true;
+            if (["0", "false", "nao", "não", "off"].includes(texto)) return false;
+            return Boolean(texto);
+        };
+
+        const obterEstadoExclusaoPersistido = () => {
+            try {
+                const armazenado = sessionStorage.getItem('estadoExclusao');
+                if (armazenado) {
+                    return JSON.parse(armazenado);
+                }
+            } catch { }
+
+            const cookieExclusao = normalizarTexto(lerCookie('exclusao_conta'));
+            if (cookieExclusao) {
+                return {
+                    exclusao: cookieExclusao,
+                    exclusaoCompleta: cookieExclusao === 'sucesso',
+                    empresaRemovida: false,
+                    docEmpresaRemovida: '',
+                    origem: 'cookie'
+                };
+            }
+
+            return null;
+        };
+
+        const salvarEstadoExclusaoPersistido = estado => {
+            try {
+                if (estado?.exclusao || estado?.empresaRemovida || estado?.docEmpresaRemovida) {
+                    sessionStorage.setItem('estadoExclusao', JSON.stringify(estado));
+                }
+            } catch { }
+        };
+
+        const limparEstadoExclusaoPersistido = (limparCookie = false) => {
+            try { sessionStorage.removeItem('estadoExclusao'); } catch { }
+            if (limparCookie) {
+                removerCookie('exclusao_conta');
+            }
+        };
+
+        const extrairEstadoExclusao = (params, estadoPersistido) => {
+            const consulta = params instanceof URLSearchParams
+                ? new URLSearchParams(params)
+                : new URLSearchParams(params || window.location.search);
+
+            const retornoParam = obterRetornoCompleto(consulta);
+            const persistido = estadoPersistido ?? obterEstadoExclusaoPersistido();
+
+            const exclusaoNormalizada = normalizarTexto(
+                consulta.get('exclusao') || persistido?.exclusao || ''
+            );
+
+            let exclusao = exclusaoNormalizada;
+            if (!exclusao && retornoParam) {
+                try {
+                    const retornoDecodificado = decodificarRetorno(retornoParam) || retornoParam;
+                    const retornoUrl = new URL(retornoDecodificado, window.location.origin);
+                    exclusao = normalizarTexto(retornoUrl.searchParams.get('exclusao'));
+                } catch { }
+            }
+
+            const empresaRemovidaParam = lerFlagBooleana(consulta.get('empresaRemovida'));
+            let empresaRemovida = empresaRemovidaParam ?? persistido?.empresaRemovida ?? false;
+
+            const docEmpresaRemovidaParam = consulta.get('doc');
+            let docEmpresaRemovida = docEmpresaRemovidaParam || persistido?.docEmpresaRemovida || '';
+
+            const exclusaoCompleta = exclusao === 'sucesso';
+
+            if (exclusaoCompleta) {
+                empresaRemovida = false;
+                docEmpresaRemovida = '';
+            }
+
+            return { exclusao, exclusaoCompleta, empresaRemovida, docEmpresaRemovida };
+        };
+
+        const mostrarMensagemExclusao = () => {
+            exibirMensagem('✅ Sua Conta foi Excluída com Sucesso. Esperamos que volte logo.', 'green');
+            limparEstadoExclusaoPersistido(true);
+        };
+
+
+        function mostrarFormularioSenhaExpirada() {
+            document.querySelector('.pills-login')?.classList.add('d-none');
+            document.getElementById('login-tabContent')?.classList.add('d-none');
+            document.getElementById('redefinirSenhaContainer')?.classList.remove('d-none');
+            exibirMensagem('⚠️ Senha expirada. Defina uma nova senha.', '#ec4115');
+            if (typeof gtag === 'function') {
+                gtag('event', 'reset-senha-tempo-area-cliente', {
+                    event_category: 'Conta',
+                    event_label: 'senha_expirada'
+                });
+            }
+        }
+
+        function mostrarFormularioCodigo(email, mensagem) {
+            const formLogin = document.getElementById('formLogin');
+            const formCodigo = document.getElementById('formCodigoLogin');
+            if (formLogin) formLogin.classList.add('d-none');
+            if (formCodigo) {
+                formCodigo.classList.remove('d-none');
+                const inputEmail = document.getElementById('emailCodigo');
+                if (inputEmail) inputEmail.value = email || inputEmail.value || '';
+                const codigoCampo = document.getElementById('codigoValidacao');
+                codigoCampo?.focus();
+            }
+            try { sessionStorage.removeItem('pendenteValidacaoDispositivo'); } catch { }
+            if (mensagem) {
+                exibirMensagem(mensagem, 'green');
+            }
+        }
+
+        window.addEventListener('DOMContentLoaded', () => {
+            const params = new URLSearchParams(parametrosIniciais);
+            const erro = params.get("erro");
+            const cadastro = params.get("cadastro");
+            const estadoExclusaoPersistido = obterEstadoExclusaoPersistido();
+            const {
+                exclusao,
+                exclusaoCompleta,
+                empresaRemovida,
+                docEmpresaRemovida,
+            } = extrairEstadoExclusao(params, estadoExclusaoPersistido);
+            const senhaAlt = params.get("senha");
+            const atualizacao = params.get("atualizacao");
+            const tab = params.get("tab");
+            const senhaExpParam = params.get('senhaExpirada');
+            const validacaoParam = params.get('validacao');
+            let emailValidacao = params.get('email') || '';
+            const mensagem = document.getElementById("mensagemRetorno");
+            const provedor = params.get('prov');
+            const provedoresSociais = ['microsoft', 'google'];
+            const nomeSocial = provedoresSociais.includes(provedor) ? params.get('nome') : '';
+            const emailSocial = provedoresSociais.includes(provedor) ? params.get('email') : '';
+
+            const gerarNomePorEmail = email => {
+                if (!email) return '';
+                const local = email.split('@')[0] || '';
+                const normalizado = local
+                    .replace(/[^\p{L}\s._-]+/gu, ' ')
+                    .replace(/[._-]+/g, ' ')
+                    .replace(/\s+/g, ' ')
+                    .trim();
+                if (!normalizado) return '';
+
+                return normalizado
+                    .split(' ')
+                    .map(parte => parte.charAt(0).toUpperCase() + parte.slice(1))
+                    .join(' ');
+            };
+
+            const decodeParam = valor => {
+                if (!valor) return '';
+                try {
+                    return decodeURIComponent(valor.replace(/\+/g, '%20'));
+                } catch {
+                    return valor;
+                }
+            };
+
+            if (provedoresSociais.includes(provedor) && (nomeSocial || emailSocial)) {
+                const botaoCadastro = document.getElementById('pills-cadastrar-tab');
+                botaoCadastro?.click();
+
+                const nomeCampo = document.getElementById('NomeCompleto');
+                const emailCampo = document.getElementById('Email');
+                const nomeValor = decodeParam(nomeSocial) || gerarNomePorEmail(emailSocial);
+                const emailValor = decodeParam(emailSocial).toLowerCase();
+
+                if (nomeCampo && nomeValor) {
+                    nomeCampo.value = nomeValor;
+                }
+                if (emailCampo && emailValor) {
+                    emailCampo.value = emailValor;
+                }
+
+                exibirMensagem('✅ Complete Seu Cadastro para Continuar.', 'green');
+            }
+
+            const conviteCadastro = params.get('convite') === '1';
+            const cnpjConvite = (params.get('cnpj') || '').replace(/\D/g, '');
+            const emailConvite = decodeParam(params.get('email') || '').trim().toLowerCase();
+
+            if (conviteCadastro && cnpjConvite.length === 14) {
+                const botaoCadastro = document.getElementById('pills-cadastrar-tab');
+                botaoCadastro?.click();
+
+                const radioPessoaJuridica = document.getElementById('tipoPJ');
+                const cnpjCampoConvite = document.getElementById('Cnpj');
+                const emailCampoCadastro = document.getElementById('Email');
+
+                if (radioPessoaJuridica) {
+                    radioPessoaJuridica.checked = true;
+                    radioPessoaJuridica.dispatchEvent(new Event('change', { bubbles: true }));
+                }
+                if (cnpjCampoConvite) {
+                    cnpjCampoConvite.value = cnpjConvite;
+                    cnpjCampoConvite.dispatchEvent(new Event('input', { bubbles: true }));
+                }
+                if (emailCampoCadastro && emailConvite) {
+                    emailCampoCadastro.value = emailConvite;
+                }
+
+                exibirMensagem('✅ Complete seu cadastro para continuar.', 'green');
+            }
+
+            if (tab === 'cadastrar') {
+                const botaoCadastro = document.getElementById('pills-cadastrar-tab');
+                botaoCadastro?.click();
+            } else if (tab === 'recuperar') {
+                const formLoginEl = document.getElementById('formLogin');
+                const formRecuperar = document.getElementById('formRecuperarSenha');
+                const formCodigo = document.getElementById('formCodigoLogin');
+                formRecuperar?.classList.remove('d-none');
+                formLoginEl?.classList.add('d-none');
+                formCodigo?.classList.add('d-none');
+                document.getElementById('emailRecuperar')?.focus();
+            }
+
+            const validacaoRealizada = validacaoParam === '1';
+
+            if (validacaoRealizada) {
+                try {
+                    emailValidacao = emailValidacao
+                        ? decodeURIComponent(emailValidacao.replace(/\+/g, '%20'))
+                        : '';
+                } catch {
+                    emailValidacao = emailValidacao || '';
+                }
+                const texto = emailValidacao
+                    ? '✅ Código enviado para o e-mail ' + emailValidacao + '.'
+                    : '✅ Código enviado. Verifique seu e-mail.';
+                mostrarFormularioCodigo(emailValidacao, texto);
+            }
+
+            const deveExibirExclusao = exclusaoCompleta && !empresaRemovida;
+
+            if (deveExibirExclusao) {
+                mostrarMensagemExclusao();
+            }
+
+            if (!validacaoRealizada && mensagem) {
+                if (erro) {
+                    let texto = '';
+                    switch (erro) {
+                        case 'token_invalido':
+                            texto = "⚠️ O link de acesso é inválido ou já expirou.";
+                            break;
+                        case 'inatividade':
+                            texto = "⚠️ Sua sessão expirou por inatividade.";
+                            break;
+                        case 'nao_autorizado':
+                            texto = "⚠️ Usuário não autorizado.";
+                            break;
+                    }
+                    exibirMensagem(texto, '#ec4115');
+
+                } else if (cadastro) {
+                    let texto = '';
+                    let cor = 'green';
+                    switch (cadastro) {
+                        case 'sucesso':
+                            texto = '✅ Cadastro confirmado com sucesso. Faça login.';
+                            if (typeof gtag === 'function') {
+                                gtag('event', 'confirmacao-cadastro-area-cliente', {
+                                    event_category: 'Conta',
+                                    event_label: 'sucesso'
+                                });
+                            }
+                            break;
+                        case 'token_expirado':
+                            texto = '⚠️ Link de confirmação expirado.';
+                            cor = '#ec4115';
+                            break;
+                        case 'token_invalido':
+                            texto = '⚠️ Link de confirmação inválido.';
+                            cor = '#ec4115';
+                            break;
+                        case 'ja_realizado':
+                            texto = '⚠️ Cadastro já confirmado. Faça login.';
+                            cor = '#ec4115';
+                            break;
+                        case 'erro':
+                            texto = '⚠️ Erro ao confirmar cadastro.';
+                            cor = '#ec4115';
+                            break;
+                    }
+                    exibirMensagem(texto, cor);
+                }
+                else if (empresaRemovida) {
+                    const texto = docEmpresaRemovida
+                        ? '✅ A empresa selecionada foi removida da sua conta.'
+                        : '✅ A empresa selecionada foi removida da sua conta.';
+                    exibirMensagem(texto, 'green');
+
+                }
+                else if (atualizacao === 'sucesso') {
+                    exibirMensagem('✅ Dados atualizados com sucesso. Faça login novamente.', 'green');
+                }
+                else if (senhaAlt === 'sucesso') {
+                    exibirMensagem('✅ Senha redefinida com sucesso. Faça login com sua nova senha.', 'green');
+                    if (typeof gtag === 'function') {
+                        gtag('event', 'confirmacao-troca-senha-area-cliente', {
+                            event_category: 'Conta',
+                            event_label: 'sucesso'
+                        });
+                    }
+                }
+                if (senhaExpParam) {
+                    mostrarFormularioSenhaExpirada();
+                }
+            }
+            try {
+                if (!exclusaoCompleta) {
+                    const estadoExclusao = { exclusao, empresaRemovida, docEmpresaRemovida };
+                    if (estadoExclusao.exclusao || estadoExclusao.empresaRemovida || estadoExclusao.docEmpresaRemovida) {
+                        window.estadoExclusao = estadoExclusao;
+                        salvarEstadoExclusaoPersistido(estadoExclusao);
+                    }
+                } else {
+                    limparEstadoExclusaoPersistido(true);
+                }
+            } catch { }
+            setTimeout(() => history.replaceState({}, document.title, window.location.pathname));
+        });
+    </script>
+
+    <script nonce="<?= htmlspecialchars(csp_nonce(), ENT_QUOTES, 'UTF-8'); ?>" defer
+        src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.1/dist/js/bootstrap.bundle.min.js"
+        integrity="sha384-HwwvtgBNo3bZJJLYd8oVXjrBZt8cqVSpeBNS5n7C8IVInixGAoxmnlMuBnhbgrkm"
+        crossorigin="anonymous"></script>
+
+
+    <script nonce="<?= htmlspecialchars(csp_nonce(), ENT_QUOTES, 'UTF-8'); ?>">
+        function obterRetornoCompleto(params) {
+            try {
+                const consulta = params || new URLSearchParams(window.location.search);
+                let retorno = consulta.get('retorno');
+                if (!retorno) return null;
+
+                const extras = [];
+                consulta.forEach((value, key) => {
+                    if (key === 'retorno') return;
+                    if (/^[A-Za-z0-9_]+$/.test(key)) {
+                        extras.push([key, value ?? '']);
+                    }
+                });
+                if (extras.length) {
+                    const retornoDecodificado = decodificarRetorno(retorno) || retorno;
+                    try {
+                        const url = new URL(retornoDecodificado, window.location.origin);
+                        extras.forEach(([k, v]) => {
+                            if (!url.searchParams.has(k)) {
+                                url.searchParams.set(k, v ?? '');
+                            }
+                        });
+                        return url.pathname + url.search + url.hash;
+                    } catch {
+                        const hashIndex = retorno.indexOf('#');
+                        const base = hashIndex >= 0 ? retorno.slice(0, hashIndex) : retorno;
+                        const hash = hashIndex >= 0 ? retorno.slice(hashIndex) : '';
+                        const separador = base.includes('?') ? '&' : '?';
+                        const adicional = extras
+                            .map(([k, v]) => `${encodeURIComponent(k)}=${encodeURIComponent(v)}`)
+                            .join('&');
+                        retorno = base + separador + adicional + hash;
+                    }
+                }
+
+                return retorno;
+            } catch {
+                return null;
+            }
+        }
+
+        function limparParametrosRetorno(params) {
+            if (!window.history?.replaceState) return;
+            try {
+                const consulta = new URLSearchParams(params || window.location.search);
+                let alterado = false;
+                consulta.forEach((value, key) => {
+                    if (key === 'retorno') return;
+                    if (/^[A-Za-z0-9_]+$/.test(key)) {
+                        consulta.delete(key);
+                        alterado = true;
+                    }
+                });
+                if (!alterado) return;
+                const novaBusca = consulta.toString();
+                const novaUrl = novaBusca ? `${window.location.pathname}?${novaBusca}` : window.location.pathname;
+                window.history.replaceState({}, document.title, novaUrl);
+            } catch { }
+        }
+
+        function decodificarRetorno(valor) {
+            if (!valor) return null;
+            try {
+                return decodeURIComponent(valor.replace(/\+/g, '%20'));
+            } catch {
+                return valor;
+            }
+        }
+
+        function ehRetornoInvalido(valor) {
+            if (!valor || typeof valor !== 'string') return true;
+            try {
+                const url = new URL(valor, window.location.origin);
+                return ehAreaClienteUrl(url.pathname);
+            } catch {
+                const texto = String(valor).trim().toLowerCase();
+                return texto.startsWith('/areacliente');
+            }
+        }
+
+        function mesclarRetornos(principal, fallback) {
+            if (!principal && !fallback) return null;
+            const normalizar = (valor) => {
+                if (!valor || typeof valor !== 'string') return null;
+                try {
+                    return new URL(valor, window.location.origin);
+                } catch {
+                    return null;
+                }
+            };
+            const urlPrincipal = normalizar(principal);
+            const urlFallback = normalizar(fallback);
+
+            if (urlPrincipal && urlFallback) {
+                if (
+                    urlPrincipal.origin === urlFallback.origin &&
+                    urlPrincipal.pathname === urlFallback.pathname
+                ) {
+                    urlFallback.searchParams.forEach((value, key) => {
+                        if (!urlPrincipal.searchParams.has(key)) {
+                            urlPrincipal.searchParams.set(key, value);
+                        }
+                    });
+                }
+                return urlPrincipal.pathname + urlPrincipal.search + urlPrincipal.hash;
+            }
+
+            const url = urlPrincipal || urlFallback;
+            if (!url) return principal || fallback || null;
+            return url.pathname + url.search + url.hash;
+        }
+
+        function ehAreaClienteUrl(valor) {
+            if (!valor || typeof valor !== 'string') return false;
+            try {
+                const url = new URL(valor, window.location.origin);
+                return url.pathname.toLowerCase().startsWith('/areacliente');
+            } catch {
+                const texto = String(valor).trim().toLowerCase();
+                return texto.startsWith('/areacliente');
+            }
+        }
+
+        function atualizarEstadoAreaCliente(logado, nome = '') {
+            try {
+                if (logado) {
+                    sessionStorage.setItem('areaClienteLogado', '1');
+                    const primeiroNome = String(nome || '')
+                        .trim()
+                        .split(/\s+/)[0] || '';
+                    if (primeiroNome) {
+                        sessionStorage.setItem('areaClientePrimeiroNome', primeiroNome);
+                    } else {
+                        sessionStorage.removeItem('areaClientePrimeiroNome');
+                    }
+                } else {
+                    sessionStorage.setItem('areaClienteLogado', '0');
+                    sessionStorage.removeItem('areaClientePrimeiroNome');
+                }
+            } catch { }
+        }
+
+        async function garantirEstadoAreaClienteComNome(dadosPossiveis = {}) {
+            let nomePreferencial = '';
+            const candidatos = [
+                dadosPossiveis?.nome,
+                dadosPossiveis?.Nome,
+                dadosPossiveis?.nomeCompleto,
+                dadosPossiveis?.NOME,
+                dadosPossiveis?.primeiroNome,
+                dadosPossiveis?.primeiro_nome
+            ];
+
+            for (const candidato of candidatos) {
+                if (typeof candidato === 'string' && candidato.trim()) {
+                    nomePreferencial = candidato;
+                    break;
+                }
+            }
+
+            if (!nomePreferencial) {
+                try {
+                    const respostaSessao = await fetch('/PaginasAreaClienteAcessoCadastro/ValidarSessao.php', {
+                        credentials: 'include',
+                        cache: 'no-store'
+                    });
+                    if (respostaSessao.ok) {
+                        let dadosSessao = null;
+                        try {
+                            dadosSessao = await respostaSessao.json();
+                        } catch { }
+                        if (dadosSessao && dadosSessao.sucesso) {
+                            nomePreferencial =
+                                dadosSessao.nome ||
+                                dadosSessao.Nome ||
+                                dadosSessao.nomeCompleto ||
+                                dadosSessao.NOME ||
+                                '';
+                        }
+                    }
+                } catch { }
+            }
+
+            if (!nomePreferencial && typeof dadosPossiveis?.email === 'string') {
+                const parteLocal = dadosPossiveis.email.split('@')[0] || '';
+                nomePreferencial = parteLocal.replace(/[._-]+/g, ' ').trim();
+            }
+
+            atualizarEstadoAreaCliente(true, nomePreferencial);
+            return nomePreferencial;
+        }
+
+        async function redirecionarSeAutenticado() {
+            const params = new URLSearchParams(parametrosIniciais);
+            const estadoExclusaoPersistido = obterEstadoExclusaoPersistido();
+            const estadoExclusao = (() => {
+                try { return window.estadoExclusao || null; } catch { return null; }
+            })();
+            const {
+                exclusao,
+                exclusaoCompleta,
+                empresaRemovida,
+            } = extrairEstadoExclusao(
+                params,
+                estadoExclusao?.exclusao ? estadoExclusao : estadoExclusaoPersistido
+            );
+            const senhaAlt = params.get('senha');
+            const atualizacao = params.get('atualizacao');
+
+            if (exclusaoCompleta
+                && !empresaRemovida) {
+                mostrarMensagemExclusao();
+            }
+
+            const loading = document.getElementById('loading-area');
+            const main = document.getElementById('main-content');
+
+            if ((exclusao === 'sucesso' && !empresaRemovida) || senhaAlt === 'sucesso' || atualizacao === 'sucesso') {
+                atualizarEstadoAreaCliente(false);
+                if (loading) loading.remove();
+                if (main) main.style.display = '';
+                return;
+            }
+            try {
+                const resp = await fetch('/PaginasAreaClienteAcessoCadastro/ValidarSessao.php', {
+                    credentials: 'include',
+                    cache: 'no-store'
+                });
+                const dados = await resp.json();
+                if (dados.sucesso) {
+                    await garantirEstadoAreaClienteComNome(dados);
+                    const ret = decodificarRetorno(obterRetornoCompleto(params));
+                    if (ret) {
+                        window.location.replace(ret);
+                    } else {
+                        window.location.replace('/AreaCliente/Sessao');
+                    } return;
+                }
+            } catch (e) {
+            }
+            atualizarEstadoAreaCliente(false);
+            if (loading) loading.remove();
+            if (main) main.style.display = '';
+        }
+
+        document.addEventListener('DOMContentLoaded', redirecionarSeAutenticado);
+    </script>
+
+    <script nonce="<?= htmlspecialchars(csp_nonce(), ENT_QUOTES, 'UTF-8'); ?>">
+        function salvarRetorno() {
+            try {
+                const params = new URLSearchParams(window.location.search);
+                const retornoParam = obterRetornoCompleto(params);
+                if (retornoParam) {
+                    const destino = decodificarRetorno(retornoParam);
+                    const destinoMesclado = mesclarRetornos(destino, sessionStorage.getItem('retornoPosLogin'));
+                    if (destinoMesclado && !ehRetornoInvalido(destinoMesclado)) {
+                        sessionStorage.setItem('retornoPosLogin', destinoMesclado);
+                    }
+                    limparParametrosRetorno(params);
+                    return;
+                }
+
+                if (!sessionStorage.getItem('retornoPosLogin')) {
+                    const ref = document.referrer;
+                    if (ref) {
+                        const url = new URL(ref);
+                        const refDestino = url.pathname + url.search + url.hash;
+                        if (url.origin === window.location.origin && !ehRetornoInvalido(refDestino)) {
+                            sessionStorage.setItem('retornoPosLogin', refDestino);
+                            return;
+                        }
+                    }
+                }
+            } catch {
+                try { sessionStorage.removeItem('retornoPosLogin'); } catch { }
+            }
+        }
+
+        function adicionarLoginSucesso(destino) {
+            try {
+                const url = new URL(destino, window.location.origin);
+                if (url.origin !== window.location.origin) {
+                    return destino;
+                }
+                if (url.searchParams.get('login') !== 'sucesso') {
+                    url.searchParams.set('login', 'sucesso');
+                }
+                return url.pathname + url.search + url.hash;
+            } catch {
+                return destino;
+            }
+        }
+
+        function redirecionarPosLogin() {
+            try {
+                let destino = sessionStorage.getItem('retornoPosLogin');
+                const params = new URLSearchParams(window.location.search);
+                const retornoParam = obterRetornoCompleto(params);
+                if (retornoParam) {
+                    const retornoDecodificado = decodificarRetorno(retornoParam);
+                    destino = mesclarRetornos(retornoDecodificado, destino) || retornoDecodificado || destino;
+                }
+
+                if (destino && !ehRetornoInvalido(destino)) {
+                    window.location.href = adicionarLoginSucesso(destino);
+                } else {
+                    try {
+                        const ref = document.referrer ? new URL(document.referrer) : null;
+                        const refDestino = ref ? ref.pathname + ref.search + ref.hash : '';
+                        if (ref && ref.origin === window.location.origin && !ehRetornoInvalido(refDestino)) {
+                            window.location.href = adicionarLoginSucesso(refDestino);
+                            return;
+                        }
+                    } catch { }
+                    window.location.href = adicionarLoginSucesso('/AreaCliente/Sessao');
+                }
+            } catch {
+                window.location.href = adicionarLoginSucesso('/AreaCliente/Sessao');
+            }
+        }
+
+        document.addEventListener('DOMContentLoaded', salvarRetorno);
+
+        const MSG_EMAIL_NAO_ENCONTRADO = '⚠️ E-mail não encontrado. Realize seu cadastro.';
+        const MSG_INFO_ERRADA = '⚠️ Alguma informação está errada. Cadastre-se ou clique em Esqueceu a Senha.';
+        const MSG_ERRO_AUTENTICAR = '⚠️ Erro ao autenticar.';
+
+        function tratarErroLogin(res, dados, texto) {
+            const status = Number(dados?.status || res?.status || 0);
+            const codigo = String(dados?.erro || dados?.error || dados?.codigo || '').toLowerCase();
+            const bruto = dados?.mensagem || texto || '';
+            const normalizado = bruto.normalize('NFD').replace(/[\u0300-\u036f]/g, '').toLowerCase();
+            let msg = dados?.mensagem;
+
+            switch (codigo) {
+                case 'email_not_found':
+                    msg = MSG_EMAIL_NAO_ENCONTRADO;
+                    break;
+                case 'invalid_password':
+                    msg = MSG_INFO_ERRADA;
+                    break;
+            }
+
+            if (!msg) {
+                if (normalizado.includes('email') && normalizado.includes('nao encontrado')) {
+                    msg = MSG_EMAIL_NAO_ENCONTRADO;
+                } else if (normalizado.includes('alguma informacao esta errada') || normalizado.includes('senha') || normalizado.includes('invalid')) {
+                    msg = MSG_INFO_ERRADA;
+                }
+            }
+
+            if (!msg) {
+                if (status === 404) msg = MSG_EMAIL_NAO_ENCONTRADO;
+                else if (status === 401 || status === 403) msg = MSG_INFO_ERRADA;
+                else if (status === 429) msg = '⚠️ Quantidade de solicitações máximas atingidas. Tente novamente em 1 hora.';
+                else if (status === 400) msg = '⚠️ Dados inválidos.';
+                else if (status >= 500) msg = '⚠️ Erro no servidor.';
+            }
+
+            if (typeof gtag === 'function') {
+                const isRateLimit = status === 429;
+                gtag('event', isRateLimit ? 'limite-tentativas-area-cliente' : 'erro-login-area-cliente', {
+                    event_category: 'Conta',
+                    event_label: codigo || status || 'erro'
+                });
+            }
+            exibirMensagem(msg || MSG_ERRO_AUTENTICAR, '#ec4115');
+        }
+
+        const formLogin = document.getElementById('formLogin');
+        const formCodigo = document.getElementById('formCodigoLogin');
+
+        if (formLogin) {
+            formLogin.addEventListener('submit', async function (e) {
+                e.preventDefault();
+                if (typeof gtag === 'function') {
+                    gtag('event', 'entrar-area-cliente', {
+                        event_category: 'Conta',
+                        event_label: 'form_login'
+                    });
+                }
+                const email = document.getElementById('email').value;
+                const mensagem = document.getElementById('mensagemRetorno');
+                const botao = this.querySelector('button[type="submit"]');
+                if (mensagem) exibirMensagem('🔐 Autenticando...', '#ec4115');
+                botao.disabled = true;
+                const spinner = document.createElement('span');
+                spinner.className = 'loading-spinner';
+                botao.appendChild(spinner);
+
+                const senha = document.getElementById('senhaLogin').value;
+                const lembrar = document.getElementById('lembrar').checked;
+                const dadosEnvio = new URLSearchParams({ email, senha, lembrar });
+                let csrfToken = (window.csrfToken && typeof window.csrfToken === 'string')
+                    ? window.csrfToken
+                    : '';
+                if (!csrfToken) {
+                    try {
+                        const respToken = await fetch('/CSRFPega.php', { credentials: 'same-origin' });
+                        const dadosToken = await respToken.json();
+                        if (dadosToken && typeof dadosToken.token === 'string') {
+                            csrfToken = dadosToken.token;
+                            window.csrfToken = csrfToken;
+                        }
+                    } catch { }
+                }
+                const headers = { 'Content-Type': 'application/x-www-form-urlencoded; charset=UTF-8' };
+                if (csrfToken) {
+                    dadosEnvio.append('csrf_token', csrfToken);
+                    headers['X-CSRF-Token'] = csrfToken;
+                }
+
+                try {
+                    const res = await fetch('/PaginasAreaClienteAcessoCadastro/Login.php', {
+                        method: 'POST',
+                        headers,
+                        body: dadosEnvio,
+                        credentials: 'include'
+                    });
+
+                    let dados = null;
+                    let texto = '';
+                    try {
+                        texto = await res.text();
+                        if (texto) {
+                            dados = JSON.parse(texto);
+                        }
+                    } catch { }
+
+                    if (mensagem) {
+                        if (res.ok && dados) {
+                            if (dados.sucesso && dados.senhaExpirada) {
+                                mostrarFormularioSenhaExpirada();
+                                if (dados.verificacaoNecessaria) {
+                                    sessionStorage.setItem('pendenteValidacaoDispositivo', '1');
+                                } else {
+                                    sessionStorage.removeItem('pendenteValidacaoDispositivo');
+                                }
+                            } else if (dados.verificacaoNecessaria) {
+                                mostrarFormularioCodigo(email, '✅ Código enviado para o e-mail ' + email + '.');
+                            } else if (dados.sucesso) {
+                                sessionStorage.removeItem('pendenteValidacaoDispositivo');
+                                if (dados.senhaExpirada) {
+                                    mostrarFormularioSenhaExpirada();
+                                } else {
+                                    await garantirEstadoAreaClienteComNome({ ...dados, email });
+                                    redirecionarPosLogin();
+                                }
+                            } else {
+                                tratarErroLogin(res, dados, texto);
+                            }
+                        } else {
+                            tratarErroLogin(res, dados, texto);
+                        }
+                    }
+                } catch (erro) {
+                    if (mensagem) {
+                        tratarErroLogin();
+                    }
+                } finally {
+                    botao.disabled = false;
+                    spinner.remove();
+                }
+            });
+        }
+    </script>
+
+    <script nonce="<?= htmlspecialchars(csp_nonce(), ENT_QUOTES, 'UTF-8'); ?>">
+        document.addEventListener('DOMContentLoaded', () => {
+            const configurarBotaoSocial = (id, url, provedor) => {
+                const botao = document.getElementById(id);
+                if (!botao) return;
+
+                botao.addEventListener('click', () => {
+                    if (typeof gtag === 'function') {
+                        gtag('event', `entrar-${provedor}-area-cliente`, {
+                            event_category: 'Conta',
+                            event_label: provedor
+                        });
+                    }
+                    const retorno = sessionStorage.getItem('retornoPosLogin') || '';
+                    const parts = ['action=start'];
+                    if (retorno) {
+                        const retornoSeguro = encodeURIComponent(retorno).replace(/%2F/gi, '/');
+                        parts.push(`retorno=${retornoSeguro}`);
+                    }
+                    window.location.href = `${url}?${parts.join('&')}`;
+                });
+            };
+
+            configurarBotaoSocial('btnMicrosoftLogin', '/PaginasAreaClienteAcessoCadastro/LoginMicrosoft.php', 'microsoft');
+            configurarBotaoSocial('btnGoogleLogin', '/PaginasAreaClienteAcessoCadastro/LoginGoogle.php', 'google');
+        });
+    </script>
+
+    <script nonce="<?= htmlspecialchars(csp_nonce(), ENT_QUOTES, 'UTF-8'); ?>">
+        document.addEventListener('DOMContentLoaded', () => {
+            const mensagem = document.getElementById('mensagemRetorno');
+            document.querySelectorAll('#login-tab button[data-bs-toggle="pill"]').forEach(btn => {
+                btn.addEventListener('shown.bs.tab', () => {
+                    if (mensagem) mensagem.textContent = '';
+                });
+            });
+        });
+    </script>
+
+    <script nonce="<?= htmlspecialchars(csp_nonce(), ENT_QUOTES, 'UTF-8'); ?>">
+        document.addEventListener('DOMContentLoaded', () => {
+            const tipoPF = document.getElementById('tipoPF');
+            const tipoPJ = document.getElementById('tipoPJ');
+
+            const toggleTipo = () => {
+                const isPJ = tipoPJ && tipoPJ.checked;
+                document.querySelectorAll('.pessoaFisica').forEach(el => el.classList.toggle('d-none', isPJ));
+                document.querySelectorAll('.pessoaJuridica').forEach(el => el.classList.toggle('d-none', !isPJ));
+            };
+
+            if (tipoPF && tipoPJ) {
+                tipoPF.addEventListener('change', toggleTipo);
+                tipoPJ.addEventListener('change', toggleTipo);
+                toggleTipo();
+            }
+        });
+    </script>
+    <script nonce="<?= htmlspecialchars(csp_nonce(), ENT_QUOTES, 'UTF-8'); ?>">
+        document.addEventListener('DOMContentLoaded', () => {
+            const cpfCampo = document.getElementById('Cpf');
+            const cnpjCampo = document.getElementById('Cnpj');
+            const empresaCampo = document.getElementById('NomeEmpresa');
+            const cpfFeedback = document.getElementById('cpfFeedback');
+            const cnpjFeedback = document.getElementById('cnpjFeedback');
+            const radioPessoaFisica = document.getElementById('tipoPF');
+            const radioPessoaJuridica = document.getElementById('tipoPJ');
+            const MSG_DOC_INVALIDO = '❌ O CPF ou CNPJ parece incorreto. Informe um CPF Válido com 11 Dígitos ou um CNPJ Válido com 14 Dígitos.';
+            const MSG_CNPJ_NAO_ENCONTRADO = '⚠️ Não encontramos este CNPJ. Confira os dados e tente novamente.';
+
+            const atualizarFeedbackDocumento = (input, feedback, mensagem = '', focar = false) => {
+                if (!input || !feedback) return;
+                const mostrar = Boolean(mensagem);
+                feedback.textContent = mensagem || '';
+                feedback.classList.toggle('d-none', !mostrar);
+                feedback.classList.toggle('d-block', mostrar);
+                if (mostrar) {
+                    feedback.setAttribute('role', 'alert');
+                    input.classList.remove('is-valid');
+                    input.classList.add('is-invalid');
+                    input.setAttribute('aria-invalid', 'true');
+                    if (focar && typeof input.focus === 'function') {
+                        try {
+                            input.focus({ preventScroll: true });
+                        } catch {
+                            input.focus();
+                        }
+                    }
+                } else {
+                    feedback.removeAttribute('role');
+                    input.classList.remove('is-invalid');
+                    input.removeAttribute('aria-invalid');
+                }
+            };
+
+            const limparFeedbackCpf = () => atualizarFeedbackDocumento(cpfCampo, cpfFeedback);
+            const limparFeedbackCnpj = () => atualizarFeedbackDocumento(cnpjCampo, cnpjFeedback);
+            const mostrarErroCpf = (mensagem, focar = false) => atualizarFeedbackDocumento(cpfCampo, cpfFeedback, mensagem, focar);
+            const mostrarErroCnpj = (mensagem, focar = false) => atualizarFeedbackDocumento(cnpjCampo, cnpjFeedback, mensagem, focar);
+            const empresaLabel = document.querySelector('label[for="NomeEmpresa"]');
+            const empresaLabelDefault = empresaLabel ? empresaLabel.textContent : '';
+            if (empresaCampo) empresaCampo.readOnly = true;
+            let empresaCtrl = null;
+            let empresaTimeout = null;
+            let cnpjValidoCadastro = false;
+
+            radioPessoaFisica?.addEventListener('change', () => {
+                limparFeedbackCpf();
+                limparFeedbackCnpj();
+            });
+            radioPessoaJuridica?.addEventListener('change', () => {
+                limparFeedbackCpf();
+                limparFeedbackCnpj();
+            });
+
+            const definirCarregamentoEmpresa = (ativo) => {
+                if (empresaCampo) {
+                    if (ativo) {
+                        empresaCampo.setAttribute('aria-busy', 'true');
+                        empresaCampo.dataset.carregandoEmpresa = 'true';
+                        empresaCampo.value = 'Carregando...';
+                    } else {
+                        empresaCampo.removeAttribute('aria-busy');
+                        if (empresaCampo.dataset.carregandoEmpresa === 'true'
+                            && empresaCampo.value === 'Carregando...'
+                        ) {
+                            empresaCampo.value = '';
+                        }
+                        delete empresaCampo.dataset.carregandoEmpresa;
+                    }
+                }
+            };
+
+            function limparCNPJ(valor) {
+                return String(valor || '').toUpperCase().replace(/[^0-9A-Z]/g, '').slice(0, 14);
+            }
+
+            function cnpjTemLetras(valor) {
+                return /[A-Z]/.test(limparCNPJ(valor));
+            }
+
+            function formatarCNPJ(valor) {
+                valor = limparCNPJ(valor);
+                valor = valor.replace(/^([0-9A-Z]{2})([0-9A-Z])/, '$1.$2');
+                valor = valor.replace(/^([0-9A-Z]{2})\.([0-9A-Z]{3})([0-9A-Z])/, '$1.$2.$3');
+                valor = valor.replace(/\.([0-9A-Z]{3})([0-9A-Z])/, '.$1/$2');
+                valor = valor.replace(/([0-9A-Z]{4})([0-9A-Z])/, '$1-$2');
+                return valor;
+            }
+
+            function formatarCPF(valor) {
+                valor = valor.replace(/\D/g, '').slice(0, 11);
+                valor = valor.replace(/(\d{3})(\d)/, '$1.$2');
+                valor = valor.replace(/(\d{3})(\d)/, '$1.$2');
+                valor = valor.replace(/(\d{3})(\d{1,2})$/, '$1-$2');
+                return valor;
+            }
+
+            function limparEmpresa() {
+                if (empresaCampo) {
+                    empresaCampo.value = '';
+                    empresaCampo.readOnly = true;
+                }
+                if (empresaLabel) empresaLabel.textContent = empresaLabelDefault;
+                cnpjValidoCadastro = false;
+                limparFeedbackCnpj();
+            }
+
+            async function buscarEmpresa() {
+                const num = limparCNPJ(cnpjCampo.value);
+                if (empresaCtrl) {
+                    empresaCtrl.abort();
+                    empresaCtrl = null;
+                }
+                if (num.length !== 14) {
+                    limparEmpresa();
+                    definirCarregamentoEmpresa(false);
+                    return;
+                }
+                if (typeof validarCNPJ === 'function' && !validarCNPJ(num)) {
+                    limparEmpresa();
+                    mostrarErroCnpj(MSG_DOC_INVALIDO);
+                    definirCarregamentoEmpresa(false);
+                    return;
+                }
+                if (cnpjTemLetras(num)) {
+                    limparFeedbackCnpj();
+                    if (empresaCampo) empresaCampo.readOnly = false;
+                    cnpjValidoCadastro = !!empresaCampo?.value.trim();
+                    definirCarregamentoEmpresa(false);
+                    return;
+                }
+                cnpjValidoCadastro = false;
+                limparEmpresa();
+                definirCarregamentoEmpresa(true);
+                empresaCtrl = new AbortController();
+                try {
+                    const r = await fetch('/AcessosConsultas/BuscarNomeEmpresaReceita.php?cnpj=' + num, { cache: 'no-store', signal: empresaCtrl.signal });
+                    if (limparCNPJ(cnpjCampo.value) !== num) return;
+                    if (!r.ok) {
+                        let mensagemErro = MSG_CNPJ_NAO_ENCONTRADO;
+                        if (r.status === 400) mensagemErro = MSG_DOC_INVALIDO;
+                        else if (r.status !== 404) mensagemErro = '⚠️ Erro ao consultar CNPJ. Tente novamente.';
+                        mostrarErroCnpj(mensagemErro);
+                        if (typeof exibirAlerta === 'function') {
+                            exibirAlerta(mensagemErro);
+                        }
+                        return;
+                    }
+                    const j = await r.json();
+                    const nomeEmpresa = j.nome || '';
+                    if (!nomeEmpresa) {
+                        mostrarErroCnpj(MSG_CNPJ_NAO_ENCONTRADO);
+                        if (typeof exibirAlerta === 'function') {
+                            exibirAlerta(MSG_CNPJ_NAO_ENCONTRADO);
+                        }
+                        return;
+                    }
+                    limparFeedbackCnpj();
+                    empresaCampo.value = nomeEmpresa;
+                    empresaCampo.readOnly = true;
+                    cnpjValidoCadastro = true;
+                } catch (e) {
+                    if (e.name !== 'AbortError') {
+                        limparEmpresa();
+                        const mensagemErro = '⚠️ Erro ao consultar CNPJ. Tente novamente.';
+                        mostrarErroCnpj(mensagemErro);
+                        if (typeof exibirAlerta === 'function') {
+                            exibirAlerta(mensagemErro);
+                        }
+                    }
+                } finally {
+                    definirCarregamentoEmpresa(false);
+                    empresaCtrl = null;
+                }
+            }
+
+            const agendarBuscaEmpresa = () => {
+                clearTimeout(empresaTimeout);
+                empresaTimeout = setTimeout(buscarEmpresa, 400);
+            };
+
+            cpfCampo?.addEventListener('input', e => {
+                limparFeedbackCpf();
+                e.target.value = formatarCPF(e.target.value);
+            });
+
+            cnpjCampo?.addEventListener('input', e => {
+                limparFeedbackCnpj();
+                e.target.value = formatarCNPJ(e.target.value);
+                agendarBuscaEmpresa();
+            });
+            ['blur', 'change'].forEach(evt =>
+                cnpjCampo?.addEventListener(evt, agendarBuscaEmpresa)
+            );
+            cnpjCampo?.addEventListener('paste', () => {
+                requestAnimationFrame(() => {
+                    cnpjCampo.value = formatarCNPJ(cnpjCampo.value);
+                    agendarBuscaEmpresa();
+                });
+            });
+            const senhaCampo = document.getElementById('senhaCadastro');
+            const senhaRepCampo = document.getElementById('senhaRepetida');
+            const criterios = {
+                length: document.getElementById('criterion-length'),
+                upper: document.getElementById('criterion-upper'),
+                lower: document.getElementById('criterion-lower'),
+                digit: document.getElementById('criterion-digit'),
+                special: document.getElementById('criterion-special')
+            };
+            const mensagens = {
+                length: 'Mínimo 8 caracteres',
+                upper: 'Uma letra maiúscula',
+                lower: 'Uma letra minúscula',
+                digit: 'Um número',
+                special: 'Um caractere especial'
+            };
+            for (const [k, li] of Object.entries(criterios)) {
+                if (li) li.textContent = `❌ ${mensagens[k]}`;
+            }
+            const matchMsg = document.getElementById('passwordMatch');
+
+            function validarSenha() {
+                const valor = senhaCampo.value;
+                const checks = {
+                    length: /.{8,}/.test(valor),
+                    upper: /[A-Z]/.test(valor),
+                    lower: /[a-z]/.test(valor),
+                    digit: /\d/.test(valor),
+                    special: /[^\w\s]/.test(valor)
+                };
+                let todos = true;
+                for (const [k, ok] of Object.entries(checks)) {
+                    const li = criterios[k];
+                    if (li) {
+                        li.classList.toggle('text-success', ok);
+                        li.classList.toggle('text-danger', !ok);
+                        li.textContent = `${ok ? '✅' : '❌'} ${mensagens[k]}`;
+                    }
+                    todos &&= ok;
+                }
+                senhaCampo.classList.toggle('is-valid', todos);
+                senhaCampo.classList.toggle('is-invalid', !todos && valor !== '');
+                validarConfirmacao();
+            }
+
+            function validarConfirmacao() {
+                const match = senhaRepCampo.value === senhaCampo.value && senhaCampo.value !== '';
+                senhaRepCampo.classList.toggle('is-valid', match);
+                senhaRepCampo.classList.toggle('is-invalid', !match && senhaRepCampo.value !== '');
+                if (matchMsg) {
+                    if (senhaRepCampo.value === '') {
+                        matchMsg.textContent = '';
+                        matchMsg.className = 'mt-2';
+                    } else if (match) {
+                        matchMsg.textContent = 'As Senhas Conferem.';
+                        matchMsg.className = 'valid-feedback d-block';
+                    } else {
+                        matchMsg.textContent = 'As Senhas Não Conferem.';
+                        matchMsg.className = 'invalid-feedback d-block';
+                    }
+                }
+            }
+
+            senhaCampo?.addEventListener('input', validarSenha);
+            senhaRepCampo?.addEventListener('input', validarConfirmacao);
+
+            const mensagem = document.getElementById('mensagemRetorno');
+            const form = document.getElementById('cadastro');
+            if (form) {
+                form.addEventListener('submit', e => {
+                    e.preventDefault();
+                    if (mensagem) mensagem.textContent = '';
+                    const nome = document.getElementById('NomeCompleto').value.trim();
+                    const emailCampo = document.getElementById('Email');
+                    if (nome.split(/\s+/).length < 2) {
+                        exibirMensagem('⚠️ Informe o Nome Completo.', '#ec4115');
+                        document.getElementById('NomeCompleto').focus();
+                        return;
+                    }
+
+                    const botao = form.querySelector('button[type="submit"]');
+                    const usarCnpj = document.getElementById('tipoPJ').checked;
+                    const doc = usarCnpj ? cnpjCampo.value : cpfCampo.value;
+                    const docDigits = doc.replace(/\D/g, '');
+                    const docCnpj = limparCNPJ(doc);
+                    limparFeedbackCpf();
+                    limparFeedbackCnpj();
+
+                    let docValido = false;
+                    if (docDigits.length === 11) docValido = validarCPF(docDigits);
+                    else if (docCnpj.length === 14) docValido = validarCNPJ(docCnpj);
+
+                    if (!docValido) {
+                        if (usarCnpj) {
+                            mostrarErroCnpj(MSG_DOC_INVALIDO, true);
+                        } else {
+                            mostrarErroCpf(MSG_DOC_INVALIDO, true);
+                        }
+                        return;
+                    }
+
+                    const tratarMensagemDocumentoCadastro = (texto, { focar = false } = {}) => {
+                        const normalizado = (texto || '').normalize('NFD').replace(/[\u0300-\u036f]/g, '').toLowerCase();
+                        if (!normalizado) return false;
+                        if (usarCnpj && normalizado.includes('nao encontramos') && normalizado.includes('cnpj')) {
+                            mostrarErroCnpj(MSG_CNPJ_NAO_ENCONTRADO, focar);
+                            return true;
+                        }
+                        if (
+                            normalizado.includes('cpf ou cnpj parece incorreto') ||
+                            normalizado.includes('cnpj invalido') ||
+                            normalizado.includes('informe um cnpj valido') ||
+                            normalizado.includes('documento invalido') ||
+                            normalizado.includes('cpf invalido')
+                        ) {
+                            if (usarCnpj) {
+                                mostrarErroCnpj(MSG_DOC_INVALIDO, focar);
+                            } else {
+                                mostrarErroCpf(MSG_DOC_INVALIDO, focar);
+                            }
+                            return true;
+                        }
+                        return false;
+                    };
+
+                    const tratarMensagemServidor = mensagem => {
+                        if (typeof mensagem !== 'string') {
+                            return '';
+                        }
+                        const texto = mensagem.trim();
+                        if (!texto) {
+                            return '';
+                        }
+                        if (/<!DOCTYPE|<\/?html|<\/?head|<\/?body/i.test(texto)) {
+                            return '';
+                        }
+                        if (texto.length > 800 && /<[^>]+>/.test(texto)) {
+                            return '';
+                        }
+                        const container = document.createElement('div');
+                        container.innerHTML = texto;
+                        const plainText = (container.textContent || container.innerText || '').trim();
+                        return plainText || texto;
+                    };
+
+                    const email = emailCampo.value.trim().toLowerCase();
+                    if (!email.includes('@') || !email.includes('.')) {
+                        exibirMensagem('⚠️ E-mail inválido.', '#ec4115');
+                        emailCampo.focus();
+                        return;
+                    }
+
+                    if (usarCnpj && docCnpj.length === 14 && !cnpjTemLetras(docCnpj) && !cnpjValidoCadastro) {
+                        mostrarErroCnpj(MSG_CNPJ_NAO_ENCONTRADO, true);
+                        return;
+                    }
+
+                    const senhaCampo = document.getElementById('senhaCadastro');
+                    const senhaRepCampo = document.getElementById('senhaRepetida');
+                    const senhaValor = senhaCampo?.value || '';
+                    const senhaRepValor = senhaRepCampo?.value || '';
+
+                    if (!senhaValor.trim()) {
+                        exibirMensagem('⚠️ Informe a senha.', '#ec4115');
+                        senhaCampo?.focus();
+                        return;
+                    }
+
+                    if (!senhaRepValor.trim()) {
+                        exibirMensagem('⚠️ Repita a senha.', '#ec4115');
+                        senhaRepCampo?.focus();
+                        return;
+                    }
+
+                    if (senhaValor !== senhaRepValor) {
+                        exibirMensagem('⚠️ As senhas não conferem.', '#ec4115');
+                        senhaRepCampo?.focus();
+                        return;
+                    }
+
+                    if (mensagem) {
+                        exibirMensagem('📨 Enviando Dados...', '#ec4115');
+                    }
+                    if (typeof gtag === 'function') {
+                        gtag('event', usarCnpj ? 'cadastro-cnpj-area-cliente' : 'cadastro-cpf-area-cliente', {
+                            event_category: 'Conta',
+                            event_label: 'form_cadastro'
+                        });
+                    }
+                    botao.disabled = true;
+                    const spinner = document.createElement('span');
+                    spinner.className = 'loading-spinner';
+                    botao.appendChild(spinner);
+
+                    const senha = document.getElementById('senhaCadastro').value;
+                    const senhaRepetida = document.getElementById('senhaRepetida').value;
+                    const novidades = document.getElementById('aceitoNovidades')?.checked ? 'SIM' : 'NAO';
+
+                    const docNormalizado = usarCnpj ? limparCNPJ(doc) : doc.replace(/\D/g, '');
+                    const dados = new URLSearchParams({
+                        nome,
+                        email,
+                        cpfcnpj: docNormalizado,
+                        senha,
+                        senhaRepetida,
+                        novidades
+                    });
+
+                    const csrfMatch = document.cookie.match(/(?:^|;\s*)csrf_token=([A-Fa-f0-9]{64})/);
+                    if (csrfMatch) {
+                        dados.append('csrf_token', csrfMatch[1]);
+                    }
+
+                    const headers = new Headers({
+                        'Content-Type': 'application/x-www-form-urlencoded; charset=UTF-8',
+                        'X-Requested-With': 'XMLHttpRequest'
+                    });
+                    if (csrfMatch) {
+                        headers.append('X-CSRF-Token', csrfMatch[1]);
+                    }
+
+                    fetch('/PaginasAreaClienteAcessoCadastro/CadastrarUsuario.php', {
+                        method: 'POST',
+                        headers,
+                        body: dados.toString(),
+                        credentials: 'same-origin',
+                        cache: 'no-store'
+                    })
+                        .then(async res => {
+                            let dadosJson = null;
+                            let textoBruto = '';
+                            try {
+                                const tipo = res.headers.get('Content-Type') || '';
+                                if (tipo.includes('application/json')) {
+                                    dadosJson = await res.json();
+                                } else {
+                                    textoBruto = await res.text();
+                                }
+                            } catch { }
+                            if (!dadosJson && textoBruto) {
+                                const mensagemSegura = tratarMensagemServidor(textoBruto);
+                                if (mensagemSegura) {
+                                    dadosJson = { mensagem: mensagemSegura, sucesso: res.ok };
+                                }
+                            }
+                            if (!dadosJson) {
+                                dadosJson = {
+                                    sucesso: false,
+                                    mensagem: '⚠️ Erro ao cadastrar. Tente novamente.'
+                                };
+                            }
+                            if (typeof gtag === 'function' && dadosJson && !dadosJson.sucesso) {
+                                gtag('event', 'erro-cadastro-area-cliente', {
+                                    event_category: 'Conta',
+                                    event_label: res.status || 'erro'
+                                });
+                            }
+                            if (mensagem) {
+                                if (dadosJson && dadosJson.mensagem) {
+                                    const mensagemSegura = tratarMensagemServidor(dadosJson.mensagem);
+                                    const mensagemParaExibir = mensagemSegura || (dadosJson.sucesso
+                                        ? '✅ Cadastro realizado. Confira seu e-mail para confirmar.'
+                                        : '⚠️ Erro ao cadastrar. Tente novamente.');
+                                    const tratouInline = dadosJson.sucesso ? false : tratarMensagemDocumentoCadastro(mensagemParaExibir, { focar: true });
+                                    if (tratouInline && !dadosJson.sucesso) {
+                                        mensagem.textContent = '';
+                                        return;
+                                    }
+                                    exibirMensagem(mensagemParaExibir, dadosJson.sucesso ? 'green' : '#ec4115');
+                                    if (dadosJson.sucesso) {
+                                        const loginTab = document.getElementById('pills-entrar-tab');
+                                        if (loginTab) {
+                                            loginTab.click();
+                                            setTimeout(() => {
+                                                exibirMensagem(mensagemParaExibir, 'green');
+                                            }, 50);
+                                        }
+                                    }
+                                } else {
+                                    exibirMensagem('⚠️ Erro ao cadastrar. Tente novamente.', '#ec4115');
+                                }
+                            }
+                        })
+                        .catch(() => {
+                            if (typeof gtag === 'function') {
+                                gtag('event', 'erro-cadastro-area-cliente', {
+                                    event_category: 'Conta',
+                                    event_label: 'erro'
+                                });
+                            }
+                            if (mensagem) {
+                                exibirMensagem('⚠️ Erro ao cadastrar. Tente novamente.', '#ec4115');
+                            }
+                        })
+                        .finally(() => {
+                            botao.disabled = false;
+                            spinner.remove();
+                        });
+                });
+
+            }
+        });
+    </script>
+
+    <script nonce="<?= htmlspecialchars(csp_nonce(), ENT_QUOTES, 'UTF-8'); ?>">
+        document.addEventListener('DOMContentLoaded', () => {
+            const forgotLink = document.getElementById('forgotPassword');
+            const formRec = document.getElementById('formRecuperarSenha');
+            const formCod = document.getElementById('formCodigoLogin');
+            const entrarTab = document.getElementById('pills-entrar-tab');
+            const lembrarCheckbox = document.getElementById('lembrar');
+
+            forgotLink?.addEventListener('click', e => {
+                e.preventDefault();
+                if (typeof gtag === 'function') {
+                    gtag('event', 'esqueceusenha-area-cliente', {
+                        event_category: 'Conta',
+                        event_label: 'esqueceu_senha'
+                    });
+                }
+                formRec?.classList.remove('d-none');
+                formLogin?.classList.add('d-none');
+                formCod?.classList.add('d-none');
+            });
+
+            entrarTab?.addEventListener('click', () => {
+                formRec?.classList.add('d-none');
+                formCod?.classList.add('d-none');
+                formLogin?.classList.remove('d-none');
+            });
+
+            lembrarCheckbox?.addEventListener('change', () => {
+                if (typeof gtag === 'function') {
+                    const evento = lembrarCheckbox.checked ? 'lembrarme-area-cliente' : 'esquecerme-area-cliente';
+                    gtag('event', evento, {
+                        event_category: 'Conta',
+                        event_label: lembrarCheckbox.checked ? 'ativar' : 'desativar'
+                    });
+                }
+            });
+
+            formRec?.addEventListener('submit', async e => {
+                e.preventDefault();
+                if (typeof gtag === 'function') {
+                    gtag('event', 'reset-senha-solicitacao-area-cliente', {
+                        event_category: 'Conta',
+                        event_label: 'enviar'
+                    });
+                }
+                const msg = document.getElementById('mensagemRecuperar');
+                if (msg) {
+                    msg.textContent = '📨 Enviando...';
+                    msg.style.color = '#ec4115';
+                }
+                const email = document.getElementById('emailRecuperar').value.trim().toLowerCase();
+                try {
+                    const resp = await fetch('/PaginasAreaClienteAcessoCadastro/RecuperarSenha.php', {
+                        method: 'POST',
+                        headers: { 'Content-Type': 'application/x-www-form-urlencoded; charset=UTF-8' },
+                        body: new URLSearchParams({ email })
+                    });
+                    let texto = null;
+                    try { texto = await resp.text(); } catch { }
+                    let dados = null;
+                    try { dados = JSON.parse(texto); } catch { }
+                    if (msg) {
+                        const sucesso = dados?.sucesso === true;
+                        msg.textContent = dados?.mensagem || (sucesso ? '✅ Verifique seu e-mail.' : '⚠️ Erro ao processar solicitação.');
+                        msg.style.color = sucesso ? 'green' : '#ec4115';
+                    }
+                } catch {
+                    if (msg) {
+                        msg.textContent = 'Erro ao processar solicitação.';
+                        msg.style.color = '#ec4115';
+                    }
+                }
+            });
+
+            const obterCsrfToken = async () => {
+                let csrfToken = (window.csrfToken && typeof window.csrfToken === 'string')
+                    ? window.csrfToken
+                    : '';
+                if (!csrfToken) {
+                    try {
+                        const respToken = await fetch('/CSRFPega.php', { credentials: 'same-origin' });
+                        const dadosToken = await respToken.json();
+                        if (dadosToken && typeof dadosToken.token === 'string') {
+                            csrfToken = dadosToken.token;
+                            window.csrfToken = csrfToken;
+                        }
+                    } catch { }
+                }
+                return csrfToken;
+            };
+
+            formCod?.addEventListener('submit', async e => {
+                e.preventDefault();
+                if (typeof gtag === 'function') {
+                    gtag('event', 'areacliente-validar-dispositivo', {
+                        event_category: 'Seguranca',
+                        event_label: 'codigo_email'
+                    });
+                }
+                const email = document.getElementById('emailCodigo').value.trim();
+                const codigo = document.getElementById('codigoValidacao').value.trim();
+                exibirMensagem('🔐 Validando...', '#ec4115');
+
+                const csrfToken = await obterCsrfToken();
+                const headers = new Headers({
+                    'Content-Type': 'application/x-www-form-urlencoded; charset=UTF-8',
+                    'X-Requested-With': 'XMLHttpRequest'
+                });
+                const body = new URLSearchParams({ email, codigo });
+                if (csrfToken) {
+                    headers.append('X-CSRF-Token', csrfToken);
+                    body.append('csrf_token', csrfToken);
+                }
+                fetch('/PaginasAreaClienteAcessoCadastro/VerificarCodigo.php', {
+                    method: 'POST',
+                    headers,
+                    body,
+                    credentials: 'same-origin',
+                    cache: 'no-store'
+                })
+                    .then(async res => {
+                        let dados = null;
+                        try {
+                            const tipo = res.headers.get('content-type') || '';
+                            if (tipo.includes('application/json')) {
+                                dados = await res.json();
+                            } else {
+                                dados = JSON.parse(await res.text());
+                            }
+                        } catch { }
+                        if (res.ok && dados && dados.sucesso) {
+                            try { sessionStorage.removeItem('pendenteValidacaoDispositivo'); } catch { }
+                            await garantirEstadoAreaClienteComNome({ ...dados, email });
+
+                            redirecionarPosLogin();
+                        } else {
+                            let msg = dados && dados.mensagem;
+                            if (!msg) {
+                                switch (res.status) {
+                                    case 403:
+                                        msg = '⚠️ Não foi possível validar o código. Atualize a página e tente novamente.';
+                                        break;
+                                    case 404:
+                                        msg = '⚠️ Código não encontrado.';
+                                        break;
+                                    case 410:
+                                        msg = '⚠️ Código expirado.';
+                                        break;
+                                    case 429:
+                                        msg = '⚠️ Quantidade de solicitações máximas atingidas. Tente novamente em 1 hora.';
+                                        break;
+                                    default:
+                                        msg = '⚠️ Erro ao validar código. Refaça o envio.';
+                                }
+                            }
+                            exibirMensagem(msg, '#ec4115');
+                        }
+                    })
+                    .catch(() => {
+                        exibirMensagem('⚠️ Erro ao validar código. Refaça o envio.', '#ec4115');
+                    });
+            });
+
+            const btnReenviar = document.getElementById('btnReenviar');
+            btnReenviar?.addEventListener('click', async () => {
+                if (typeof gtag === 'function') {
+                    gtag('event', 'areacliente-reenviar-codigo', {
+                        event_category: 'Seguranca',
+                        event_label: 'codigo_email'
+                    });
+                }
+                const email = document.getElementById('emailCodigo').value.trim();
+                exibirMensagem('📨 Enviando...', '#ec4115');
+
+                const csrfToken = await obterCsrfToken();
+                const headers = new Headers({
+                    'Content-Type': 'application/x-www-form-urlencoded; charset=UTF-8',
+                    'X-Requested-With': 'XMLHttpRequest'
+                });
+                const body = new URLSearchParams({ email });
+                if (csrfToken) {
+                    headers.append('X-CSRF-Token', csrfToken);
+                    body.append('csrf_token', csrfToken);
+                }
+                fetch('/PaginasAreaClienteAcessoCadastro/ReenviarCodigo.php', {
+                    method: 'POST',
+                    headers,
+                    body,
+                    credentials: 'same-origin',
+                    cache: 'no-store'
+                })
+                    .then(async res => {
+                        let dados = null;
+                        try {
+                            const tipo = res.headers.get('content-type') || '';
+                            if (tipo.includes('application/json')) {
+                                dados = await res.json();
+                            } else {
+                                dados = JSON.parse(await res.text());
+                            }
+                        } catch { }
+                        const sucesso = res.ok && dados && dados.sucesso;
+                        const msg = dados?.mensagem || (sucesso ? '✅ Código reenviado para o e-mail ' + email + '.' : '⚠️ Erro ao reenviar código.');
+                        exibirMensagem(msg, sucesso ? 'green' : '#ec4115');
+                    })
+                    .catch(() => {
+                        exibirMensagem('⚠️ Erro ao reenviar código.', '#ec4115');
+                    });
+            });
+        });
+    </script>
+
+    <script nonce="<?= htmlspecialchars(csp_nonce(), ENT_QUOTES, 'UTF-8'); ?>">
+        document.addEventListener('DOMContentLoaded', () => {
+            const closedEyeSvg = `<svg viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M3.97993 8.22257C3.05683 9.31382 2.35242 10.596 1.93436 12.0015C3.22565 16.338 7.24311 19.5 11.9991 19.5C12.9917 19.5 13.9521 19.3623 14.8623 19.1049M6.22763 6.22763C7.88389 5.13558 9.86771 4.5 12 4.5C16.756 4.5 20.7734 7.66205 22.0647 11.9985C21.3528 14.3919 19.8106 16.4277 17.772 17.772M6.22763 6.22763L3 3M6.22763 6.22763L9.87868 9.87868M17.772 17.772L21 21M17.772 17.772L14.1213 14.1213M14.1213 14.1213C14.6642 13.5784 15 12.8284 15 12C15 10.3431 13.6569 9 12 9C11.1716 9 10.4216 9.33579 9.87868 9.87868M14.1213 14.1213L9.87868 9.87868" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg>`;
+            const openEyeSvg = `<svg viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M2.03555 12.3224C1.96647 12.1151 1.9664 11.8907 2.03536 11.6834C3.42372 7.50972 7.36079 4.5 12.0008 4.5C16.6387 4.5 20.5742 7.50692 21.9643 11.6776C22.0334 11.8849 22.0335 12.1093 21.9645 12.3166C20.5761 16.4903 16.6391 19.5 11.9991 19.5C7.36119 19.5 3.42564 16.4931 2.03555 12.3224Z" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/><path d="M15 12C15 13.6569 13.6569 15 12 15C10.3431 15 9 13.6569 9 12C9 10.3431 10.3431 9 12 9C13.6569 9 15 10.3431 15 12Z" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg>`;
+            document.querySelectorAll('.toggle-password').forEach(btn => {
+                const target = document.querySelector(btn.dataset.target);
+                if (target) btn.innerHTML = closedEyeSvg;
+                btn.addEventListener('click', () => {
+                    if (!target) return;
+                    const visible = target.type === 'text';
+                    const eventoTag = visible ? btn.dataset.tagHide : btn.dataset.tagShow;
+                    if (typeof gtag === 'function' && eventoTag) {
+                        gtag('event', eventoTag, {
+                            event_category: 'Conta',
+                            event_label: target.id || 'senha'
+                        });
+                    }
+                    target.type = visible ? 'password' : 'text';
+                    btn.innerHTML = visible ? closedEyeSvg : openEyeSvg;
+                    target.focus();
+                });
+            });
+
+            const senhaCadastro = document.getElementById('senhaCadastro');
+            const criteria = document.getElementById('passwordCriteria');
+            if (senhaCadastro && criteria) {
+                senhaCadastro.addEventListener('focus', () => {
+                    criteria.classList.remove('d-none');
+                });
+                senhaCadastro.addEventListener('blur', () => {
+                    criteria.classList.add('d-none');
+                });
+            }
+        });
+    </script>
+
+    <script nonce="<?= htmlspecialchars(csp_nonce(), ENT_QUOTES, 'UTF-8'); ?>">
+        document.addEventListener('DOMContentLoaded', () => {
+            const params = new URLSearchParams(window.location.search);
+            const token = params.get('token');
+            const redefBox = document.getElementById('redefinirSenhaContainer');
+            if (token && redefBox) {
+                document.querySelector('.pills-login')?.classList.add('d-none');
+                document.getElementById('login-tabContent')?.classList.add('d-none');
+                redefBox.classList.remove('d-none');
+                const hidden = document.getElementById('tokenRedef');
+                if (hidden) hidden.value = token;
+            }
+
+            const senhaCampo = document.getElementById('senhaRedefinir');
+            const senhaRepCampo = document.getElementById('senhaRedefinirRep');
+            const criterios = {
+                length: document.getElementById('criterion-length-red'),
+                upper: document.getElementById('criterion-upper-red'),
+                lower: document.getElementById('criterion-lower-red'),
+                digit: document.getElementById('criterion-digit-red'),
+                special: document.getElementById('criterion-special-red')
+            };
+            const mensagens = {
+                length: 'Mínimo 8 caracteres',
+                upper: 'Uma letra maiúscula',
+                lower: 'Uma letra minúscula',
+                digit: 'Um número',
+                special: 'Um caractere especial'
+            };
+            for (const [k, li] of Object.entries(criterios)) {
+                if (li) li.textContent = `❌ ${mensagens[k]}`;
+            }
+            const matchMsg = document.getElementById('passwordMatchRedef');
+            function validarSenha() {
+                const valor = senhaCampo.value;
+                const checks = {
+                    length: /.{8,}/.test(valor),
+                    upper: /[A-Z]/.test(valor),
+                    lower: /[a-z]/.test(valor),
+                    digit: /\d/.test(valor),
+                    special: /[^\w\s]/.test(valor)
+                };
+                let todos = true;
+                for (const [k, ok] of Object.entries(checks)) {
+                    const li = criterios[k];
+                    if (li) {
+                        li.classList.toggle('text-success', ok);
+                        li.classList.toggle('text-danger', !ok);
+                        li.textContent = `${ok ? '✅' : '❌'} ${mensagens[k]}`;
+                    }
+                    todos &&= ok;
+                }
+                senhaCampo.classList.toggle('is-valid', todos);
+                senhaCampo.classList.toggle('is-invalid', !todos && valor !== '');
+                validarConfirmacao();
+            }
+            function validarConfirmacao() {
+                const match = senhaRepCampo.value === senhaCampo.value && senhaCampo.value !== '';
+                senhaRepCampo.classList.toggle('is-valid', match);
+                senhaRepCampo.classList.toggle('is-invalid', !match && senhaRepCampo.value !== '');
+                if (matchMsg) {
+                    if (senhaRepCampo.value === '') {
+                        matchMsg.textContent = '';
+                        matchMsg.className = 'mt-2';
+                    } else if (match) {
+                        matchMsg.textContent = 'As Senhas Conferem.';
+                        matchMsg.className = 'valid-feedback d-block';
+                    } else {
+                        matchMsg.textContent = 'As Senhas Não Conferem.';
+                        matchMsg.className = 'invalid-feedback d-block';
+                    }
+                }
+            }
+            senhaCampo?.addEventListener('input', validarSenha);
+            senhaRepCampo?.addEventListener('input', validarConfirmacao);
+            const criteriaRedef = document.getElementById('passwordCriteriaRedef');
+            if (senhaCampo && criteriaRedef) {
+                senhaCampo.addEventListener('focus', () => criteriaRedef.classList.remove('d-none'));
+                senhaCampo.addEventListener('blur', () => criteriaRedef.classList.add('d-none'));
+            }
+            document.getElementById('formRedefinirSenha')?.addEventListener('submit', async e => {
+                e.preventDefault();
+                if (typeof gtag === 'function') {
+                    gtag('event', 'areacliente-alterar-senha-tempo', {
+                        event_category: 'Conta',
+                        event_label: 'senha_expirada'
+                    });
+                }
+                const msg = document.getElementById('mensagemRedefinir');
+                if (msg) {
+                    msg.textContent = '📨 Enviando...';
+                    msg.style.color = '#ec4115';
+                }
+                const body = new URLSearchParams({
+                    senha: senhaCampo.value,
+                    senhaRepetida: senhaRepCampo.value
+                });
+                if (token) body.append('token', token);
+                const csrf = document.cookie.match(/(?:^|;\s*)csrf_token=([A-Fa-f0-9]{64})/);
+                if (csrf) body.append('csrf_token', csrf[1]);
+                if (typeof window.csrfToken === 'string' && /^[A-Fa-f0-9]{64}$/.test(window.csrfToken)) {
+                    body.append('csrf_token', window.csrfToken);
+                }
+                const url = token
+                    ? '/PaginasAreaClienteAcessoCadastro/RedefinirSenhaAPI.php'
+                    : '/PaginasAreaClienteSessaoPerfil/SenhaExpirada.php';
+                try {
+                    const headers = {
+                        'Content-Type': 'application/x-www-form-urlencoded; charset=UTF-8',
+                        'X-Requested-With': 'XMLHttpRequest'
+                    };
+                    if (typeof window.csrfToken === 'string' && /^[A-Fa-f0-9]{64}$/.test(window.csrfToken)) {
+                        headers['X-CSRF-Token'] = window.csrfToken;
+                    }
+                    const resp = await fetch(url, {
+                        method: 'POST',
+                        headers,
+                        body,
+                        credentials: 'same-origin',
+                        cache: 'no-store'
+                    });
+                    let texto = null;
+                    try { texto = await resp.text(); } catch { }
+                    let dados = null;
+                    try { dados = JSON.parse(texto); } catch { }
+                    if (!dados && typeof texto === 'string' && /<!DOCTYPE\s+html/i.test(texto)) {
+                        dados = {
+                            sucesso: false,
+                            mensagem: '⚠️ Não foi possível atualizar sua senha agora. Recarregue a página e tente novamente.'
+                        };
+                    }
+                    const sucesso = resp.ok && dados?.sucesso === true;
+                    const pendenteValidacao = sessionStorage.getItem('pendenteValidacaoDispositivo') === '1';
+                    const precisaValidar = dados?.verificacaoNecessaria === true || pendenteValidacao;
+                    if (sucesso) {
+                        sessionStorage.removeItem('pendenteValidacaoDispositivo');
+                    }
+                    if (msg) {
+                        if (sucesso) {
+                            if (precisaValidar) {
+                                msg.textContent = '✅ Código enviado. Aguarde...';
+                                msg.style.color = 'green';
+                            } else {
+                                msg.textContent = '🔄 Redirecionando...';
+                                msg.style.color = '#ec4115';
+                            }
+                        } else {
+                            msg.textContent = dados?.mensagem || texto || '⚠️ Erro ao processar solicitação.';
+                            msg.style.color = '#ec4115';
+                        }
+                    }
+                    if (sucesso) {
+                        const destino = dados?.redirect || (precisaValidar
+                            ? '/AreaCliente?validacao=1'
+                            : '/AreaCliente?senha=sucesso');
+                        setTimeout(() => { window.location.href = destino; }, 1200);
+                    } else {
+                    }
+                } catch (e) {
+                    if (msg) {
+                        msg.textContent = 'Erro ao processar solicitação.';
+                        msg.style.color = '#ec4115';
+                    }
+                }
+            });
+        });
+    </script>
+    <script nonce="<?= htmlspecialchars(csp_nonce(), ENT_QUOTES, 'UTF-8'); ?>">
+        window.addEventListener('pageshow', function (e) {
+            var navType = (performance.getEntriesByType && performance.getEntriesByType('navigation')[0]?.type) ||
+                (performance.navigation && performance.navigation.type);
+            if (e.persisted || navType === 'back_forward' || navType === 2) {
+                window.location.reload();
+            }
+        });
+    </script>
+
+    <script nonce="<?= htmlspecialchars(csp_nonce(), ENT_QUOTES, 'UTF-8'); ?>">
+        document.addEventListener('DOMContentLoaded', () => {
+            document.querySelectorAll('input[type="password"]').forEach(inp => {
+                const warn = document.createElement('div');
+                warn.className = 'caps-warning mt-1 d-none';
+                warn.style.color = '#ec4115';
+                warn.style.fontSize = '0.875rem';
+                warn.textContent = 'Caps Lock ativado';
+                inp.insertAdjacentElement('afterend', warn);
+                const toggle = e => {
+                    const caps = e.getModifierState && e.getModifierState('CapsLock');
+                    warn.classList.toggle('d-none', !caps);
+                };
+                inp.addEventListener('keydown', toggle);
+                inp.addEventListener('keyup', toggle);
+                inp.addEventListener('focus', toggle);
+                inp.addEventListener('blur', () => warn.classList.add('d-none'));
+            });
+        });
+    </script>
+
+    <script nonce="<?= htmlspecialchars(csp_nonce(), ENT_QUOTES, 'UTF-8'); ?>">
+        document.addEventListener('DOMContentLoaded', () => {
+            const link = document.querySelector('a.link-voltar-configurador');
+            if (!link) return;
+            const destino = sessionStorage.getItem('retornoPosLogin');
+            if (!destino || ehAreaClienteUrl(destino)) return;
+            link.setAttribute('href', destino);
+            link.addEventListener('click', (e) => {
+                if (typeof gtag === 'function') {
+                    gtag('event', 'areacliente-voltar-configurador', {
+                        event_category: 'Conta',
+                        event_label: 'voltar'
+                    });
+                }
+                if (
+                    e.button === 0 &&
+                    !e.ctrlKey &&
+                    !e.metaKey &&
+                    !e.shiftKey &&
+                    !e.altKey
+                ) {
+                    e.preventDefault();
+                    window.location.href = destino;
+                }
+            });
+        });
+    </script>
+
+    <script nonce="<?= htmlspecialchars(csp_nonce(), ENT_QUOTES, 'UTF-8'); ?>">
+        document.addEventListener('DOMContentLoaded', () => {
+            document.querySelectorAll('input, textarea').forEach(el => {
+                el.addEventListener('keydown', e => {
+                    if ((e.key || '').toLowerCase() === 'a' && e.ctrlKey) e.stopPropagation();
+                });
+            });
+        });
+    </script>
+
+</body>
+
+</html>

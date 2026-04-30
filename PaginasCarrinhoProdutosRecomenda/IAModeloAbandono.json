@@ -1,0 +1,131 @@
+{
+  "treinado_em": "2026-03-18T20:03:27.529443+00:00",
+  "data_treino": "2026-03-18T20:03:27.529443+00:00",
+  "janela_dados_inicio": "2026-02-11T14:03:59-03:00",
+  "janela_dados_fim": "2026-02-12T14:36:24-03:00",
+  "taxa_positivo": 1.0,
+  "versao_modelo": "abandono-20260318200327",
+  "features": [
+    "tempo_parado_ms",
+    "valor_carrinho",
+    "quantidade_itens",
+    "valor_medio_item",
+    "tempo_desde_inicio_ms",
+    "total_eventos_sessao",
+    "eventos_abandono_sessao",
+    "tempo_ativo_total_ms",
+    "profundidade_scroll",
+    "total_modais_abertos",
+    "interacoes_recomendacoes",
+    "evento_tentativa_saida",
+    "evento_aba_oculta",
+    "evento_inatividade"
+  ],
+  "features_utilizadas": [
+    "tempo_parado_ms",
+    "valor_carrinho",
+    "quantidade_itens",
+    "valor_medio_item",
+    "tempo_desde_inicio_ms",
+    "total_eventos_sessao",
+    "eventos_abandono_sessao",
+    "tempo_ativo_total_ms",
+    "profundidade_scroll",
+    "total_modais_abertos",
+    "interacoes_recomendacoes",
+    "evento_tentativa_saida",
+    "evento_aba_oculta",
+    "evento_inatividade"
+  ],
+  "medias": [
+    9.0,
+    1171.45,
+    1.0,
+    1171.45,
+    3265.0,
+    1.0,
+    1.0,
+    3265.0,
+    80.33509700176367,
+    0.0,
+    0.0,
+    1.0,
+    0.0,
+    0.0
+  ],
+  "stds": [
+    1.0,
+    1.0,
+    1.0,
+    1.0,
+    1.0,
+    1.0,
+    1.0,
+    1.0,
+    1.0,
+    1.0,
+    1.0,
+    1.0,
+    1.0,
+    1.0
+  ],
+  "pesos": [
+    2.8990844771574267,
+    0.0,
+    0.0,
+    0.0,
+    0.0,
+    0.0,
+    0.0,
+    0.0,
+    0.0,
+    0.0,
+    0.0,
+    0.0,
+    0.0,
+    0.0,
+    0.0
+  ],
+  "threshold": 0.9478011607993655,
+  "metricas": {
+    "precision": 1.0,
+    "recall": 1.0,
+    "f1": 1.0,
+    "accuracy": 1.0,
+    "auc": 0.0
+  },
+  "metricas_treino": {
+    "precision": 1.0,
+    "recall": 1.0,
+    "f1": 1.0,
+    "accuracy": 1.0,
+    "auc": 0.0
+  },
+  "metricas_validacao": {
+    "precision": 1.0,
+    "recall": 1.0,
+    "f1": 1.0,
+    "accuracy": 1.0,
+    "auc": 0.0
+  },
+  "amostras": 1,
+  "amostras_validacao": 1,
+  "num_amostras": 2,
+  "sessoes_treino": 1,
+  "sessoes_validacao": 1,
+  "split": "temporal_80_20",
+  "contagem_eventos_classe": {
+    "treino": {
+      "0": 0,
+      "1": 1
+    },
+    "validacao": {
+      "0": 0,
+      "1": 1
+    },
+    "total": {
+      "0": 0,
+      "1": 2
+    }
+  }
+}

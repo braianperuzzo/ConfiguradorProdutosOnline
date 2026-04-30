@@ -1,0 +1,773 @@
+<!DOCTYPE html>
+<html lang="pt-BR" data-page-type="<?= htmlspecialchars($pageType ?? '', ENT_QUOTES, 'UTF-8'); ?>"
+    data-content-group="<?= htmlspecialchars($contentGroup ?? '', ENT_QUOTES, 'UTF-8'); ?>"
+    data-user-state="<?= htmlspecialchars($userState ?? '', ENT_QUOTES, 'UTF-8'); ?>">
+
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover" />
+    <title>Página não Encontrada | Configurador de Produtos IBR</title>
+    <meta name="description" content="Sua conexão foi perdida. Tente novamente quando estiver online.">
+    <meta property="og:title" content="Conexão Perdida - Redutores IBR">
+    <meta property="og:description" content="Sua conexão foi perdida. Tente novamente quando estiver online.">
+    <meta property="og:type" content="website">
+    <meta name="robots" content="noindex, nofollow">
+    <meta property="og:image" content="https://configurador.redutoresibr.com.br/Imagens/LogotipoAplicativo512512.png">
+    <meta name="twitter:image" content="https://configurador.redutoresibr.com.br/Imagens/LogotipoAplicativo512512.png">
+    <meta property="og:url" content="https://configurador.redutoresibr.com.br/PaginaErros/PaginaErros.html">
+    <meta name="twitter:url" content="https://configurador.redutoresibr.com.br/PaginaErros/PaginaErros.html">
+    <link rel="canonical" href="https://configurador.redutoresibr.com.br/PaginaErros/PaginaErros.html">
+    <link rel="alternate" href="https://configurador.redutoresibr.com.br/PaginaErros/PaginaErros.html" hreflang="pt-BR">
+    <link rel="alternate" href="https://configurador.redutoresibr.com.br/PaginaErros/PaginaErros.html"
+        hreflang="x-default">
+    <meta property="og:locale" content="pt_BR">
+    <meta property="og:site_name" content="Configurador de Produtos IBR">
+    <link rel="preload" href="/Fontes/Fontes.min.css" data-versioned-href="/Fontes/Fontes.min.css" as="style"
+        onload="this.onload=null;this.rel='stylesheet'">
+    <noscript>
+        <link rel="stylesheet" href="/Fontes/Fontes.min.css" data-versioned-href="/Fontes/Fontes.min.css">
+    </noscript>
+    <link rel="icon" href="/Imagens/Icone.ico" type="image/x-icon" />
+    <meta name="theme-color" content="#ec4115" />
+    <meta name="color-scheme" content="light dark">
+    <script nonce="<?= htmlspecialchars(csp_nonce(), ENT_QUOTES, 'UTF-8'); ?>">
+        window.APP_VERSION = 'versao.8.7.2';
+        window.__APP_VERSION_SOURCE__ = 'inline';
+    </script>
+    <script nonce="<?= htmlspecialchars(csp_nonce(), ENT_QUOTES, 'UTF-8'); ?>" src="/Versionamento/CarregarVersao.js"
+        defer></script>
+    <script nonce="<?= htmlspecialchars(csp_nonce(), ENT_QUOTES, 'UTF-8'); ?>">
+        (function preloadCarregarPagina() {
+            try {
+                var head = document.head || document.getElementsByTagName('head')[0];
+                if (!head || head.querySelector('link[data-preload-carregar-pagina]')) {
+                    return;
+                }
+                var supportCheck = document.createElement('link');
+                if (supportCheck.relList && typeof supportCheck.relList.supports === 'function' &&
+                    !supportCheck.relList.supports('preload')) {
+                    return;
+                }
+                var link = document.createElement('link');
+                link.rel = 'preload';
+                link.as = 'script';
+                link.setAttribute('data-preload-carregar-pagina', 'true');
+                var resolver = typeof buildVersionedAssetUrl === 'function'
+                    ? buildVersionedAssetUrl
+                    : function fallbackResolver(url) {
+                        if (typeof window !== 'undefined') {
+                            var version = window.APP_VERSION;
+                            if (typeof version === 'string') {
+                                version = version.trim();
+                            } else if (version != null) {
+                                version = String(version);
+                            }
+                            if (version) {
+                                var normalizedUrl = url;
+                                var hashIndex = normalizedUrl.indexOf('#');
+                                var hash = '';
+                                if (hashIndex >= 0) {
+                                    hash = normalizedUrl.slice(hashIndex);
+                                    normalizedUrl = normalizedUrl.slice(0, hashIndex);
+                                }
+                                var separator = normalizedUrl.indexOf('?') >= 0 ? '&' : '?';
+                                return normalizedUrl + separator + 'versao=' + encodeURIComponent(version) + hash;
+                            }
+                        }
+                        return url;
+                    };
+                link.href = resolver('/PaginasCarregarPagina/CarregarPagina.min.js');
+                head.appendChild(link);
+            } catch (error) {
+                console.warn('CarregarPagina preload setup failed.', error);
+            }
+        })();
+    </script>
+    <script nonce="<?= htmlspecialchars(csp_nonce(), ENT_QUOTES, 'UTF-8'); ?>"
+        data-versioned-src="/SEO/RegraLinksCanonicos.js" defer></script>
+
+    <style>
+        :root {
+            --primary: #ec4115;
+            --primary-dark: #d94f1f;
+            --text-light: #f0f0f0;
+            --text-dark: #1c1c1c;
+            --bg-light: #fdfdfd;
+            --bg-dark: #121212;
+            --card-light: #ffffff;
+            --card-dark: #1f1f1f;
+            --shadow-light: rgba(0, 0, 0, 0.1) 0px 8px 16px;
+            --shadow-dark: rgba(255, 255, 255, 0.05) 0px 4px 12px;
+            --sun-color: #FFC107;
+            --moon-color: #90A4AE;
+            --toggle-bg: #f0f0f0;
+        }
+
+        html[data-theme='dark'] {
+            --bg-light: var(--bg-dark);
+            --text-dark: var(--text-light);
+            --card-light: var(--card-dark);
+            --shadow-light: var(--shadow-dark);
+            --toggle-bg: #333333;
+        }
+
+        * {
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Sarabun', sans-serif;
+            background: var(--bg-light);
+            color: var(--text-dark);
+            margin: 0;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            transition: background 0.4s ease, color 0.4s ease;
+        }
+
+        .container {
+            background: var(--card-light);
+            padding: 40px;
+            border-radius: 20px;
+            box-shadow: var(--shadow-light);
+            text-align: center;
+            width: 90%;
+            max-width: 400px;
+            animation: fadeIn 0.6s ease-out;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            position: relative;
+        }
+
+        .logo {
+            width: 120px;
+            margin-bottom: 24px;
+            animation: pulse 2.5s infinite;
+        }
+
+        h1 {
+            font-size: 22px;
+            color: var(--primary);
+            margin-bottom: 10px;
+            line-height: 1.3;
+            animation: slideFadeIn 0.8s ease-out;
+        }
+
+        .message {
+            font-size: 15px;
+            line-height: 1.4;
+            margin-bottom: 20px;
+        }
+
+        .signal {
+            width: 48px;
+            height: 48px;
+            margin-bottom: 20px;
+        }
+
+        .btn {
+            background-color: var(--primary);
+            border: none;
+            color: white;
+            padding: 12px 24px;
+            font-size: 15px;
+            border-radius: 8px;
+            cursor: pointer;
+            transition: background 0.3s ease, transform 0.3s ease;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        .btn:hover,
+        .btn:focus {
+            background-color: var(--primary-dark);
+            transform: scale(1.05);
+            outline: none;
+        }
+
+        .btn svg {
+            width: 20px;
+            height: 20px;
+            transition: transform 0.3s ease;
+        }
+
+        .icon {
+            width: 24px;
+            height: 24px;
+            fill: none;
+            stroke: currentColor;
+            stroke-width: 2;
+            stroke-linecap: round;
+            stroke-linejoin: round;
+        }
+
+        .theme-icon {
+            transition: transform 0.5s;
+        }
+
+        .theme-icon .sun,
+        .theme-icon .sun-inner,
+        .theme-icon .sun-rays,
+        .theme-icon .moon {
+            transition: opacity 0.3s, transform 0.3s;
+        }
+
+        .theme-icon .sun,
+        .theme-icon .sun-inner,
+        .theme-icon .sun-rays {
+            opacity: 0;
+            transform: scale(0.5);
+        }
+
+        .theme-icon .moon {
+            opacity: 1;
+            transform: scale(1);
+        }
+
+        .theme-icon .icon-bg {
+            fill: var(--toggle-bg);
+            transition: fill 0.3s;
+        }
+
+        .theme-icon .sun,
+        .theme-icon .sun-rays {
+            stroke: var(--sun-color);
+        }
+
+        .theme-icon .sun-inner {
+            fill: var(--sun-color);
+        }
+
+        .theme-icon .moon {
+            fill: var(--moon-color);
+        }
+
+        .theme-icon.rotate {
+            animation: rotateIcon 0.6s ease;
+        }
+
+        html[data-theme='dark'] .theme-icon .sun,
+        html[data-theme='dark'] .theme-icon .sun-inner,
+        html[data-theme='dark'] .theme-icon .sun-rays {
+            opacity: 1;
+            transform: scale(1);
+        }
+
+        html[data-theme='dark'] .theme-icon .moon {
+            opacity: 0;
+            transform: scale(0.5);
+        }
+
+        .toggle-theme {
+            position: absolute;
+            top: 16px;
+            right: 16px;
+            background: var(--toggle-bg);
+            border: none;
+            cursor: pointer;
+            padding: 8px;
+            border-radius: 50%;
+            color: var(--primary);
+            transition: transform 0.3s, background-color 0.3s;
+        }
+
+        .toggle-theme:hover {
+            transform: scale(1.15);
+            background-color: rgba(0, 0, 0, 0.1);
+        }
+
+        html[data-theme='dark'] .toggle-theme:hover {
+            background-color: rgba(255, 255, 255, 0.1);
+        }
+
+        .toggle-theme svg {
+            width: 24px;
+            height: 24px;
+            fill: none;
+            stroke-width: 3;
+            stroke-linecap: round;
+        }
+
+        .refresh {
+            animation: spin 1.5s linear infinite;
+            transform-origin: center;
+        }
+
+        .pulse {
+            animation: pulseDot 1.5s infinite;
+        }
+
+        .arc1,
+        .arc2,
+        .arc3 {
+            animation: wave 2s infinite;
+            opacity: 0.4;
+            transform-origin: center;
+        }
+
+        .arc2 {
+            animation-delay: 0.3s;
+        }
+
+        .arc3 {
+            animation-delay: 0.6s;
+        }
+
+        @keyframes fadeIn {
+            from {
+                opacity: 0;
+                transform: translateY(-20px);
+            }
+
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        @keyframes slideFadeIn {
+            from {
+                opacity: 0;
+                transform: translateY(-8px);
+            }
+
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        @keyframes pulse {
+
+            0%,
+            100% {
+                transform: scale(1);
+            }
+
+            50% {
+                transform: scale(1.05);
+            }
+        }
+
+        @keyframes pulseDot {
+
+            0%,
+            100% {
+                r: 2;
+                opacity: 1;
+            }
+
+            50% {
+                r: 3.2;
+                opacity: 0.6;
+            }
+        }
+
+        @keyframes rotateIcon {
+            from {
+                transform: rotate(0deg);
+            }
+
+            to {
+                transform: rotate(360deg);
+            }
+        }
+
+        @keyframes spin {
+            from {
+                transform: rotate(0deg);
+            }
+
+            to {
+                transform: rotate(360deg);
+            }
+        }
+
+        @keyframes wave {
+
+            0%,
+            100% {
+                opacity: 0.4;
+            }
+
+            50% {
+                opacity: 1;
+            }
+        }
+
+        .pending {
+            margin-top: 20px;
+            display: none;
+        }
+
+        .pending ul {
+            list-style: disc;
+            margin: 8px 0;
+            padding-left: 20px;
+            text-align: left;
+        }
+    </style>
+    <!-- Google tag (gtag.js) -->
+    <script nonce="<?= htmlspecialchars(csp_nonce(), ENT_QUOTES, 'UTF-8'); ?>"
+        data-versioned-src="/SEO/TagsGoogle.min.js" defer></script>
+</head>
+
+<body>
+    <main class="container" role="alert" aria-live="polite">
+        <button class="toggle-theme" onclick="alternarTema()" aria-label="Alternar tema">
+            <svg id="iconTema" class="theme-icon" viewBox="0 0 24 24" width="24" height="24" fill="none"
+                stroke-width="3" stroke-linecap="round" xmlns="http://www.w3.org/2000/svg">
+                <circle class="icon-bg" cx="12" cy="12" r="11" />
+                <circle class="sun" cx="12" cy="12" r="5" />
+                <circle class="sun-inner" cx="12" cy="12" r="2" />
+                <g class="sun-rays">
+                    <line x1="12" y1="1" x2="12" y2="4" />
+                    <line x1="12" y1="20" x2="12" y2="23" />
+                    <line x1="4.22" y1="4.22" x2="5.64" y2="5.64" />
+                    <line x1="18.36" y1="18.36" x2="19.78" y2="19.78" />
+                    <line x1="1" y1="12" x2="3" y2="12" />
+                    <line x1="21" y1="12" x2="23" y2="12" />
+                    <line x1="4.22" y1="19.78" x2="5.64" y2="18.36" />
+                    <line x1="18.36" y1="5.64" x2="19.78" y2="4.22" />
+                </g>
+                <path class="moon" d="M21 12.79A9 9 0 1 1 11.21 3A7 7 0 0 0 21 12.79z" />
+            </svg>
+        </button>
+
+        <img loading="lazy" src="/Imagens/Logotipo.svg" alt="Logotipo Redutores IBR" class="logo" />
+        <h1 id="greeting">Estamos com saudade! 😢</h1>
+        <p id="errorMessage" class="message"></p>
+        <p id="statusMessage" class="message"></p>
+
+        <svg class="signal" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 64 64" aria-hidden="true">
+            <circle class="pulse" cx="32" cy="32" r="4" fill="#ec4115" />
+            <path d="M24 32a8 8 0 0 1 16 0" stroke="#ec4115" stroke-width="4" fill="none" class="arc3" />
+            <path d="M16 32a16 16 0 0 1 32 0" stroke="#ec4115" stroke-width="3" fill="none" class="arc1" />
+            <path d="M8 32a24 24 0 0 1 48 0" stroke="#ec4115" stroke-width="2" fill="none" class="arc2" />
+        </svg>
+
+        <button class="btn" onclick="tentarNovamente()" aria-label="Tentar novamente">
+            <svg class="icon refresh" viewBox="0 0 24 24" aria-hidden="true">
+                <path d="M17.65 6.35A7.95 7.95 0 0 0 12 4V1L7 6l5 5V7a5 5 0 1 1-5 5H5a7 7 0 1 0 12.65-5.65z"
+                    transform="scale(-1,1) translate(-24,0)" />
+            </svg>
+            Tentar Novamente
+        </button>
+
+        <div id="pending" class="pending">
+            <h2>Envios Pendentes</h2>
+            <ul id="pendingList"></ul>
+            <button id="sendQueued" class="btn" type="button">Enviar Agora</button>
+        </div>
+    </main>
+
+    <script nonce="<?= htmlspecialchars(csp_nonce(), ENT_QUOTES, 'UTF-8'); ?>">
+
+        function atualizarIconeTema(tema) {
+            const icon = document.getElementById('iconTema');
+            const sun = icon.querySelector('.sun');
+            const sunInner = icon.querySelector('.sun-inner');
+            const rays = icon.querySelectorAll('.sun-rays line');
+            const moon = icon.querySelector('.moon');
+            if (sun && sunInner && moon) {
+                const mostrarSol = tema === 'dark';
+                const opacidadeSol = mostrarSol ? '1' : '0';
+                const escalaSol = mostrarSol ? '1' : '0.5';
+                [sun, sunInner].forEach(el => {
+                    el.style.opacity = opacidadeSol;
+                    el.style.transform = `scale(${escalaSol})`;
+                });
+                rays.forEach(el => {
+                    el.style.opacity = opacidadeSol;
+                    el.style.transform = `scale(${escalaSol})`;
+                });
+                moon.style.opacity = mostrarSol ? '0' : '1';
+                moon.style.transform = mostrarSol ? 'scale(0.5)' : 'scale(1)';
+            }
+        }
+
+        function criarIcone(nome) {
+            const svg = document.createElementNS('http://www.w3.org/2000/svg', 'svg');
+            svg.setAttribute('width', '24');
+            svg.setAttribute('height', '24');
+            svg.setAttribute('fill', 'none');
+            svg.setAttribute('stroke', 'currentColor');
+            svg.setAttribute('stroke-width', '2');
+            svg.setAttribute('stroke-linecap', 'round');
+            svg.setAttribute('stroke-linejoin', 'round');
+            const icones = {
+                moon: ['M21 12.79A9 9 0 1 1 11.21 3A7 7 0 0 0 21 12.79z'],
+                sun: [
+                    ['circle', { cx: 12, cy: 12, r: 5 }],
+                    ['circle', { cx: 12, cy: 12, r: 2, fill: 'currentColor' }],
+                    ['line', { x1: 12, y1: 1, x2: 12, y2: 3 }],
+                    ['line', { x1: 12, y1: 21, x2: 12, y2: 23 }],
+                    ['line', { x1: 4.22, y1: 4.22, x2: 5.64, y2: 5.64 }],
+                    ['line', { x1: 18.36, y1: 18.36, x2: 19.78, y2: 19.78 }],
+                    ['line', { x1: 1, y1: 12, x2: 3, y2: 12 }],
+                    ['line', { x1: 21, y1: 12, x2: 23, y2: 12 }],
+                    ['line', { x1: 4.22, y1: 19.78, x2: 5.64, y2: 18.36 }],
+                    ['line', { x1: 18.36, y1: 5.64, x2: 19.78, y2: 4.22 }]
+                ],
+                'refresh-ccw': [
+                    ['polyline', { points: '1 4 1 10 7 10' }],
+                    ['polyline', { points: '23 20 23 14 17 14' }],
+                    ['path', { d: 'M20.49 9A9 9 0 0 0 6.51 15l-5-5' }],
+                    ['path', { d: 'M3.51 15A9 9 0 0 0 17.49 9l5 5' }]
+                ]
+            };
+            const config = icones[nome];
+            if (config) {
+                config.forEach(p => {
+                    if (typeof p === 'string') {
+                        const path = document.createElementNS('http://www.w3.org/2000/svg', 'path');
+                        path.setAttribute('d', p);
+                        svg.appendChild(path);
+                    } else {
+                        const [tag, attrs] = p;
+                        const el = document.createElementNS('http://www.w3.org/2000/svg', tag);
+                        Object.entries(attrs).forEach(([k, v]) => el.setAttribute(k, v));
+                        svg.appendChild(el);
+                    }
+                });
+            }
+            return svg;
+        }
+
+        function criarIcones() {
+            document.querySelectorAll('[data-lucide]').forEach(el => {
+                const nome = el.getAttribute('data-lucide');
+                const svg = criarIcone(nome);
+                el.replaceWith(svg);
+            });
+        }
+
+        const greeting = document.getElementById("greeting");
+        const hora = new Date().getHours();
+        let saudacao = hora < 12 ? "Bom dia ☀️" : hora < 18 ? "Boa tarde 🌤️" : "Boa noite 🌙";
+        greeting.textContent = `${saudacao}, estamos com saudade! 😢`;
+
+        const params = new URLSearchParams(location.search);
+        let codigo = params.get("code");
+
+        if (!codigo) {
+            const pathname = window.location.pathname.toLowerCase();
+            if (pathname === "/PaginaErros/PaginaErros.html") {
+                codigo = "offline";
+            } else {
+                codigo = "404";
+            }
+        }
+
+        const registrarPaginaErro = () => {
+            const payload = {
+                status_code: codigo || 'generic',
+                page_path: window.location.pathname + window.location.search
+            };
+            if (typeof window.gtag === 'function') {
+                window.gtag('event', 'pagina_erro', payload);
+            }
+            if (window.dataLayer && typeof window.dataLayer.push === 'function') {
+                window.dataLayer.push(Object.assign({ event: 'pagina_erro' }, payload));
+            }
+        };
+
+        registrarPaginaErro();
+
+        const mensagens = {
+            "404": "😕 <strong>Página não encontrada (Erro 404).</strong><br>O endereço pode estar incorreto ou não existir.",
+            "500": "😕 <strong>Erro interno do servidor (Erro 500).</strong><br>Ocorreu um problema no servidor. Tente novamente mais tarde.",
+            "401": "😕 <strong>Não autorizado (Erro 401).</strong><br>Você precisa se autenticar para acessar este recurso.",
+            "403": "😕 <strong>Acesso negado (Erro 403).</strong><br>Você não tem permissão para acessar este recurso.",
+            "502": "😕 <strong>Erro de gateway (Erro 502).</strong><br>O servidor recebeu uma resposta inválida.",
+            "429": "😕 <strong>Limite de solicitações excedido (Erro 429).</strong><br>Tente novamente em 1 hora.",
+            "offline": "😕 <strong>Sem conexão no momento!</strong><br>Verifique sua conexão com a internet.",
+            "generic": "😕 <strong>Ocorreu um erro inesperado.</strong><br>Tente novamente mais tarde."
+        };
+
+        document.getElementById("errorMessage").innerHTML = mensagens[codigo] || mensagens["generic"];
+
+        const verificarConexao = codigo === 'offline';
+
+        const nomeCookieTema = (typeof window !== "undefined" && window.THEME_COOKIE_NAME) || "modoEscuro";
+        const dominioCookieTema = (typeof window !== "undefined" && window.THEME_COOKIE_DOMAIN) || ".redutoresibr.com.br";
+        const maxIdadeCookieTema = (typeof window !== "undefined" && typeof window.THEME_COOKIE_MAX_AGE === "number")
+            ? window.THEME_COOKIE_MAX_AGE
+            : 60 * 60 * 24 * 365;
+
+        function lerCookie(nome) {
+            if (typeof document === 'undefined' || typeof document.cookie !== 'string') {
+                return null;
+            }
+
+            const cookies = document.cookie.split(';').map(row => row.trim()).filter(Boolean);
+            for (const cookie of cookies) {
+                if (cookie.startsWith(`${nome}=`)) {
+                    const valor = cookie.substring(nome.length + 1);
+                    try {
+                        return decodeURIComponent(valor);
+                    } catch {
+                        return valor;
+                    }
+                }
+            }
+            return null;
+        }
+
+        function definirCookieTema(valor) {
+            if (typeof document === 'undefined') {
+                return;
+            }
+
+            const valorCodificado = encodeURIComponent(valor);
+            const atributosBase = `; path=/; max-age=${maxIdadeCookieTema}; SameSite=Lax`;
+            const cookieComDominio = `${nomeCookieTema}=${valorCodificado}${atributosBase}; domain=${dominioCookieTema}`;
+
+            try {
+                document.cookie = cookieComDominio;
+                if (lerCookie(nomeCookieTema) !== valor) {
+                    document.cookie = `${nomeCookieTema}=${valorCodificado}${atributosBase}`;
+                }
+            } catch {
+                document.cookie = `${nomeCookieTema}=${valorCodificado}${atributosBase}`;
+            }
+        }
+
+        let temaSalvo = lerCookie(nomeCookieTema);
+        if (temaSalvo === null) {
+            temaSalvo = localStorage.getItem("modoEscuro");
+        }
+        if (temaSalvo === "1") {
+            document.documentElement.dataset.theme = "dark";
+        } else if (temaSalvo === "0") {
+            document.documentElement.dataset.theme = "light";
+        }
+
+        function alternarTema() {
+            const html = document.documentElement;
+            const icon = document.getElementById('iconTema');
+            const novoTemaEhEscuro = html.dataset.theme !== "dark";
+            html.dataset.theme = novoTemaEhEscuro ? "dark" : "light";
+            const valorTema = novoTemaEhEscuro ? "1" : "0";
+            localStorage.setItem("modoEscuro", valorTema);
+            definirCookieTema(valorTema);
+            atualizarIconeTema(html.dataset.theme);
+            icon.classList.add('rotate');
+            icon.addEventListener('animationend', () => icon.classList.remove('rotate'), { once: true });
+        }
+
+        function atualizarStatus() {
+            const status = document.getElementById("statusMessage");
+            if (status) status.textContent = navigator.onLine ? "Conectado ✅" : "Sem conexão ❌";
+        }
+        if (verificarConexao) {
+            window.addEventListener("online", () => { atualizarStatus(); checarConexao(); });
+        } else {
+            window.addEventListener("online", atualizarStatus);
+        } window.addEventListener("offline", atualizarStatus);
+        atualizarStatus();
+
+        const retorno = sessionStorage.getItem('offline-redirect') || '/';
+
+        function tentarNovamente() {
+            setTimeout(() => {
+                sessionStorage.removeItem('offline-redirect');
+                location.href = retorno;
+            }, 500);
+        }
+
+        async function checarConexao() {
+            if (!navigator.onLine) return;
+            try {
+                const resp = await fetch('/Imagens/Icone.ico', { method: 'HEAD', cache: 'no-store' });
+                const tipo = resp.headers.get('content-type') || '';
+                if (resp.ok && tipo.includes('image') && !resp.url.includes('/PaginaErros/PaginaErros.html')) {
+                    sessionStorage.removeItem('offline-redirect');
+                    location.href = retorno;
+                }
+            } catch { }
+        }
+
+        if (verificarConexao) {
+            checarConexao();
+        }
+
+        atualizarIconeTema(document.documentElement.dataset.theme || 'light');
+        const handleQueuedRequests = e => {
+            const data = e.data;
+            if (!data || data.type !== 'queuedRequests') {
+                return;
+            }
+            if (data.error) {
+                console.warn('Falha ao listar solicitações pendentes do Service Worker:', data.error);
+                if ('serviceWorker' in navigator) {
+                    navigator.serviceWorker.removeEventListener('message', handleQueuedRequests);
+                }
+                return;
+            }
+            if (data.requests && data.requests.length) {
+                const section = document.getElementById('pending');
+                const list = document.getElementById('pendingList');
+                if (!section || !list) {
+                    return;
+                }
+                list.innerHTML = '';
+                data.requests.forEach(r => {
+                    const li = document.createElement('li');
+                    try {
+                        li.textContent = `${r.method} ${new URL(r.url).pathname}`;
+                    } catch {
+                        li.textContent = `${r.method} ${r.url}`;
+                    }
+                    list.appendChild(li);
+                });
+                section.style.display = 'block';
+            }
+        };
+
+        if ('serviceWorker' in navigator) {
+            const { serviceWorker } = navigator;
+            const detachListener = () => serviceWorker.removeEventListener('message', handleQueuedRequests);
+            const requestQueuedData = worker => {
+                if (worker && typeof worker.postMessage === 'function') {
+                    worker.postMessage({ type: 'getQueuedRequests' });
+                }
+            };
+
+            serviceWorker.removeEventListener('message', handleQueuedRequests);
+            serviceWorker.addEventListener('message', handleQueuedRequests);
+
+            if (serviceWorker.controller) {
+                requestQueuedData(serviceWorker.controller);
+            } else {
+                serviceWorker.ready.then(reg => {
+                    requestQueuedData(reg.active);
+                }).catch(() => { });
+            }
+
+            serviceWorker.addEventListener('controllerchange', () => {
+                requestQueuedData(serviceWorker.controller);
+            });
+
+            window.addEventListener('beforeunload', detachListener, { once: true });
+
+            const sendQueuedButton = document.getElementById('sendQueued');
+            if (sendQueuedButton) {
+                sendQueuedButton.addEventListener('click', () => {
+                    serviceWorker.ready.then(reg => {
+                        if ('sync' in reg) {
+                            reg.sync.register('sync-requests').catch(() => { });
+                        }
+                    });
+                });
+            }
+        }
+    </script>
+
+</body>
+
+</html>
