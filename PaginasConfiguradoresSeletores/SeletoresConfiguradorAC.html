@@ -1,0 +1,1785 @@
+<!DOCTYPE html>
+
+<div id="titulo-estrutural" class="sr-only">Configurador</div>
+
+<link rel="stylesheet" href="/Layout/Galeria.min.css" data-versioned-href="/Layout/Galeria.min.css">
+
+<main class="main mb-0 pb-0">
+    <div class="pagina__titulo--bloco fw-bold mt-5 mb-4">
+    </div>
+    <div class="container">
+        <div class="galeria-produto" data-visible="1.VFN" data-lightbox-module="/Layout/ModuloPhotoSwipe.js"
+            data-folder="IBRVFN" data-title="IBR VFN"
+            data-description="A linha IBR VFN de redutores oferece alto desempenho nos ambientes mais agressivos devido a sua construção em aço inoxidável, tanto carcaça quanto as diversas opções de acessórios que possui. Seu corpo é quadrado e internamente é fabricado com engrenagens de coroa e rosca sem-fim, possui proteção IP69K, garantida pelas vedações com retentor duplo de viton e capa externa em aço inoxidável."
+            data-site="https://www.redutoresibr.com.br/pt/Produtos/ibr-i"
+            data-catalog="https://www.redutoresibr.com.br/pt/Arquivos/visualizar/catalogo-anticorrosivos#book/">
+        </div>
+
+        <div class="galeria-produto" data-visible="1.Z" data-lightbox-module="/Layout/ModuloPhotoSwipe.js"
+            data-folder="IBRZ" data-title="IBR Z"
+            data-description="A linha Z de redutores e motorredutores se caracteriza pela tecnologia empregada, desde a concepção da transmissão por engrenagens coroa e rosca sem-fim helicoidais até o tratamento de superfície especial NTT, que garante alteração de propriedades e aumento da resistência do alumínio à corrosão."
+            data-site="https://www.redutoresibr.com.br/pt/Produtos/ibr-z"
+            data-catalog="https://www.redutoresibr.com.br/pt/Arquivos/visualizar/catalogo-anticorrosivos#book/">
+        </div>
+    </div>
+    <div id="titulo-configurador" class="pagina__titulo--bloco mt-5 mb-5 text-center">
+        <h2 id="texto-configurador" class="fs-3 fw-bolder m-0"></h2>
+    </div>
+</main>
+
+<script nonce="<?= htmlspecialchars(csp_nonce(), ENT_QUOTES, 'UTF-8'); ?>">
+    document.addEventListener('DOMContentLoaded', () => {
+        const metaDescription = document.querySelector('meta[name="description"]');
+        const ogTitle = document.querySelector('meta[property="og:title"]');
+        const ogDescription = document.querySelector('meta[property="og:description"]');
+        const metaKeywords = document.querySelector('meta[name="keywords"]');
+        const schemaInfo = (() => {
+            const isWebPageNode = (node) => node && typeof node === 'object' && !Array.isArray(node)
+                && (node['@type'] === 'WebPage' || (typeof node['@id'] === 'string' && node['@id'].includes('#webpage')));
+            const scripts = Array.from(document.querySelectorAll('head script[type="application/ld+json"]'));
+
+            for (const script of scripts) {
+                const content = script.textContent?.trim();
+                if (!content) continue;
+                try {
+                    const parsed = JSON.parse(content);
+
+                    if (Array.isArray(parsed)) {
+                        const index = parsed.findIndex(isWebPageNode);
+                        if (index !== -1) {
+                            const original = JSON.parse(JSON.stringify(parsed[index]));
+                            return {
+                                script,
+                                original,
+                                update(data) {
+                                    const next = parsed.map((item, i) => i === index ? data : item);
+                                    script.textContent = JSON.stringify(next);
+                                }
+                            };
+                        }
+                    } else if (parsed && Array.isArray(parsed['@graph'])) {
+                        const index = parsed['@graph'].findIndex(isWebPageNode);
+                        if (index !== -1) {
+                            const original = JSON.parse(JSON.stringify(parsed['@graph'][index]));
+                            return {
+                                script,
+                                original,
+                                update(data) {
+                                    const next = {
+                                        ...parsed,
+                                        '@graph': parsed['@graph'].map((item, i) => i === index ? data : item)
+                                    };
+                                    script.textContent = JSON.stringify(next);
+                                }
+                            };
+                        }
+                    } else if (isWebPageNode(parsed)) {
+                        const original = JSON.parse(JSON.stringify(parsed));
+                        return {
+                            script,
+                            original,
+                            update(data) {
+                                script.textContent = JSON.stringify(data);
+                            }
+                        };
+                    }
+                } catch { }
+            }
+
+            return { script: null, original: null, update() { } };
+        })();
+
+        const ldJsonScript = schemaInfo.script;
+        const originalLdJson = schemaInfo.original;
+        const updateLdJson = schemaInfo.update;
+
+        const originalMeta = {
+            description: metaDescription?.getAttribute('content') || '',
+            ogTitle: ogTitle?.getAttribute('content') || '',
+            ogDescription: ogDescription?.getAttribute('content') || '',
+            keywords: metaKeywords?.getAttribute('content') || ''
+        };
+
+        function atualizarMetadados(visivel, tituloCompleto) {
+            const descricao = (visivel?.dataset.description || '').replace(/\s+/g, ' ').trim();
+            const site = visivel?.dataset.site || '';
+            const catalogo = visivel?.dataset.catalog || '';
+            const priceValidUntil = new Date(Date.now() + 1000 * 60 * 60 * 24 * 180).toISOString().slice(0, 10);
+            const moeda = (visivel?.dataset.priceCurrency || visivel?.dataset.currency || 'BRL').trim() || 'BRL';
+            const precoBruto = (visivel?.dataset.price || visivel?.dataset.preco || '0.00').trim();
+            const precoNormalizado = precoBruto.replace(/\./g, '').replace(',', '.');
+            const precoNumero = Number(precoNormalizado);
+            const preco = Number.isFinite(precoNumero) ? precoNumero.toFixed(2) : '0.00';
+
+            const paginaTitulo = tituloCompleto ? 'Configurador de Produtos - ' + tituloCompleto : 'Configurador de Produtos';
+
+            if (metaDescription) {
+                metaDescription.setAttribute('content', descricao || originalMeta.description);
+            }
+
+            if (ogTitle) {
+                ogTitle.setAttribute('content', paginaTitulo);
+            }
+
+            if (ogDescription) {
+                ogDescription.setAttribute('content', descricao || originalMeta.ogDescription);
+            }
+
+            if (metaKeywords) {
+                const palavrasChave = originalMeta.keywords ? originalMeta.keywords.split(',').map(k => k.trim()).filter(Boolean) : [];
+                if (tituloCompleto && !palavrasChave.includes(tituloCompleto)) {
+                    palavrasChave.unshift(tituloCompleto);
+                }
+                if (descricao) {
+                    const termosDescricao = descricao.split(/[,;\.]/).map(parte => parte.trim()).filter(Boolean);
+                    termosDescricao.forEach(termo => {
+                        if (!palavrasChave.includes(termo)) {
+                            palavrasChave.push(termo);
+                        }
+                    });
+                }
+                metaKeywords.setAttribute('content', palavrasChave.join(', '));
+            }
+
+            if (ldJsonScript && originalLdJson) {
+                try {
+                    const atualizado = {
+                        ...originalLdJson,
+                        name: paginaTitulo,
+                        description: descricao || originalLdJson.description || ''
+                    };
+                    if (site) {
+                        atualizado.url = site;
+                    }
+                    if (catalogo) {
+                        atualizado.offers = {
+                            '@type': 'Offer',
+                            url: catalogo,
+                            availability: 'https://schema.org/InStock',
+                            priceValidUntil: priceValidUntil,
+                            priceCurrency: 'BRL',
+                            priceCurrency: moeda,
+                            price: preco,
+                            shippingDetails: {
+                                '@type': 'OfferShippingDetails',
+                                shippingRate: {
+                                    '@type': 'MonetaryAmount',
+                                    value: '0',
+                                    currency: 'BRL'
+                                },
+                                deliveryTime: {
+                                    '@type': 'ShippingDeliveryTime',
+                                    handlingTime: {
+                                        '@type': 'QuantitativeValue',
+                                        minValue: 0,
+                                        maxValue: 1,
+                                        unitCode: 'DAY'
+                                    },
+                                    transitTime: {
+                                        '@type': 'QuantitativeValue',
+                                        minValue: 1,
+                                        maxValue: 10,
+                                        unitCode: 'DAY'
+                                    }
+                                }
+                            }
+                        };
+                    } else if (!originalLdJson?.offers) {
+                        delete atualizado.offers;
+                    }
+                    updateLdJson(atualizado);
+                } catch { }
+            }
+        }
+
+        function atualizarTituloDinamicoDocumento() {
+            window.__refreshDynamicDocumentTitle?.({
+                sourceDoc: document,
+                pageUrl: window.location.pathname + window.location.search
+            });
+        }
+
+        function atualizarTitulo() {
+            const visivel = Array.from(document.querySelectorAll('.galeria-produto[data-title]'))
+                .find(g => g.style.display !== 'none');
+            const titulo = visivel ? visivel.dataset.title : '';
+            const el = document.getElementById('texto-configurador');
+            if (!el) return;
+            if (!titulo) {
+                el.innerHTML = '';
+                atualizarMetadados(null, '');
+                atualizarTituloDinamicoDocumento();
+                return;
+            }
+            let html = 'Configure o seu ';
+            if (titulo.toUpperCase().startsWith('IBR ')) {
+                const partes = titulo.split(' ');
+                const primeiro = partes.shift();
+                const resto = partes.join(' ');
+                html += '<span class="text-dark">' + primeiro + '</span>';
+                if (resto) html += ' <span class="text-orange">' + resto + '</span>';
+            } else {
+                html += titulo;
+            }
+            el.innerHTML = html;
+            atualizarMetadados(visivel, titulo);
+            atualizarTituloDinamicoDocumento();
+        }
+        atualizarTitulo();
+        setTimeout(atualizarTitulo);
+        document.getElementById('ACLN')?.addEventListener('change', atualizarTitulo);
+    });
+</script>
+
+<!--<script nonce="<?= htmlspecialchars(csp_nonce(), ENT_QUOTES, 'UTF-8'); ?>"
+    src="/Layout/LayoutAjudaSeletores.min.js"></script>
+
+<script src="/PaginasNavegacaoCompartilhada/ConfiguracaoGuiada.min.js"></script>
+
+<script nonce="<?= htmlspecialchars(csp_nonce(), ENT_QUOTES, 'UTF-8'); ?>">
+    document.addEventListener('DOMContentLoaded', () => {
+        const pageId = 'SeletoresConfiguradorAC';
+        const helpConfigs = window.HelpContentCatalog?.getPageHelpConfigs(pageId) || {};
+
+        window.LayoutAjudaSeletores.registerPageHelp({
+            pageId: 'SeletoresConfiguradorAC',
+            helpConfigs,
+            buttonSelector: 'button.help-icon[data-help-text]',
+            updateTriggerIds: ['ACLN', 'ACBR', 'ACRD', 'ACCM', 'ACCP', 'ACAF', 'ACAFP', 'ACBT', 'ACPE', 'ACAS', 'ACASP', 'ACPM', 'ACOPC',
+                'ACMO', 'MOLN', 'MOTP', 'MOTT', 'MOFQ', 'MOPT', 'MOPL', 'MOCP', 'MOCPP', 'MOPC', 'MOPP', 'MOOPC', 'MOCR', 'ACCR']
+        });
+    });
+</script>-->
+
+<script nonce="<?= htmlspecialchars(csp_nonce(), ENT_QUOTES, 'UTF-8'); ?>"
+    data-versioned-src="/Layout/Galeria.min.js"></script>
+<script nonce="<?= htmlspecialchars(csp_nonce(), ENT_QUOTES, 'UTF-8'); ?>"
+    data-versioned-src="/Layout/FiltrarPorURL.min.js"></script>
+
+<section id="GrupoACLN">
+    <label class="cssB d-flex align-items-center gap-1 justify-content-center" for="ACLN">Linha do Redutor:
+        <button class="help-icon" data-help-title="" data-help-text="" data-help-class="perm-popover" data-bs-title=""
+            data-bs-content="" aria-label="Ajuda sobre Linha do Redutor"></button>
+    </label>
+    <select class="cssC" id="ACLN" name="ACLN">
+    </select>
+</section>
+
+<section id="GrupoACBR">
+    <label class="cssB d-flex align-items-center gap-1 justify-content-center" for="ACBR">Tamanho do Redutor:
+        <button class="help-icon" data-help-title="" data-help-text="" data-help-class="perm-popover" data-bs-title=""
+            data-bs-content="" aria-label="Ajuda sobre Tamanho do Redutor"></button>
+    </label>
+    <select class="cssC" id="ACBR" name="ACBR">
+    </select>
+</section>
+
+
+<section id="GrupoACRD">
+    <label class="cssB d-flex align-items-center gap-1 justify-content-center" for="ACRD">Redução do Redutor:
+        <button class="help-icon" data-help-title="" data-help-text="" data-help-class="perm-popover" data-bs-title=""
+            data-bs-content="" aria-label="Ajuda sobre Redução do Redutor"></button>
+    </label>
+    <select class="cssC" id="ACRD" name="ACRD">
+    </select>
+</section>
+
+
+<section id="GrupoACCM">
+    <label class="cssB d-flex align-items-center gap-1 justify-content-center" for="ACCM">Tamanho da Carcaça ou Eixo de
+        Entrada do Redutor:
+        <button class="help-icon" data-help-title="" data-help-text="" data-help-class="perm-popover" data-bs-title=""
+            data-bs-content="" aria-label="Ajuda sobre Tamanho da Carcaça ou Eixo de Entrada do Redutor"></button>
+    </label>
+    <select class="cssC" id="ACCM" name="ACCM">
+    </select>
+</section>
+
+
+<section id="GrupoACCP">
+    <label class="cssB d-flex align-items-center gap-1 justify-content-center" for="ACCP">Forma Construtiva:<button
+            class="help-icon" data-help-title="" data-help-text="" data-help-class="perm-popover" data-bs-title=""
+            data-bs-content="" aria-label="Ajuda sobre Forma Construtiva"></button>
+    </label>
+    <select class="cssC" id="ACCP" name="ACCP">
+    </select>
+</section>
+
+
+<section id="GrupoACAF" class="grupo-condicional">
+    <label class="cssB d-flex align-items-center gap-1 justify-content-center" for="ACAF">Acessório de Fixação do
+        Redutor:
+        <button class="help-icon" data-help-title="" data-help-text="" data-help-class="perm-popover" data-bs-title=""
+            data-bs-content="" aria-label="Ajuda sobre Acessório de Fixação do Redutor"></button>
+    </label>
+    <select class="cssC" id="ACAF" name="ACAF">
+    </select>
+
+
+    <div class="subgrupo" style="display: none;">
+
+        <section id="GrupoACAFP" class="grupo-condicional">
+            <label class="cssB d-flex align-items-center gap-1 justify-content-center" for="ACAFP">Posição do Acessório
+                de Fixação:
+                <button class="help-icon" data-help-title="" data-help-text="" data-help-class="perm-popover"
+                    data-bs-title="" data-bs-content=""
+                    aria-label="Ajuda sobre Posição do Acessório de Fixação"></button>
+            </label>
+            <select class="cssC" id="ACAFP" name="ACAFP">
+                <option value="A" selected>DIREITA</option>
+                <option value="B">ESQUERDA</option>
+            </select>
+        </section>
+
+
+        <section id="GrupoACBT" class="grupo-condicional" style="display: none;">
+            <label class="cssB d-flex align-items-center gap-1 justify-content-center" for="ACBT">Posição do Braço de
+                Torque:
+                <button class="help-icon" data-help-title="" data-help-text="" data-help-class="perm-popover"
+                    data-bs-title="" data-bs-content="" aria-label="Ajuda sobre Posição do Braço de Torque"></button>
+            </label>
+            <select class="cssC" id="ACBT" name="ACBT">
+                <option value="1" selected>1</option>
+                <option value="2">2</option>
+                <option value="3">3</option>
+                <option value="4">4</option>
+                <option value="5">5</option>
+            </select>
+        </section>
+
+
+        <section id="GrupoACPE" class="grupo-condicional" style="display: none;">
+            <label class="cssB d-flex align-items-center gap-1 justify-content-center" for="ACPE">Posição dos Pés do
+                Redutor:
+                <button class="help-icon" data-help-title="" data-help-text="" data-help-class="perm-popover"
+                    data-bs-title="" data-bs-content="" aria-label="Ajuda sobre Posição dos Pés do Redutor"></button>
+            </label>
+            <select class="cssC" id="ACPE" name="ACPE">
+                <option value="PB" selected>ESQUERDA</option>
+                <option value="PA">DIREITA</option>
+                <option value="PV">INFERIOR</option>
+            </select>
+        </section>
+    </div>
+</section>
+
+
+<section id="GrupoACAS" class="grupo-condicional">
+    <label class="cssB d-flex align-items-center gap-1 justify-content-center" for="ACAS">Acessório de Saída do Redutor:
+        <button class="help-icon" data-help-title="" data-help-text="" data-help-class="perm-popover" data-bs-title=""
+            data-bs-content="" aria-label="Ajuda sobre Acessório de Saída do Redutor"></button>
+    </label>
+    <select class="cssC" id="ACAS" name="ACAS">
+    </select>
+
+
+    <div class="subgrupo" style="display: none;">
+
+        <section id="GrupoACASP" class="grupo-condicional">
+            <label class="cssB d-flex align-items-center gap-1 justify-content-center" for="ACASP">Posição do Acessório
+                de Saída:
+                <button class="help-icon" data-help-title="" data-help-text="" data-help-class="perm-popover"
+                    data-bs-title="" data-bs-content="" aria-label="Ajuda sobre Posição do Acessório de Saída"></button>
+            </label>
+            <select class="cssC" id="ACASP" name="ACASP">
+                <option value="A" selected>DIREITA</option>
+                <option value="B">ESQUERDA</option>
+            </select>
+        </section>
+    </div>
+</section>
+
+<section id="GrupoACPM" class="grupo-condicional" style="display: none;">
+    <label class="cssB d-flex align-items-center gap-1 justify-content-center" for="ACPM">Posição de Montagem do
+        Redutor:
+        <button class="help-icon" data-help-title="" data-help-text="" data-help-class="perm-popover" data-bs-title=""
+            data-bs-content="" aria-label="Ajuda sobre Posição de Montagem do Redutor"></button>
+    </label>
+    <select class="cssC" id="ACPM" name="ACPM">
+    </select>
+</section>
+
+
+<section id="GrupoACOPC">
+    <label class="cssB d-flex align-items-center gap-1 justify-content-center" for="ACOPC_NAO">Itens Opcionais do
+        Redutor:
+        <button class="help-icon" data-help-title="" data-help-text="" data-help-class="perm-popover" data-bs-title=""
+            data-bs-content="" aria-label="Ajuda sobre Itens Opcionais do Redutor"></button>
+    </label>
+    <div id="dropdownACOPC" class="dropdown-checkbox" style="max-width:400px; margin: 0 auto;">
+        <div class="dropdown-button cssC" onclick="toggleDropdown(this)">NÃO</div>
+        <div class="dropdown-list"
+            style="display:none; border: 1px solid #ec4115; max-height: 180px; overflow-y: auto; border-radius: 6px; background: white; padding: 10px; margin-top: 4px;">
+            <div id="checklistACOPC" style="display:flex; flex-direction:column; gap:6px; text-align:left;">
+                <label><input type="checkbox" id="ACOPC_NAO" name="ACOPC" value="NÃO" checked> NÃO</label>
+            </div>
+        </div>
+        <input type="hidden" id="ACOPC" name="ACOPC" value="NÃO">
+    </div>
+</section>
+
+
+<section id="GrupoACMO" class="grupo-condicional">
+    <label class="cssB d-flex align-items-center gap-1 justify-content-center" for="ACMO">Com Motor:
+        <button class="help-icon" data-help-title="" data-help-text="" data-help-class="perm-popover" data-bs-title=""
+            data-bs-content="" aria-label="Ajuda sobre Com Motor"></button>
+    </label>
+    <select class="cssC" id="ACMO" name="ACMO">
+        <option value="N">NÃO</option>
+        <option value="S">SIM</option>
+    </select>
+
+
+    <div class="subgrupo" style="display: none;">
+
+        <section id="GrupoMOLN" class="grupo-condicional">
+            <label class="cssB d-flex align-items-center gap-1 justify-content-center" for="MOLN">Linha do Motor:
+                <button class="help-icon" data-help-title="" data-help-text="" data-help-class="perm-popover"
+                    data-bs-title="" data-bs-content="" aria-label="Ajuda sobre Linha do Motor"></button>
+            </label>
+            <select class="cssC" id="MOLN" name="MOLN">
+
+            </select>
+        </section>
+
+
+        <section id="GrupoMOTP" class="grupo-condicional">
+            <label class="cssB d-flex align-items-center gap-1 justify-content-center" for="MOTP">Tipo do Motor:
+                <button class="help-icon" data-help-title="" data-help-text="" data-help-class="perm-popover"
+                    data-bs-title="" data-bs-content="" aria-label="Ajuda sobre Tipo do Motor"></button>
+            </label>
+            <select class="cssC" id="MOTP" name="MOTP">
+
+            </select>
+        </section>
+
+
+        <section id="GrupoMOTT" class="grupo-condicional">
+            <label class="cssB d-flex align-items-center gap-1 justify-content-center" for="MOTT">Tensão do Motor:
+                <button class="help-icon" data-help-title="" data-help-text="" data-help-class="perm-popover"
+                    data-bs-title="" data-bs-content="" aria-label="Ajuda sobre Tensão do Motor"></button>
+            </label>
+            <select class="cssC" id="MOTT" name="MOTT">
+
+            </select>
+        </section>
+
+
+        <section id="GrupoMOFQ" class="grupo-condicional">
+            <label class="cssB d-flex align-items-center gap-1 justify-content-center" for="MOFQ">Frequência do Motor:
+                <button class="help-icon" data-help-title="" data-help-text="" data-help-class="perm-popover"
+                    data-bs-title="" data-bs-content="" aria-label="Ajuda sobre Frequência do Motor"></button>
+            </label>
+            <select class="cssC" id="MOFQ" name="MOFQ">
+
+            </select>
+        </section>
+
+
+        <section id="GrupoMOPT" class="grupo-condicional">
+            <label class="cssB d-flex align-items-center gap-1 justify-content-center" for="MOPT">Potência do Motor:
+                <button class="help-icon" data-help-title="" data-help-text="" data-help-class="perm-popover"
+                    data-bs-title="" data-bs-content="" aria-label="Ajuda sobre Potência do Motor"></button>
+            </label>
+            <select class="cssC" id="MOPT" name="MOPT">
+
+            </select>
+        </section>
+
+
+        <section id="GrupoMOPL" class="grupo-condicional">
+            <label class="cssB d-flex align-items-center gap-1 justify-content-center" for="MOPL">Polaridade do Motor:
+                <button class="help-icon" data-help-title="" data-help-text="" data-help-class="perm-popover"
+                    data-bs-title="" data-bs-content="" aria-label="Ajuda sobre Polaridade do Motor"></button>
+            </label>
+            <select class="cssC" id="MOPL" name="MOPL">
+
+            </select>
+        </section>
+
+
+        <section id="GrupoMOCP" class="grupo-condicional">
+            <label class="cssB d-flex align-items-center gap-1 justify-content-center" for="MOCP">Forma Construtiva do
+                Motor:
+                <button class="help-icon" data-help-title="" data-help-text="" data-help-class="perm-popover"
+                    data-bs-title="" data-bs-content="" aria-label="Ajuda sobre Forma Construtiva do Motor"></button>
+            </label>
+            <select class="cssC" id="MOCP" name="MOCP">
+
+            </select>
+
+
+            <div class="SubgrupoMOCP" style="display: none;">
+                <section id="GrupoMOCPP" class="subgrupo subgrupo-aninhado grupo-condicional">
+                    <label class="cssB d-flex align-items-center gap-1 justify-content-center" for="MOCPP">Posição dos
+                        Pés do Motor:
+                        <button class="help-icon" data-help-title="" data-help-text="" data-help-class="perm-popover"
+                            data-bs-title="" data-bs-content=""
+                            aria-label="Ajuda sobre Posição dos Pés do Motor"></button>
+                    </label>
+                    <select class="cssC" id="MOCPP" name="MOCPP">
+
+                    </select>
+                </section>
+            </div>
+        </section>
+
+
+        <section id="GrupoMOPC" class="grupo-condicional">
+            <label class="cssB d-flex align-items-center gap-1 justify-content-center" for="MOPC">Posição da Caixa de
+                Ligação ou de Montagem do Motor:
+                <button class="help-icon" data-help-title="" data-help-text="" data-help-class="perm-popover"
+                    data-bs-title="" data-bs-content=""
+                    aria-label="Ajuda sobre Posição da Caixa de Ligação ou de Montagem do Motor"></button>
+            </label>
+            <select class="cssC" id="MOPC" name="MOPC">
+
+            </select>
+        </section>
+
+
+        <section id="GrupoMOPP" class="grupo-condicional">
+            <label class="cssB d-flex align-items-center gap-1 justify-content-center" for="MOPP">Posição do Prensa
+                Cabo:
+                <button class="help-icon" data-help-title="" data-help-text="" data-help-class="perm-popover"
+                    data-bs-title="" data-bs-content="" aria-label="Ajuda sobre Posição do Prensa Cabo"></button>
+            </label>
+            <select class="cssC" id="MOPP" name="MOPP">
+
+            </select>
+        </section>
+
+
+        <section id="GrupoMOOPC" class="grupo-condicional">
+            <label class="cssB d-flex align-items-center gap-1 justify-content-center" for="MOOPC_NAO">Itens Opcionais
+                do Motor:
+                <button class="help-icon" data-help-title="" data-help-text="" data-help-class="perm-popover"
+                    data-bs-title="" data-bs-content="" aria-label="Ajuda sobre Itens Opcionais do Motor"></button>
+            </label>
+            <div id="dropdownMOOPC" class="dropdown-checkbox" style="max-width:400px; margin: 0 auto;">
+                <div class="dropdown-button cssC" onclick="toggleDropdown(this)">NÃO</div>
+                <div class="dropdown-list"
+                    style="display:none; border: 1px solid #ec4115; max-height: 180px; overflow-y: auto; border-radius: 6px; background: white; padding: 10px; margin-top: 4px;">
+                    <div id="checklistMOOPC" style="display:flex; flex-direction:column; gap:6px; text-align:left;">
+                        <label><input type="checkbox" id="MOOPC_NAO" name="MOOPC" value="NÃO" checked> NÃO</label>
+                        <label><input type="checkbox" name="MOOPC" value="ACOR"> PINTURA ANTICORROSIVA</label>
+                        <label><input type="checkbox" name="MOOPC" value="PINTCZ"> PINTURA CINZA</label>
+                        <label><input type="checkbox" name="MOOPC" value="VF"> VENTILAÇÃO FORÇADA</label>
+                        <label><input type="checkbox" name="MOOPC" value="CR"> CONTRA RECUO</label>
+                    </div>
+                </div>
+                <input type="hidden" id="MOOPC" name="MOOPC" value="NÃO">
+            </div>
+
+
+            <div class="SubgrupoMOOPC" style="display: none;">
+                <section id="GrupoMOCR" class="subgrupo subgrupo-aninhado grupo-condicional">
+                    <label class="cssB d-flex align-items-center gap-1 justify-content-center" for="MOCR">Sentido de
+                        Giro do Motor:
+                        <button class="help-icon" data-help-title="" data-help-text="" data-help-class="perm-popover"
+                            data-bs-title="" data-bs-content=""
+                            aria-label="Ajuda sobre Sentido de Giro do Motor"></button>
+                    </label>
+                    <select class="cssC" id="MOCR" name="MOCR">
+                        <option value="H">HORÁRIO</option>
+                        <option value="AH">ANTI-HORÁRIO</option>
+                    </select>
+                </section>
+
+
+                <section id="GrupoACCR" class="subgrupo subgrupo-aninhado grupo-condicional">
+                    <label class="cssB d-flex align-items-center gap-1 justify-content-center" for="ACCR">Sentido de
+                        Giro do Redutor:
+                        <button class="help-icon" data-help-title="" data-help-text="" data-help-class="perm-popover"
+                            data-bs-title="" data-bs-content=""
+                            aria-label="Ajuda sobre Sentido de Giro do Redutor"></button>
+                    </label>
+                    <select class="cssC" id="ACCR" name="ACCR">
+
+                    </select>
+                </section>
+
+            </div>
+        </section>
+    </div>
+</section>
+
+</div>
+</section>
+
+<script nonce="<?= htmlspecialchars(csp_nonce(), ENT_QUOTES, 'UTF-8'); ?>">
+    async function carregarACLN() {
+        const aclnSelect = document.getElementById('ACLN');
+
+        const response = await fetch('/PaginasConfiguradoresSeletoresConsultas/AC/ACLN.php');
+        const optionsHTML = await response.text();
+
+        aclnSelect.innerHTML = optionsHTML;
+
+        aclnSelect.value = ''
+        aclnSelect.disabled = false;
+
+        aclnSelect.dispatchEvent(new Event('change'));
+    }
+
+    document.addEventListener('DOMContentLoaded', () => {
+        carregarACLN();
+    });
+
+    async function carregarACBR() {
+        const aclnSelect = document.getElementById('ACLN');
+        const acbrSelect = document.getElementById('ACBR');
+        const grupoACBR = document.getElementById('GrupoACBR');
+
+        const acln = aclnSelect.value;
+
+        const response = await fetch(`/PaginasConfiguradoresSeletoresConsultas/AC/ACBR.php?ACLN=${encodeURIComponent(acln)}`);
+        const optionsHTML = await response.text();
+
+        acbrSelect.innerHTML = optionsHTML;
+        grupoACBR.style.display = 'block';
+        acbrSelect.disabled = false;
+        acbrSelect.value = '';
+
+        acbrSelect.onchange = carregarACRD;
+
+        carregarACRD();
+    }
+
+    const aclnSelect = document.getElementById('ACLN');
+    if (aclnSelect) {
+        aclnSelect.addEventListener('change', carregarACBR);
+    }
+
+    const acbrSelect = document.getElementById('ACBR');
+    if (acbrSelect) {
+        acbrSelect.addEventListener('change', carregarACRD);
+    }
+
+    async function carregarACRD() {
+        const acln = document.getElementById('ACLN')?.value;
+        const acbr = document.getElementById('ACBR')?.value;
+        const acrdSelect = document.getElementById('ACRD');
+        const grupoACRD = document.getElementById('GrupoACRD');
+
+        const response = await fetch(`/PaginasConfiguradoresSeletoresConsultas/AC/ACRD.php?ACLN=${encodeURIComponent(acln)}&ACBR=${encodeURIComponent(acbr)}`);
+        const optionsHTML = await response.text();
+
+        acrdSelect.innerHTML = optionsHTML;
+        grupoACRD.style.display = 'block';
+        acrdSelect.disabled = false;
+        acrdSelect.value = '';
+
+        carregarACCM();
+    }
+
+    async function carregarACCM() {
+        const acln = document.getElementById('ACLN')?.value;
+        const acbr = document.getElementById('ACBR')?.value;
+        const acrd = document.getElementById('ACRD')?.value;
+        const accmSelect = document.getElementById('ACCM');
+        const grupoACCM = document.getElementById('GrupoACCM');
+
+        const response = await fetch(`/PaginasConfiguradoresSeletoresConsultas/AC/ACCM.php?ACLN=${encodeURIComponent(acln)}&ACBR=${encodeURIComponent(acbr)}&ACRD=${encodeURIComponent(acrd)}`);
+        const optionsHTML = await response.text();
+
+        const valorAtual = accmSelect.value;
+        accmSelect.innerHTML = optionsHTML;
+        grupoACCM.style.display = 'block';
+        accmSelect.disabled = false;
+
+        if (Array.from(accmSelect.options).some(opt => opt.value === valorAtual)) {
+            accmSelect.value = valorAtual;
+        } else {
+            accmSelect.value = '';
+        }
+
+        carregarACCP();
+        carregarACAF();
+    }
+
+    async function carregarACCP() {
+        const acln = document.getElementById('ACLN')?.value;
+        const acbr = document.getElementById('ACBR')?.value;
+        const accm = document.getElementById('ACCM')?.value;
+        const acrd = document.getElementById('ACRD')?.value;
+        const acas = document.getElementById('ACAS')?.value;
+        const acaf = document.getElementById('ACAF')?.value;
+        const accpSelect = document.getElementById('ACCP');
+        const grupoACCP = document.getElementById('GrupoACCP');
+
+        if (accm.includes('EE')) {
+            grupoACCP.style.display = 'none';
+            accpSelect.value = '';
+            return;
+        }
+
+        const response = await fetch(`/PaginasConfiguradoresSeletoresConsultas/AC/ACCP.php?ACLN=${encodeURIComponent(acln)}&ACBR=${encodeURIComponent(acbr)}&ACCM=${encodeURIComponent(accm)}&ACRD=${encodeURIComponent(acrd)}&ACAS=${encodeURIComponent(acas)}&ACAF=${encodeURIComponent(acaf)}`);
+        const optionsHTML = await response.text();
+
+        accpSelect.innerHTML = optionsHTML;
+        grupoACCP.style.display = 'block';
+        accpSelect.disabled = false;
+    }
+
+    const acrdSelect = document.getElementById('ACRD');
+    if (acrdSelect) {
+        acrdSelect.addEventListener('change', carregarACCM);
+    }
+
+    const accmSelect = document.getElementById('ACCM');
+    if (accmSelect) {
+        accmSelect.addEventListener('change', carregarACCP);
+    }
+
+    async function carregarACAF() {
+        const acln = document.getElementById('ACLN')?.value;
+        const acbr = document.getElementById('ACBR')?.value;
+        const accp = document.getElementById('ACCP')?.value || 'N';
+        const grupoACAF = document.getElementById('GrupoACAF');
+        const acafSelect = document.getElementById('ACAF');
+
+        const response = await fetch(`/PaginasConfiguradoresSeletoresConsultas/AC/ACAF.php?ACLN=${encodeURIComponent(acln)}&ACBR=${encodeURIComponent(acbr)}`);
+        const optionsHTML = await response.text();
+        acafSelect.innerHTML = optionsHTML;
+
+        grupoACAF.style.display = 'block';
+        acafSelect.disabled = false;
+        acafSelect.value = 'N';
+
+        acafSelect.dispatchEvent(new Event('change'));
+
+        carregarACAS();
+    }
+
+    function carregarACAFP() {
+        const acln = document.getElementById('ACLN')?.value;
+        const acaf = document.getElementById('ACAF')?.value;
+        const grupoACAFP = document.getElementById('GrupoACAFP');
+        const acafpSelect = document.getElementById('ACAFP');
+        const subgrupoACAF = document.querySelector('#GrupoACAF .subgrupo');
+
+        const deveExibirAFP = (
+            acaf !== 'N' &&
+            acaf !== 'PE'
+        );
+
+        grupoACAFP.style.display = deveExibirAFP ? 'block' : 'none';
+        acafpSelect.value = deveExibirAFP ? 'A' : '';
+
+        const exibeSubgrupo = deveExibirAFP || acaf === 'PE' || deveExibirACBT();
+        if (subgrupoACAF) {
+            subgrupoACAF.style.display = exibeSubgrupo ? 'block' : 'none';
+        }
+
+        carregarACBT();
+        carregarACPE();
+    }
+
+    function deveExibirACBT() {
+        const acln = document.getElementById('ACLN')?.value;
+        const acaf = document.getElementById('ACAF')?.value;
+        return acaf === 'BT';
+    }
+
+    function carregarACBT() {
+        const acln = document.getElementById('ACLN')?.value;
+        const acaf = document.getElementById('ACAF')?.value;
+        const grupoACBT = document.getElementById('GrupoACBT');
+        const acbtSelect = document.getElementById('ACBT');
+
+        const deveExibir = acaf === 'BT';
+
+        grupoACBT.style.display = deveExibir ? 'block' : 'none';
+        acbtSelect.value = deveExibir ? '1' : '';
+    }
+
+    function carregarACPE() {
+        const acaf = document.getElementById('ACAF')?.value;
+        const grupoACPE = document.getElementById('GrupoACPE');
+        const acpeSelect = document.getElementById('ACPE');
+
+        const deveExibir = acaf === 'PE';
+
+        grupoACPE.style.display = deveExibir ? 'block' : 'none';
+        acpeSelect.value = deveExibir ? 'PB' : '';
+    }
+
+    const acafSelect = document.getElementById('ACAF');
+    if (acafSelect) {
+        acafSelect.addEventListener('change', () => {
+            carregarACAFP();
+            carregarACBT();
+            carregarACPE();
+        });
+    }
+
+    async function carregarACAS() {
+        const acln = document.getElementById('ACLN')?.value;
+        const acbr = document.getElementById('ACBR')?.value;
+        const grupoACAS = document.getElementById('GrupoACAS');
+        const acasSelect = document.getElementById('ACAS');
+
+        const response = await fetch(`/PaginasConfiguradoresSeletoresConsultas/AC/ACAS.php?ACLN=${encodeURIComponent(acln)}&ACBR=${encodeURIComponent(acbr)}`);
+        const optionsHTML = await response.text();
+
+        acasSelect.innerHTML = optionsHTML;
+
+        grupoACAS.style.display = 'block';
+        acasSelect.disabled = false;
+
+        const optN = acasSelect.querySelector('option[value="N"]');
+        if (optN) {
+            acasSelect.value = 'N';
+        } else if (acasSelect.options.length > 0) {
+            acasSelect.selectedIndex = 0;
+        }
+
+        acasSelect.dispatchEvent(new Event('change'));
+
+        carregarACPM();
+        carregarACOPC();
+        validarACOPC();
+    }
+
+    function carregarACASP() {
+        const acasSelect = document.getElementById('ACAS');
+        const acln = document.getElementById('ACLN')?.value;
+        const grupoACASP = document.getElementById('GrupoACASP');
+        const acaspSelect = document.getElementById('ACASP');
+        const subgrupoACAS = document.querySelector('#GrupoACAS .subgrupo');
+
+        const valor = acasSelect.value;
+        const deveExibir = valor !== 'N' && valor !== 'ED';
+
+        if (deveExibir) {
+            grupoACASP.style.display = 'block';
+            if (subgrupoACAS) subgrupoACAS.style.display = 'block';
+
+            acaspSelect.innerHTML = `
+            <option value="A" selected>DIREITA</option>
+            <option value="B">ESQUERDA</option>
+        `;
+            acaspSelect.value = 'A';
+        } else {
+            grupoACASP.style.display = 'none';
+            acaspSelect.value = '';
+            if (subgrupoACAS) subgrupoACAS.style.display = 'none';
+        }
+
+        carregarACPM();
+        carregarACOPC();
+        validarACOPC();
+    }
+
+    const acasSelect = document.getElementById('ACAS');
+    if (acasSelect) {
+        acasSelect.addEventListener('change', () => {
+            carregarACASP();
+            carregarACPM();
+        });
+    }
+
+    document.addEventListener('DOMContentLoaded', () => {
+        const acpmSelect = document.getElementById('ACPM');
+        if (acpmSelect) {
+            acpmSelect.addEventListener('change', carregarACOPC);
+        }
+    });
+
+    document.addEventListener('DOMContentLoaded', () => {
+        const acafpSelect = document.getElementById('ACAFP');
+        const acaspSelect = document.getElementById('ACASP');
+        const acasSelect = document.getElementById('ACAS');
+        const aclnSelect = document.getElementById('ACLN');
+    });
+
+    async function carregarACPM() {
+        const acln = document.getElementById('ACLN')?.value;
+        const acbr = document.getElementById('ACBR')?.value;
+        const grupoACPM = document.getElementById('GrupoACPM');
+        const acpmSelect = document.getElementById('ACPM');
+
+        const response = await fetch(`/PaginasConfiguradoresSeletoresConsultas/AC/ACPM.php?ACLN=${encodeURIComponent(acln)}&ACBR=${encodeURIComponent(acbr)}`);
+        const optionsHTML = await response.text();
+
+        acpmSelect.innerHTML = optionsHTML;
+        grupoACPM.style.display = 'block';
+
+        acpmSelect.dispatchEvent(new Event('change'));
+        carregarACOPC();
+        validarACOPC();
+    }
+
+    const acpmSelect = document.getElementById('ACPM');
+    if (acpmSelect) {
+        acpmSelect.addEventListener('change', carregarACOPC);
+    }
+
+    function carregarACOPC() {
+        const acln = document.getElementById('ACLN')?.value;
+        const acbr = document.getElementById('ACBR')?.value;
+        const grupoACOPC = document.getElementById('GrupoACOPC');
+
+        grupoACOPC.style.display = 'block';
+
+        validarACOPC();
+        carregarACMO();
+    }
+
+    function validarACOPC() {
+        const checkboxes = document.querySelectorAll('#checklistACOPC input[type="checkbox"]');
+        let selecionados = Array.from(checkboxes)
+            .filter(cb => cb.checked)
+            .map(cb => cb.value);
+
+        if (selecionados.includes("NÃO") && selecionados.length > 1) {
+            document.querySelector('input[name="ACOPC"][value="NÃO"]').checked = false;
+            selecionados = selecionados.filter(v => v !== "NÃO");
+        }
+
+        if (selecionados.length === 0) {
+            document.querySelector('input[name="ACOPC"][value="NÃO"]').checked = true;
+            selecionados = ["NÃO"];
+        }
+
+        document.getElementById('ACOPC').value = selecionados.join(',');
+
+        const nomesVisiveis = selecionados.map(valor => {
+            const label = Array.from(document.querySelectorAll('#checklistACOPC label')).find(lbl =>
+                lbl.querySelector(`input[value="${valor}"]`)
+            );
+            return label ? label.textContent.trim() : valor;
+        });
+
+        document.querySelector('#dropdownACOPC .dropdown-button').textContent = nomesVisiveis.join(', ');
+
+        document.getElementById('ACOPC').dispatchEvent(new Event('change'));
+    }
+
+    document.querySelectorAll('#checklistACOPC input[type="checkbox"]').forEach(cb => {
+        cb.addEventListener('change', validarACOPC);
+    });
+
+    const acopcSelect = document.getElementById('ACOPC');
+    if (acopcSelect) {
+        acopcSelect.addEventListener('change', () => {
+            setTimeout(() => {
+                carregarACMO();
+            }, 10);
+        });
+    }
+
+    window.toggleDropdown = function (button) {
+        const list = button.nextElementSibling;
+        list.style.display = list.style.display === 'block' ? 'none' : 'block';
+    };
+
+    document.addEventListener('click', function (e) {
+        document.querySelectorAll('.dropdown-checkbox').forEach(dropdown => {
+            if (!dropdown.contains(e.target)) {
+                dropdown.querySelector('.dropdown-list').style.display = 'none';
+            }
+        });
+    });
+
+    window.addEventListener('load', () => {
+        const grupoACOPC = document.getElementById('GrupoACOPC');
+        if (grupoACOPC?.style.display === 'block') {
+            carregarACMO();
+        }
+    });
+
+    function carregarACMO() {
+        const accm = document.getElementById('ACCM')?.value;
+        const accp = document.getElementById('ACCP')?.value;
+        const grupoACMO = document.getElementById('GrupoACMO');
+        const acmoSelect = document.getElementById('ACMO');
+
+        const permitirS = !accm.includes("EE") && accp !== "B";
+
+        const valorAtual = acmoSelect.value;
+
+        acmoSelect.innerHTML = '';
+        acmoSelect.disabled = false;
+
+        if (permitirS) {
+            acmoSelect.appendChild(new Option("SIM", "S"));
+        }
+
+        acmoSelect.appendChild(new Option("NÃO", "N"));
+
+        if (Array.from(acmoSelect.options).some(opt => opt.value === valorAtual)) {
+            acmoSelect.value = valorAtual;
+        } else {
+            acmoSelect.value = "N";
+        }
+
+        grupoACMO.style.display = 'block';
+        acmoSelect.dispatchEvent(new Event('change'));
+
+        carregarMOLN();
+    }
+
+    async function carregarMOLN() {
+        const acmoSelect = document.getElementById('ACMO');
+        const accp = document.getElementById('ACCP')?.value;
+        const accm = document.getElementById('ACCM')?.value;
+        const grupoMOLN = document.getElementById('GrupoMOLN');
+        const molnSelect = document.getElementById('MOLN');
+        const subgrupoACMO = document.querySelector('#GrupoACMO .subgrupo');
+
+        if (acmoSelect.value === "S") {
+            grupoMOLN.style.display = 'block';
+            if (subgrupoACMO) subgrupoACMO.style.display = 'block';
+
+            try {
+                const response = await fetch(`/PaginasConfiguradoresSeletoresConsultas/AC/MOLN.php?ACCM=${encodeURIComponent(accm)}&ACCP=${encodeURIComponent(accp)}`);
+                const optionsHTML = await response.text();
+                molnSelect.innerHTML = optionsHTML;
+
+                molnSelect.style.display = 'block';
+                molnSelect.disabled = false;
+                molnSelect.dispatchEvent(new Event('change'));
+            } catch (error) {
+
+                grupoMOLN.style.display = 'none';
+                if (subgrupoACMO) subgrupoACMO.style.display = 'none';
+                molnSelect.style.display = 'none';
+                molnSelect.innerHTML = '';
+            }
+        } else {
+            grupoMOLN.style.display = 'none';
+            if (subgrupoACMO) subgrupoACMO.style.display = 'none';
+            molnSelect.style.display = 'none';
+        }
+
+        molnSelect.value = "";
+
+        carregarMOTP();
+        carregarMOOPC();
+    }
+
+    async function carregarMOTP() {
+        const moln = document.getElementById('MOLN')?.value;
+        const accm = document.getElementById('ACCM')?.value;
+        const accp = document.getElementById('ACCP')?.value;
+        const grupoMOTP = document.getElementById('GrupoMOTP');
+        const motpSelect = document.getElementById('MOTP');
+
+        const response = await fetch(`/PaginasConfiguradoresSeletoresConsultas/AC/MOTP.php?MOLN=${encodeURIComponent(moln)}&ACCM=${encodeURIComponent(accm)}&ACCP=${encodeURIComponent(accp)}`);
+        const optionsHTML = await response.text();
+        motpSelect.innerHTML = optionsHTML;
+
+        grupoMOTP.style.display = 'block';
+        motpSelect.style.display = 'block';
+        motpSelect.disabled = false;
+        motpSelect.value = "";
+
+        carregarMOTT();
+    }
+
+    document.getElementById('ACCM')?.addEventListener('change', carregarACMO);
+    document.getElementById('ACCP')?.addEventListener('change', carregarACMO);
+
+    const acmoSelect = document.getElementById('ACMO');
+    if (acmoSelect) {
+        acmoSelect.addEventListener('change', carregarMOLN);
+    }
+
+    const molnSelect = document.getElementById('MOLN');
+    if (molnSelect) {
+        molnSelect.addEventListener('change', carregarMOTP);
+        molnSelect.addEventListener('change', carregarMOOPC);
+    }
+
+    const motpSelect = document.getElementById('MOTP');
+    if (motpSelect) {
+        motpSelect.addEventListener('change', carregarMOTT);
+    }
+
+    async function carregarMOTT() {
+        const moln = document.getElementById('MOLN')?.value;
+        const motp = document.getElementById('MOTP')?.value;
+        const accm = document.getElementById('ACCM')?.value;
+        const accp = document.getElementById('ACCP')?.value;
+        const grupoMOTT = document.getElementById('GrupoMOTT');
+        const mottSelect = document.getElementById('MOTT');
+
+        const response = await fetch(`/PaginasConfiguradoresSeletoresConsultas/AC/MOTT.php?MOLN=${encodeURIComponent(moln)}&MOTP=${encodeURIComponent(motp)}&ACCM=${encodeURIComponent(accm)}&ACCP=${encodeURIComponent(accp)}`);
+        const optionsHTML = await response.text();
+        mottSelect.innerHTML = optionsHTML;
+
+        grupoMOTT.style.display = 'block';
+        mottSelect.style.display = 'block';
+        mottSelect.disabled = false;
+        mottSelect.value = '';
+
+        carregarMOFQ();
+    }
+
+    async function carregarMOFQ() {
+        const moln = document.getElementById('MOLN')?.value;
+        const motp = document.getElementById('MOTP')?.value;
+        const mott = document.getElementById('MOTT')?.value;
+        const accm = document.getElementById('ACCM')?.value;
+        const accp = document.getElementById('ACCP')?.value;
+        const grupoMOFQ = document.getElementById('GrupoMOFQ');
+        const mofqSelect = document.getElementById('MOFQ');
+
+        const response = await fetch(`/PaginasConfiguradoresSeletoresConsultas/AC/MOFQ.php?MOLN=${encodeURIComponent(moln)}&MOTP=${encodeURIComponent(motp)}&MOTT=${encodeURIComponent(mott)}&ACCM=${encodeURIComponent(accm)}&ACCP=${encodeURIComponent(accp)}`);
+        const optionsHTML = await response.text();
+        mofqSelect.innerHTML = optionsHTML;
+
+        grupoMOFQ.style.display = 'block';
+        mofqSelect.style.display = 'block';
+        mofqSelect.disabled = false;
+        mofqSelect.value = '';
+
+        carregarMOPT();
+    }
+
+    async function carregarMOPT() {
+        const moln = document.getElementById('MOLN')?.value;
+        const motp = document.getElementById('MOTP')?.value;
+        const mott = document.getElementById('MOTT')?.value;
+        const mofq = document.getElementById('MOFQ')?.value;
+        const accm = document.getElementById('ACCM')?.value;
+        const accp = document.getElementById('ACCP')?.value;
+        const grupoMOPT = document.getElementById('GrupoMOPT');
+        const moptSelect = document.getElementById('MOPT');
+
+        const response = await fetch(`/PaginasConfiguradoresSeletoresConsultas/AC/MOPT.php?MOLN=${encodeURIComponent(moln)}&MOTP=${encodeURIComponent(motp)}&MOTT=${encodeURIComponent(mott)}&MOFQ=${encodeURIComponent(mofq)}&ACCM=${encodeURIComponent(accm)}&ACCP=${encodeURIComponent(accp)}`);
+        const optionsHTML = await response.text();
+        moptSelect.innerHTML = optionsHTML;
+
+        grupoMOPT.style.display = 'block';
+        moptSelect.style.display = 'block';
+        moptSelect.disabled = false;
+        moptSelect.value = '';
+
+        carregarMOPL();
+    }
+
+    async function carregarMOPL() {
+        const moln = document.getElementById('MOLN')?.value;
+        const motp = document.getElementById('MOTP')?.value;
+        const mott = document.getElementById('MOTT')?.value;
+        const mofq = document.getElementById('MOFQ')?.value;
+        const mopt = document.getElementById('MOPT')?.value;
+        const accm = document.getElementById('ACCM')?.value;
+        const accp = document.getElementById('ACCP')?.value;
+        const grupoMOPL = document.getElementById('GrupoMOPL');
+        const moplSelect = document.getElementById('MOPL');
+
+        const response = await fetch(`/PaginasConfiguradoresSeletoresConsultas/AC/MOPL.php?MOLN=${encodeURIComponent(moln)}&MOTP=${encodeURIComponent(motp)}&MOTT=${encodeURIComponent(mott)}&MOFQ=${encodeURIComponent(mofq)}&MOPT=${encodeURIComponent(mopt)}&ACCM=${encodeURIComponent(accm)}&ACCP=${encodeURIComponent(accp)}`);
+        const optionsHTML = await response.text();
+        moplSelect.innerHTML = optionsHTML;
+
+        grupoMOPL.style.display = 'block';
+        moplSelect.style.display = 'block';
+        moplSelect.disabled = false;
+        moplSelect.value = '';
+
+        carregarMOCP();
+    }
+
+    const mottSelect = document.getElementById('MOTT');
+    if (mottSelect) {
+        mottSelect.addEventListener('change', carregarMOFQ);
+    }
+
+    const mofqSelect = document.getElementById('MOFQ');
+    if (mofqSelect) {
+        mofqSelect.addEventListener('change', carregarMOPT);
+    }
+
+    const moptSelect = document.getElementById('MOPT');
+    if (moptSelect) {
+        moptSelect.addEventListener('change', carregarMOPL);
+    }
+
+    const moplSelect = document.getElementById('MOPL');
+    if (moplSelect) {
+        moplSelect.addEventListener('change', carregarMOCP);
+    }
+
+    async function carregarMOCP() {
+        const moln = document.getElementById('MOLN')?.value;
+        const motp = document.getElementById('MOTP')?.value;
+        const mott = document.getElementById('MOTT')?.value;
+        const mofq = document.getElementById('MOFQ')?.value;
+        const mopt = document.getElementById('MOPT')?.value;
+        const mopl = document.getElementById('MOPL')?.value;
+        const accm = document.getElementById('ACCM')?.value;
+        const accp = document.getElementById('ACCP')?.value;
+        const grupoMOCP = document.getElementById('GrupoMOCP');
+        const mocpSelect = document.getElementById('MOCP');
+
+        const response = await fetch(
+            `/PaginasConfiguradoresSeletoresConsultas/AC/MOCP.php?MOLN=${encodeURIComponent(moln)}&MOTP=${encodeURIComponent(motp)}&MOTT=${encodeURIComponent(mott)}&MOFQ=${encodeURIComponent(mofq)}&MOPT=${encodeURIComponent(mopt)}&MOPL=${encodeURIComponent(mopl)}&ACCM=${encodeURIComponent(accm)}&ACCP=${encodeURIComponent(accp)}`
+        );
+
+        const optionsHTML = await response.text();
+        mocpSelect.innerHTML = optionsHTML;
+
+        grupoMOCP.style.display = 'block';
+        mocpSelect.style.display = 'block';
+        mocpSelect.disabled = false;
+        mocpSelect.value = accp;
+        mocpSelect.dispatchEvent(new Event('change'));
+
+        carregarMOCPP();
+        carregarMOPC();
+    }
+
+    const mocpSelect = document.getElementById('MOCP');
+    if (mocpSelect) {
+        mocpSelect.addEventListener('change', carregarMOCPP);
+    }
+
+    function carregarMOCPP() {
+        const moln = document.getElementById('MOLN')?.value;
+        const mocp = document.getElementById('MOCP')?.value;
+        const accm = document.getElementById('ACCM')?.value;
+        const grupoMOCPP = document.getElementById('GrupoMOCPP');
+        const divSubgrupo = document.querySelector('.SubgrupoMOCP');
+        const mocppSelect = document.getElementById('MOCPP');
+
+        const deveExibir = moln !== "3.W" && ["B3", "B34", "B35"].includes(mocp);
+
+        if (deveExibir) {
+            mocppSelect.innerHTML = '<option value="T" selected>TOPO</option>';
+
+            const bloqueado = moln === "2.I" && accm === "56";
+            if (!bloqueado) {
+                mocppSelect.innerHTML += '<option value="D">DIREITA</option>';
+                mocppSelect.innerHTML += '<option value="E">ESQUERDA</option>';
+            }
+
+            divSubgrupo.style.display = 'block';
+            grupoMOCPP.style.display = 'block';
+        } else {
+            divSubgrupo.style.display = 'none';
+            grupoMOCPP.style.display = 'none';
+        }
+
+        carregarMOPC();
+    }
+
+    function carregarMOPC() {
+        const moln = document.getElementById('MOLN')?.value;
+        const grupoMOPC = document.getElementById('GrupoMOPC');
+        const mopcSelect = document.getElementById('MOPC');
+
+        mopcSelect.innerHTML = '';
+
+        const isAPM = moln === "3.APM" || moln === "3.SPM";
+
+        const rotulos = {
+            "CX270": "270°",
+            "CX180": "180°",
+            "CX90": "90°",
+            "CX0": "0°",
+            "B3": "B3",
+            "B6": "B6",
+            "B7": "B7",
+            "B8": "B8",
+            "V5": "V5",
+            "V6": "V6"
+        };
+
+        const opcoes = isAPM
+            ? ["B3", "B6", "B7", "B8", "V5", "V6"]
+            : ["CX270", "CX180", "CX90", "CX0"];
+
+        const valorPadrao = isAPM ? "B3" : "CX270";
+
+        opcoes.forEach(valor => {
+            const selected = valor === valorPadrao ? 'selected' : '';
+            mopcSelect.innerHTML += `<option value="${valor}" ${selected}>${rotulos[valor]}</option>`;
+        });
+
+        grupoMOPC.style.display = 'block';
+        mopcSelect.disabled = false;
+
+        carregarMOPP();
+    }
+
+    function carregarMOPP() {
+        const moln = document.getElementById('MOLN')?.value;
+        const motp = document.getElementById('MOTP')?.value;
+        const mocp = document.getElementById('MOCP')?.value;
+        const grupoMOPP = document.getElementById('GrupoMOPP');
+        const moppSelect = document.getElementById('MOPP');
+
+        if (moln === "3.APM" || moln === "3.SPM") {
+            grupoMOPP.style.display = 'none';
+            return;
+        }
+
+        moppSelect.innerHTML = '';
+
+        const opcoes = [
+            { valor: "PC1", label: "1" },
+            { valor: "PC2", label: "2" },
+            { valor: "PC3", label: "3" },
+            { valor: "PC4", label: "4" }
+        ];
+
+        opcoes.forEach(op => {
+            const option = document.createElement('option');
+            option.value = op.valor;
+            option.textContent = op.label;
+            moppSelect.appendChild(option);
+        });
+
+        let valorPadrao = "PC1";
+        if (moln === "3.I" || (moln === "2.I" && motp === "T")) valorPadrao = "PC1";
+        else if (moln === "2.I" && motp === "M") valorPadrao = "PC2";
+        else if (moln === "3.W") valorPadrao = "PC3";
+
+        moppSelect.value = valorPadrao;
+
+        grupoMOPP.style.display = 'block';
+        moppSelect.disabled = false;
+
+        carregarMOOPC();
+    }
+
+    document.getElementById('MOCP')?.addEventListener('change', carregarMOCPP);
+    document.getElementById('MOCP')?.addEventListener('change', carregarMOPC);
+    document.getElementById('MOPC')?.addEventListener('change', carregarMOPP);
+    document.getElementById('MOPP')?.addEventListener('change', carregarMOOPC);
+
+    function carregarMOOPC() {
+        const moln = document.getElementById('MOLN')?.value.trim();
+        const accm = document.getElementById('ACCM')?.value;
+        const motp = document.getElementById('MOTP')?.value;
+        const grupoMOPP = document.getElementById('GrupoMOPP');
+        const grupoMOOPC = document.getElementById('GrupoMOOPC');
+        const checklist = document.querySelectorAll('#checklistMOOPC input[type="checkbox"]');
+
+        if (!grupoMOPP || grupoMOPP.style.display !== 'block' || !grupoMOOPC) {
+            grupoMOOPC.style.display = 'none';
+            return;
+        }
+
+        grupoMOOPC.style.display = 'block';
+
+        checklist.forEach(cb => {
+            const value = cb.value;
+            let mostrar = true;
+
+            if (["ACOR", "PINTCZ"].includes(value) && ["3.APM", "3.SPM"].includes(moln)) {
+                mostrar = false;
+            }
+
+            if (value === "VF") {
+                mostrar = (moln === "2.I" && ["63", "71"].includes(accm)) ||
+                    (moln === "3.I" && motp !== "F" && ["63", "71", "80", "90", "100-112", "132"].includes(accm));
+            }
+
+            if (value === "CR") {
+                mostrar = (moln === "3.W" && ["80", "90", "100-112", "132"].includes(accm)) ||
+                    (moln === "3.I" && ["80", "90", "100-112"].includes(accm));
+            }
+
+            cb.closest('label').style.display = mostrar ? 'block' : 'none';
+
+            if (!mostrar) cb.checked = false;
+        });
+
+        validarMOOPC();
+        carregarMOCR();
+    }
+
+    function validarMOOPC() {
+        const checkboxes = document.querySelectorAll('#checklistMOOPC input[type="checkbox"]');
+        let selecionados = Array.from(checkboxes)
+            .filter(cb => cb.checked)
+            .map(cb => cb.value);
+
+        if (selecionados.includes("NÃO") && selecionados.length > 1) {
+            document.querySelector('input[name="MOOPC"][value="NÃO"]').checked = false;
+            selecionados = selecionados.filter(v => v !== "NÃO");
+        }
+
+        if (selecionados.length === 0) {
+            document.querySelector('input[name="MOOPC"][value="NÃO"]').checked = true;
+            selecionados = ["NÃO"];
+        }
+
+        if (selecionados.includes("ACOR") && selecionados.includes("PINTCZ")) {
+            document.querySelector('input[name="MOOPC"][value="ACOR"]').checked = false;
+            selecionados = selecionados.filter(v => v !== "ACOR");
+        }
+
+        document.getElementById('MOOPC').value = selecionados.join(',');
+
+        const nomesVisiveis = selecionados.map(valor => {
+            const label = Array.from(document.querySelectorAll('#checklistMOOPC label')).find(lbl =>
+                lbl.querySelector(`input[value="${valor}"]`)
+            );
+            return label ? label.textContent.trim() : valor;
+        });
+
+        document.querySelector('#dropdownMOOPC .dropdown-button').textContent = nomesVisiveis.join(', ');
+
+        carregarMOCR();
+    }
+
+    document.getElementById('MOOPC').dispatchEvent(new Event('change'));
+
+    document.addEventListener('DOMContentLoaded', () => {
+        const checkboxes = document.querySelectorAll('#checklistMOOPC input[type="checkbox"]');
+        checkboxes.forEach(cb => {
+            cb.addEventListener('change', validarMOOPC);
+        });
+    });
+
+    function carregarMOCR() {
+        const grupoMOCR = document.getElementById('GrupoMOCR');
+        const grupoACCR = document.getElementById('GrupoACCR');
+        const subgrupoMOOPC = document.querySelector('.SubgrupoMOOPC');
+        const mocrSelect = document.getElementById('MOCR');
+        const moopc = document.getElementById('MOOPC')?.value || '';
+
+        const crSelecionado = moopc.split(',').includes('CR');
+
+        if (!crSelecionado) {
+            subgrupoMOOPC.style.display = 'none';
+            grupoMOCR.style.display = 'none';
+            grupoACCR.style.display = 'none';
+            mocrSelect.value = '';
+            return;
+        }
+
+        subgrupoMOOPC.style.display = 'block';
+        grupoMOCR.style.display = 'block';
+        grupoACCR.style.display = 'none';
+
+        mocrSelect.innerHTML = `
+        <option value="H">HORÁRIO</option>
+        <option value="AH">ANTI-HORÁRIO</option>
+    `;
+
+        mocrSelect.value = '';
+        carregarACCR();
+    }
+
+    function carregarACCR() {
+        const grupoACCR = document.getElementById('GrupoACCR');
+        const accrSelect = document.getElementById('ACCR');
+        const mocr = document.getElementById('MOCR')?.value;
+
+        if (!mocr) {
+            grupoACCR.style.display = 'none';
+            accrSelect.value = '';
+            return;
+        }
+
+        if (mocr === 'H') {
+            accrSelect.innerHTML = `<option value="AH">ANTI-HORÁRIO</option>`;
+            accrSelect.value = 'AH';
+        } else {
+            accrSelect.innerHTML = `<option value="H">HORÁRIO</option>`;
+            accrSelect.value = 'H';
+        }
+
+        grupoACCR.style.display = 'block';
+        accrSelect.dispatchEvent(new Event('change'));
+    }
+
+    document.getElementById('MOOPC')?.addEventListener('change', carregarMOCR);
+    document.getElementById('MOOPC')?.addEventListener('change', validarMOOPC);
+    document.getElementById('MOCR')?.addEventListener('change', carregarACCR);
+
+
+</script>
+
+<script nonce="<?= htmlspecialchars(csp_nonce(), ENT_QUOTES, 'UTF-8'); ?>">
+    function exibirBotaoCompartilhar() {
+        const wrapper = document.getElementById("compartilhar-wrapper");
+        if (wrapper) wrapper.style.display = "block";
+        if (typeof exibirBotaoRefazerConfiguracao === "function") exibirBotaoRefazerConfiguracao();
+    }
+
+    function exibirBotaoSolicitarCotacao() {
+        const wrapper = document.getElementById("cotacao-wrapper");
+        if (wrapper) wrapper.style.display = "block";
+    }
+
+    async function gerarCodigoProduto() {
+        if (typeof formularioCompleto === 'function' && !formularioCompleto(true)) {
+            if (typeof exibirAlerta === 'function') {
+                exibirAlerta('⚠️ Por favor, preencha todos os campos antes de gerar o produto.');
+            }
+            return;
+        }
+        const FORMACONSTRUTIVA = v("ACCM").includes("EE") ? "" : v("ACCP");
+
+        const FORMACONSTRUTIVAREDUTOR = (v("ACMO") === "N")
+            ? `${v("ACCM")}${FORMACONSTRUTIVA}.`
+            : "";
+
+        const POSICAOACESSORIOFIXACAO = (!["N", "PE"].includes(v("ACAF")))
+            ? `.${v("ACAFP")} ` : "";
+
+        const POSICAOBRACOTORQUE = (v("ACAF") === "BT")
+            ? `.${v("ACBT")} ` : "";
+
+        const PESREDUTOR = (v("ACAF") === "PE") ? `.${v("ACPE")} ` : "";
+
+        const POSICAOACESSORIOSAIDA = (!["N", "ED"].includes(v("ACAS")))
+            ? `.${v("ACASP")} ` : "";
+
+        const POSICAOMONTAGEM = `.${v("ACPM")} `;
+
+        const TEMOPCIONAISREDUTOR = (v("ACOPC") === "NÃO" || vazio(v("ACOPC")))
+            ? "" : `.${v("ACOPC")} `;
+
+        const VARIOSOPCIONAISREDUTOR = contem(TEMOPCIONAISREDUTOR, ",")
+            ? substituir(TEMOPCIONAISREDUTOR, ", ", ".")
+            : TEMOPCIONAISREDUTOR;
+
+        const PESMOTOR = (v("ACMO") === "S" && v("MOLN") !== "3.W" && ["B3", "B34", "B35"].includes(v("MOCP")))
+            ? v("MOCPP") : "";
+
+        const CARCACA100112 = (v("ACMO") === "S" && v("ACCM") === "100-112")
+            ? await get("Carcaca100112.php", {
+                MOLN: v("MOLN"),
+                MOTP: v("MOTP"),
+                MOTT: v("MOTT"),
+                MOFQ: v("MOFQ"),
+                MOPT: v("MOPT"),
+                MOPL: v("MOPL")
+            }) : v("ACCM");
+
+        const CARCACAINICIO = (v("ACMO") === "S")
+            ? await get("CarcacaInicio.php", {
+                MOLN: v("MOLN"),
+                MOTP: v("MOTP"),
+                MOTT: v("MOTT"),
+                MOFQ: v("MOFQ"),
+                MOPT: v("MOPT"),
+                MOPL: v("MOPL"),
+                MOCM: CARCACA100112
+            }) : "";
+
+        const CARCACAFIM = (v("ACMO") === "S")
+            ? await get("CarcacaFim.php", {
+                MOLN: v("MOLN"),
+                MOTP: v("MOTP"),
+                MOTT: v("MOTT"),
+                MOFQ: v("MOFQ"),
+                MOPT: v("MOPT"),
+                MOPL: v("MOPL"),
+                MOCM: CARCACA100112
+            }) : "";
+
+        const FORMACONSTRUTIVAMOTORREDUTOR = (v("ACMO") === "S")
+            ? `${CARCACAINICIO}${CARCACA100112}${CARCACAFIM}${v("MOCP")}${PESMOTOR}.`
+            : "";
+
+        const TEMOPCIONAIS = (v("ACMO") === "S" && v("MOOPC") !== "NÃO" && !vazio(v("MOOPC")))
+            ? `.${v("MOOPC")} ` : "";
+
+        const VARIOSOPCIONAIS = contem(TEMOPCIONAIS, ",")
+            ? substituir(TEMOPCIONAIS, ", ", ".")
+            : TEMOPCIONAIS;
+
+        const OPCIONAISPADRAO = contem(VARIOSOPCIONAIS, "CR")
+            ? `${VARIOSOPCIONAIS}${v("MOCR")} ` : VARIOSOPCIONAIS;
+
+        const CAIXADELIGACAO = (v("ACMO") === "S" && v("MOPC") !== "CX270")
+            ? `.${v("MOPC")} ` : "";
+
+        const PRENSACABO = (v("ACMO") === "S" && !(
+            ["3.APM", "3.SPM"].includes(v("MOLN")) ||
+            (v("MOLN") === "3.I" && v("MOPP") === "PC1") ||
+            (v("MOLN") === "2.I" && v("MOTP") === "T" && v("MOPP") === "PC1") ||
+            (v("MOLN") === "2.I" && v("MOTP") === "M" && v("MOPP") === "PC2") ||
+            (v("MOLN") === "3.W" && v("MOPP") === "PC3") ||
+            vazio(v("MOPP"))
+        )) ? `.${v("MOPP")} ` : "";
+
+        const CODIGOMOTOR = (v("ACMO") === "S")
+            ?
+            `.${v("MOLN")}.${v("MOTP")}.${v("MOTT")}.${v("MOPT")}.${v("MOPL")}.${FORMACONSTRUTIVAMOTORREDUTOR}${v("MOFQ")}${OPCIONAISPADRAO}${CAIXADELIGACAO}${PRENSACABO} `
+            : "";
+
+        const LINHAPRODUTO = v("ACMO") === "S"
+            ? substituir(v("ACLN"), "1.", "M.")
+            : v("ACLN");
+
+        const COMPOSICAOCODIGO = [
+            LINHAPRODUTO,
+            v("ACBR"),
+            v("ACRD"),
+            FORMACONSTRUTIVAREDUTOR,
+            v("ACCM").includes("EE") ? "" : (vazio(v("ACBU")) ? "N." : `${v("ACBU")}.`),
+            v("ACAF"),
+            POSICAOACESSORIOFIXACAO,
+            POSICAOBRACOTORQUE,
+            v("ACAS"),
+            POSICAOACESSORIOSAIDA,
+            PESREDUTOR,
+            POSICAOMONTAGEM,
+            VARIOSOPCIONAISREDUTOR,
+            CODIGOMOTOR
+        ]
+            .map(s => s.replace(/^\.|\.$/g, ""))
+            .map(s => s.replace(/,\s*/g, ".").replace(/\s+/g, ""))
+            .map(s => s.replace(/\.{2,}/g, "."))
+            .filter(Boolean)
+            .join(".");
+
+        document.getElementById("refProduto").textContent = COMPOSICAOCODIGO;
+        mostrarDetalhesProduto({}, COMPOSICAOCODIGO);
+
+        fetch("/PaginasConsultaProdutos/CodigoDescricaoObservacaoProduto.php", {
+            method: "POST",
+            headers: { "Content-Type": "application/x-www-form-urlencoded" },
+            body: `codigo = ${encodeURIComponent(COMPOSICAOCODIGO)} `
+        })
+            .then(resp => resp.text())
+            .then(text => {
+                let dados;
+                try { dados = JSON.parse(text); } catch { throw new Error(text); }
+                return dados;
+            })
+            .then(dados => {
+                mostrarDetalhesProduto(dados || {}, COMPOSICAOCODIGO);
+                window.codigoProduto = dados?.CD_PRODUTO || "";
+                window.codigoProduto = dados?.CD_PRODUTO || "";
+                window.codigoEstoquePendente = dados?.CD_PRODUTO || "";
+                if (typeof mostrarDetalhesEstoque === 'function') {
+                    mostrarDetalhesEstoque(dados?.CD_PRODUTO || "");
+                }
+                if (typeof mostrarDetalhesPreco === 'function') {
+                    const params = gerarLinkAtual().split('?')[1] || '';
+                    mostrarDetalhesPreco(params);
+                }
+            })
+            .catch(err => {
+
+                if (typeof mostrarDetalhesPreco === 'function') {
+                    const params = gerarLinkAtual().split('?')[1] || '';
+                    mostrarDetalhesPreco(params);
+                }
+            });
+
+
+        if (window.manualHistoricoProduto && window.ultimoHistoricoProduto !== COMPOSICAOCODIGO) {
+            const linkAtual = gerarLinkAtual();
+            fetch("/PaginasAreaClienteSessaoPerfil/RegistrarProduto.php", {
+                method: "POST",
+                headers: { "Content-Type": "application/x-www-form-urlencoded" },
+                body: `produto = ${encodeURIComponent(COMPOSICAOCODIGO)}& link=${encodeURIComponent(linkAtual)}`
+            });
+            window.ultimoHistoricoProduto = COMPOSICAOCODIGO;
+            window.manualHistoricoProduto = false;
+        }
+
+        exibirBotaoCompartilhar();
+        //exibirBotaoSolicitarDesenho();
+        exibirBotaoSolicitarCotacao();
+    }
+</script>
+
+<script nonce="<?= htmlspecialchars(csp_nonce(), ENT_QUOTES, 'UTF-8'); ?>">
+    const endpointPreco = '/PaginasConfiguradoresPrecoVenda/ACPV.php';
+    function mostrarDetalhesPreco(paramString) {
+        const params = new URLSearchParams(
+            typeof paramString === 'string'
+                ? paramString
+                : new URLSearchParams(paramString).toString()
+        );
+        if (window.codigoProduto) {
+            params.append('produto', window.codigoProduto);
+        }
+        const codInput = document.getElementById('codigoClienteInput');
+        if (codInput && codInput.value.trim()) {
+            params.set('pessoa', codInput.value.trim());
+        }
+        fetch(endpointPreco, {
+            method: 'POST',
+            headers: { 'Content-Type': 'application/x-www-form-urlencoded' },
+            body: params.toString()
+        })
+            .then(r => r.json())
+            .then(p => {
+                const valorRS = p && p['001'] ? parseFloat(String(p['001']).replace(/\./g, '').replace(',', '.')) : NaN;
+                const valorSP = p && p['003'] ? parseFloat(String(p['003']).replace(/\./g, '').replace(',', '.')) : NaN;
+                const textoRS = !isNaN(valorRS) && valorRS !== 0 ? `R$ ${valorRS.toLocaleString('pt-BR', { minimumFractionDigits: 2, maximumFractionDigits: 2 })} ` : '👉 😊 Ops! O preço de venda está indisponível no momento. 📞 Fale com nossos Consultores Comerciais para mais informações!';
+                const textoSP = !isNaN(valorSP) && valorSP !== 0 ? `R$ ${valorSP.toLocaleString('pt-BR', { minimumFractionDigits: 2, maximumFractionDigits: 2 })} ` : '👉 😊 Ops! O preço de venda está indisponível no momento. 📞 Fale com nossos Consultores Comerciais para mais informações!';
+                const precoRSElem = document.getElementById('precoRS');
+                if (precoRSElem) precoRSElem.innerHTML = `< strong > Preço Final de Venda:</strong > ${textoRS} `;
+                const precoSPElem = document.getElementById('precoSP');
+                if (precoSPElem) precoSPElem.innerHTML = `< strong > Preço Final de Venda:</strong > ${textoSP}`;
+                const linhaPrecoElem = document.getElementById('linhaEntreEmpresasPreco');
+                if (linhaPrecoElem) linhaPrecoElem.style.display = 'block';
+                const notaRS = document.getElementById('notaPrecoRS');
+                const notaSP = document.getElementById('notaPrecoSP');
+                const mostrarNota = window.produtoExiste === false;
+                if (notaRS) notaRS.style.display = mostrarNota ? 'block' : 'none';
+                if (notaSP) notaSP.style.display = mostrarNota ? 'block' : 'none';
+            });
+    }
+
+    document.addEventListener('DOMContentLoaded', () => {
+        const codInput = document.getElementById('codigoClienteInput');
+        const codBtn = document.getElementById('codigoClienteBtn');
+        const limparBtn = document.getElementById('limparClienteBtn');
+        const nomeInfo = document.getElementById('nomeClienteInfo');
+
+        let nomeCtrl = null;
+        const carregarNome = async codigo => {
+            if (!nomeInfo) return;
+            if (nomeCtrl) nomeCtrl.abort();
+            if (!codigo) { nomeInfo.textContent = ''; nomeCtrl = null; return; }
+            nomeCtrl = new AbortController();
+            try {
+                const r = await fetch('/AcessosConsultas/BuscarDadosPessoaPlenus.php?q=' + encodeURIComponent(codigo) + '&offset=0', { signal: nomeCtrl.signal });
+                if (!r.ok) throw new Error('HTTP');
+                const j = await r.json();
+                const pessoa = (j.pessoas || []).find(p => p.CD_PESSOA === codigo);
+                nomeInfo.textContent = pessoa ? pessoa.NM_PESSOA : '';
+            } catch (e) {
+                if (e.name !== 'AbortError') nomeInfo.textContent = '';
+            } finally {
+                nomeCtrl = null;
+            }
+        };
+
+        const atualizarPreco = () => {
+            const params = gerarLinkAtual().split('?')[1] || '';
+            carregarNome(codInput?.value.trim());
+            mostrarDetalhesPreco(params);
+        };
+
+        if (codInput) {
+            codInput.value = '001';
+            codInput.addEventListener('change', atualizarPreco);
+            codInput.addEventListener('keydown', e => {
+                if (e.key === 'Enter') { e.preventDefault(); atualizarPreco(); }
+            });
+        }
+        if (codBtn) {
+            codBtn.addEventListener('click', atualizarPreco);
+        }
+        if (limparBtn) {
+            limparBtn.addEventListener('click', () => {
+                if (codInput) codInput.value = '001';
+                atualizarPreco();
+            });
+        }
+    });
+</script>
+
+
+
+</body>
+
+</html>

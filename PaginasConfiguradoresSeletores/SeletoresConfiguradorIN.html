@@ -1,0 +1,857 @@
+<!DOCTYPE html>
+
+<div id="titulo-estrutural" class="sr-only">Configurador</div>
+
+<link rel="stylesheet" href="/Layout/Galeria.min.css" data-versioned-href="/Layout/Galeria.min.css">
+
+<main class="main mb-0 pb-0">
+    <div class="pagina__titulo--bloco fw-bold mt-5 mb-4">
+    </div>
+    <div class="container">
+        <div class="galeria-produto" data-visible="4.K" data-lightbox-module="/Layout/ModuloPhotoSwipe.js"
+            data-folder="IBRK" data-title="IBR INVEOR M"
+            data-description="É o modelo mais completo da linha, disponível nos tamanhos A, B, C e D, cobrindo uma ampla faixa de potências, com capacidade para motores de até 30 CV. Destaca-se pela variedade de versões com opções de comunicação em redes industriais, facilitando a integração em sistemas automatizados. Conta ainda com módulo opcional para controle de mótofreio e resistor de frenagem integrado, assegurando maior segurança e eficiência nas operações. Sua carcaça robusta em alumínio garante excelente resistência e dissipação térmica, enquanto o grau de proteção IP 65 permite instalação direta em ambientes industriais severos, sem necessidade de painéis adicionais. Combinando robustez, flexibilidade e facilidade de instalação, o INVEOR M é ideal para aplicações descentralizadas que exigem alto desempenho e confiabilidade."
+            data-site="https://www.redutoresibr.com.br/pt/Produtos/inveor-m"
+            data-catalog="https://www.redutoresibr.com.br/pt/Arquivos/visualizar/catalogo-automacao#book/">
+        </div>
+    </div>
+    <div id="titulo-configurador" class="pagina__titulo--bloco mt-5 mb-5 text-center">
+        <h2 id="texto-configurador" class="fs-3 fw-bolder m-0"></h2>
+    </div>
+</main>
+
+<script nonce="<?= htmlspecialchars(csp_nonce(), ENT_QUOTES, 'UTF-8'); ?>">
+    document.addEventListener('DOMContentLoaded', () => {
+        const metaDescription = document.querySelector('meta[name="description"]');
+        const ogTitle = document.querySelector('meta[property="og:title"]');
+        const ogDescription = document.querySelector('meta[property="og:description"]');
+        const metaKeywords = document.querySelector('meta[name="keywords"]');
+        const schemaInfo = (() => {
+            const isWebPageNode = (node) => node && typeof node === 'object' && !Array.isArray(node)
+                && (node['@type'] === 'WebPage' || (typeof node['@id'] === 'string' && node['@id'].includes('#webpage')));
+            const scripts = Array.from(document.querySelectorAll('head script[type="application/ld+json"]'));
+
+            for (const script of scripts) {
+                const content = script.textContent?.trim();
+                if (!content) continue;
+                try {
+                    const parsed = JSON.parse(content);
+
+                    if (Array.isArray(parsed)) {
+                        const index = parsed.findIndex(isWebPageNode);
+                        if (index !== -1) {
+                            const original = JSON.parse(JSON.stringify(parsed[index]));
+                            return {
+                                script,
+                                original,
+                                update(data) {
+                                    const next = parsed.map((item, i) => i === index ? data : item);
+                                    script.textContent = JSON.stringify(next);
+                                }
+                            };
+                        }
+                    } else if (parsed && Array.isArray(parsed['@graph'])) {
+                        const index = parsed['@graph'].findIndex(isWebPageNode);
+                        if (index !== -1) {
+                            const original = JSON.parse(JSON.stringify(parsed['@graph'][index]));
+                            return {
+                                script,
+                                original,
+                                update(data) {
+                                    const next = {
+                                        ...parsed,
+                                        '@graph': parsed['@graph'].map((item, i) => i === index ? data : item)
+                                    };
+                                    script.textContent = JSON.stringify(next);
+                                }
+                            };
+                        }
+                    } else if (isWebPageNode(parsed)) {
+                        const original = JSON.parse(JSON.stringify(parsed));
+                        return {
+                            script,
+                            original,
+                            update(data) {
+                                script.textContent = JSON.stringify(data);
+                            }
+                        };
+                    }
+                } catch { }
+            }
+
+            return { script: null, original: null, update() { } };
+        })();
+
+        const ldJsonScript = schemaInfo.script;
+        const originalLdJson = schemaInfo.original;
+        const updateLdJson = schemaInfo.update;
+
+        const originalMeta = {
+            description: metaDescription?.getAttribute('content') || '',
+            ogTitle: ogTitle?.getAttribute('content') || '',
+            ogDescription: ogDescription?.getAttribute('content') || '',
+            keywords: metaKeywords?.getAttribute('content') || ''
+        };
+
+        function atualizarMetadados(visivel, tituloCompleto) {
+            const descricao = (visivel?.dataset.description || '').replace(/\s+/g, ' ').trim();
+            const site = visivel?.dataset.site || '';
+            const catalogo = visivel?.dataset.catalog || '';
+            const priceValidUntil = new Date(Date.now() + 1000 * 60 * 60 * 24 * 180).toISOString().slice(0, 10);
+            const moeda = (visivel?.dataset.priceCurrency || visivel?.dataset.currency || 'BRL').trim() || 'BRL';
+            const precoBruto = (visivel?.dataset.price || visivel?.dataset.preco || '0.00').trim();
+            const precoNormalizado = precoBruto.replace(/\./g, '').replace(',', '.');
+            const precoNumero = Number(precoNormalizado);
+            const preco = Number.isFinite(precoNumero) ? precoNumero.toFixed(2) : '0.00';
+
+            const paginaTitulo = tituloCompleto ? 'Configurador de Produtos - ' + tituloCompleto : 'Configurador de Produtos';
+
+            if (metaDescription) {
+                metaDescription.setAttribute('content', descricao || originalMeta.description);
+            }
+
+            if (ogTitle) {
+                ogTitle.setAttribute('content', paginaTitulo);
+            }
+
+            if (ogDescription) {
+                ogDescription.setAttribute('content', descricao || originalMeta.ogDescription);
+            }
+
+            if (metaKeywords) {
+                const palavrasChave = originalMeta.keywords ? originalMeta.keywords.split(',').map(k => k.trim()).filter(Boolean) : [];
+                if (tituloCompleto && !palavrasChave.includes(tituloCompleto)) {
+                    palavrasChave.unshift(tituloCompleto);
+                }
+                if (descricao) {
+                    const termosDescricao = descricao.split(/[,;\.]/).map(parte => parte.trim()).filter(Boolean);
+                    termosDescricao.forEach(termo => {
+                        if (!palavrasChave.includes(termo)) {
+                            palavrasChave.push(termo);
+                        }
+                    });
+                }
+                metaKeywords.setAttribute('content', palavrasChave.join(', '));
+            }
+
+            if (ldJsonScript && originalLdJson) {
+                try {
+                    const atualizado = {
+                        ...originalLdJson,
+                        name: paginaTitulo,
+                        description: descricao || originalLdJson.description || ''
+                    };
+                    if (site) {
+                        atualizado.url = site;
+                    }
+                    if (catalogo) {
+                        atualizado.offers = {
+                            '@type': 'Offer',
+                            url: catalogo,
+                            availability: 'https://schema.org/InStock',
+                            priceValidUntil: priceValidUntil,
+                            priceCurrency: 'BRL',
+                            priceCurrency: moeda,
+                            price: preco,
+                            shippingDetails: {
+                                '@type': 'OfferShippingDetails',
+                                shippingRate: {
+                                    '@type': 'MonetaryAmount',
+                                    value: '0',
+                                    currency: 'BRL'
+                                },
+                                deliveryTime: {
+                                    '@type': 'ShippingDeliveryTime',
+                                    handlingTime: {
+                                        '@type': 'QuantitativeValue',
+                                        minValue: 0,
+                                        maxValue: 1,
+                                        unitCode: 'DAY'
+                                    },
+                                    transitTime: {
+                                        '@type': 'QuantitativeValue',
+                                        minValue: 1,
+                                        maxValue: 10,
+                                        unitCode: 'DAY'
+                                    }
+                                }
+                            }
+                        };
+                    } else if (!originalLdJson?.offers) {
+                        delete atualizado.offers;
+                    }
+                    updateLdJson(atualizado);
+                } catch { }
+            }
+        }
+
+        function atualizarTituloDinamicoDocumento() {
+            window.__refreshDynamicDocumentTitle?.({
+                sourceDoc: document,
+                pageUrl: window.location.pathname + window.location.search
+            });
+        }
+
+        function atualizarTitulo() {
+            const visivel = Array.from(document.querySelectorAll('.galeria-produto[data-title]'))
+                .find(g => g.style.display !== 'none');
+            const titulo = visivel ? visivel.dataset.title : '';
+            const el = document.getElementById('texto-configurador');
+            if (!el) return;
+            if (!titulo) {
+                el.innerHTML = '';
+                atualizarMetadados(null, '');
+                atualizarTituloDinamicoDocumento();
+                return;
+            }
+            let html = 'Configure o seu ';
+            if (titulo.toUpperCase().startsWith('IBR ')) {
+                const partes = titulo.split(' ');
+                const primeiro = partes.shift();
+                const resto = partes.join(' ');
+                html += '<span class="text-dark">' + primeiro + '</span>';
+                if (resto) html += ' <span class="text-orange">' + resto + '</span>';
+            } else {
+                html += titulo;
+            }
+            el.innerHTML = html;
+            atualizarMetadados(visivel, titulo);
+            atualizarTituloDinamicoDocumento();
+        }
+        atualizarTitulo();
+        setTimeout(atualizarTitulo);
+        document.getElementById('INLN')?.addEventListener('change', atualizarTitulo);
+    });
+</script>
+
+
+<!--<script nonce="<?= htmlspecialchars(csp_nonce(), ENT_QUOTES, 'UTF-8'); ?>"
+    src="/Layout/LayoutAjudaSeletores.min.js"></script>
+
+<script src="/PaginasNavegacaoCompartilhada/ConfiguracaoGuiada.min.js"></script>
+
+<script nonce="<?= htmlspecialchars(csp_nonce(), ENT_QUOTES, 'UTF-8'); ?>">
+    document.addEventListener('DOMContentLoaded', () => {
+        const pageId = 'SeletoresConfiguradorIN';
+        const helpConfigs = window.HelpContentCatalog?.getPageHelpConfigs(pageId) || {};
+
+        window.LayoutAjudaSeletores.registerPageHelp({
+            pageId: 'SeletoresConfiguradorIN',
+            helpConfigs,
+            buttonSelector: 'button.help-icon[data-help-text]',
+            updateTriggerIds: ['INLN', 'INTP', 'INTT', 'INPT', 'INFE', 'INPC', 'INAP', 'INCM', 'INCP', 'INCO', 'INOPCS', 'MOLN', 'MOCM']
+        });
+    });
+</script>-->
+
+<script nonce="<?= htmlspecialchars(csp_nonce(), ENT_QUOTES, 'UTF-8'); ?>"
+    data-versioned-src="/Layout/Galeria.min.js"></script>
+<script nonce="<?= htmlspecialchars(csp_nonce(), ENT_QUOTES, 'UTF-8'); ?>"
+    data-versioned-src="/Layout/FiltrarPorURL.min.js"></script>
+
+<section id="GrupoINLN">
+    <label class="cssB d-flex align-items-center gap-1 justify-content-center" for="INLN">LINHA DO INVERSOR:
+        <button class="help-icon" data-help-title="" data-help-text="" data-help-class="perm-popover" data-bs-title=""
+            data-bs-content="" aria-label="Ajuda sobre LINHA DO INVERSOR"></button>
+    </label>
+    <select class="cssC" id="INLN" name="INLN">
+
+    </select>
+</section>
+
+
+<section id="GrupoINTP">
+    <label class="cssB d-flex align-items-center gap-1 justify-content-center" for="INTP">TIPO DO INVERSOR:
+        <button class="help-icon" data-help-title="" data-help-text="" data-help-class="perm-popover" data-bs-title=""
+            data-bs-content="" aria-label="Ajuda sobre TIPO DO INVERSOR"></button>
+    </label>
+    <select class="cssC" id="INTP" name="INTP">
+
+    </select>
+</section>
+
+
+<section id="GrupoINTT">
+    <label class="cssB d-flex align-items-center gap-1 justify-content-center" for="INTT">TENSÃO DO INVERSOR:
+        <button class="help-icon" data-help-title="" data-help-text="" data-help-class="perm-popover" data-bs-title=""
+            data-bs-content="" aria-label="Ajuda sobre TENSÃO DO INVERSOR"></button>
+    </label>
+    <select class="cssC" id="INTT" name="INTT">
+
+    </select>
+</section>
+
+
+<section id="GrupoINPT">
+    <label class="cssB d-flex align-items-center gap-1 justify-content-center" for="INPT">POTÊNCIA DO INVERSOR:
+        <button class="help-icon" data-help-title="" data-help-text="" data-help-class="perm-popover" data-bs-title=""
+            data-bs-content="" aria-label="Ajuda sobre POTÊNCIA DO INVERSOR"></button>
+    </label>
+    <select class="cssC" id="INPT" name="INPT">
+
+    </select>
+</section>
+
+
+<section id="GrupoINFE">
+    <label class="cssB d-flex align-items-center gap-1 justify-content-center" for="INFE">FRAME DO INVERSOR:
+        <button class="help-icon" data-help-title="" data-help-text="" data-help-class="perm-popover" data-bs-title=""
+            data-bs-content="" aria-label="Ajuda sobre FRAME DO INVERSOR"></button>
+    </label>
+    <select class="cssC" id="INFE" name="INFE">
+
+    </select>
+</section>
+
+
+<section id="GrupoINPC">
+    <label class="cssB d-flex align-items-center gap-1 justify-content-center" for="INPC">PCI DE POTÊNCIA DO INVERSOR:
+        <button class="help-icon" data-help-title="" data-help-text="" data-help-class="perm-popover" data-bs-title=""
+            data-bs-content="" aria-label="Ajuda sobre PCI DE POTÊNCIA DO INVERSOR"></button>
+    </label>
+    <select class="cssC" id="INPC" name="INPC">
+
+    </select>
+</section>
+
+
+<section id="GrupoINAP">
+    <label class="cssB d-flex align-items-center gap-1 justify-content-center" for="INAP">PCI DE APLICAÇÃO DO INVERSOR:
+        <button class="help-icon" data-help-title="" data-help-text="" data-help-class="perm-popover" data-bs-title=""
+            data-bs-content="" aria-label="Ajuda sobre PCI DE APLICAÇÃO DO INVERSOR"></button>
+    </label>
+    <select class="cssC" id="INAP" name="INAP">
+
+    </select>
+</section>
+
+
+<section id="GrupoINCM">
+    <label class="cssB d-flex align-items-center gap-1 justify-content-center" for="INCM">CARCAÇA DO INVERSOR:
+        <button class="help-icon" data-help-title="" data-help-text="" data-help-class="perm-popover" data-bs-title=""
+            data-bs-content="" aria-label="Ajuda sobre CARCAÇA DO INVERSOR"></button>
+    </label>
+    <select class="cssC" id="INCM" name="INCM">
+
+    </select>
+</section>
+
+
+<section id="GrupoINCP">
+    <label class="cssB d-flex align-items-center gap-1 justify-content-center" for="INCP">TAMPA DO INVERSOR:
+        <button class="help-icon" data-help-title="" data-help-text="" data-help-class="perm-popover" data-bs-title=""
+            data-bs-content="" aria-label="Ajuda sobre TAMPA DO INVERSOR"></button>
+    </label>
+    <select class="cssC" id="INCP" name="INCP">
+
+    </select>
+</section>
+
+
+<section id="GrupoINCO">
+    <label class="cssB d-flex align-items-center gap-1 justify-content-center" for="INCO">PADRÃO DO INVERSOR:
+        <button class="help-icon" data-help-title="" data-help-text="" data-help-class="perm-popover" data-bs-title=""
+            data-bs-content="" aria-label="Ajuda sobre PADRÃO DO INVERSOR"></button>
+    </label>
+    <select class="cssC" id="INCO" name="INCO">
+
+    </select>
+</section>
+
+
+<section id="GrupoINOPCS">
+    <label class="cssB d-flex align-items-center gap-1 justify-content-center" for="INOPCS">SUPORTE DO INVERSOR:
+        <button class="help-icon" data-help-title="" data-help-text="" data-help-class="perm-popover" data-bs-title=""
+            data-bs-content="" aria-label="Ajuda sobre SUPORTE DO INVERSOR"></button>
+    </label>
+    <select class="cssC" id="INOPCS" name="INOPCS">
+
+    </select>
+
+
+    <div class="subgrupo">
+        <section id="GrupoMOLN">
+            <label class="cssB d-flex align-items-center gap-1 justify-content-center" for="MOLN">LINHA DO MOTOR:
+                <button class="help-icon" data-help-title="" data-help-text="" data-help-class="perm-popover"
+                    data-bs-title="" data-bs-content="" aria-label="Ajuda sobre LINHA DO MOTOR"></button>
+            </label>
+            <select class="cssC" id="MOLN" name="MOLN">
+
+            </select>
+        </section>
+
+        <section id="GrupoMOCM">
+            <label class="cssB d-flex align-items-center gap-1 justify-content-center" for="MOCM">CARCAÇA DO MOTOR:
+                <button class="help-icon" data-help-title="" data-help-text="" data-help-class="perm-popover"
+                    data-bs-title="" data-bs-content="" aria-label="Ajuda sobre CARCAÇA DO MOTOR"></button>
+            </label>
+            <select class="cssC" id="MOCM" name="MOCM">
+
+            </select>
+        </section>
+    </div>
+</section>
+
+</div>
+</section>
+
+<script nonce="<?= htmlspecialchars(csp_nonce(), ENT_QUOTES, 'UTF-8'); ?>">
+
+    async function carregarINLN() {
+        const grupo = document.getElementById('GrupoINLN');
+        const select = document.getElementById('INLN');
+        const response = await fetch(`/PaginasConfiguradoresSeletoresConsultas/IN/INLN.php`);
+        select.innerHTML = await response.text();
+        grupo.style.display = select.style.display = 'block';
+
+        carregarINTP();
+    }
+
+    async function carregarINTP() {
+        const inln = v("INLN");
+        const grupo = document.getElementById('GrupoINTP');
+        const select = document.getElementById('INTP');
+        const response = await fetch(`/PaginasConfiguradoresSeletoresConsultas/IN/INTP.php?INLN=${encodeURIComponent(inln)}`);
+        select.innerHTML = await response.text();
+        grupo.style.display = select.style.display = 'block';
+
+        carregarINTT();
+    }
+
+    async function carregarINTT() {
+        const inln = v("INLN");
+        const intp = v("INTP");
+        const grupo = document.getElementById('GrupoINTT');
+        const select = document.getElementById('INTT');
+        const response = await fetch(`/PaginasConfiguradoresSeletoresConsultas/IN/INTT.php?INLN=${encodeURIComponent(inln)}&INTP=${encodeURIComponent(intp)}`);
+        select.innerHTML = await response.text();
+        grupo.style.display = select.style.display = 'block';
+        select.value = '';
+
+        carregarINPT();
+    }
+
+    async function carregarINPT() {
+        const inln = v("INLN");
+        const intp = v("INTP");
+        const intt = v("INTT");
+        const grupo = document.getElementById('GrupoINPT');
+        const select = document.getElementById('INPT');
+        const response = await fetch(`/PaginasConfiguradoresSeletoresConsultas/IN/INPT.php?INLN=${encodeURIComponent(inln)}&INTP=${encodeURIComponent(intp)}&INTT=${encodeURIComponent(intt)}`);
+        select.innerHTML = await response.text();
+        grupo.style.display = select.style.display = 'block';
+        select.value = '';
+
+        carregarINFE();
+    }
+
+    async function carregarINFE() {
+        const inln = v("INLN");
+        const intp = v("INTP");
+        const intt = v("INTT");
+        const inpt = v("INPT");
+        const grupo = document.getElementById('GrupoINFE');
+        const select = document.getElementById('INFE');
+        const response = await fetch(`/PaginasConfiguradoresSeletoresConsultas/IN/INFE.php?INLN=${encodeURIComponent(inln)}&INTP=${encodeURIComponent(intp)}&INTT=${encodeURIComponent(intt)}&INPT=${encodeURIComponent(inpt)}`);
+        select.innerHTML = await response.text();
+        grupo.style.display = select.style.display = 'block';
+        select.value = '';
+
+        carregarINPC();
+    }
+
+    async function carregarINPC() {
+        const inln = v("INLN");
+        const intp = v("INTP");
+        const intt = v("INTT");
+        const inpt = v("INPT");
+        const infe = v("INFE");
+        const grupo = document.getElementById('GrupoINPC');
+        const select = document.getElementById('INPC');
+        const response = await fetch(`/PaginasConfiguradoresSeletoresConsultas/IN/INPC.php?INLN=${encodeURIComponent(inln)}&INTP=${encodeURIComponent(intp)}&INTT=${encodeURIComponent(intt)}&INPT=${encodeURIComponent(inpt)}&INFE=${encodeURIComponent(infe)}`);
+        select.innerHTML = await response.text();
+        grupo.style.display = select.style.display = 'block';
+        select.value = '';
+
+        carregarINAP();
+    }
+
+    async function carregarINAP() {
+        const inln = v("INLN");
+        const intp = v("INTP");
+        const intt = v("INTT");
+        const inpt = v("INPT");
+        const infe = v("INFE");
+        const inpc = v("INPC");
+        const grupo = document.getElementById('GrupoINAP');
+        const select = document.getElementById('INAP');
+        const response = await fetch(`/PaginasConfiguradoresSeletoresConsultas/IN/INAP.php?INLN=${encodeURIComponent(inln)}&INTP=${encodeURIComponent(intp)}&INTT=${encodeURIComponent(intt)}&INPT=${encodeURIComponent(inpt)}&INFE=${encodeURIComponent(infe)}&INPC=${encodeURIComponent(inpc)}`);
+        select.innerHTML = await response.text();
+        grupo.style.display = select.style.display = 'block';
+        select.value = '';
+
+        carregarINCM();
+    }
+
+    async function carregarINCM() {
+        const inln = v("INLN");
+        const intp = v("INTP");
+        const intt = v("INTT");
+        const inpt = v("INPT");
+        const infe = v("INFE");
+        const inpc = v("INPC");
+        const inap = v("INAP");
+        const grupo = document.getElementById('GrupoINCM');
+        const select = document.getElementById('INCM');
+        const response = await fetch(`/PaginasConfiguradoresSeletoresConsultas/IN/INCM.php?INLN=${encodeURIComponent(inln)}&INTP=${encodeURIComponent(intp)}&INTT=${encodeURIComponent(intt)}&INPT=${encodeURIComponent(inpt)}&INFE=${encodeURIComponent(infe)}&INPC=${encodeURIComponent(inpc)}&INAP=${encodeURIComponent(inap)}`);
+        select.innerHTML = await response.text();
+        grupo.style.display = select.style.display = 'block';
+        select.value = '';
+
+        carregarINCP();
+    }
+
+    async function carregarINCP() {
+        const inln = v("INLN");
+        const intp = v("INTP");
+        const intt = v("INTT");
+        const inpt = v("INPT");
+        const infe = v("INFE");
+        const inpc = v("INPC");
+        const inap = v("INAP");
+        const incm = v("INCM");
+        const grupo = document.getElementById('GrupoINCP');
+        const select = document.getElementById('INCP');
+        const response = await fetch(`/PaginasConfiguradoresSeletoresConsultas/IN/INCP.php?INLN=${encodeURIComponent(inln)}&INTP=${encodeURIComponent(intp)}&INTT=${encodeURIComponent(intt)}&INPT=${encodeURIComponent(inpt)}&INFE=${encodeURIComponent(infe)}&INPC=${encodeURIComponent(inpc)}&INAP=${encodeURIComponent(inap)}&INCM=${encodeURIComponent(incm)}`);
+        select.innerHTML = await response.text();
+        grupo.style.display = select.style.display = 'block';
+        select.value = '';
+
+        carregarINCO();
+    }
+
+    async function carregarINCO() {
+        const inln = v("INLN");
+        const intp = v("INTP");
+        const intt = v("INTT");
+        const inpt = v("INPT");
+        const infe = v("INFE");
+        const inpc = v("INPC");
+        const inap = v("INAP");
+        const incm = v("INCM");
+        const incp = v("INCP");
+        const grupo = document.getElementById('GrupoINCO');
+        const select = document.getElementById('INCO');
+        const response = await fetch(`/PaginasConfiguradoresSeletoresConsultas/IN/INCO.php?INLN=${encodeURIComponent(inln)}&INTP=${encodeURIComponent(intp)}&INTT=${encodeURIComponent(intt)}&INPT=${encodeURIComponent(inpt)}&INFE=${encodeURIComponent(infe)}&INPC=${encodeURIComponent(inpc)}&INAP=${encodeURIComponent(inap)}&INCM=${encodeURIComponent(incm)}&INCP=${encodeURIComponent(incp)}`);
+        select.innerHTML = await response.text();
+        grupo.style.display = select.style.display = 'block';
+
+        select.dispatchEvent(new Event('change'));
+        carregarINOPCS();
+    }
+
+    async function carregarINOPCS() {
+        const inln = v("INLN");
+        const intp = v("INTP");
+        const intt = v("INTT");
+        const infe = v("INFE");
+        const inco = v("INCO");
+
+        const grupo = document.getElementById('GrupoINOPCS');
+        const select = document.getElementById('INOPCS');
+        const subgrupo = grupo.querySelector('.subgrupo');
+
+        const response = await fetch(`/PaginasConfiguradoresSeletoresConsultas/IN/INOPCS.php?INLN=${encodeURIComponent(inln)}&INTP=${encodeURIComponent(intp)}&INTT=${encodeURIComponent(intt)}&INFE=${encodeURIComponent(infe)}&INCO=${encodeURIComponent(inco)}`);
+        select.innerHTML = await response.text();
+
+        grupo.style.display = 'block';
+        select.style.display = 'block';
+
+        const atualizarSubgrupo = () => {
+            const mostrar = select.value.trim() === 'NM';
+            subgrupo.style.display = mostrar ? 'block' : 'none';
+            if (mostrar) {
+                carregarMOLN();
+            }
+        };
+
+        select.addEventListener('change', atualizarSubgrupo);
+        atualizarSubgrupo();
+    }
+
+    async function carregarMOLN() {
+        const inln = v("INLN");
+        const intp = v("INTP");
+        const intt = v("INTT");
+        const infe = v("INFE");
+        const inco = v("INCO");
+        const inopcs = v("INOPCS");
+
+        const grupo = document.getElementById("GrupoMOLN");
+        const select = document.getElementById("MOLN");
+
+        try {
+            const response = await fetch(`/PaginasConfiguradoresSeletoresConsultas/IN/MOLN.php?INLN=${encodeURIComponent(inln)}&INTP=${encodeURIComponent(intp)}&INTT=${encodeURIComponent(intt)}&INFE=${encodeURIComponent(infe)}&INCO=${encodeURIComponent(inco)}&INOPCS=${encodeURIComponent(inopcs)}`);
+            select.innerHTML = await response.text();
+
+            grupo.style.display = 'block';
+            select.style.display = 'block';
+
+            select.value = '';
+            select.dispatchEvent(new Event('change'));
+        } catch (error) {
+
+            grupo.style.display = 'none';
+            select.style.display = 'none';
+            select.innerHTML = '';
+        } finally {
+            carregarMOCM();
+        }
+    }
+
+    async function carregarMOCM() {
+        const inln = v("INLN");
+        const intp = v("INTP");
+        const intt = v("INTT");
+        const infe = v("INFE");
+        const inco = v("INCO");
+        const inopcs = v("INOPCS");
+        const moln = v("MOLN");
+
+        const grupo = document.getElementById("GrupoMOCM");
+        const select = document.getElementById("MOCM");
+
+        const response = await fetch(`/PaginasConfiguradoresSeletoresConsultas/IN/MOCM.php?INLN=${encodeURIComponent(inln)}&INTP=${encodeURIComponent(intp)}&INTT=${encodeURIComponent(intt)}&INFE=${encodeURIComponent(infe)}&INCO=${encodeURIComponent(inco)}&INOPCS=${encodeURIComponent(inopcs)}&MOLN=${encodeURIComponent(moln)}`);
+
+        select.innerHTML = await response.text();
+
+        select.value = '';
+
+        grupo.style.display = 'block';
+        select.style.display = 'block';
+    }
+
+
+    document.addEventListener("DOMContentLoaded", () => {
+        carregarINLN();
+
+        document.getElementById('INLN')?.addEventListener('change', carregarINTP);
+        document.getElementById('INTP')?.addEventListener('change', carregarINTT);
+        document.getElementById('INTT')?.addEventListener('change', carregarINPT);
+        document.getElementById('INPT')?.addEventListener('change', carregarINFE);
+        document.getElementById('INFE')?.addEventListener('change', carregarINPC);
+        document.getElementById('INPC')?.addEventListener('change', carregarINAP);
+        document.getElementById('INAP')?.addEventListener('change', carregarINCM);
+        document.getElementById('INCM')?.addEventListener('change', carregarINCP);
+        document.getElementById('INCP')?.addEventListener('change', carregarINCO);
+        document.getElementById('INCO')?.addEventListener('change', carregarINOPCS);
+        document.getElementById('INOPCS')?.addEventListener('change', carregarMOLN);
+        document.getElementById('INOPCS')?.addEventListener('change', carregarMOCM);
+        document.getElementById('MOLN')?.addEventListener('change', carregarMOCM);
+    })
+
+</script>
+
+<script nonce="<?= htmlspecialchars(csp_nonce(), ENT_QUOTES, 'UTF-8'); ?>">
+    function exibirBotaoCompartilhar() {
+        const wrapper = document.getElementById("compartilhar-wrapper");
+        if (wrapper) wrapper.style.display = "block";
+        if (typeof exibirBotaoRefazerConfiguracao === "function") exibirBotaoRefazerConfiguracao();
+    }
+
+    function exibirBotaoSolicitarCotacao() {
+        const wrapper = document.getElementById("cotacao-wrapper");
+        if (wrapper) wrapper.style.display = "block";
+    }
+
+    async function gerarCodigoProduto() {
+        if (typeof formularioCompleto === 'function' && !formularioCompleto(true)) {
+            if (typeof exibirAlerta === 'function') {
+                exibirAlerta('⚠️ Por favor, preencha todos os campos antes de gerar o produto.');
+            }
+            return;
+        }
+        const INLN = v("INLN");
+        const INTP = v("INTP");
+        const INTT = v("INTT");
+        const INPT = v("INPT");
+        const INFE = v("INFE");
+        const INPC = v("INPC");
+        const INAP = v("INAP");
+        const INCM = v("INCM");
+        const INCP = v("INCP");
+        const INCO = v("INCO");
+        const INOPCS = v("INOPCS");
+        const MOLN = v("MOLN");
+        const MOCM = v("MOCM");
+
+        const SUPORTE = INOPCS === "NP" ? "" : `.${MOLN}.${MOCM}`;
+
+        const COMPOSICAOCODIGO = [
+            INLN,
+            INTP,
+            INTT,
+            INPT,
+            INFE,
+            INPC,
+            INAP,
+            INCM,
+            INCP,
+            INCO,
+            INOPCS + SUPORTE
+        ]
+            .map(s => s.replace(/^\.|\.$/g, ""))
+            .map(s => s.replace(/,\s*/g, ".").replace(/\s+/g, ""))
+            .map(s => s.replace(/\.{2,}/g, "."))
+            .filter(Boolean)
+            .join(".");
+
+        document.getElementById("refProduto").textContent = COMPOSICAOCODIGO;
+        mostrarDetalhesProduto({}, COMPOSICAOCODIGO);
+
+        fetch("/PaginasConsultaProdutos/CodigoDescricaoObservacaoProduto.php", {
+            method: "POST",
+            headers: { "Content-Type": "application/x-www-form-urlencoded" },
+            body: `codigo=${encodeURIComponent(COMPOSICAOCODIGO)}`
+        })
+            .then(resp => resp.text())
+            .then(text => {
+                let dados;
+                try { dados = JSON.parse(text); } catch { throw new Error(text); }
+                return dados;
+            })
+            .then(dados => {
+                mostrarDetalhesProduto(dados || {}, COMPOSICAOCODIGO);
+                window.codigoProduto = dados?.CD_PRODUTO || "";
+                window.codigoProduto = dados?.CD_PRODUTO || "";
+                window.codigoEstoquePendente = dados?.CD_PRODUTO || "";
+                if (typeof mostrarDetalhesEstoque === 'function') {
+                    mostrarDetalhesEstoque(dados?.CD_PRODUTO || "");
+                }
+                if (typeof mostrarDetalhesPreco === 'function') {
+                    const params = gerarLinkAtual().split('?')[1] || '';
+                    mostrarDetalhesPreco(params);
+                }
+            })
+            .catch(err => {
+
+                if (typeof mostrarDetalhesPreco === 'function') {
+                    const params = gerarLinkAtual().split('?')[1] || '';
+                    mostrarDetalhesPreco(params);
+                }
+            });
+
+
+        if (window.manualHistoricoProduto && window.ultimoHistoricoProduto !== COMPOSICAOCODIGO) {
+            const linkAtual = gerarLinkAtual();
+            fetch("/PaginasAreaClienteSessaoPerfil/RegistrarProduto.php", {
+                method: "POST",
+                headers: { "Content-Type": "application/x-www-form-urlencoded" },
+                body: `produto=${encodeURIComponent(COMPOSICAOCODIGO)}&link=${encodeURIComponent(linkAtual)}`
+            });
+            window.ultimoHistoricoProduto = COMPOSICAOCODIGO;
+            window.manualHistoricoProduto = false;
+        }
+
+        exibirBotaoCompartilhar();
+        //exibirBotaoSolicitarDesenho();
+        exibirBotaoSolicitarCotacao();
+    }
+</script>
+
+<script nonce="<?= htmlspecialchars(csp_nonce(), ENT_QUOTES, 'UTF-8'); ?>">
+    const endpointPreco = '/PaginasConfiguradoresPrecoVenda/INPV.php';
+    function mostrarDetalhesPreco(paramString) {
+        const params = new URLSearchParams(
+            typeof paramString === 'string'
+                ? paramString
+                : new URLSearchParams(paramString).toString()
+        );
+        if (window.codigoProduto) {
+            params.append('produto', window.codigoProduto);
+        }
+        const codInput = document.getElementById('codigoClienteInput');
+        if (codInput && codInput.value.trim()) {
+            params.set('pessoa', codInput.value.trim());
+        }
+        fetch(endpointPreco, {
+            method: 'POST',
+            headers: { 'Content-Type': 'application/x-www-form-urlencoded' },
+            body: params.toString()
+        })
+            .then(r => r.json())
+            .then(p => {
+                const valorRS = p && p['001'] ? parseFloat(String(p['001']).replace(/\./g, '').replace(',', '.')) : NaN;
+                const valorSP = p && p['003'] ? parseFloat(String(p['003']).replace(/\./g, '').replace(',', '.')) : NaN;
+                const textoRS = !isNaN(valorRS) && valorRS !== 0 ? `R$ ${valorRS.toLocaleString('pt-BR', { minimumFractionDigits: 2, maximumFractionDigits: 2 })}` : '👉 😊 Ops! O preço de venda está indisponível no momento. 📞 Fale com nossos Consultores Comerciais para mais informações!';
+                const textoSP = !isNaN(valorSP) && valorSP !== 0 ? `R$ ${valorSP.toLocaleString('pt-BR', { minimumFractionDigits: 2, maximumFractionDigits: 2 })}` : '👉 😊 Ops! O preço de venda está indisponível no momento. 📞 Fale com nossos Consultores Comerciais para mais informações!';
+                const precoRSElem = document.getElementById('precoRS');
+                if (precoRSElem) precoRSElem.innerHTML = `<strong>Preço Final de Venda:</strong> ${textoRS}`;
+                const precoSPElem = document.getElementById('precoSP');
+                if (precoSPElem) precoSPElem.innerHTML = `<strong>Preço Final de Venda:</strong> ${textoSP}`;
+                const linhaPrecoElem = document.getElementById('linhaEntreEmpresasPreco');
+                if (linhaPrecoElem) linhaPrecoElem.style.display = 'block';
+                const notaRS = document.getElementById('notaPrecoRS');
+                const notaSP = document.getElementById('notaPrecoSP');
+                const mostrarNota = window.produtoExiste === false;
+                if (notaRS) notaRS.style.display = mostrarNota ? 'block' : 'none';
+                if (notaSP) notaSP.style.display = mostrarNota ? 'block' : 'none';
+            });
+    }
+
+    document.addEventListener('DOMContentLoaded', () => {
+        const codInput = document.getElementById('codigoClienteInput');
+        const codBtn = document.getElementById('codigoClienteBtn');
+        const limparBtn = document.getElementById('limparClienteBtn');
+        const nomeInfo = document.getElementById('nomeClienteInfo');
+
+        let nomeCtrl = null;
+        const carregarNome = async codigo => {
+            if (!nomeInfo) return;
+            if (nomeCtrl) nomeCtrl.abort();
+            if (!codigo) { nomeInfo.textContent = ''; nomeCtrl = null; return; }
+            nomeCtrl = new AbortController();
+            try {
+                const r = await fetch('/AcessosConsultas/BuscarDadosPessoaPlenus.php?q=' + encodeURIComponent(codigo) + '&offset=0', { signal: nomeCtrl.signal });
+                if (!r.ok) throw new Error('HTTP');
+                const j = await r.json();
+                const pessoa = (j.pessoas || []).find(p => p.CD_PESSOA === codigo);
+                nomeInfo.textContent = pessoa ? pessoa.NM_PESSOA : '';
+            } catch (e) {
+                if (e.name !== 'AbortError') nomeInfo.textContent = '';
+            } finally {
+                nomeCtrl = null;
+            }
+        };
+
+        const atualizarPreco = () => {
+            const params = gerarLinkAtual().split('?')[1] || '';
+            carregarNome(codInput?.value.trim());
+            mostrarDetalhesPreco(params);
+        };
+
+        if (codInput) {
+            codInput.value = '001';
+            codInput.addEventListener('change', atualizarPreco);
+            codInput.addEventListener('keydown', e => {
+                if (e.key === 'Enter') { e.preventDefault(); atualizarPreco(); }
+            });
+        }
+        if (codBtn) {
+            codBtn.addEventListener('click', atualizarPreco);
+        }
+        if (limparBtn) {
+            limparBtn.addEventListener('click', () => {
+                if (codInput) codInput.value = '001';
+                atualizarPreco();
+            });
+        }
+    });
+</script>
+
+
+
+
+</body>
+
+</html>

@@ -1,0 +1,2145 @@
+<!DOCTYPE html>
+
+<div id="titulo-estrutural" class="sr-only">Configurador</div>
+
+<link rel="stylesheet" href="/Layout/Galeria.min.css" data-versioned-href="/Layout/Galeria.min.css">
+
+<main class="main mb-0 pb-0">
+    <div class="pagina__titulo--bloco fw-bold mt-5 mb-4">
+    </div>
+    <div class="container">
+        <div class="galeria-produto" data-visible="1.FKA" data-lightbox-module="/Layout/ModuloPhotoSwipe.js"
+            data-folder="IBRXFKA" data-title="IBR X - FKA"
+            data-description="Dado as combinações das engrenagens cilíndricas helicoidais e cônicas empregues em sua construção, os redutores e motorredutores da linha IBR X – FFA se destacam por proporcionar alto rendimento, aliado a alta capacidade de torque de até 18.000 N.m e configuração ortogonal, com saída em 90 graus em relação ao eixo do motor. Podem ser consideradas diversas opções de montagem em máquinas e equipamentos, utilizando flanges de saída e braços de torque, além da possibilidade de fornecimento com eixos de saída maciços ou vazados."
+            data-site="https://www.redutoresibr.com.br/pt/Produtos/ibr-x---fka"
+            data-catalog="https://www.redutoresibr.com.br/pt/Arquivos/visualizar/catalogo-geral#book/">
+        </div>
+
+        <div class="galeria-produto" data-visible="1.FFA" data-lightbox-module="/Layout/ModuloPhotoSwipe.js"
+            data-folder="IBRPFFA" data-title="IBR P - FFA"
+            data-description="Os redutores de eixos paralelos IBR P – FFA são compostos por 2 ou 3 pares de engrenagens cilíndricas helicoidais e termicamente tratadas, atingindo elevadas faixas de torque de até 18.000 Nm. As combinações e características dessas engrenagens possibilitam variadas opções de reduções e um rendimento elevado, resultando em menor consumo de energia dos motorredutores devido à eficiência."
+            data-site="https://www.redutoresibr.com.br/pt/Produtos/ibr-p---ffa"
+            data-catalog="https://www.redutoresibr.com.br/pt/Arquivos/visualizar/catalogo-geral#book/">
+        </div>
+
+        <div class="galeria-produto" data-visible="1.FR" data-lightbox-module="/Layout/ModuloPhotoSwipe.js"
+            data-folder="IBRCFR" data-title="IBR C - FR"
+            data-description="A linha de redutores e motorredutores coaxiais é fabricada com 2 ou 3 estágios de engrenagens cilíndricas helicoidais, oferecendo uma ampla gama de opções de reduções, altos níveis de torque de até 18.000 N.m e excelente rendimento, o que resulta em eficiência energética e economia. Sua construção com pés permite diversas configurações de montagem em máquinas e equipamentos, além da possibilidade de aplicação com flanges de saída."
+            data-site="https://www.redutoresibr.com.br/pt/Produtos/ibr-c---fr"
+            data-catalog="https://www.redutoresibr.com.br/pt/Arquivos/visualizar/catalogo-geral#book/">
+        </div>
+    </div>
+    <div id="titulo-configurador" class="pagina__titulo--bloco mt-5 mb-5 text-center">
+        <h2 id="texto-configurador" class="fs-3 fw-bolder m-0"></h2>
+    </div>
+</main>
+
+<script nonce="<?= htmlspecialchars(csp_nonce(), ENT_QUOTES, 'UTF-8'); ?>">
+    document.addEventListener('DOMContentLoaded', () => {
+        const metaDescription = document.querySelector('meta[name="description"]');
+        const ogTitle = document.querySelector('meta[property="og:title"]');
+        const ogDescription = document.querySelector('meta[property="og:description"]');
+        const metaKeywords = document.querySelector('meta[name="keywords"]');
+        const schemaInfo = (() => {
+            const isWebPageNode = (node) => node && typeof node === 'object' && !Array.isArray(node)
+                && (node['@type'] === 'WebPage' || (typeof node['@id'] === 'string' && node['@id'].includes('#webpage')));
+            const scripts = Array.from(document.querySelectorAll('head script[type="application/ld+json"]'));
+
+            for (const script of scripts) {
+                const content = script.textContent?.trim();
+                if (!content) continue;
+                try {
+                    const parsed = JSON.parse(content);
+
+                    if (Array.isArray(parsed)) {
+                        const index = parsed.findIndex(isWebPageNode);
+                        if (index !== -1) {
+                            const original = JSON.parse(JSON.stringify(parsed[index]));
+                            return {
+                                script,
+                                original,
+                                update(data) {
+                                    const next = parsed.map((item, i) => i === index ? data : item);
+                                    script.textContent = JSON.stringify(next);
+                                }
+                            };
+                        }
+                    } else if (parsed && Array.isArray(parsed['@graph'])) {
+                        const index = parsed['@graph'].findIndex(isWebPageNode);
+                        if (index !== -1) {
+                            const original = JSON.parse(JSON.stringify(parsed['@graph'][index]));
+                            return {
+                                script,
+                                original,
+                                update(data) {
+                                    const next = {
+                                        ...parsed,
+                                        '@graph': parsed['@graph'].map((item, i) => i === index ? data : item)
+                                    };
+                                    script.textContent = JSON.stringify(next);
+                                }
+                            };
+                        }
+                    } else if (isWebPageNode(parsed)) {
+                        const original = JSON.parse(JSON.stringify(parsed));
+                        return {
+                            script,
+                            original,
+                            update(data) {
+                                script.textContent = JSON.stringify(data);
+                            }
+                        };
+                    }
+                } catch { }
+            }
+
+            return { script: null, original: null, update() { } };
+        })();
+
+        const ldJsonScript = schemaInfo.script;
+        const originalLdJson = schemaInfo.original;
+        const updateLdJson = schemaInfo.update;
+
+        const originalMeta = {
+            description: metaDescription?.getAttribute('content') || '',
+            ogTitle: ogTitle?.getAttribute('content') || '',
+            ogDescription: ogDescription?.getAttribute('content') || '',
+            keywords: metaKeywords?.getAttribute('content') || ''
+        };
+
+        function atualizarMetadados(visivel, tituloCompleto) {
+            const descricao = (visivel?.dataset.description || '').replace(/\s+/g, ' ').trim();
+            const site = visivel?.dataset.site || '';
+            const catalogo = visivel?.dataset.catalog || '';
+            const priceValidUntil = new Date(Date.now() + 1000 * 60 * 60 * 24 * 180).toISOString().slice(0, 10);
+            const moeda = (visivel?.dataset.priceCurrency || visivel?.dataset.currency || 'BRL').trim() || 'BRL';
+            const precoBruto = (visivel?.dataset.price || visivel?.dataset.preco || '0.00').trim();
+            const precoNormalizado = precoBruto.replace(/\./g, '').replace(',', '.');
+            const precoNumero = Number(precoNormalizado);
+            const preco = Number.isFinite(precoNumero) ? precoNumero.toFixed(2) : '0.00';
+
+            const paginaTitulo = tituloCompleto ? 'Configurador de Produtos - ' + tituloCompleto : 'Configurador de Produtos';
+
+            if (metaDescription) {
+                metaDescription.setAttribute('content', descricao || originalMeta.description);
+            }
+
+            if (ogTitle) {
+                ogTitle.setAttribute('content', paginaTitulo);
+            }
+
+            if (ogDescription) {
+                ogDescription.setAttribute('content', descricao || originalMeta.ogDescription);
+            }
+
+            if (metaKeywords) {
+                const palavrasChave = originalMeta.keywords ? originalMeta.keywords.split(',').map(k => k.trim()).filter(Boolean) : [];
+                if (tituloCompleto && !palavrasChave.includes(tituloCompleto)) {
+                    palavrasChave.unshift(tituloCompleto);
+                }
+                if (descricao) {
+                    const termosDescricao = descricao.split(/[,;\.]/).map(parte => parte.trim()).filter(Boolean);
+                    termosDescricao.forEach(termo => {
+                        if (!palavrasChave.includes(termo)) {
+                            palavrasChave.push(termo);
+                        }
+                    });
+                }
+                metaKeywords.setAttribute('content', palavrasChave.join(', '));
+            }
+
+            if (ldJsonScript && originalLdJson) {
+                try {
+                    const atualizado = {
+                        ...originalLdJson,
+                        name: paginaTitulo,
+                        description: descricao || originalLdJson.description || ''
+                    };
+                    if (site) {
+                        atualizado.url = site;
+                    }
+                    if (catalogo) {
+                        atualizado.offers = {
+                            '@type': 'Offer',
+                            url: catalogo,
+                            availability: 'https://schema.org/InStock',
+                            priceValidUntil: priceValidUntil,
+                            priceCurrency: 'BRL',
+                            priceCurrency: moeda,
+                            price: preco,
+                            shippingDetails: {
+                                '@type': 'OfferShippingDetails',
+                                shippingRate: {
+                                    '@type': 'MonetaryAmount',
+                                    value: '0',
+                                    currency: 'BRL'
+                                },
+                                deliveryTime: {
+                                    '@type': 'ShippingDeliveryTime',
+                                    handlingTime: {
+                                        '@type': 'QuantitativeValue',
+                                        minValue: 0,
+                                        maxValue: 1,
+                                        unitCode: 'DAY'
+                                    },
+                                    transitTime: {
+                                        '@type': 'QuantitativeValue',
+                                        minValue: 1,
+                                        maxValue: 10,
+                                        unitCode: 'DAY'
+                                    }
+                                }
+                            }
+                        };
+                    } else if (!originalLdJson?.offers) {
+                        delete atualizado.offers;
+                    }
+                    updateLdJson(atualizado);
+                } catch { }
+            }
+        }
+
+        function atualizarTituloDinamicoDocumento() {
+            window.__refreshDynamicDocumentTitle?.({
+                sourceDoc: document,
+                pageUrl: window.location.pathname + window.location.search
+            });
+        }
+
+        function atualizarTitulo() {
+            const visivel = Array.from(document.querySelectorAll('.galeria-produto[data-title]'))
+                .find(g => g.style.display !== 'none');
+            const titulo = visivel ? visivel.dataset.title : '';
+            const el = document.getElementById('texto-configurador');
+            if (!el) return;
+            if (!titulo) {
+                el.innerHTML = '';
+                atualizarMetadados(null, '');
+                atualizarTituloDinamicoDocumento();
+                return;
+            }
+            let html = 'Configure o seu ';
+            if (titulo.toUpperCase().startsWith('IBR ')) {
+                const partes = titulo.split(' ');
+                const primeiro = partes.shift();
+                const resto = partes.join(' ');
+                html += '<span class="text-dark">' + primeiro + '</span>';
+                if (resto) html += ' <span class="text-orange">' + resto + '</span>';
+            } else {
+                html += titulo;
+            }
+            el.innerHTML = html;
+            atualizarMetadados(visivel, titulo);
+            atualizarTituloDinamicoDocumento();
+        }
+        atualizarTitulo();
+        setTimeout(atualizarTitulo);
+        document.getElementById('FXLN')?.addEventListener('change', atualizarTitulo);
+    });
+</script>
+
+<!--<script nonce="<?= htmlspecialchars(csp_nonce(), ENT_QUOTES, 'UTF-8'); ?>"
+    src="/Layout/LayoutAjudaSeletores.min.js"></script>
+
+<script src="/PaginasNavegacaoCompartilhada/ConfiguracaoGuiada.min.js"></script>
+
+<script nonce="<?= htmlspecialchars(csp_nonce(), ENT_QUOTES, 'UTF-8'); ?>">
+    document.addEventListener('DOMContentLoaded', () => {
+        const pageId = 'SeletoresConfiguradorFX';
+        const helpConfigs = window.HelpContentCatalog?.getPageHelpConfigs(pageId) || {};
+
+        window.LayoutAjudaSeletores.registerPageHelp({
+            pageId: 'SeletoresConfiguradorFX',
+            helpConfigs,
+            buttonSelector: 'button.help-icon[data-help-text]',
+            updateTriggerIds: ['FXBR', 'FXRD', 'FXET', 'FXCM', 'FXBU', 'FXCP', 'FXAF', 'FXAFP', 'FXBT', 'FXPE', 'FXAS', 'FXASP', 'FXPM', 'FXOPC', 'FXMO', 'MOLN', 'MOTP',
+                'MOTT', 'MOFQ', 'MOPT', 'MOPL', 'MOCP', 'MOCPP', 'MOPC', 'MOPP', 'MOOPC', 'FXCR', 'FXVA', 'VALN', 'VAPT', 'VAECP', 'VASCP', 'VAPM', 'FXPL']
+        });
+    });
+</script>-->
+
+<script nonce="<?= htmlspecialchars(csp_nonce(), ENT_QUOTES, 'UTF-8'); ?>"
+    data-versioned-src="/Layout/Galeria.min.js"></script>
+<script nonce="<?= htmlspecialchars(csp_nonce(), ENT_QUOTES, 'UTF-8'); ?>"
+    data-versioned-src="/Layout/FiltrarPorURL.min.js"></script>
+
+<section id="GrupoFXLN">
+    <label class="cssB d-flex align-items-center gap-1 justify-content-center" for="FXLN">Linha do Redutor:
+        <button class="help-icon" data-help-title="" data-help-text="" data-help-class="perm-popover" data-bs-title=""
+            data-bs-content="" aria-label="Ajuda sobre Linha do Redutor"></button>
+    </label>
+    <select class="cssC" id="FXLN" name="FXLN">
+    </select>
+</section>
+
+
+<section id="GrupoFXBR">
+    <label class="cssB d-flex align-items-center gap-1 justify-content-center" for="FXBR">Tamanho do Redutor:
+        <button class="help-icon" data-help-title="" data-help-text="" data-help-class="perm-popover" data-bs-title=""
+            data-bs-content="" aria-label="Ajuda sobre Tamanho do Redutor"></button>
+    </label>
+    <select class="cssC" id="FXBR" name="FXBR">
+    </select>
+</section>
+
+
+<section id="GrupoFXRD">
+    <label class="cssB d-flex align-items-center gap-1 justify-content-center" for="FXRD">Redução do Redutor:
+        <button class="help-icon" data-help-title="" data-help-text="" data-help-class="perm-popover" data-bs-title=""
+            data-bs-content="" aria-label="Ajuda sobre Redução do Redutor"></button>
+    </label>
+    <select class="cssC" id="FXRD" name="FXRD" disabled>
+    </select>
+</section>
+
+
+<section id="GrupoFXET">
+    <label class="cssB d-flex align-items-center gap-1 justify-content-center" for="FXET">Estágio do Redutor:
+        <button class="help-icon" data-help-title="" data-help-text="" data-help-class="perm-popover" data-bs-title=""
+            data-bs-content="" aria-label="Ajuda sobre Estágio do Redutor"></button>
+    </label>
+    <select class="cssC" id="FXET" name="FXET">
+    </select>
+</section>
+
+
+<section id="GrupoFXCM">
+    <label class="cssB d-flex align-items-center gap-1 justify-content-center" for="FXCM">Tamanho da Carcaça ou Eixo de
+        Entrada do Redutor:
+        <button class="help-icon" data-help-title="" data-help-text="" data-help-class="perm-popover" data-bs-title=""
+            data-bs-content="" aria-label="Ajuda sobre Tamanho da Carcaça ou Eixo de Entrada do Redutor"></button>
+    </label>
+    <select class="cssC" id="FXCM" name="FXCM">
+    </select>
+
+
+    <div class="subgrupo">
+
+        <section id="GrupoFXBU" style="display: none;">
+            <label class="cssB d-flex align-items-center gap-1 justify-content-center" for="FXBU">Bucha de Redução do
+                Redutor:
+                <button class="help-icon" data-help-title="" data-help-text="" data-help-class="perm-popover"
+                    data-bs-title="" data-bs-content="" aria-label="Ajuda sobre Bucha de Redução do Redutor"></button>
+            </label>
+            <select class="cssC" id="FXBU" name="FXBU" disabled>
+            </select>
+        </section>
+    </div>
+</section>
+
+
+<section id="GrupoFXCP">
+    <label class="cssB d-flex align-items-center gap-1 justify-content-center" for="FXCP">Forma Construtiva do Redutor:
+        <button class="help-icon" data-help-title="" data-help-text="" data-help-class="perm-popover" data-bs-title=""
+            data-bs-content="" aria-label="Ajuda sobre Forma Construtiva do Redutor"></button>
+    </label>
+    <select class="cssC" id="FXCP" name="FXCP">
+    </select>
+</section>
+
+
+<section id="GrupoFXAF" class="grupo-condicional">
+    <label class="cssB d-flex align-items-center gap-1 justify-content-center" for="FXAF">Acessório de Fixação do
+        Redutor:
+        <button class="help-icon" data-help-title="" data-help-text="" data-help-class="perm-popover" data-bs-title=""
+            data-bs-content="" aria-label="Ajuda sobre Acessório de Fixação do Redutor"></button>
+    </label>
+    <select class="cssC" id="FXAF" name="FXAF">
+    </select>
+
+
+    <div class="subgrupo" style="display: none;">
+
+        <section id="GrupoFXAFP" class="grupo-condicional">
+            <label class="cssB d-flex align-items-center gap-1 justify-content-center" for="FXAFP">Posição do Acessório
+                de Fixação:
+                <button class="help-icon" data-help-title="" data-help-text="" data-help-class="perm-popover"
+                    data-bs-title="" data-bs-content=""
+                    aria-label="Ajuda sobre Posição do Acessório de Fixação"></button>
+            </label>
+            <select class="cssC" id="FXAFP" name="FXAFP">
+                <option value="A">DIREITA</option>
+                <option value="B">ESQUERDA</option>
+            </select>
+        </section>
+
+
+        <section id="GrupoFXBT" class="grupo-condicional">
+            <label class="cssB d-flex align-items-center gap-1 justify-content-center" for="FXBT">Posição do Braço de
+                Torque:
+                <button class="help-icon" data-help-title="" data-help-text="" data-help-class="perm-popover"
+                    data-bs-title="" data-bs-content="" aria-label="Ajuda sobre Posição do Braço de Torque"></button>
+            </label>
+            <select class="cssC" id="FXBT" name="FXBT">
+                <option value="1" selected>1</option>
+                <option value="2">2</option>
+                <option value="3">3</option>
+                <option value="4">4</option>
+                <option value="5">5</option>
+            </select>
+        </section>
+
+
+        <section id="GrupoFXPE" class="grupo-condicional">
+            <label class="cssB d-flex align-items-center gap-1 justify-content-center" for="FXPE">Posição dos Pés do
+                Redutor:
+                <button class="help-icon" data-help-title="" data-help-text="" data-help-class="perm-popover"
+                    data-bs-title="" data-bs-content="" aria-label="Ajuda sobre Posição dos Pés do Redutor"></button>
+            </label>
+            <select class="cssC" id="FXPE" name="FXPE">
+                <option value="PB">ESQUERDA</option>
+                <option value="PA">DIREITA</option>
+                <option value="PV">INFERIOR</option>
+            </select>
+        </section>
+    </div>
+</section>
+
+
+<section id="GrupoFXAS" class="grupo-condicional">
+    <label class="cssB d-flex align-items-center gap-1 justify-content-center" for="FXAS">Acessório de Saída do Redutor:
+        <button class="help-icon" data-help-title="" data-help-text="" data-help-class="perm-popover" data-bs-title=""
+            data-bs-content="" aria-label="Ajuda sobre Acessório de Saída do Redutor"></button>
+    </label>
+    <select class="cssC" id="FXAS" name="FXAS">
+    </select>
+
+
+    <div class="subgrupo" style="display: none;">
+
+        <section id="GrupoFXASP" class="grupo-condicional">
+            <label class="cssB d-flex align-items-center gap-1 justify-content-center" for="FXASP">Posição do Acessório
+                de Saída:
+                <button class="help-icon" data-help-title="" data-help-text="" data-help-class="perm-popover"
+                    data-bs-title="" data-bs-content="" aria-label="Ajuda sobre Posição do Acessório de Saída"></button>
+            </label>
+            <select class="cssC" id="FXASP" name="FXASP">
+                <option value="A" selected>DIREITA</option>
+                <option value="B">ESQUERDA</option>
+            </select>
+        </section>
+    </div>
+</section>
+
+
+<section id="GrupoFXPM" class="grupo-condicional">
+    <label class="cssB d-flex align-items-center gap-1 justify-content-center" for="FXPM">Posição de Montagem do
+        Redutor:
+        <button class="help-icon" data-help-title="" data-help-text="" data-help-class="perm-popover" data-bs-title=""
+            data-bs-content="" aria-label="Ajuda sobre Posição de Montagem do Redutor"></button>
+    </label>
+    <select class="cssC" id="FXPM" name="FXPM">
+    </select>
+</section>
+
+
+<section id="GrupoFXOPC">
+    <label class="cssB d-flex align-items-center gap-1 justify-content-center" for="FXOPC_NAO">Itens Opcionais do
+        Redutor:
+        <button class="help-icon" data-help-title="" data-help-text="" data-help-class="perm-popover" data-bs-title=""
+            data-bs-content="" aria-label="Ajuda sobre Itens Opcionais do Redutor"></button>
+    </label>
+    <div id="dropdownFXOPC" class="dropdown-checkbox" style="max-width:400px; margin: 0 auto;">
+        <div class="dropdown-button cssC" onclick="toggleDropdown(this)">NÃO</div>
+        <div class="dropdown-list"
+            style="display:none; border: 1px solid #ec4115; max-height: 180px; overflow-y: auto; border-radius: 6px; background: white; padding: 10px; margin-top: 4px;">
+            <div id="checklistFXOPC" style="display:flex; flex-direction:column; gap:6px; text-align:left;">
+                <label><input type="checkbox" id="FXOPC_NAO" name="FXOPC" value="NÃO" checked> NÃO</label>
+                <label><input type="checkbox" name="FXOPC" value="ACOR"> PINTURA ANTICORROSIVA</label>
+                <label><input type="checkbox" name="FXOPC" value="PINTCZ"> PINTURA CINZA</label>
+            </div>
+        </div>
+        <input type="hidden" id="FXOPC" name="FXOPC" value="NÃO">
+    </div>
+</section>
+
+
+<section id="GrupoFXMO" class="grupo-condicional">
+    <label class="cssB d-flex align-items-center gap-1 justify-content-center" for="FXMO">Com Motor:
+        <button class="help-icon" data-help-title="" data-help-text="" data-help-class="perm-popover" data-bs-title=""
+            data-bs-content="" aria-label="Ajuda sobre Com Motor"></button>
+    </label>
+    <select class="cssC" id="FXMO" name="FXMO">
+        <option value="N">NÃO</option>
+        <option value="S">SIM</option>
+    </select>
+
+
+    <div class="subgrupo" style="display: none;">
+
+        <section id="GrupoMOLN" class="grupo-condicional">
+            <label class="cssB d-flex align-items-center gap-1 justify-content-center" for="MOLN">Linha do Motor:
+                <button class="help-icon" data-help-title="" data-help-text="" data-help-class="perm-popover"
+                    data-bs-title="" data-bs-content="" aria-label="Ajuda sobre Linha do Motor"></button>
+            </label>
+            <select class="cssC" id="MOLN" name="MOLN">
+
+            </select>
+        </section>
+
+
+        <section id="GrupoMOTP" class="grupo-condicional">
+            <label class="cssB d-flex align-items-center gap-1 justify-content-center" for="MOTP">Tipo do Motor:
+                <button class="help-icon" data-help-title="" data-help-text="" data-help-class="perm-popover"
+                    data-bs-title="" data-bs-content="" aria-label="Ajuda sobre Tipo do Motor"></button>
+            </label>
+            <select class="cssC" id="MOTP" name="MOTP">
+
+            </select>
+        </section>
+
+
+        <section id="GrupoMOTT" class="grupo-condicional">
+            <label class="cssB d-flex align-items-center gap-1 justify-content-center" for="MOTT">Tensão do Motor:
+                <button class="help-icon" data-help-title="" data-help-text="" data-help-class="perm-popover"
+                    data-bs-title="" data-bs-content="" aria-label="Ajuda sobre Tensão do Motor"></button>
+            </label>
+            <select class="cssC" id="MOTT" name="MOTT">
+
+            </select>
+        </section>
+
+
+        <section id="GrupoMOFQ" class="grupo-condicional">
+            <label class="cssB d-flex align-items-center gap-1 justify-content-center" for="MOFQ">Frequência do Motor:
+                <button class="help-icon" data-help-title="" data-help-text="" data-help-class="perm-popover"
+                    data-bs-title="" data-bs-content="" aria-label="Ajuda sobre Frequência do Motor"></button>
+            </label>
+            <select class="cssC" id="MOFQ" name="MOFQ">
+
+            </select>
+        </section>
+
+
+        <section id="GrupoMOPT" class="grupo-condicional">
+            <label class="cssB d-flex align-items-center gap-1 justify-content-center" for="MOPT">Potência do Motor:
+                <button class="help-icon" data-help-title="" data-help-text="" data-help-class="perm-popover"
+                    data-bs-title="" data-bs-content="" aria-label="Ajuda sobre Potência do Motor"></button>
+            </label>
+            <select class="cssC" id="MOPT" name="MOPT">
+
+            </select>
+        </section>
+
+
+        <section id="GrupoMOPL" class="grupo-condicional">
+            <label class="cssB d-flex align-items-center gap-1 justify-content-center" for="MOPL">Polaridade do Motor:
+                <button class="help-icon" data-help-title="" data-help-text="" data-help-class="perm-popover"
+                    data-bs-title="" data-bs-content="" aria-label="Ajuda sobre Polaridade do Motor"></button>
+            </label>
+            <select class="cssC" id="MOPL" name="MOPL">
+
+            </select>
+        </section>
+
+
+        <section id="GrupoMOCP" class="grupo-condicional">
+            <label class="cssB d-flex align-items-center gap-1 justify-content-center" for="MOCP">Forma Construtiva do
+                Motor:
+                <button class="help-icon" data-help-title="" data-help-text="" data-help-class="perm-popover"
+                    data-bs-title="" data-bs-content="" aria-label="Ajuda sobre Forma Construtiva do Motor"></button>
+            </label>
+            <select class="cssC" id="MOCP" name="MOCP">
+
+            </select>
+
+
+            <div class="SubgrupoMOCP" style="display: none;">
+                <section id="GrupoMOCPP" class="subgrupo subgrupo-aninhado grupo-condicional">
+                    <label class="cssB d-flex align-items-center gap-1 justify-content-center" for="MOCPP">Posição dos
+                        Pés do Motor:
+                        <button class="help-icon" data-help-title="" data-help-text="" data-help-class="perm-popover"
+                            data-bs-title="" data-bs-content=""
+                            aria-label="Ajuda sobre Posição dos Pés do Motor"></button>
+                    </label>
+                    <select class="cssC" id="MOCPP" name="MOCPP">
+
+                    </select>
+                </section>
+            </div>
+        </section>
+
+
+        <section id="GrupoMOPC" class="grupo-condicional">
+            <label class="cssB d-flex align-items-center gap-1 justify-content-center" for="MOPC">Posição da Caixa de
+                Ligação ou de Montagem do Motor:
+                <button class="help-icon" data-help-title="" data-help-text="" data-help-class="perm-popover"
+                    data-bs-title="" data-bs-content=""
+                    aria-label="Ajuda sobre Posição da Caixa de Ligação ou de Montagem do Motor"></button>
+            </label>
+            <select class="cssC" id="MOPC" name="MOPC">
+
+            </select>
+        </section>
+
+
+        <section id="GrupoMOPP" class="grupo-condicional">
+            <label class="cssB d-flex align-items-center gap-1 justify-content-center" for="MOPP">Posição do Prensa
+                Cabo:
+                <button class="help-icon" data-help-title="" data-help-text="" data-help-class="perm-popover"
+                    data-bs-title="" data-bs-content="" aria-label="Ajuda sobre Posição do Prensa Cabo"></button>
+            </label>
+            <select class="cssC" id="MOPP" name="MOPP">
+
+            </select>
+        </section>
+
+
+        <section id="GrupoMOOPC" class="grupo-condicional">
+            <label class="cssB d-flex align-items-center gap-1 justify-content-center" for="MOOPC_NAO">Itens Opcionais
+                do Motor:
+                <button class="help-icon" data-help-title="" data-help-text="" data-help-class="perm-popover"
+                    data-bs-title="" data-bs-content="" aria-label="Ajuda sobre Itens Opcionais do Motor"></button>
+            </label>
+            <div id="dropdownMOOPC" class="dropdown-checkbox" style="max-width:400px; margin: 0 auto;">
+                <div class="dropdown-button cssC" onclick="toggleDropdown(this)">NÃO</div>
+                <div class="dropdown-list"
+                    style="display:none; border: 1px solid #ec4115; max-height: 180px; overflow-y: auto; border-radius: 6px; background: white; padding: 10px; margin-top: 4px;">
+                    <div id="checklistMOOPC" style="display:flex; flex-direction:column; gap:6px; text-align:left;">
+                        <label><input type="checkbox" id="MOOPC_NAO" name="MOOPC" value="NÃO" checked> NÃO</label>
+                        <label><input type="checkbox" name="MOOPC" value="ACOR"> PINTURA ANTICORROSIVA</label>
+                        <label><input type="checkbox" name="MOOPC" value="PINTCZ"> PINTURA CINZA</label>
+                        <label><input type="checkbox" name="MOOPC" value="VF"> VENTILAÇÃO FORÇADA</label>
+                        <label><input type="checkbox" name="MOOPC" value="CR"> CONTRA RECUO</label>
+                    </div>
+                </div>
+                <input type="hidden" id="MOOPC" name="MOOPC" value="NÃO">
+            </div>
+
+
+            <div class="SubgrupoMOOPC" style="display: none;">
+                <section id="GrupoMOCR" class="subgrupo subgrupo-aninhado grupo-condicional">
+                    <label class="cssB d-flex align-items-center gap-1 justify-content-center" for="MOCR">Sentido de
+                        Giro do Motor:
+                        <button class="help-icon" data-help-title="" data-help-text="" data-help-class="perm-popover"
+                            data-bs-title="" data-bs-content=""
+                            aria-label="Ajuda sobre Sentido de Giro do Motor"></button>
+                    </label>
+                    <select class="cssC" id="MOCR" name="MOCR">
+                        <option value="H">HORÁRIO</option>
+                        <option value="AH">ANTI-HORÁRIO</option>
+                    </select>
+                </section>
+
+
+                <section id="GrupoFXCR" class="subgrupo subgrupo-aninhado grupo-condicional">
+                    <label class="cssB d-flex align-items-center gap-1 justify-content-center" for="FXCR">Sentido de
+                        Giro do Redutor:
+                        <button class="help-icon" data-help-title="" data-help-text="" data-help-class="perm-popover"
+                            data-bs-title="" data-bs-content=""
+                            aria-label="Ajuda sobre Sentido de Giro do Redutor"></button>
+                    </label>
+                    <select class="cssC" id="FXCR" name="FXCR">
+
+                    </select>
+                </section>
+            </div>
+        </section>
+    </div>
+</section>
+
+
+<section id="GrupoFXVA" class="grupo-condicional">
+    <label class="cssB d-flex align-items-center gap-1 justify-content-center" for="FXVA">Com Variador (Apenas B5):
+        <button class="help-icon" data-help-title="" data-help-text="" data-help-class="perm-popover" data-bs-title=""
+            data-bs-content="" aria-label="Ajuda sobre Com Variador (Apenas B5)"></button>
+    </label>
+    <select class="cssC" id="FXVA" name="FXVA">
+        <option value="N">NÃO</option>
+        <option value="S">SIM</option>
+    </select>
+
+
+    <div class="subgrupo" style="display: none;">
+
+        <section id="GrupoVALN" class="grupo-condicional">
+            <label class="cssB d-flex align-items-center gap-1 justify-content-center" for="VALN">Linha do Variador:
+                <button class="help-icon" data-help-title="" data-help-text="" data-help-class="perm-popover"
+                    data-bs-title="" data-bs-content="" aria-label="Ajuda sobre Linha do Variador"></button>
+            </label>
+            <select class="cssC" id="VALN" name="VALN">
+
+            </select>
+        </section>
+
+
+        <section id="GrupoVAPT" class="grupo-condicional">
+            <label class="cssB d-flex align-items-center gap-1 justify-content-center" for="VAPT">Potência do Variador:
+                <button class="help-icon" data-help-title="" data-help-text="" data-help-class="perm-popover"
+                    data-bs-title="" data-bs-content="" aria-label="Ajuda sobre Potência do Variador"></button>
+            </label>
+            <select class="cssC" id="VAPT" name="VAPT">
+
+            </select>
+        </section>
+
+
+        <section id="GrupoVAECP" class="grupo-condicional">
+            <label class="cssB d-flex align-items-center gap-1 justify-content-center" for="VAECP">Forma Construtiva da
+                Entrada do Variador:
+                <button class="help-icon" data-help-title="" data-help-text="" data-help-class="perm-popover"
+                    data-bs-title="" data-bs-content=""
+                    aria-label="Ajuda sobre Forma Construtiva da Entrada do Variador"></button>
+            </label>
+            <select class="cssC" id="VAECP" name="VAECP">
+                <option value="B5">B5</option>
+            </select>
+
+
+            <div class="subgrupo subgrupo-aninhado">
+                <section id="GrupoVASCP" class="grupo-condicional">
+                    <label class="cssB d-flex align-items-center gap-1 justify-content-center" for="VASCP">Forma
+                        Construtiva da Saída do Variador:
+                        <button class="help-icon" data-help-title="" data-help-text="" data-help-class="perm-popover"
+                            data-bs-title="" data-bs-content=""
+                            aria-label="Ajuda sobre Forma Construtiva da Saída do Variador"></button>
+                    </label>
+                    <select class="cssC" id="VASCP" name="VASCP">
+
+                    </select>
+                </section>
+            </div>
+        </section>
+
+
+        <section id="GrupoVAPM" class="grupo-condicional">
+            <label class="cssB d-flex align-items-center gap-1 justify-content-center" for="VAPM">Posição de Montagem do
+                Variador:
+                <button class="help-icon" data-help-title="" data-help-text="" data-help-class="perm-popover"
+                    data-bs-title="" data-bs-content=""
+                    aria-label="Ajuda sobre Posição de Montagem do Variador"></button>
+            </label>
+            <select class="cssC" id="VAPM" name="VAPM">
+                <option value="B3">B3</option>
+                <option value="B5">B5</option>
+                <option value="V6">V6</option>
+            </select>
+        </section>
+    </div>
+</section>
+
+<section id="GrupoFXPL" class="grupo-condicional">
+    <label class="cssB d-flex align-items-center gap-1 justify-content-center" for="FXPL">Adaptação para Servomotor
+        (B14):
+        <button class="help-icon" data-help-title="" data-help-text="" data-help-class="perm-popover" data-bs-title=""
+            data-bs-content="" aria-label="Ajuda sobre Adaptação para Servomotor (B14)"></button>
+    </label>
+    <select class="cssC" id="FXPL" name="FXPL">
+        <option value="N">NÃO</option>
+    </select>
+</section>
+
+</div>
+</section>
+
+<script nonce="<?= htmlspecialchars(csp_nonce(), ENT_QUOTES, 'UTF-8'); ?>">
+    async function carregarFXLN() {
+        const fxlnSelect = document.getElementById('FXLN');
+
+        const response = await fetch('/PaginasConfiguradoresSeletoresConsultas/FX/FXLN.php');
+        const optionsHTML = await response.text();
+
+        fxlnSelect.innerHTML = optionsHTML;
+
+        fxlnSelect.value = '';
+        fxlnSelect.disabled = false;
+
+        fxlnSelect.dispatchEvent(new Event('change'));
+    }
+
+    document.addEventListener('DOMContentLoaded', () => {
+        carregarFXLN();
+    });
+
+    async function carregarFXBR() {
+        const fxlnSelect = document.getElementById('FXLN');
+        const fxbrSelect = document.getElementById('FXBR');
+        const grupoFXBR = document.getElementById('GrupoFXBR');
+
+        const fxln = fxlnSelect.value;
+
+        const response = await fetch(`/PaginasConfiguradoresSeletoresConsultas/FX/FXBR.php?FXLN=${encodeURIComponent(fxln)}`);
+        const optionsHTML = await response.text();
+
+        fxbrSelect.innerHTML = optionsHTML;
+        grupoFXBR.style.display = 'block';
+        fxbrSelect.disabled = false;
+        fxbrSelect.value = '';
+
+        fxbrSelect.onchange = carregarFXRD;
+        await carregarFXRD();
+    }
+
+    const fxlnSelect = document.getElementById('FXLN');
+    if (fxlnSelect) {
+        fxlnSelect.addEventListener('change', carregarFXBR);
+        fxlnSelect.addEventListener('change', carregarFXOPC);
+    }
+
+    const fxbrSelect = document.getElementById('FXBR');
+    if (fxbrSelect) {
+        fxbrSelect.addEventListener('change', carregarFXRD);
+    }
+
+    async function carregarFXRD() {
+        const fxln = document.getElementById('FXLN')?.value;
+        const fxbr = document.getElementById('FXBR')?.value;
+        const fxrdSelect = document.getElementById('FXRD');
+        const grupoFXRD = document.getElementById('GrupoFXRD');
+
+        const response = await fetch(`/PaginasConfiguradoresSeletoresConsultas/FX/FXRD.php?FXLN=${encodeURIComponent(fxln)}&FXBR=${encodeURIComponent(fxbr)}`);
+
+        const optionsHTML = await response.text();
+        fxrdSelect.innerHTML = optionsHTML;
+        grupoFXRD.style.display = 'block';
+        fxrdSelect.disabled = false;
+        fxrdSelect.value = '';
+
+        fxrdSelect.addEventListener('change', carregarFXET);
+        await carregarFXET();
+    }
+
+    async function carregarFXET() {
+        const fxln = document.getElementById('FXLN')?.value;
+        const fxbr = document.getElementById('FXBR')?.value;
+        const fxrd = document.getElementById('FXRD')?.value;
+        const fxetSelect = document.getElementById('FXET');
+        const grupoFXET = document.getElementById('GrupoFXET');
+
+        const response = await fetch(`/PaginasConfiguradoresSeletoresConsultas/FX/FXET.php?FXLN=${encodeURIComponent(fxln)}&FXBR=${encodeURIComponent(fxbr)}&FXRD=${encodeURIComponent(fxrd)}`);
+        const optionsHTML = await response.text();
+
+        fxetSelect.innerHTML = optionsHTML;
+        grupoFXET.style.display = 'block';
+        fxetSelect.disabled = false;
+
+        fxetSelect.addEventListener('change', carregarFXCM);
+        await carregarFXCM();
+
+    }
+
+    async function carregarFXCM() {
+        const fxln = document.getElementById('FXLN')?.value;
+        const fxbr = document.getElementById('FXBR')?.value;
+        const fxrd = document.getElementById('FXRD')?.value;
+        const fxet = document.getElementById('FXET')?.value;
+        const grupoFXCM = document.getElementById('GrupoFXCM');
+        const fxcmSelect = document.getElementById('FXCM');
+
+        const response = await fetch(`/PaginasConfiguradoresSeletoresConsultas/FX/FXCM.php?FXLN=${encodeURIComponent(fxln)}&FXBR=${encodeURIComponent(fxbr)}&FXRD=${encodeURIComponent(fxrd)}&FXET=${encodeURIComponent(fxet)}`);
+        const optionsHTML = await response.text();
+        fxcmSelect.innerHTML = optionsHTML;
+
+        grupoFXCM.style.display = 'block';
+        fxcmSelect.disabled = false;
+        fxcmSelect.value = '';
+
+        const subgrupoFXBU = grupoFXCM.querySelector('.subgrupo');
+        if (subgrupoFXBU) {
+            subgrupoFXBU.style.display = 'none';
+
+            fxcmSelect.addEventListener('change', () => {
+                subgrupoFXBU.style.display = fxcmSelect.value ? 'block' : 'none';
+            });
+        }
+        fxcmSelect.addEventListener('change', carregarFXBU);
+        fxcmSelect.addEventListener('change', carregarFXCP);
+        await carregarFXCP();
+    }
+
+    async function carregarFXBU() {
+        const fxln = document.getElementById('FXLN')?.value;
+        const fxbr = document.getElementById('FXBR')?.value;
+        const fxrd = document.getElementById('FXRD')?.value;
+        const fxcm = document.getElementById('FXCM')?.value;
+        const fxet = document.getElementById('FXET')?.value;
+        const grupoFXBU = document.getElementById('GrupoFXBU');
+        const fxbuSelect = document.getElementById('FXBU');
+
+        const response = await fetch(`/PaginasConfiguradoresSeletoresConsultas/FX/FXBU.php?FXLN=${encodeURIComponent(fxln)}&FXBR=${encodeURIComponent(fxbr)}&FXRD=${encodeURIComponent(fxrd)}&FXCM=${encodeURIComponent(fxcm)}&FXET=${encodeURIComponent(fxet)}`);
+
+        const optionsHTML = await response.text();
+        fxbuSelect.innerHTML = optionsHTML;
+
+        const deveExibirBucha = !fxcm.includes('EE');
+        const subgrupoFXBU = document.querySelector('#GrupoFXCM .subgrupo');
+        grupoFXBU.style.display = deveExibirBucha ? 'block' : 'none';
+
+        if (subgrupoFXBU) {
+            subgrupoFXBU.style.display = deveExibirBucha ? 'block' : 'none';
+        }
+
+        fxbuSelect.disabled = false;
+
+        const optN = fxbuSelect.querySelector('option[value="N"]');
+        if (optN) {
+            fxbuSelect.value = 'N';
+        } else if (fxbuSelect.options.length > 0) {
+            fxbuSelect.selectedIndex = 0;
+        }
+
+        fxbuSelect.dispatchEvent(new Event('change'));
+
+        await carregarVisibilidadeBuchaFX();
+        fxbuSelect.addEventListener('change', carregarFXCP);
+        await carregarFXCP();
+    }
+
+    const fxrdSelect = document.getElementById('FXRD');
+    if (fxrdSelect) fxrdSelect.addEventListener('change', carregarFXCM);
+
+    const fxcmSelect = document.getElementById('FXCM');
+    if (fxcmSelect) {
+        fxcmSelect.addEventListener('change', carregarFXBU);
+
+        fxcmSelect.addEventListener('change', () => {
+            const grupoFXCP = document.getElementById('GrupoFXCP');
+            const fxcpSelect = document.getElementById('FXCP');
+
+            if (grupoFXCP && fxcpSelect) {
+                if (fxcmSelect.value.includes('EE')) {
+                    grupoFXCP.style.display = 'none';
+                    fxcpSelect.value = '';
+                } else {
+                    grupoFXCP.style.display = 'block';
+                }
+            }
+        });
+    }
+
+    const fxbuSelect = document.getElementById('FXBU');
+    if (fxbuSelect) fxbuSelect.addEventListener('change', carregarFXCP);
+    if (fxbuSelect) fxbuSelect.addEventListener('change', carregarFXAF);
+    if (fxbuSelect) fxbuSelect.addEventListener('change', carregarFXAS);
+
+    function carregarVisibilidadeBuchaFX() {
+        const fxln = document.getElementById('FXLN')?.value;
+        const fxcm = document.getElementById('FXCM')?.value;
+        const grupoFXBU = document.getElementById('GrupoFXBU');
+        if (grupoFXBU) {
+            const deveExibir = !fxcm.includes('EE');
+            grupoFXBU.style.display = deveExibir ? 'block' : 'none';
+        }
+    }
+
+    async function carregarFXCP() {
+        const fxln = document.getElementById('FXLN')?.value;
+        const fxbr = document.getElementById('FXBR')?.value;
+        const fxcm = document.getElementById('FXCM')?.value;
+        const fxrd = document.getElementById('FXRD')?.value;
+        const fxet = document.getElementById('FXET')?.value;
+        const fxbu = document.getElementById('FXBU')?.value;
+
+        const fxcpSelect = document.getElementById('FXCP');
+
+        const response = await fetch(`/PaginasConfiguradoresSeletoresConsultas/FX/FXCP.php?FXLN=${encodeURIComponent(fxln)}&FXBR=${encodeURIComponent(fxbr)}&FXCM=${encodeURIComponent(fxcm)}&FXRD=${encodeURIComponent(fxrd)}&FXET=${encodeURIComponent(fxet)}&FXBU=${encodeURIComponent(fxbu)}`);
+        const optionsHTML = await response.text();
+
+        fxcpSelect.innerHTML = optionsHTML;
+        fxcpSelect.disabled = false;
+
+        await carregarVisibilidadeBuchaFX();
+
+        fxcpSelect.addEventListener('change', carregarFXAF);
+        fxcpSelect.addEventListener('change', carregarFXAS);
+        await carregarFXAF();
+        await carregarFXAS();
+    }
+
+    const fxcpSelect = document.getElementById('FXCP');
+    if (fxcpSelect) {
+        fxcpSelect.addEventListener('change', () => {
+            const grupoFXBU = document.getElementById('GrupoFXBU');
+            const fxbuSelect = document.getElementById('FXBU');
+            if (!fxbuSelect || !grupoFXBU) return;
+
+            const valorSelecionado = fxcpSelect.value;
+            grupoFXBU.style.display = valorSelecionado.includes("EE") ? 'none' : 'block';
+        });
+
+        fxcpSelect.addEventListener('change', carregarFXAF);
+        fxcpSelect.addEventListener('change', carregarFXAS);
+    }
+
+    async function carregarFXAF() {
+        const fxln = document.getElementById('FXLN')?.value;
+        const fxbr = document.getElementById('FXBR')?.value;
+        const grupoFXAF = document.getElementById('GrupoFXAF');
+        const fxafSelect = document.getElementById('FXAF');
+
+        const response = await fetch(`/PaginasConfiguradoresSeletoresConsultas/FX/FXAF.php?FXLN=${encodeURIComponent(fxln)}&FXBR=${encodeURIComponent(fxbr)}`);
+        const optionsHTML = await response.text();
+        fxafSelect.innerHTML = optionsHTML;
+
+        grupoFXAF.style.display = 'block';
+        fxafSelect.disabled = false;
+
+        const optN = fxafSelect.querySelector('option[value="N"]');
+        if (optN) {
+            fxafSelect.value = 'N';
+        } else if (fxafSelect.options.length > 0) {
+            fxafSelect.selectedIndex = 0;
+        }
+
+        fxafSelect.addEventListener('change', () => {
+            carregarFXAFP();
+            carregarFXBT();
+            carregarFXPE();
+        });
+
+        fxafSelect.dispatchEvent(new Event('change'));
+    }
+
+    function carregarFXAFP() {
+        const fxln = document.getElementById('FXLN')?.value;
+        const fxafSelect = document.getElementById('FXAF');
+        const grupoFXAFP = document.getElementById('GrupoFXAFP');
+        const fxafpSelect = document.getElementById('FXAFP');
+        const subgrupoFXAF = document.querySelector('#GrupoFXAF .subgrupo');
+
+        const valor = fxafSelect.value;
+
+        const deveExibirAFP = valor !== 'N' && valor !== 'PE' && !['1.FFA', '1.FR'].includes(fxln);
+        const deveExibirSubgrupo = deveExibirAFP || valor === 'PE';
+
+        grupoFXAFP.style.display = deveExibirAFP ? 'block' : 'none';
+        fxafpSelect.value = deveExibirAFP ? 'A' : '';
+
+        if (subgrupoFXAF) {
+            subgrupoFXAF.style.display = deveExibirSubgrupo ? 'block' : 'none';
+        }
+
+        carregarFXBT();
+    }
+
+    function carregarFXBT() {
+        const fxafSelect = document.getElementById('FXAF');
+        const fxln = document.getElementById('FXLN')?.value;
+        const grupoFXBT = document.getElementById('GrupoFXBT');
+        const fxbtSelect = document.getElementById('FXBT');
+
+        const deveExibir = fxafSelect.value === "BT" && fxln === "1.FR";
+
+        if (deveExibir) {
+            grupoFXBT.style.display = 'block';
+            fxbtSelect.value = '1';
+        } else {
+            grupoFXBT.style.display = 'none';
+            fxbtSelect.value = '';
+        }
+
+        carregarFXPE();
+    }
+
+    function carregarFXPE() {
+        const fxafSelect = document.getElementById('FXAF');
+        const grupoFXPE = document.getElementById('GrupoFXPE');
+        const fxpeSelect = document.getElementById('FXPE');
+
+        if (fxafSelect.value === "PE") {
+            grupoFXPE.style.display = 'block';
+            fxpeSelect.value = 'PB';
+        } else {
+            grupoFXPE.style.display = 'none';
+            fxpeSelect.value = '';
+        }
+    }
+
+    const fxafSelect = document.getElementById('FXAF');
+    if (fxafSelect) fxafSelect.addEventListener('change', () => {
+        carregarFXAFP();
+        carregarFXBT();
+        carregarFXPE();
+    });
+
+    async function carregarFXAS() {
+        const fxln = document.getElementById('FXLN')?.value;
+        const fxbr = document.getElementById('FXBR')?.value;
+        const grupoFXAS = document.getElementById('GrupoFXAS');
+        const fxasSelect = document.getElementById('FXAS');
+
+        const response = await fetch(`/PaginasConfiguradoresSeletoresConsultas/FX/FXAS.php?FXLN=${encodeURIComponent(fxln)}&FXBR=${encodeURIComponent(fxbr)}`);
+
+        const optionsHTML = await response.text();
+        fxasSelect.innerHTML = optionsHTML;
+
+        grupoFXAS.style.display = 'block';
+        fxasSelect.disabled = false;
+
+        const params = new URLSearchParams(window.location.search);
+        const fxasUrl = params.get('FXAS');
+
+        if (fxasUrl && fxasSelect.querySelector(`option[value="${fxasUrl}"]`)) {
+            fxasSelect.value = fxasUrl;
+        } else if (fxln === "1.FR") {
+            const optSX = fxasSelect.querySelector('option[value="SX"]');
+            if (optSX) {
+                fxasSelect.value = 'SX';
+            }
+        } else if (fxln !== "1.FR" && fxbr && fxbr.trim() !== "") {
+            const optN = fxasSelect.querySelector('option[value="N"]');
+            if (optN) {
+                fxasSelect.value = 'N';
+            }
+        } else if (fxasSelect.options.length > 0) {
+            fxasSelect.selectedIndex = 0;
+        }
+
+        fxasSelect.addEventListener('change', carregarFXASP);
+        carregarFXASP();
+    }
+
+    function carregarFXASP() {
+        const fxasSelect = document.getElementById('FXAS');
+        const fxln = document.getElementById('FXLN')?.value;
+        const grupoFXASP = document.getElementById('GrupoFXASP');
+        const fxaspSelect = document.getElementById('FXASP');
+        const subgrupoFXAS = document.querySelector('#GrupoFXAS .subgrupo');
+
+        const valor = fxasSelect.value;
+        const deveExibir = valor !== 'N' && valor !== 'ED' && valor !== 'SX' && fxln && fxln !== '1.FFA';
+
+        if (deveExibir) {
+            grupoFXASP.style.display = 'block';
+            if (subgrupoFXAS) subgrupoFXAS.style.display = 'block';
+
+            fxaspSelect.innerHTML = `
+            <option value="A" selected>DIREITA</option>
+            <option value="B">ESQUERDA</option>
+        `;
+            const params = new URLSearchParams(window.location.search);
+            const fxaspUrl = params.get('FXASP');
+            if (fxaspUrl && fxaspSelect.querySelector(`option[value="${fxaspUrl}"]`)) {
+                fxaspSelect.value = fxaspUrl;
+            } else {
+                fxaspSelect.value = 'A';
+            }
+        } else {
+            grupoFXASP.style.display = 'none';
+            fxaspSelect.value = '';
+            if (subgrupoFXAS) subgrupoFXAS.style.display = 'none';
+        }
+
+        carregarFXPM();
+    }
+
+
+    const fxasSelect = document.getElementById('FXAS');
+    if (fxasSelect) fxasSelect.addEventListener('change', () => {
+        carregarFXASP();
+        carregarFXPM();
+    });
+
+    async function carregarFXPM() {
+        const fxln = document.getElementById('FXLN')?.value;
+        const fxbr = document.getElementById('FXBR')?.value;
+        const fxet = document.getElementById('FXET')?.value;
+        const grupoFXPM = document.getElementById('GrupoFXPM');
+        const fxpmSelect = document.getElementById('FXPM');
+
+        const response = await fetch(`/PaginasConfiguradoresSeletoresConsultas/FX/FXPM.php?FXLN=${encodeURIComponent(fxln)}&FXBR=${encodeURIComponent(fxbr)}&FXET=${encodeURIComponent(fxet)}`);
+        const optionsHTML = await response.text();
+        fxpmSelect.innerHTML = optionsHTML;
+
+        grupoFXPM.style.display = 'block';
+
+        fxpmSelect.dispatchEvent(new Event('change'));
+        await carregarFXOPC();
+        await validarFXOPC();
+    }
+
+    function carregarFXOPC() {
+        const fxln = document.getElementById('FXLN')?.value;
+        const fxbr = document.getElementById('FXBR')?.value;
+        const grupoFXOPC = document.getElementById('GrupoFXOPC');
+
+        grupoFXOPC.style.display = 'block';
+
+        validarFXOPC();
+        carregarFXMO();
+        carregarFXVA();
+    }
+
+    function validarFXOPC() {
+        const checkboxes = document.querySelectorAll('#checklistFXOPC input[type="checkbox"]');
+        let selecionados = Array.from(checkboxes)
+            .filter(cb => cb.checked)
+            .map(cb => cb.value);
+
+        if (selecionados.includes("NÃO") && selecionados.length > 1) {
+            document.querySelector('input[name="FXOPC"][value="NÃO"]').checked = false;
+            selecionados = selecionados.filter(v => v !== "NÃO");
+        }
+
+        if (selecionados.length === 0) {
+            document.querySelector('input[name="FXOPC"][value="NÃO"]').checked = true;
+            selecionados = ["NÃO"];
+        }
+
+        if (selecionados.includes("ACOR") && selecionados.includes("PINTCZ")) {
+            document.querySelector('input[name="FXOPC"][value="ACOR"]').checked = false;
+            selecionados = selecionados.filter(v => v !== "ACOR");
+        }
+
+        document.getElementById('FXOPC').value = selecionados.join(',');
+
+        const nomesVisiveis = selecionados.map(valor => {
+            const label = Array.from(document.querySelectorAll('#checklistFXOPC label')).find(lbl =>
+                lbl.querySelector(`input[value="${valor}"]`)
+            );
+            return label ? label.textContent.trim() : valor;
+        });
+
+        document.querySelector('#dropdownFXOPC .dropdown-button').textContent = nomesVisiveis.join(', ');
+
+        document.getElementById('FXOPC').dispatchEvent(new Event('change'));
+    }
+
+    document.querySelectorAll('#checklistFXOPC input[type="checkbox"]').forEach(cb => {
+        cb.addEventListener('change', validarFXOPC);
+    });
+
+    window.toggleDropdown = function (button) {
+        const list = button.nextElementSibling;
+        list.style.display = list.style.display === 'block' ? 'none' : 'block';
+    };
+
+    document.addEventListener('click', function (e) {
+        document.querySelectorAll('.dropdown-checkbox').forEach(dropdown => {
+            if (!dropdown.contains(e.target)) {
+                dropdown.querySelector('.dropdown-list').style.display = 'none';
+            }
+        });
+    });
+
+    function carregarFXMO() {
+        const fxcm = document.getElementById('FXCM')?.value;
+        const fxcp = document.getElementById('FXCP')?.value;
+        const fxmoSelect = document.getElementById('FXMO');
+        const grupoFXMO = document.getElementById('GrupoFXMO');
+
+        const permitirS = (
+            !fxcm.includes("EE") &&
+            fxcp !== "B"
+        );
+
+        fxmoSelect.innerHTML = '';
+        fxmoSelect.disabled = false;
+
+        if (permitirS) {
+            fxmoSelect.appendChild(new Option("SIM", "S"));
+        }
+        fxmoSelect.appendChild(new Option("NÃO", "N"));
+
+        fxmoSelect.value = "N";
+
+        grupoFXMO.style.display = 'block';
+        fxmoSelect.dispatchEvent(new Event('change'));
+
+        carregarMOLN();
+    }
+
+    document.getElementById('FXCM')?.addEventListener('change', carregarFXMO);
+    document.getElementById('FXCP')?.addEventListener('change', carregarFXMO);
+
+    const fxmoSelect = document.getElementById('FXMO');
+    if (fxmoSelect) {
+        fxmoSelect.addEventListener('change', carregarMOLN);
+    }
+
+    async function carregarMOLN() {
+        const fxmoSelect = document.getElementById('FXMO');
+        const fxcp = document.getElementById('FXCP')?.value;
+        const fxcm = document.getElementById('FXCM')?.value;
+        const grupoMOLN = document.getElementById('GrupoMOLN');
+        const molnSelect = document.getElementById('MOLN');
+        const subgrupoFXMO = document.querySelector('#GrupoFXMO .subgrupo');
+
+        if (fxmoSelect.value === "S") {
+            grupoMOLN.style.display = 'block';
+            if (subgrupoFXMO) subgrupoFXMO.style.display = 'block';
+
+            try {
+                const response = await fetch(`/PaginasConfiguradoresSeletoresConsultas/FX/MOLN.php?FXCM=${encodeURIComponent(fxcm)}&FXCP=${encodeURIComponent(fxcp)}`);
+                const optionsHTML = await response.text();
+                molnSelect.innerHTML = optionsHTML;
+
+                molnSelect.style.display = 'block';
+                molnSelect.disabled = false;
+                molnSelect.dispatchEvent(new Event('change'));
+            } catch (error) {
+
+                grupoMOLN.style.display = 'none';
+                if (subgrupoFXMO) subgrupoFXMO.style.display = 'none';
+                molnSelect.style.display = 'none';
+                molnSelect.innerHTML = '';
+            }
+        } else {
+            grupoMOLN.style.display = 'none';
+            if (subgrupoFXMO) subgrupoFXMO.style.display = 'none';
+            molnSelect.style.display = 'none';
+        }
+
+        molnSelect.value = "";
+
+        await carregarMOTP();
+        carregarMOOPC();
+    }
+
+    const molnSelect = document.getElementById('MOLN');
+    if (molnSelect) {
+        molnSelect.addEventListener('change', carregarMOTP);
+        molnSelect.addEventListener('change', carregarMOOPC);
+    }
+
+    async function carregarMOTP() {
+        const moln = document.getElementById('MOLN')?.value;
+        const fxcm = document.getElementById('FXCM')?.value;
+        const fxcp = document.getElementById('FXCP')?.value;
+        const grupoMOTP = document.getElementById('GrupoMOTP');
+        const motpSelect = document.getElementById('MOTP');
+
+        const response = await fetch(`/PaginasConfiguradoresSeletoresConsultas/FX/MOTP.php?MOLN=${encodeURIComponent(moln)}&FXCM=${encodeURIComponent(fxcm)}&FXCP=${encodeURIComponent(fxcp)}`);
+        const optionsHTML = await response.text();
+        motpSelect.innerHTML = optionsHTML;
+
+        grupoMOTP.style.display = 'block';
+        motpSelect.style.display = 'block';
+        motpSelect.disabled = false;
+        motpSelect.value = "";
+
+        carregarMOTT();
+    }
+
+    const motpSelect = document.getElementById('MOTP');
+    if (motpSelect) {
+        motpSelect.addEventListener('change', carregarMOTT);
+    }
+
+    async function carregarMOTT() {
+        const moln = document.getElementById('MOLN')?.value;
+        const motp = document.getElementById('MOTP')?.value;
+        const fxcm = document.getElementById('FXCM')?.value;
+        const fxcp = document.getElementById('FXCP')?.value;
+        const grupoMOTT = document.getElementById('GrupoMOTT');
+        const mottSelect = document.getElementById('MOTT');
+        const subgrupoFXMO = document.querySelector('#GrupoFXMO .subgrupo');
+
+        const response = await fetch(`/PaginasConfiguradoresSeletoresConsultas/FX/MOTT.php?MOLN=${encodeURIComponent(moln)}&MOTP=${encodeURIComponent(motp)}&FXCM=${encodeURIComponent(fxcm)}&FXCP=${encodeURIComponent(fxcp)}`);
+        const optionsHTML = await response.text();
+        mottSelect.innerHTML = optionsHTML;
+
+        grupoMOTT.style.display = 'block';
+        mottSelect.style.display = 'block';
+        mottSelect.disabled = false;
+        mottSelect.value = '';
+
+        carregarMOFQ();
+    }
+
+    const mottSelect = document.getElementById('MOTT');
+    if (mottSelect) {
+        mottSelect.addEventListener('change', carregarMOFQ);
+    }
+
+    async function carregarMOFQ() {
+        const moln = document.getElementById('MOLN')?.value;
+        const motp = document.getElementById('MOTP')?.value;
+        const mott = document.getElementById('MOTT')?.value;
+        const fxcm = document.getElementById('FXCM')?.value;
+        const fxcp = document.getElementById('FXCP')?.value;
+        const grupoMOFQ = document.getElementById('GrupoMOFQ');
+        const mofqSelect = document.getElementById('MOFQ');
+
+        const response = await fetch(`/PaginasConfiguradoresSeletoresConsultas/FX/MOFQ.php?MOLN=${encodeURIComponent(moln)}&MOTP=${encodeURIComponent(motp)}&MOTT=${encodeURIComponent(mott)}&FXCM=${encodeURIComponent(fxcm)}&FXCP=${encodeURIComponent(fxcp)}`);
+        const optionsHTML = await response.text();
+        mofqSelect.innerHTML = optionsHTML;
+
+        grupoMOFQ.style.display = 'block';
+        mofqSelect.style.display = 'block';
+        mofqSelect.disabled = false;
+        mofqSelect.value = '';
+
+        carregarMOPT();
+    }
+
+    const mofqSelect = document.getElementById('MOFQ');
+    if (mofqSelect) {
+        mofqSelect.addEventListener('change', carregarMOPT);
+    }
+
+    async function carregarMOPT() {
+        const moln = document.getElementById('MOLN')?.value;
+        const motp = document.getElementById('MOTP')?.value;
+        const mott = document.getElementById('MOTT')?.value;
+        const mofq = document.getElementById('MOFQ')?.value;
+        const fxcm = document.getElementById('FXCM')?.value;
+        const fxcp = document.getElementById('FXCP')?.value;
+        const grupoMOPT = document.getElementById('GrupoMOPT');
+        const moptSelect = document.getElementById('MOPT');
+
+        const response = await fetch(`/PaginasConfiguradoresSeletoresConsultas/FX/MOPT.php?MOLN=${encodeURIComponent(moln)}&MOTP=${encodeURIComponent(motp)}&MOTT=${encodeURIComponent(mott)}&MOFQ=${encodeURIComponent(mofq)}&FXCM=${encodeURIComponent(fxcm)}&FXCP=${encodeURIComponent(fxcp)}`);
+        const optionsHTML = await response.text();
+        moptSelect.innerHTML = optionsHTML;
+
+        grupoMOPT.style.display = 'block';
+        moptSelect.style.display = 'block';
+        moptSelect.disabled = false;
+        moptSelect.value = '';
+
+        carregarMOPL();
+    }
+
+    const moptSelect = document.getElementById('MOPT');
+    if (moptSelect) {
+        moptSelect.addEventListener('change', carregarMOPL);
+    }
+
+    async function carregarMOPL() {
+        const moln = document.getElementById('MOLN')?.value;
+        const motp = document.getElementById('MOTP')?.value;
+        const mott = document.getElementById('MOTT')?.value;
+        const mofq = document.getElementById('MOFQ')?.value;
+        const mopt = document.getElementById('MOPT')?.value;
+        const fxcm = document.getElementById('FXCM')?.value;
+        const fxcp = document.getElementById('FXCP')?.value;
+        const grupoMOPL = document.getElementById('GrupoMOPL');
+        const moplSelect = document.getElementById('MOPL');
+
+        const response = await fetch(`/PaginasConfiguradoresSeletoresConsultas/FX/MOPL.php?MOLN=${encodeURIComponent(moln)}&MOTP=${encodeURIComponent(motp)}&MOTT=${encodeURIComponent(mott)}&MOFQ=${encodeURIComponent(mofq)}&MOPT=${encodeURIComponent(mopt)}&FXCM=${encodeURIComponent(fxcm)}&FXCP=${encodeURIComponent(fxcp)}`);
+        const optionsHTML = await response.text();
+        moplSelect.innerHTML = optionsHTML;
+
+        grupoMOPL.style.display = 'block';
+        moplSelect.style.display = 'block';
+        moplSelect.disabled = false;
+        moplSelect.value = '';
+
+        carregarMOCP();
+    }
+
+    const moplSelect = document.getElementById('MOPL');
+    if (moplSelect) {
+        moplSelect.addEventListener('change', carregarMOCP);
+    }
+
+    async function carregarMOCP() {
+        const moln = document.getElementById('MOLN')?.value;
+        const motp = document.getElementById('MOTP')?.value;
+        const mott = document.getElementById('MOTT')?.value;
+        const mofq = document.getElementById('MOFQ')?.value;
+        const mopt = document.getElementById('MOPT')?.value;
+        const mopl = document.getElementById('MOPL')?.value;
+        const fxcm = document.getElementById('FXCM')?.value;
+        const fxcp = document.getElementById('FXCP')?.value;
+        const grupoMOCP = document.getElementById('GrupoMOCP');
+        const mocpSelect = document.getElementById('MOCP');
+
+        const response = await fetch(
+            `/PaginasConfiguradoresSeletoresConsultas/FX/MOCP.php?MOLN=${encodeURIComponent(moln)}&MOTP=${encodeURIComponent(motp)}&MOTT=${encodeURIComponent(mott)}&MOFQ=${encodeURIComponent(mofq)}&MOPT=${encodeURIComponent(mopt)}&MOPL=${encodeURIComponent(mopl)}&FXCM=${encodeURIComponent(fxcm)}&FXCP=${encodeURIComponent(fxcp)}`
+        );
+
+        const optionsHTML = await response.text();
+        mocpSelect.innerHTML = optionsHTML;
+
+        grupoMOCP.style.display = 'block';
+        mocpSelect.style.display = 'block';
+        mocpSelect.disabled = false;
+        mocpSelect.value = fxcp;
+        mocpSelect.dispatchEvent(new Event('change'));
+
+        carregarMOCPP();
+        carregarMOPC();
+    }
+
+    function carregarMOCPP() {
+        const moln = document.getElementById('MOLN')?.value;
+        const mocp = document.getElementById('MOCP')?.value;
+        const fxcm = document.getElementById('FXCM')?.value;
+        const grupoMOCPP = document.getElementById('GrupoMOCPP');
+        const divSubgrupo = document.querySelector('.SubgrupoMOCP');
+        const mocppSelect = document.getElementById('MOCPP');
+
+        const deveExibir = moln !== "3.W" && ["B3", "B34", "B35"].includes(mocp);
+
+        if (deveExibir) {
+            mocppSelect.innerHTML = '';
+            mocppSelect.innerHTML += '<option value="T" selected>Topo</option>';
+
+            const bloqueado = moln === "2.I" && fxcm === "56";
+            if (!bloqueado) {
+                mocppSelect.innerHTML += '<option value="D">Direita</option>';
+                mocppSelect.innerHTML += '<option value="E">Esquerda</option>';
+            }
+
+            divSubgrupo.style.display = 'block';
+            grupoMOCPP.style.display = 'block';
+        } else {
+            divSubgrupo.style.display = 'none';
+            grupoMOCPP.style.display = 'none';
+        }
+
+        carregarMOPC();
+    }
+
+    const mocpSelect = document.getElementById('MOCP');
+    if (mocpSelect) {
+        mocpSelect.addEventListener('change', carregarMOCPP);
+        mocpSelect.addEventListener('change', carregarMOPC);
+    }
+
+    function carregarMOPC() {
+        const moln = document.getElementById('MOLN')?.value;
+        const grupoMOPC = document.getElementById('GrupoMOPC');
+        const mopcSelect = document.getElementById('MOPC');
+
+        mopcSelect.innerHTML = '';
+
+        const isAPM = moln === "3.APM" || moln === "3.SPM";
+
+        const rotulos = {
+            "CX270": "270°",
+            "CX180": "180°",
+            "CX90": "90°",
+            "CX0": "0°",
+            "B3": "B3",
+            "B6": "B6",
+            "B7": "B7",
+            "B8": "B8",
+            "V5": "V5",
+            "V6": "V6"
+        };
+
+        const opcoes = isAPM
+            ? ["B3", "B6", "B7", "B8", "V5", "V6"]
+            : ["CX270", "CX180", "CX90", "CX0"];
+
+        const valorPadrao = isAPM ? "B3" : "CX270";
+
+        opcoes.forEach(valor => {
+            const selected = valor === valorPadrao ? 'selected' : '';
+            mopcSelect.innerHTML += `<option value="${valor}" ${selected}>${rotulos[valor]}</option>`;
+        });
+
+        grupoMOPC.style.display = 'block';
+        mopcSelect.disabled = false;
+
+        carregarMOPP();
+    }
+
+    const mopcSelect = document.getElementById('MOPC');
+    if (mopcSelect) {
+        mopcSelect.addEventListener('change', carregarMOPP);
+    }
+
+    function carregarMOPP() {
+        const moln = document.getElementById('MOLN')?.value;
+        const motp = document.getElementById('MOTP')?.value;
+        const mocp = document.getElementById('MOCP')?.value;
+        const grupoMOPP = document.getElementById('GrupoMOPP');
+        const moppSelect = document.getElementById('MOPP');
+
+        if (moln === "3.APM" || moln === "3.SPM") {
+            grupoMOPP.style.display = 'none';
+            return;
+        }
+
+        moppSelect.innerHTML = '';
+
+        const opcoes = [
+            { valor: "PC1", label: "1" },
+            { valor: "PC2", label: "2" },
+            { valor: "PC3", label: "3" },
+            { valor: "PC4", label: "4" }
+        ];
+
+        opcoes.forEach(op => {
+            const option = document.createElement('option');
+            option.value = op.valor;
+            option.textContent = op.label;
+            moppSelect.appendChild(option);
+        });
+
+        let valorPadrao = "PC1";
+        if (moln === "3.I" || (moln === "2.I" && motp === "T")) valorPadrao = "PC1";
+        else if (moln === "2.I" && motp === "M") valorPadrao = "PC2";
+        else if (moln === "3.W") valorPadrao = "PC3";
+
+        moppSelect.value = valorPadrao;
+
+        grupoMOPP.style.display = 'block';
+        moppSelect.disabled = false;
+
+        carregarMOOPC();
+    }
+
+    const moppSelect = document.getElementById('MOPP');
+    if (moppSelect) {
+        moppSelect.addEventListener('change', carregarMOOPC);
+    }
+
+    function carregarMOOPC() {
+        const moln = document.getElementById('MOLN')?.value.trim();
+        const fxcm = document.getElementById('FXCM')?.value;
+        const motp = document.getElementById('MOTP')?.value;
+        const grupoMOPP = document.getElementById('GrupoMOPP');
+        const grupoMOOPC = document.getElementById('GrupoMOOPC');
+        const checklist = document.querySelectorAll('#checklistMOOPC input[type="checkbox"]');
+
+        if (!grupoMOPP || grupoMOPP.style.display !== 'block' || !grupoMOOPC) {
+            grupoMOOPC.style.display = 'none';
+            return;
+        }
+
+        grupoMOOPC.style.display = 'block';
+
+        checklist.forEach(cb => {
+            const value = cb.value;
+            let mostrar = true;
+
+            if (["ACOR", "PINTCZ"].includes(value) && (moln === "3.APM" || moln === "3.SPM")) {
+                mostrar = false;
+            }
+
+            if (value === "VF") {
+                mostrar = (moln === "2.I" && ["63", "71"].includes(fxcm)) ||
+                    (moln === "3.I" && motp !== "F" && ["63", "71", "80", "90", "100-112", "132"].includes(fxcm));
+            }
+
+            if (value === "CR") {
+                mostrar = (moln === "3.W" && ["80", "90", "100-112", "132"].includes(fxcm)) ||
+                    (moln === "3.I" && ["80", "90", "100-112"].includes(fxcm));
+            }
+
+            cb.closest('label').style.display = mostrar ? 'block' : 'none';
+
+            if (!mostrar) cb.checked = false;
+        });
+
+        validarMOOPC();
+        carregarMOCR();
+    }
+
+    const moopcSelect = document.getElementById('MOOPC');
+    if (moopcSelect) {
+        moopcSelect.addEventListener('change', carregarMOCR);
+        moopcSelect.addEventListener('change', validarMOOPC);
+    }
+
+    function validarMOOPC() {
+        const checkboxes = document.querySelectorAll('#checklistMOOPC input[type="checkbox"]');
+        let selecionados = Array.from(checkboxes)
+            .filter(cb => cb.checked)
+            .map(cb => cb.value);
+
+        if (selecionados.includes("NÃO") && selecionados.length > 1) {
+            document.querySelector('input[name="MOOPC"][value="NÃO"]').checked = false;
+            selecionados = selecionados.filter(v => v !== "NÃO");
+        }
+
+        if (selecionados.length === 0) {
+            document.querySelector('input[name="MOOPC"][value="NÃO"]').checked = true;
+            selecionados = ["NÃO"];
+        }
+
+        if (selecionados.includes("ACOR") && selecionados.includes("PINTCZ")) {
+            document.querySelector('input[name="MOOPC"][value="ACOR"]').checked = false;
+            selecionados = selecionados.filter(v => v !== "ACOR");
+        }
+
+        document.getElementById('MOOPC').value = selecionados.join(',');
+
+        const nomesVisiveis = selecionados.map(valor => {
+            const label = Array.from(document.querySelectorAll('#checklistMOOPC label')).find(lbl =>
+                lbl.querySelector(`input[value="${valor}"]`)
+            );
+            return label ? label.textContent.trim() : valor;
+        });
+
+        document.querySelector('#dropdownMOOPC .dropdown-button').textContent = nomesVisiveis.join(', ');
+
+        carregarMOCR();
+    }
+
+    document.getElementById('MOOPC').dispatchEvent(new Event('change'));
+
+    document.addEventListener('DOMContentLoaded', () => {
+        const checkboxes = document.querySelectorAll('#checklistMOOPC input[type="checkbox"]');
+        checkboxes.forEach(cb => {
+            cb.addEventListener('change', validarMOOPC);
+        });
+    });
+
+    function carregarMOCR() {
+        const grupoMOCR = document.getElementById('GrupoMOCR');
+        const grupoFXCR = document.getElementById('GrupoFXCR');
+        const subgrupoMOOPC = document.querySelector('.SubgrupoMOOPC');
+        const mocrSelect = document.getElementById('MOCR');
+        const moopc = document.getElementById('MOOPC')?.value || '';
+
+        const crSelecionado = moopc.split(',').includes('CR');
+
+        if (!crSelecionado) {
+            if (subgrupoMOOPC) subgrupoMOOPC.style.display = 'none';
+            if (grupoMOCR) grupoMOCR.style.display = 'none';
+            if (grupoFXCR) grupoFXCR.style.display = 'none';
+            if (mocrSelect) mocrSelect.value = '';
+            return;
+        }
+
+        if (subgrupoMOOPC) subgrupoMOOPC.style.display = 'block';
+        if (grupoMOCR) grupoMOCR.style.display = 'block';
+        if (grupoFXCR) grupoFXCR.style.display = 'none';
+
+        if (mocrSelect) {
+            mocrSelect.innerHTML = `
+            <option value="H">HORÁRIO</option>
+            <option value="AH">ANTI-HORÁRIO</option>
+        `;
+            mocrSelect.value = '';
+        }
+
+        carregarFXCR();
+    }
+
+    const mocrSelect = document.getElementById('MOCR');
+    if (mocrSelect) {
+        carregarFXVA();
+        mocrSelect.addEventListener('change', carregarFXCR);
+    }
+
+    async function carregarFXCR() {
+        const fxln = document.getElementById('FXLN')?.value;
+        const fxbr = document.getElementById('FXBR')?.value;
+        const mocr = document.getElementById('MOCR')?.value;
+        const grupoFXCR = document.getElementById('GrupoFXCR');
+        const fxcrSelect = document.getElementById('FXCR');
+
+        if (!mocr) {
+            grupoFXCR.style.display = 'none';
+            fxcrSelect.value = '';
+            return;
+        }
+
+        const response = await fetch(`/PaginasConfiguradoresSeletoresConsultas/FX/FXCR.php?FXLN=${encodeURIComponent(fxln)}&FXBR=${encodeURIComponent(fxbr)}&MOCR=${encodeURIComponent(mocr)}`);
+        const optionsHTML = await response.text();
+
+        fxcrSelect.innerHTML = optionsHTML;
+
+        if (optionsHTML.trim()) {
+            grupoFXCR.style.display = 'block';
+            fxcrSelect.selectedIndex = 0;
+            fxcrSelect.dispatchEvent(new Event('change'));
+        } else {
+            grupoFXCR.style.display = 'none';
+            fxcrSelect.innerHTML = '';
+        }
+    }
+
+    function carregarFXVA() {
+        const fxcm = document.getElementById('FXCM')?.value;
+        const fxcp = document.getElementById('FXCP')?.value;
+        const fxvaSelect = document.getElementById('FXVA');
+        const grupoFXVA = document.getElementById('GrupoFXVA');
+
+        const permitirS = ["63", "71", "80", "90"].includes(fxcm) && fxcp === "B5";
+
+        fxvaSelect.innerHTML = '';
+        fxvaSelect.disabled = false;
+
+        if (permitirS) fxvaSelect.appendChild(new Option("SIM", "S"));
+        fxvaSelect.appendChild(new Option("NÃO", "N"));
+        fxvaSelect.value = "N";
+
+        grupoFXVA.style.display = 'block';
+
+        fxvaSelect.dispatchEvent(new Event('change'));
+
+        carregarVALN();
+    }
+
+    document.getElementById('FXCM')?.addEventListener('change', carregarFXVA);
+    document.getElementById('FXCP')?.addEventListener('change', carregarFXVA);
+    document.getElementById('FXVA')?.addEventListener('change', carregarVALN);
+
+    async function carregarVALN() {
+        const fxvaSelect = document.getElementById('FXVA');
+        const grupoVALN = document.getElementById('GrupoVALN');
+        const valnSelect = document.getElementById('VALN');
+        const subgrupoFXVA = document.querySelector('#GrupoFXVA .subgrupo');
+
+        if (fxvaSelect.value === "S") {
+            grupoVALN.style.display = 'block';
+            if (subgrupoFXVA) subgrupoFXVA.style.display = 'block';
+
+            const response = await fetch(`/PaginasConfiguradoresSeletoresConsultas/FX/VALN.php`);
+            if (!response.ok) throw new Error('Erro ao buscar opções de VALN');
+            const optionsHTML = await response.text();
+            valnSelect.innerHTML = optionsHTML;
+            valnSelect.style.display = 'block';
+            valnSelect.disabled = false;
+            valnSelect.value = '1.V';
+            valnSelect.dispatchEvent(new Event('change'));
+        } else {
+            grupoVALN.style.display = 'none';
+            if (subgrupoFXVA) subgrupoFXVA.style.display = 'none';
+            valnSelect.style.display = 'none';
+        }
+    }
+
+    document.getElementById('VALN')?.addEventListener('change', carregarVAPT);
+
+    async function carregarVAPT() {
+        const valn = document.getElementById('VALN')?.value;
+        const fxcm = document.getElementById('FXCM')?.value;
+        const grupoVAPT = document.getElementById('GrupoVAPT');
+        const vaptSelect = document.getElementById('VAPT');
+
+        grupoVAPT.style.display = 'block';
+
+        const response = await fetch(`/PaginasConfiguradoresSeletoresConsultas/FX/VAPT.php?VALN=${encodeURIComponent(valn)}&FXCM=${encodeURIComponent(fxcm)}`);
+        if (!response.ok) throw new Error('Erro ao buscar opções de VAPT');
+        const optionsHTML = await response.text();
+        vaptSelect.innerHTML = optionsHTML;
+        vaptSelect.disabled = false;
+        vaptSelect.style.display = 'block';
+        vaptSelect.dispatchEvent(new Event('change'));
+    }
+
+    document.getElementById('VAPT')?.addEventListener('change', carregarVAECP);
+
+    function carregarVAECP() {
+        const vapt = document.getElementById('VAPT')?.value;
+        const grupoVAECP = document.getElementById('GrupoVAECP');
+        const vaecpSelect = document.getElementById('VAECP');
+        const subgrupoFXVA = document.querySelector('#GrupoFXVA .subgrupo');
+
+        grupoVAECP.style.display = 'block';
+        if (subgrupoFXVA) subgrupoFXVA.style.display = 'block';
+
+        vaecpSelect.disabled = false;
+        vaecpSelect.value = 'B5';
+        vaecpSelect.dispatchEvent(new Event('change'));
+    }
+
+    document.getElementById('VAECP')?.addEventListener('change', carregarVASCP);
+
+    async function carregarVASCP() {
+        const valn = document.getElementById('VALN')?.value;
+        const fxcm = document.getElementById('FXCM')?.value;
+        const vapt = document.getElementById('VAPT')?.value;
+        const fxmo = document.getElementById('FXMO')?.value;
+
+        const grupoVASCP = document.getElementById('GrupoVASCP');
+        const vascpSelect = document.getElementById('VASCP');
+        const subgrupoVAECP = document.querySelector('#GrupoVAECP .subgrupo');
+
+        grupoVASCP.style.display = 'block';
+        if (subgrupoVAECP) subgrupoVAECP.style.display = 'block';
+
+        const response = await fetch(`/PaginasConfiguradoresSeletoresConsultas/FX/VASCP.php?VALN=${encodeURIComponent(valn)}&FXCM=${encodeURIComponent(fxcm)}&VAPT=${encodeURIComponent(vapt)}&FXMO=${encodeURIComponent(fxmo)}`);
+        const optionsHTML = await response.text();
+        vascpSelect.innerHTML = optionsHTML;
+        vascpSelect.disabled = false;
+        vascpSelect.style.display = 'block';
+
+        const optionExists = Array.from(vascpSelect.options).some(opt => opt.value === fxcm);
+        vascpSelect.value = optionExists ? fxcm : vascpSelect.options[0]?.value || '';
+
+        carregarVAPM();
+    }
+
+    document.getElementById('VASCP')?.addEventListener('change', carregarVAPM);
+
+    function carregarVAPM() {
+        const vascp = document.getElementById('VASCP')?.value;
+        const grupoVAPM = document.getElementById('GrupoVAPM');
+        const vapmSelect = document.getElementById('VAPM');
+
+        grupoVAPM.style.display = 'block';
+        vapmSelect.disabled = false;
+        vapmSelect.style.display = 'block';
+        vapmSelect.value = '';
+    }
+
+    function carregarFXPL() {
+        const fxplSelect = document.getElementById('FXPL');
+        const grupoFXPL = document.getElementById('GrupoFXPL');
+
+        fxplSelect.innerHTML = '';
+        fxplSelect.disabled = false;
+
+        fxplSelect.value = "N";
+
+        grupoFXPL.style.display = 'block';
+        grupoFXPL.dispatchEvent(new Event('change'));
+
+    }
+
+</script>
+
+<script nonce="<?= htmlspecialchars(csp_nonce(), ENT_QUOTES, 'UTF-8'); ?>">
+    function exibirBotaoCompartilhar() {
+        const wrapper = document.getElementById("compartilhar-wrapper");
+        if (wrapper) wrapper.style.display = "block";
+        if (typeof exibirBotaoRefazerConfiguracao === "function") exibirBotaoRefazerConfiguracao();
+    }
+
+    function exibirBotaoSolicitarCotacao() {
+        const wrapper = document.getElementById("cotacao-wrapper");
+        if (wrapper) wrapper.style.display = "block";
+    }
+
+    async function gerarCodigoProduto() {
+        if (typeof formularioCompleto === 'function' && !formularioCompleto(true)) {
+            if (typeof exibirAlerta === 'function') {
+                exibirAlerta('⚠️ Por favor, preencha todos os campos antes de gerar o produto.');
+            }
+            return;
+        }
+        const FORMACONSTRUTIVA = v("FXCM").includes("EE") ? "" : v("FXCP");
+
+        const FORMACONSTRUTIVAREDUTOR = (v("FXMO") === "N" && v("FXVA") === "N")
+            ? `${v("FXCM")}${FORMACONSTRUTIVA}.` : "";
+
+        const POSICAOACESSORIOFIXACAO = (!["1.FFA", "1.FR"].includes(v("FXLN")) && !["N", "PE"].includes(v("FXAF")))
+            ? `.${v("FXAFP")}` : "";
+
+        const POSICAOBRACOTORQUE = (v("FXAF") === "BT" && v("FXLN") === "1.FR") ? `.${v("FXBT")}` : "";
+
+        const PESREDUTOR = v("FXAF") === "PE" ? `.${v("FXPE")}` : "";
+
+        const POSICAOACESSORIOSAIDA = (!["N", "ED", "SX"].includes(v("FXAS")) && !["1.FFA"].includes(v("FXLN")))
+            ? `.${v("FXASP")}` : "";
+
+        const POSICAOMONTAGEM = `.${v("FXPM")}`;
+
+        const TEMOPCIONAISREDUTOR = (v("FXOPC") === "NÃO" || vazio(v("FXOPC"))) ? "" : `.${v("FXOPC")}`;
+        const VARIOSOPCIONAISREDUTOR = contem(TEMOPCIONAISREDUTOR, ",") ? substituir(TEMOPCIONAISREDUTOR, ", ", ".") : TEMOPCIONAISREDUTOR;
+
+        const PESMOTOR = (v("FXMO") === "S" && v("MOLN") !== "3.W" && ["B3", "B34", "B35"].includes(v("MOCP"))) ? v("MOCPP") : "";
+
+        const CARCACA100112 = (v("FXMO") === "S" && v("FXCM") === "100-112")
+            ? await get("Carcaca100112.php", {
+                MOLN: v("MOLN"), MOTP: v("MOTP"), MOTT: v("MOTT"),
+                MOFQ: v("MOFQ"), MOPT: v("MOPT"), MOPL: v("MOPL")
+            }) : v("FXCM");
+
+        const CARCACAINICIO = (v("FXMO") === "S")
+            ? await get("CarcacaInicio.php", {
+                MOLN: v("MOLN"), MOTP: v("MOTP"), MOTT: v("MOTT"),
+                MOFQ: v("MOFQ"), MOPT: v("MOPT"), MOPL: v("MOPL"), MOCM: CARCACA100112
+            }) : "";
+
+        const CARCACAFIM = (v("FXMO") === "S")
+            ? await get("CarcacaFim.php", {
+                MOLN: v("MOLN"), MOTP: v("MOTP"), MOTT: v("MOTT"),
+                MOFQ: v("MOFQ"), MOPT: v("MOPT"), MOPL: v("MOPL"), MOCM: CARCACA100112
+            }) : "";
+
+        const FORMACONSTRUTIVAMOTORREDUTOR = v("FXMO") === "S"
+            ? `${CARCACAINICIO}${CARCACA100112}${CARCACAFIM}${v("MOCP")}${PESMOTOR}.` : "";
+
+        const TEMOPCIONAIS = (v("FXMO") === "S" && v("MOOPC") !== "NÃO" && !vazio(v("MOOPC"))) ? `.${v("MOOPC")}` : "";
+        const VARIOSOPCIONAIS = contem(TEMOPCIONAIS, ",") ? substituir(TEMOPCIONAIS, ", ", ".") : TEMOPCIONAIS;
+        const OPCIONAISPADRAO = contem(VARIOSOPCIONAIS, "CR") ? `${VARIOSOPCIONAIS}${v("MOCR")}` : VARIOSOPCIONAIS;
+
+        const CAIXADELIGACAO = (v("FXMO") === "S" && v("MOPC") !== "CX270") ? `.${v("MOPC")}` : "";
+
+        const PRENSACABO = (v("FXMO") === "S" && !(
+            ["3.APM", "3.SPM"].includes(v("MOLN")) ||
+            (v("MOLN") === "3.I" && v("MOPP") === "PC1") ||
+            (v("MOLN") === "2.I" && v("MOTP") === "T" && v("MOPP") === "PC1") ||
+            (v("MOLN") === "2.I" && v("MOTP") === "M" && v("MOPP") === "PC2") ||
+            (v("MOLN") === "3.W" && v("MOPP") === "PC3") ||
+            vazio(v("MOPP"))
+        )) ? `.${v("MOPP")}` : "";
+
+        const CODIGOMOTOR = v("FXMO") === "S"
+            ? `.${v("MOLN")}.${v("MOTP")}.${v("MOTT")}.${v("MOPT")}.${v("MOPL")}.${FORMACONSTRUTIVAMOTORREDUTOR}${v("MOFQ")}${OPCIONAISPADRAO}${CAIXADELIGACAO}${PRENSACABO}` : "";
+
+        const FORMACONSTRUTIVAVARIADOR = (v("FXVA") === "S" && v("FXMO") === "N") ? `.${v("FXCM")}${v("VAECP")}` : "";
+        const FORMACONSTRUTIVAVARIADORETIQUETA = (v("FXVA") === "S") ? `.${v("FXCM")}${v("VAECP")}` : "";
+        const CODIGOVARIADOR = (v("FXVA") === "S") ? `.${v("VALN")}.${v("VAPT")}${FORMACONSTRUTIVAVARIADOR}.${v("VASCP")}.${v("VAPM")}` : "";
+
+
+        const LINHAPRODUTO = seAlgum(
+            v("FXMO") === "N" && v("FXVA") === "N", v("FXLN"),
+            v("FXMO") === "N" && v("FXVA") === "S", v("FXLN"),
+            v("FXMO") === "S" && v("FXVA") === "N", substituir(v("FXLN"), "1.", "M."),
+            v("FXMO") === "S" && v("FXVA") === "S", substituir(v("FXLN"), "1.", "MV.")
+        );
+
+        const COMPOSICAOCODIGO = [
+            LINHAPRODUTO,
+            v("FXBR"),
+            v("FXRD"),
+            v("FXET"),
+            FORMACONSTRUTIVAREDUTOR,
+            v("FXCM").includes("EE") ? "" : (vazio(v("FXBU")) ? "N." : `${v("FXBU")}.`),
+            v("FXAF"),
+            POSICAOACESSORIOFIXACAO,
+            POSICAOBRACOTORQUE,
+            v("FXAS"),
+            POSICAOACESSORIOSAIDA,
+            PESREDUTOR,
+            POSICAOMONTAGEM,
+            VARIOSOPCIONAISREDUTOR,
+            CODIGOVARIADOR,
+            CODIGOMOTOR
+        ]
+            .map(s => s.replace(/^\.|\.$/g, ""))
+            .map(s => s.replace(/,\s*/g, ".").replace(/\s+/g, ""))
+            .map(s => s.replace(/\.{2,}/g, "."))
+            .filter(Boolean)
+            .join(".");
+
+        document.getElementById("refProduto").textContent = COMPOSICAOCODIGO;
+        mostrarDetalhesProduto({}, COMPOSICAOCODIGO);
+
+        fetch("/PaginasConsultaProdutos/CodigoDescricaoObservacaoProduto.php", {
+            method: "POST",
+            headers: { "Content-Type": "application/x-www-form-urlencoded" },
+            body: `codigo=${encodeURIComponent(COMPOSICAOCODIGO)}`
+        })
+            .then(resp => resp.text())
+            .then(text => {
+                let dados;
+                try { dados = JSON.parse(text); } catch { throw new Error(text); }
+                return dados;
+            })
+            .then(dados => {
+                mostrarDetalhesProduto(dados || {}, COMPOSICAOCODIGO);
+                window.codigoProduto = dados?.CD_PRODUTO || "";
+                window.codigoProduto = dados?.CD_PRODUTO || "";
+                window.codigoEstoquePendente = dados?.CD_PRODUTO || "";
+                if (typeof mostrarDetalhesEstoque === 'function') {
+                    mostrarDetalhesEstoque(dados?.CD_PRODUTO || "");
+                }
+                if (typeof mostrarDetalhesPreco === 'function') {
+                    const params = gerarLinkAtual().split('?')[1] || '';
+                    mostrarDetalhesPreco(params);
+                }
+            })
+            .catch(err => {
+
+                if (typeof mostrarDetalhesPreco === 'function') {
+                    const params = gerarLinkAtual().split('?')[1] || '';
+                    mostrarDetalhesPreco(params);
+                }
+            });
+
+
+        if (window.manualHistoricoProduto && window.ultimoHistoricoProduto !== COMPOSICAOCODIGO) {
+            const linkAtual = gerarLinkAtual();
+            fetch("/PaginasAreaClienteSessaoPerfil/RegistrarProduto.php", {
+                method: "POST",
+                headers: { "Content-Type": "application/x-www-form-urlencoded" },
+                body: `produto=${encodeURIComponent(COMPOSICAOCODIGO)}&link=${encodeURIComponent(linkAtual)}`
+            });
+            window.ultimoHistoricoProduto = COMPOSICAOCODIGO;
+            window.manualHistoricoProduto = false;
+        }
+
+        exibirBotaoCompartilhar();
+        //exibirBotaoSolicitarDesenho();
+        exibirBotaoSolicitarCotacao();
+    }
+</script>
+
+<script nonce="<?= htmlspecialchars(csp_nonce(), ENT_QUOTES, 'UTF-8'); ?>">
+    const endpointPreco = '/PaginasConfiguradoresPrecoVenda/FXPV.php';
+    function mostrarDetalhesPreco(paramString) {
+        const params = new URLSearchParams(
+            typeof paramString === 'string'
+                ? paramString
+                : new URLSearchParams(paramString).toString()
+        );
+        if (window.codigoProduto) {
+            params.append('produto', window.codigoProduto);
+        }
+        const codInput = document.getElementById('codigoClienteInput');
+        if (codInput && codInput.value.trim()) {
+            params.set('pessoa', codInput.value.trim());
+        }
+        fetch(endpointPreco, {
+            method: 'POST',
+            headers: { 'Content-Type': 'application/x-www-form-urlencoded' },
+            body: params.toString()
+        })
+            .then(r => r.json())
+            .then(p => {
+                const valorRS = p && p['001'] ? parseFloat(String(p['001']).replace(/\./g, '').replace(',', '.')) : NaN;
+                const valorSP = p && p['003'] ? parseFloat(String(p['003']).replace(/\./g, '').replace(',', '.')) : NaN;
+                const textoRS = !isNaN(valorRS) && valorRS !== 0 ? `R$ ${valorRS.toLocaleString('pt-BR', { minimumFractionDigits: 2, maximumFractionDigits: 2 })}` : '👉 😊 Ops! O preço de venda está indisponível no momento. 📞 Fale com nossos Consultores Comerciais para mais informações!';
+                const textoSP = !isNaN(valorSP) && valorSP !== 0 ? `R$ ${valorSP.toLocaleString('pt-BR', { minimumFractionDigits: 2, maximumFractionDigits: 2 })}` : '👉 😊 Ops! O preço de venda está indisponível no momento. 📞 Fale com nossos Consultores Comerciais para mais informações!';
+                const precoRSElem = document.getElementById('precoRS');
+                if (precoRSElem) precoRSElem.innerHTML = `<strong>Preço Final de Venda:</strong> ${textoRS}`;
+                const precoSPElem = document.getElementById('precoSP');
+                if (precoSPElem) precoSPElem.innerHTML = `<strong>Preço Final de Venda:</strong> ${textoSP}`;
+                const linhaPrecoElem = document.getElementById('linhaEntreEmpresasPreco');
+                if (linhaPrecoElem) linhaPrecoElem.style.display = 'block';
+                const notaRS = document.getElementById('notaPrecoRS');
+                const notaSP = document.getElementById('notaPrecoSP');
+                const mostrarNota = window.produtoExiste === false;
+                if (notaRS) notaRS.style.display = mostrarNota ? 'block' : 'none';
+                if (notaSP) notaSP.style.display = mostrarNota ? 'block' : 'none';
+            });
+    }
+
+    document.addEventListener('DOMContentLoaded', () => {
+        const codInput = document.getElementById('codigoClienteInput');
+        const codBtn = document.getElementById('codigoClienteBtn');
+        const limparBtn = document.getElementById('limparClienteBtn');
+        const nomeInfo = document.getElementById('nomeClienteInfo');
+
+        let nomeCtrl = null;
+        const carregarNome = async codigo => {
+            if (!nomeInfo) return;
+            if (nomeCtrl) nomeCtrl.abort();
+            if (!codigo) { nomeInfo.textContent = ''; nomeCtrl = null; return; }
+            nomeCtrl = new AbortController();
+            try {
+                const r = await fetch('/AcessosConsultas/BuscarDadosPessoaPlenus.php?q=' + encodeURIComponent(codigo) + '&offset=0', { signal: nomeCtrl.signal });
+                if (!r.ok) throw new Error('HTTP');
+                const j = await r.json();
+                const pessoa = (j.pessoas || []).find(p => p.CD_PESSOA === codigo);
+                nomeInfo.textContent = pessoa ? pessoa.NM_PESSOA : '';
+            } catch (e) {
+                if (e.name !== 'AbortError') nomeInfo.textContent = '';
+            } finally {
+                nomeCtrl = null;
+            }
+        };
+
+        const atualizarPreco = () => {
+            const params = gerarLinkAtual().split('?')[1] || '';
+            carregarNome(codInput?.value.trim());
+            mostrarDetalhesPreco(params);
+        };
+
+        if (codInput) {
+            codInput.value = '001';
+            codInput.addEventListener('change', atualizarPreco);
+            codInput.addEventListener('keydown', e => {
+                if (e.key === 'Enter') { e.preventDefault(); atualizarPreco(); }
+            });
+        }
+        if (codBtn) {
+            codBtn.addEventListener('click', atualizarPreco);
+        }
+        if (limparBtn) {
+            limparBtn.addEventListener('click', () => {
+                if (codInput) codInput.value = '001';
+                atualizarPreco();
+            });
+        }
+    });
+</script>
+
+
+
+
+</body>
+
+</html>

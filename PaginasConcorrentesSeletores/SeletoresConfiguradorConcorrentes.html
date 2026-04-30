@@ -1,0 +1,3553 @@
+<!DOCTYPE html>
+
+<main id="main-content" class="sr-only" data-page-title="Configurador de Produtos IBR"></main>
+
+<link rel="stylesheet" href="/Layout/Galeria.min.css" data-versioned-href="/Layout/Galeria.min.css">
+
+
+<main class="main mb-0 pb-0">
+    <div class="pagina__titulo--bloco fw-bold mt-5 mb-4"></div>
+    <div id="conteudo-publico">
+        <div class="container">
+            <div class="galeria-produto" data-visible="GUIA-INTERCAMBIALIDADE"
+                data-lightbox-module="/Layout/ModuloPhotoSwipe.js" data-folder="Intercambialidade"
+                data-files='["/ImagensPaginaConcorrentes/Explicacao.webp"]' data-title="Guia de Intercambialidade IBR"
+                data-description="O Guia de Intercambialidade IBR te ajuda a encontrar, com segurança, o produto IBR equivalente ao item do concorrente. Basta informar as características do modelo que você usa hoje e o sistema indica a melhor opção IBR compatível para substituição e aplicação, agilizando a escolha e reduzindo chances de erro."
+                data-site="https://www.redutoresibr.com.br/pt"
+                data-catalog="https://www.redutoresibr.com.br/pt/Arquivos/catalogo-geral"
+                data-site-label="Site de Produtos IBR" data-catalog-label="Catálogo de Produtos IBR">
+            </div>
+        </div>
+    </div>
+
+    <div id="mensagem-permissao" class="mensagem-permissao-intercambialidade">
+        Oops! 😅 Você não tem permissão para acessar este conteúdo. Faça login com uma conta autorizada ou fale com
+        seu Consultor Comercial da IBR para liberar o acesso. 🔐
+    </div>
+
+    <div id="conteudo-restrito">
+        <div id="titulo-configurador" class="pagina__titulo--bloco mt-5 mb-5 text-center">
+            <h2 id="texto-configurador" class="fs-3 fw-bolder m-0">
+                Configure o Produto <span class="text-orange">Concorrente</span>
+            </h2>
+        </div>
+        <section id="GrupoCOMA">
+            <label class="cssB d-flex align-items-center gap-1 justify-content-center" for="COMA">Marca do
+                Concorrente:
+                <button class="help-icon" data-help-title="Marca do Concorrente" data-help-text=""
+                    data-help-class="perm-popover" data-bs-title="Marca do Concorrente" data-bs-content=""></button>
+            </label>
+            <select class="cssC" id="COMA" name="COMA"></select>
+        </section>
+
+        <section id="GrupoCOLN">
+            <label class="cssB d-flex align-items-center gap-1 justify-content-center" for="COLN">Linha do Produto
+                Concorrente:
+                <button class="help-icon" data-help-title="Linha do Concorrente" data-help-text=""
+                    data-help-class="perm-popover" data-bs-title="Linha do Concorrente" data-bs-content=""></button>
+            </label>
+            <select class="cssC" id="COLN" name="COLN"></select>
+        </section>
+
+        <section id="GrupoCOBR">
+            <label class="cssB d-flex align-items-center gap-1 justify-content-center" for="COBR">Tamanho do
+                Produto Concorrente:
+                <button class="help-icon" data-help-title="Tamanho do Concorrente" data-help-text=""
+                    data-help-class="perm-popover" data-bs-title="Tamanho do Concorrente" data-bs-content=""></button>
+            </label>
+            <select class="cssC" id="COBR" name="COBR"></select>
+        </section>
+
+        <section id="GrupoCORD">
+            <label class="cssB d-flex align-items-center gap-1 justify-content-center" for="CORD">Redução do
+                Produto Concorrente:
+                <button class="help-icon" data-help-title="Redução do Produto" data-help-text=""
+                    data-help-class="perm-popover" data-bs-title="Redução do Produto" data-bs-content=""></button>
+            </label>
+            <select class="cssC" id="CORD" name="CORD"></select>
+        </section>
+
+        <div class="resultado-auto-grid">
+            <section id="GrupoCOVZ" class="resultado-auto-section">
+                <label class="cssB d-flex align-items-center gap-1 justify-content-center" for="COVZ">Diâmetro do Eixo
+                    de Saída:
+                    <button class="help-icon" data-help-title="Diâmetro do Eixo de Saída" data-help-text=""
+                        data-help-class="perm-popover" data-bs-title="Diâmetro do Eixo de Saída"
+                        data-bs-content=""></button>
+                </label>
+                <p class="resultado-auto-valor" id="COVZTexto">⏳</p>
+                <select class="cssC" id="COVZ" name="COVZ" hidden aria-hidden="true" tabindex="-1"></select>
+            </section>
+
+            <section id="GrupoCOTR" class="resultado-auto-section">
+                <label class="cssB d-flex align-items-center gap-1 justify-content-center" for="COTR">Torque do Produto
+                    Concorrente:
+                    <button class="help-icon" data-help-title="Torque do Concorrente" data-help-text=""
+                        data-help-class="perm-popover" data-bs-title="Torque do Concorrente"
+                        data-bs-content=""></button>
+                </label>
+                <p class="resultado-auto-valor" id="COTRTexto">⏳</p>
+                <select class="cssC" id="COTR" name="COTR" hidden aria-hidden="true" tabindex="-1"></select>
+            </section>
+        </div>
+
+        <details class="config-avancada" id="config-avancada-intercambialidade">
+            <summary>
+                Configurações Avançada
+                <button class="help-icon" type="button" data-help-title="Configurações Avançada"
+                    data-help-key="ajudaConfigAvancada" data-help-text="" data-help-class="perm-popover"
+                    data-bs-title="Configurações Avançada" data-bs-content=""
+                    aria-label="Ajuda sobre Configurações Avançada"></button>
+            </summary>
+            <div class="config-avancada__conteudo">
+                <div class="criterio-reducao">
+                    <div class="criterio-reducao__item">
+                        <div class="criterio-reducao__titulo">Critério de Redução do Produto IBR:
+                            <button class="help-icon" type="button" data-help-title="Critério de Redução do Produto IBR"
+                                data-help-key="ajudaCriterioReducao" data-help-text="" data-help-class="perm-popover"
+                                data-bs-title="Critério de Redução do Produto IBR" data-bs-content=""
+                                aria-label="Ajuda sobre Critério de Redução do Produto IBR"></button>
+                        </div>
+                        <div class="criterio-reducao__controles">
+                            <div class="criterio-reducao__faixa">
+                                <div class="slider-duplo" id="criterioReducaoSlider">
+                                    <div class="slider-duplo__trilha" aria-hidden="true"></div>
+                                    <input type="range" id="criterioReducaoMin" min="-50" max="50" value="-10" step="1"
+                                        aria-label="Valor mínimo do critério de redução">
+                                    <input type="range" id="criterioReducaoMax" min="-50" max="50" value="10" step="1"
+                                        aria-label="Valor máximo do critério de redução">
+                                </div>
+                                <div class="criterio-reducao__inputs" id="criterioReducaoInputs">
+                                    <div class="criterio-reducao__campo">
+                                        <input type="number" id="criterioReducaoMinInput" min="-50" max="50" value="-10"
+                                            step="1" aria-label="Campo mínimo percentual">
+                                        <span class="criterio-reducao__percentual" aria-hidden="true">%</span>
+                                    </div>
+                                    <div class="criterio-reducao__campo">
+                                        <input type="number" id="criterioReducaoMaxInput" min="-50" max="50" value="10"
+                                            step="1" aria-label="Campo máximo percentual">
+                                        <span class="criterio-reducao__percentual" aria-hidden="true">%</span>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="criterio-reducao__item">
+                        <div class="criterio-reducao__titulo">Critério de Torque do Produto IBR:
+                            <button class="help-icon" type="button" data-help-title="Critério de Torque do Produto IBR"
+                                data-help-key="ajudaCriterioTorque" data-help-text="" data-help-class="perm-popover"
+                                data-bs-title="Critério de Torque do Produto IBR" data-bs-content=""
+                                aria-label="Ajuda sobre Critério de Torque do Produto IBR"></button>
+                        </div>
+                        <div class="criterio-reducao__controles">
+                            <div class="criterio-reducao__faixa">
+                                <div class="slider-duplo" id="criterioTorqueSlider">
+                                    <div class="slider-duplo__trilha" aria-hidden="true"></div>
+                                    <input type="range" id="criterioTorqueMin" min="-50" max="50" value="-5" step="1"
+                                        aria-label="Valor mínimo do critério de torque">
+                                    <input type="range" id="criterioTorqueMax" min="-50" max="50" value="30" step="1"
+                                        aria-label="Valor máximo do critério de torque">
+                                </div>
+                                <div class="criterio-reducao__inputs" id="criterioTorqueInputs">
+                                    <div class="criterio-reducao__campo">
+                                        <input type="number" id="criterioTorqueMinInput" min="-50" max="50" value="-5"
+                                            step="1" aria-label="Campo mínimo percentual do critério de torque">
+                                        <span class="criterio-reducao__percentual" aria-hidden="true">%</span>
+                                    </div>
+                                    <div class="criterio-reducao__campo">
+                                        <input type="number" id="criterioTorqueMaxInput" min="-50" max="50" value="30"
+                                            step="1" aria-label="Campo máximo percentual do critério de torque">
+                                        <span class="criterio-reducao__percentual" aria-hidden="true">%</span>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="criterio-reducao__reset">
+                        <button type="button" id="criterioRestaurarPadrao" class="criterio-reducao__botao-restaurar"
+                            hidden aria-label="Restaurar valores padrão dos critérios"
+                            title="Restaurar valores padrão dos critérios">
+                            <svg class="criterio-reducao__icone-restaurar" viewBox="0 0 24 24" aria-hidden="true"
+                                focusable="false">
+                                <path fill="currentColor"
+                                    d="M12 5a7 7 0 0 1 6.71 5H21l-3.5 3.5L14 10h2.02A4.5 4.5 0 1 0 16.5 14h2.02A7 7 0 1 1 12 5Z" />
+                            </svg>
+                            <span>Restaurar</span>
+                        </button>
+                    </div>
+                </div>
+            </div>
+        </details>
+
+        <select class="cssC" id="IBCN" name="IBCN" hidden aria-hidden="true" tabindex="-1"></select>
+        <select class="cssC" id="IBLN" name="IBLN" hidden aria-hidden="true" tabindex="-1"></select>
+
+        <section class="home-botoes home-botoes--intercambialidade">
+            <div class="botao-linha gerar-produto-wrapper gerar-equivalentes-wrapper">
+                <a href="#" class="botao-home gerar-produto" id="btn-gerar-equivalentes" title="Gerar Equivalente IBR"
+                    target="_blank" rel="noopener noreferrer" data-gtag-event="intercambialidade-gerar-equivalente-ibr"
+                    data-gtag-category="Intercambialidade" data-gtag-label="gerar-equivalente-ibr">
+                    <span>Gerar Equivalente IBR</span>
+                    <svg class="icone-gerar" width="40" height="40" viewBox="0 0 512 512"
+                        xmlns="http://www.w3.org/2000/svg" fill="#ec4115">
+                        <path
+                            d="M496 293.98c9.03-.7 16-8.25 16-17.3v-41.38c0-9.06-6.97-16.59-16-17.31l-54.83-4.28c-3.48-.27-6.48-2.45-7.83-5.69l-18.03-43.52c-1.34-3.22-.78-6.91 1.5-9.55l35.75-41.81c5.88-6.89 5.5-17.14-.92-23.55l-29.25-29.25c-6.41-6.41-16.67-6.81-23.55-.92l-41.81 35.75c-2.64 2.27-6.34 2.84-9.55 1.52l-43.53-18.05c-3.22-1.33-5.42-4.37-5.7-7.83l-4.27-54.81C293.28 6.97 285.75 0 276.69 0h-41.38c-9.06 0-16.59 6.97-17.3 16.02l-4.28 54.81c-.27 3.47-2.47 6.5-5.69 7.83l-43.53 18.05c-3.22 1.33-6.91.75-9.56-1.52l-41.8-35.75c-6.88-5.89-17.13-5.48-23.55.92l-29.25 29.25c-6.41 6.41-6.8 16.66-.92 23.55l35.75 41.81c2.25 2.64 2.84 6.33 1.5 9.55l-18.03 43.52c-1.31 3.23-4.36 5.42-7.81 5.69L16 218c-9.03.72-16 8.25-16 17.31v41.36c0 9.06 6.97 16.61 16 17.31l54.84 4.27c3.45.28 6.5 2.48 7.81 5.7l18.03 43.52c1.34 3.22.75 6.92-1.5 9.56l-35.75 41.81c-5.88 6.88-5.48 17.13.92 23.55l29.25 29.25c6.42 6.41 16.67 6.8 23.55.91l41.8-35.75c2.66-2.25 6.34-2.84 9.56-1.5l43.53 18.03c3.22 1.34 5.42 4.36 5.69 7.84l4.28 54.81c.7 9.03 8.23 16.02 17.3 16.02h41.38c9.06 0 16.59-6.98 17.3-16.02l4.27-54.81c.28-3.48 2.48-6.5 5.7-7.84l43.53-18.03c3.2-1.34 6.92-.75 9.55 1.5l41.81 35.75c6.88 5.89 17.14 5.5 23.55-.91l29.25-29.25c6.42-6.42 6.8-16.67.92-23.55l-35.75-41.81c-2.25-2.64-2.84-6.34-1.5-9.56l18.03-43.52c1.35-3.22 4.34-5.42 7.83-5.7l54.83-4.27zM256 342.52c-23.11 0-44.84-9-61.19-25.33-16.34-16.36-25.34-38.08-25.34-61.2s9-44.84 25.34-61.17c16.35-16.36 38.08-25.34 61.19-25.34s44.84 8.98 61.19 25.34c16.34 16.33 25.34 38.06 25.34 61.17s-9 44.84-25.34 61.2C300.84 333.52 279.12 342.52 256 342.52z" />
+                    </svg>
+                </a>
+            </div>
+        </section>
+
+        <section id="equivalentes-info-bloco" class="equivalentes-info equivalentes-info-hidden">
+            <div class="container">
+                <div id="lista-informacoes-equivalentes" class="equivalentes-info-grid"></div>
+            </div>
+        </section>
+
+        <div id="equivalentes-sem-resultado" class="equivalentes-info-hidden" style="padding: 24px 12px;">
+            <p class="equivalente-info-mensagem-sem-resultado"
+                style="margin: 0 auto; max-width: 960px; text-align: center; min-height: 120px;">
+                ❌ Oops. Não possuimos produtos equivalentes cadastrados em nossa base. 😔 Por favor, entre em contato
+                com nossos Consultores Comerciais para obter ajuda.
+            </p>
+        </div>
+
+        <div id="equivalentes-actions-wrapper" class="equivalentes-actions-wrapper" style="display: none;">
+            <div style="position: relative;">
+                <button type="button" id="btnCompartilhar" aria-expanded="false"
+                    class="botao-icon botao-compartilhar-tema" data-gtag-event="intercambialidade-compartilhar-menu"
+                    data-gtag-category="Intercambialidade" data-gtag-label="compartilhar-menu">
+                    <svg class="icone-compartilhar-svg" width="40" height="40" viewBox="0 0 24 24"
+                        xmlns="http://www.w3.org/2000/svg" fill="currentColor">
+                        <path class="quadrado"
+                            d="M7 1.00391H4C2.34315 1.00391 1 2.34705 1 4.00391V20.0039C1 21.6608 2.34315 23.0039 4 23.0039H20C21.6569 23.0039 23 21.6608 23 20.0039V17.0039C23 16.4516 22.5523 16.0039 22 16.0039C21.4477 16.0039 21 16.4516 21 17.0039V20.0039C21 20.5562 20.5523 21.0039 20 21.0039H4C3.44772 21.0039 3 20.5562 3 20.0039V4.00391C3 3.45162 3.44772 3.00391 4 3.00391H7C7.55228 3.00391 8 2.55619 8 2.00391C8 1.45162 7.55228 1.00391 7 1.00391Z" />
+                        <path class="seta" fill-rule="evenodd" clip-rule="evenodd"
+                            d="M19.6495 0.799565C18.4834 -0.72981 16.0093 0.081426 16.0093 1.99313V3.91272C12.2371 3.86807 9.65665 5.16473 7.9378 6.97554C6.10034 8.9113 5.34458 11.3314 5.02788 12.9862C4.86954 13.8135 5.41223 14.4138 5.98257 14.6211C6.52743 14.8191 7.25549 14.7343 7.74136 14.1789C9.12036 12.6027 11.7995 10.4028 16.0093 10.5464V13.0069C16.0093 14.9186 18.4834 15.7298 19.6495 14.2004L23.3933 9.29034C24.2022 8.2294 24.2022 6.7706 23.3933 5.70966L19.6495 0.799565Z" />
+                    </svg>
+                    Compartilhar
+                </button>
+
+                <div id="submenu-compartilhar">
+                    <div
+                        style="display: flex; gap: 12px; justify-content: center; align-items: center; margin-top: 10px;">
+                        <a href="#" id="btnCompartilharWhatsapp" class="botao-icon icone-compartilhar" title="WhatsApp"
+                            aria-label="Compartilhar via WhatsApp"
+                            data-gtag-event="intercambialidade-compartilhar-whatsapp"
+                            data-gtag-category="Intercambialidade" data-gtag-label="compartilhar-whatsapp">
+                            <svg class="icone-mensagem" width="40" height="40" viewBox="0 0 16 16"
+                                xmlns="http://www.w3.org/2000/svg" fill="currentColor">
+                                <g class="balao">
+                                    <path
+                                        d="M11.42 9.49c-.19-.09-1.1-.54-1.27-.61s-.29-.09-.42.1-.48.6-.59.73-.21.14-.4 0a5.13 5.13 0 0 1-1.49-.92 5.25 5.25 0 0 1-1-1.29c-.11-.18 0-.28.08-.38s.18-.21.28-.32a1.39 1.39 0 0 0 .18-.31.38.38 0 0 0 0-.33c0-.09-.42-1-.58-1.37s-.3-.32-.41-.32h-.4a.72.72 0 0 0-.5.23 2.1 2.1 0 0 0-.65 1.55A3.59 3.59 0 0 0 5 8.2 8.32 8.32 0 0 0 8.19 11c.44.19.78.3 1.05.39a2.53 2.53 0 0 0 1.17.07 1.93 1.93 0 0 0 1.26-.88 1.67 1.67 0 0 0 .11-.88c-.05-.07-.17-.12-.36-.21z" />
+                                    <path
+                                        d="M13.29 2.68A7.36 7.36 0 0 0 8 .5a7.44 7.44 0 0 0-6.41 11.15l-1 3.85 3.94-1a7.4 7.4 0 0 0 3.55.9H8a7.44 7.44 0 0 0 5.29-12.72zM8 14.12a6.12 6.12 0 0 1-3.15-.87l-.22-.13-2.34.61.62-2.28-.14-.23a6.18 6.18 0 0 1 9.6-7.65 6.12 6.12 0 0 1 1.81 4.37A6.19 6.19 0 0 1 8 14.12z" />
+                                </g>
+                            </svg>
+                        </a>
+                        <a href="#" id="btnCopiarLink" class="botao-icon icone-compartilhar" title="Copiar Link"
+                            aria-label="Copiar Link" data-gtag-event="intercambialidade-compartilhar-copiar-link"
+                            data-gtag-category="Intercambialidade" data-gtag-label="compartilhar-copiar-link">
+                            <svg class="icone-corrente-svg" width="40" height="40" viewBox="0 0 24 24"
+                                xmlns="http://www.w3.org/2000/svg" fill="none" stroke="currentColor"
+                                style="transition: transform 0.3s ease, filter 0.3s ease;">
+                                <g class="elo1">
+                                    <path
+                                        d="M9.16488 17.6505C8.92513 17.8743 8.73958 18.0241 8.54996 18.1336C7.62175 18.6695 6.47816 18.6695 5.54996 18.1336C5.20791 17.9361 4.87912 17.6073 4.22153 16.9498C3.56394 16.2922 3.23514 15.9634 3.03767 15.6213C2.50177 14.6931 2.50177 13.5495 3.03767 12.6213C3.23514 12.2793 3.56394 11.9505 4.22153 11.2929L7.04996 8.46448C7.70755 7.80689 8.03634 7.47809 8.37838 7.28062C9.30659 6.74472 10.4502 6.74472 11.3784 7.28061C11.7204 7.47809 12.0492 7.80689 12.7068 8.46448"
+                                        stroke-width="2" stroke-linecap="round" />
+                                </g>
+                                <g class="elo2">
+                                    <path
+                                        d="M13.3644 9.12207C13.6932 9.45086 13.8907 9.7929 14.4266 10.7211C14.4266 11.8647 14.4266 11.8647 13.8907 12.7929C13.7812 12.9825 13.6314 13.1681 13.4075 13.4078M10.5919 10.5922C10.368 10.8319 10.2182 11.0175 10.1087 11.2071C9.57284 12.1353 9.57284 13.2789 10.1087 14.2071C10.3062 14.5492 10.635 14.878 11.2926 15.5355C11.9502 16.1931 12.279 16.5219 12.621 16.7194C13.5492 17.2553 14.6928 17.2553 15.621 16.7194C15.9631 16.5219 16.2919 16.1931 16.9495 15.5355L19.7779 12.7071C20.4355 12.0495 20.7643 11.7207 20.9617 11.3787C21.4976 10.4505 21.4976 9.30689 20.9617 8.37869C20.7643 8.03665 20.4355 7.70785 19.7779 7.05026C19.1203 6.39267 18.7915 6.06388 18.4495 5.8664C17.5212 5.3305 16.3777 5.3305 15.4495 5.8664C15.2598 5.97588 15.0743 6.12571 14.8345 6.34955"
+                                        stroke-width="2" stroke-linecap="round" />
+                                </g>
+                            </svg>
+                        </a>
+                        <a href="#" id="btnCompartilharEmail" class="botao-icon icone-compartilhar compartilhar-email"
+                            title="Compartilhar por Email" aria-label="Compartilhar por Email"
+                            data-gtag-event="intercambialidade-compartilhar-email"
+                            data-gtag-category="Intercambialidade" data-gtag-label="compartilhar-email">
+                            <svg width="40" height="40" viewBox="0 0 1920 1920" xmlns="http://www.w3.org/2000/svg"
+                                class="svg-compartilhar-email" aria-hidden="true">
+                                <path fill="currentColor" fill-rule="evenodd"
+                                    d="M0 1694.235h1920V226H0v1468.235ZM112.941 376.664V338.94H1807.06v37.723L960 1111.233l-847.059-734.57ZM1807.06 526.198v950.513l-351.134-438.89-88.32 70.475 378.353 472.998H174.042l378.353-472.998-88.32-70.475-351.134 438.89V526.198L960 1260.768l847.059-734.57Z">
+                                </path>
+                            </svg>
+                        </a>
+                    </div>
+                </div>
+            </div>
+            <a href="#" id="btnSolicitarCotacaoInterc" class="botao-icon botao-compartilhar-tema"
+                title="Solicitar Cotação" data-gtag-event="intercambialidade-solicitar-cotacao-modal-abrir"
+                data-gtag-category="Intercambialidade" data-gtag-label="solicitar-cotacao">
+                <svg class="icone-cotacao" width="22" height="22" viewBox="0 0 425.773 425.773"
+                    style="margin-right: 8px;" fill="currentColor" xmlns="http://www.w3.org/2000/svg">
+                    <path
+                        d="M408.932,297.012c-1.575-2.252-3.26-4.359-5.051-6.316c2.25-3.305,3.962-7.022,5.026-11.037
+                                    c3.147-11.93-0.009-24.432-8.435-33.441c-5.438-5.82-11.85-10.504-19.17-14.016c-1.107-18.672-16.65-33.521-35.597-33.521
+                                    c-18.665,0-34.027,14.418-35.534,32.701c-2.203,0.973-4.314,2.049-6.334,3.219l-21.687-6.572
+                                    c-0.002,0.008-0.003,0.018-0.005,0.025l-40.472-12.266c-1.304-3.945-4.198-7.361-8.244-10.25
+                                    c4.452-4.949,8.21-9.957,11.068-14.098c6.78-9.832,12.42-20.42,16.326-30.631c1.926-4.309,3.566-8.635,4.894-12.879
+                                    c5.26-4.408,8.355-10.992,8.355-17.898v-16.918c0-4.854-1.527-9.602-4.336-13.537V75.76
+                                    c0-41.777-33.987-75.76-75.759-75.76h-24.56c-41.775,0-75.763,33.982-75.763,75.76v23.818
+                                    c-2.808,3.934-4.334,8.686-4.334,13.535v16.918c0,6.9,3.096,13.482,8.354,17.896c1.326,4.238,2.968,8.564,4.893,12.885
+                                    c3.909,10.213,9.552,20.797,16.327,30.621c2.859,4.143,6.618,9.152,11.07,14.104c-4.048,2.889-6.941,6.305-8.246,10.25
+                                    l-54.016,16.371C29.676,243.088,6.886,407.402,6.886,407.402H6.89c-0.113,0.73-0.192,1.471-0.192,2.236
+                                    c0,7.916,6.419,14.336,14.339,14.336h313.507c3.514,1.162,7.265,1.799,11.163,1.799c19.662,0,35.659-15.994,35.659-35.656
+                                    v-3.006c7.149-3.205,13.469-7.408,18.906-12.574c12.302-11.684,18.805-26.932,18.805-44.092
+                                    C419.076,317.892,415.662,306.647,408.932,297.012z M167.162,274.697c-0.205,1.984-1.604,3.643-3.528,4.178
+                                    c-0.431,0.119-0.869,0.178-1.303,0.178c-1.499,0-2.943-0.695-3.877-1.932l-13.646-18.1c-0.636-0.844-0.979-1.871-0.979-2.928
+                                    l0.018-29.019c0.001-1.699,0.893-3.279,2.352-4.156c1.458-0.879,3.27-0.928,4.773-0.133c3.974,2.1,7.939,3.512,11.789,4.197
+                                    c2.318,0.41,4.008,2.426,4.008,4.781v12.105c0.691,0.271,1.32,0.701,1.829,1.266c0.92,1.021,1.364,2.385,1.225,3.752
+                                    L167.162,274.697z M218.568,259.022l-13.626,18.088c-0.932,1.234-2.379,1.934-3.881,1.934c-0.431,0-0.869-0.059-1.299-0.176
+                                    c-1.922-0.537-3.322-2.197-3.527-4.184l-2.661-25.797c-0.142-1.367,0.305-2.73,1.226-3.752c0.507-0.564,1.135-0.994,1.825-1.266
+                                    v-12.105c0-2.355,1.691-4.371,4.01-4.781c3.847-0.686,7.812-2.098,11.784-4.195c1.507-0.795,3.318-0.744,4.775,0.135
+                                    c1.458,0.879,2.352,2.457,2.352,4.16l0.002,29.02C219.548,257.152,219.205,258.178,218.568,259.022z M194.741,201.289h-26.087
+                                    c-5.764,0-16.893-7.711-28.77-24.936c-9.375-13.586-15.889-28.625-17.422-40.23l-0.262-2.008l-4.714-3.064
+                                    c-1.378-0.895-2.209-2.426-2.209-4.07v-7.994c0-2.68,2.174-4.855,4.855-4.855h1.983v-8.658c0-1.842,1.041-3.523,2.688-4.348
+                                    c6.686-3.336,19.951-8.936,33.688-8.936c10.961,0,20.048,3.646,27.012,10.836c8.676,8.965,18.673,13.512,29.722,13.512
+                                    c6.252,0,12.717-1.475,19.211-4.385c1.502-0.674,3.243-0.541,4.626,0.354c0.645,0.42,1.174,0.979,1.553,1.625h2.647
+                                    c2.682,0,4.857,2.176,4.857,4.855v7.994c0,1.645-0.834,3.176-2.212,4.072l-4.712,3.063l-0.262,2
+                                    c-1.536,11.611-8.049,26.652-17.425,40.244C211.635,193.58,200.507,201.289,194.741,201.289z M384.285,357.705
+                                    c-6.555,6.23-15.328,10.387-26.134,12.393v20.02c0,6.873-5.564,12.441-12.445,12.441c-6.877,0-12.443-5.568-12.443-12.441v-19.354
+                                    c-15.767-2.135-27.564-8.967-35.056-20.34c-2.293-3.482-2.693-7.879-1.064-11.717c1.634-3.836,5.08-6.604,9.181-7.357l9.395-1.748
+                                    c4.797-0.897,9.684,1.115,12.479,5.123c3.528,5.08,9.515,7.654,17.777,7.654c12.708,0,12.708-5.057,12.708-6.719
+                                    c0-2.41-0.898-4.16-2.843-5.516c-1.974-1.379-5.584-2.611-10.729-3.656c-20.656-4.215-33.974-9.68-39.565-16.254
+                                    c-5.687-6.66-8.441-14.107-8.441-22.77c0-9.406,3.105-17.867,9.228-25.164c5.927-7.057,14.998-11.641,26.931-13.637v-14.328
+                                    c0-6.871,5.566-12.441,12.443-12.441c6.881,0,12.445,5.57,12.445,12.441v14.596c10.686,2.037,19.03,6.357,25.36,13.133
+                                    c2.924,3.127,4.041,7.533,2.95,11.674c-1.099,4.139-4.233,7.424-8.318,8.695l-6.44,2.02c-4.674,1.469-9.781,0.047-13.03-3.617
+                                    c-3.239-3.654-8.056-5.51-14.298-5.51c-5.029,0-11.032,1.199-11.032,6.906c0,1.615,0.619,3.074,1.786,4.217
+                                    c1.232,1.191,4.814,2.461,10.647,3.766c13.455,2.941,23.289,5.633,29.168,7.975c5.972,2.375,11,6.451,14.959,12.117
+                                    c3.95,5.654,5.959,12.432,5.959,20.139C395.862,341.238,391.969,350.406,384.285,357.705z" />
+                </svg>
+                Solicitar Cotação
+            </a>
+            <a href="#" id="btn-reset-configuracao" class="botao-icon botao-compartilhar-tema" title="Reconfigurar">
+                <svg width="40" height="40" viewBox="0 0 489.711 489.711" fill="currentColor"
+                    xmlns="http://www.w3.org/2000/svg" style="margin-right: 8px;">
+                    <path
+                        d="M112.156,97.111c72.3-65.4,180.5-66.4,253.8-6.7l-58.1,2.2c-7.5,0.3-13.3,6.5-13,14c0.3,7.3,6.3,13,13.5,13 c0.2,0,0.3,0,0.5,0l89.2-3.3c7.3-0.3,13-6.2,13-13.5v-1c0-0.2,0-0.3,0-0.5v-0.1l0,0l-3.3-88.2c-0.3-7.5-6.6-13.3-14-13 c-7.5,0.3-13.3,6.5-13,14l2.1,55.3c-36.3-29.7-81-46.9-128.8-49.3c-59.2-3-116.1,17.3-160,57.1c-60.4,54.7-86,137.9-66.8,217.1 c1.5,6.2,7,10.3,13.1,10.3c1.1,0,2.1-0.1,3.2-0.4c7.2-1.8,11.7-9.1,9.9-16.3C36.656,218.211,59.056,145.111,112.156,97.111z" />
+                    <path
+                        d="M462.456,195.511c-1.8-7.2-9.1-11.7-16.3-9.9c-7.2,1.8-11.7,9.1-9.9,16.3c16.9,69.6-5.6,142.7-58.7,190.7 c-37.3,33.7-84.1,50.3-130.7,50.3c-44.5,0-88.9-15.1-124.7-44.9l58.8-5.3c7.4-0.7,12.9-7.2,12.2-14.7s-7.2-12.9-14.7-12.2l-88.9,8 c-7.4,0.7-12.9,7.2-12.2,14.7l8,88.9c0.6,7,6.5,12.3,13.4,12.3c0.4,0,0.8,0,1.2-0.1c7.4-0.7,12.9-7.2,12.2-14.7l-4.8-54.1 c36.3,29.4,80.8,46.5,128.3,48.9c3.8,0.2,7.6,0.3,11.3,0.3c55.1,0,107.5-20.2,148.7-57.4 C456.056,357.911,481.656,274.811,462.456,195.511z" />
+                </svg>
+                Reconfigurar
+            </a>
+        </div>
+
+        <div id="alerta-copiado-equivalentes" class="alerta-copiado" role="alert" aria-live="polite"></div>
+
+        <div id="modalformulario-compartilhar-email"
+            style="display: none; position: fixed; inset: 0; z-index: 3000; align-items: center; justify-content: center; background: rgba(0, 0, 0, 0.65);"
+            onmousedown="fecharAoClicarForaCompartilharEmailIntercambialidade(event)">
+            <div class="form-desenho-container" onmousedown="event.stopPropagation()">
+                <h2 style="color: #ec4115;">Compartilhar por Email</h2>
+                <p style="font-size: 14px; color: #555; margin-top: -12px; margin-bottom: 20px;">
+                    Envie as informações de intercambialidade diretamente por email. Informe os dados abaixo e adicione
+                    um comentário
+                    opcional para quem receberá este compartilhamento.
+                </p>
+                <input id="nomeCompartilharEmailInterc" class="cssC campo-form" placeholder="Nome*" maxlength="100"
+                    required />
+                <input id="emailCompartilharEmailInterc" class="cssC campo-form" type="email" placeholder="Email*"
+                    maxlength="150" autocomplete="email" required />
+                <textarea id="comentarioCompartilharEmailInterc" class="cssC campo-form" rows="4"
+                    placeholder="Comentário (opcional)" maxlength="1000"></textarea>
+                <div class="botoes-form">
+                    <button id="botaoEnviarCompartilharEmailInterc" class="botao-ibr botao-primario"
+                        onclick="enviarCompartilharEmailIntercambialidade()">Enviar
+                        <svg class="btn-icon" viewBox="0 0 24 24" width="20" height="20"
+                            xmlns="http://www.w3.org/2000/svg" fill="none" stroke="currentColor" stroke-width="2"
+                            stroke-linecap="round" stroke-linejoin="round">
+                            <path d="M5 12h14"></path>
+                            <path d="M13 6l6 6-6 6"></path>
+                        </svg>
+                    </button>
+                    <button type="button" class="botao-ibr botao-secundario"
+                        onclick="fecharFormularioCompartilharEmailIntercambialidade()"
+                        data-gtag-event="intercambialidade-compartilhar-email-cancelar"
+                        data-gtag-category="Intercambialidade" data-gtag-label="compartilhar">Cancelar</button>
+                </div>
+            </div>
+        </div>
+
+        <div id="modalformulario-cotacao-interc"
+            style="display: none; position: fixed; inset: 0; z-index: 3000; align-items: center; justify-content: center; background: rgba(0, 0, 0, 0.65);"
+            onmousedown="fecharAoClicarForaCotacaoIntercambialidade(event)">
+            <div class="form-desenho-container" onmousedown="event.stopPropagation()">
+                <h2 style="color: #ec4115;">Solicitar Cotação</h2>
+                <p style="font-size: 14px; color: #555; margin-top: -12px; margin-bottom: 20px;">
+                    Solicite sua cotação preenchendo os dados abaixo. Um de nossos Consultores Comerciais irá te
+                    contatar o
+                    quanto antes!
+                </p>
+                <input id="nomeCotacaoInterc" class="cssC campo-form" placeholder="Nome*" maxlength="100" required />
+                <input id="cnpjCotacaoInterc" class="cssC campo-form" placeholder="CNPJ ou CPF*" maxlength="18"
+                    required />
+                <div id="empresaCotacaoIntercContainer">
+                    <input id="empresaCotacaoInterc" class="cssC campo-form" placeholder="Empresa*" maxlength="100"
+                        required readonly />
+                </div>
+                <input id="emailCotacaoInterc" type="email" class="cssC campo-form" placeholder="Email*" maxlength="100"
+                    autocomplete="email" required />
+                <input id="telefoneCotacaoInterc" type="tel" class="cssC campo-form" placeholder="Telefone/Celular*"
+                    maxlength="20" required />
+                <textarea id="observacaoCotacaoInterc" class="cssC campo-form"
+                    placeholder="Observação (máx. 250 caracteres)" maxlength="250"></textarea>
+                <div class="botoes-form">
+                    <button id="botaoEnviarCotacaoInterc" class="botao-ibr botao-primario"
+                        onclick="enviarSolicitacaoCotacaoIntercambialidade()">Enviar
+                        <svg class="btn-icon" viewBox="0 0 24 24" width="20" height="20"
+                            xmlns="http://www.w3.org/2000/svg" fill="none" stroke="currentColor" stroke-width="2"
+                            stroke-linecap="round" stroke-linejoin="round">
+                            <path d="M5 12h14"></path>
+                            <path d="M13 6l6 6-6 6"></path>
+                        </svg>
+                    </button>
+                    <button class="botao-ibr botao-primario" onclick="window.location.href='/AreaCliente/Sessao'">Área
+                        do
+                        Cliente
+                        <svg class="btn-icon" viewBox="0 0 24 24" width="20" height="20"
+                            xmlns="http://www.w3.org/2000/svg" fill="none" stroke="currentColor" stroke-width="2"
+                            stroke-linecap="round" stroke-linejoin="round">
+                            <path d="M5 12h14"></path>
+                            <path d="M13 6l6 6-6 6"></path>
+                        </svg>
+                    </button>
+                    <button type="button" class="botao-ibr botao-secundario"
+                        onclick="fecharFormularioCotacaoIntercambialidade()">Cancelar</button>
+                </div>
+            </div>
+        </div>
+
+    </div>
+</main>
+
+<div id="modal-configurador" class="modal-configurador" aria-hidden="true" inert>
+    <div class="modal-configurador__overlay" data-acao="fechar"></div>
+    <div class="modal-configurador__conteudo" role="dialog" aria-modal="true" aria-label="Configurador de produto">
+        <button class="modal-configurador__fechar is-hidden" type="button" data-acao="fechar"
+            aria-label="Fechar configurador" data-gtag-event="configurador_cancelar" data-gtag-category="Configurador"
+            data-gtag-label="modal">
+            ✕
+        </button>
+        <iframe id="iframe-configurador" class="modal-configurador__iframe" title="Configurador"
+            loading="lazy"></iframe>
+    </div>
+</div>
+
+
+<div id="modal-opcoes-configurador" class="modal-opcoes-configurador" aria-hidden="true" hidden>
+    <div class="modal-opcoes-configurador__overlay" data-acao="fechar"></div>
+    <div class="modal-opcoes-configurador__conteudo" role="dialog" aria-modal="true"
+        aria-labelledby="modal-opcoes-configurador-titulo" aria-describedby="modal-opcoes-configurador-descricao">
+        <div class="modal-opcoes-configurador__cabecalho">
+            <h3 id="modal-opcoes-configurador-titulo">Escolha o Item Desejado</h3>
+            <p id="modal-opcoes-configurador-descricao">O item escolhido possui mais de uma correspondência válida.
+                Escolha
+                qual deseja acessar.</p>
+        </div>
+
+        <div class="modal-opcoes-configurador__separador" aria-hidden="true"></div>
+
+        <div class="modal-opcoes-configurador__corpo">
+            <section class="modal-opcoes-configurador__secao" data-grupo="tamanho" hidden>
+                <h4>Selecione o Tamanho Desejado:</h4>
+                <div class="modal-opcoes-configurador__lista" data-lista="tamanho"></div>
+            </section>
+
+            <section class="modal-opcoes-configurador__secao" data-grupo="reducao" hidden>
+                <h4>Selecione a Redução Desejada:</h4>
+                <div class="modal-opcoes-configurador__lista" data-lista="reducao"></div>
+            </section>
+        </div>
+
+        <div class="modal-opcoes-configurador__separador" aria-hidden="true"></div>
+        <div class="modal-opcoes-configurador__acoes">
+            <button type="button" class="botao-ibr botao-primario" data-acao="confirmar">Acessar o Produto</button>
+            <button type="button" class="botao-ibr botao-secundario" data-acao="cancelar">Cancelar</button>
+        </div>
+    </div>
+</div>
+
+<script nonce="<?= htmlspecialchars(csp_nonce(), ENT_QUOTES, 'UTF-8'); ?>"
+    data-versioned-src="/Layout/Galeria.min.js"></script>
+
+<!--<script nonce="<?= htmlspecialchars(csp_nonce(), ENT_QUOTES, 'UTF-8'); ?>"
+    src="/Layout/LayoutAjudaSeletores.min.js"></script>
+
+<script src="/PaginasNavegacaoCompartilhada/ConfiguracaoGuiada.min.js"></script>
+
+<script nonce="<?= htmlspecialchars(csp_nonce(), ENT_QUOTES, 'UTF-8'); ?>">
+    document.addEventListener('DOMContentLoaded', () => {
+        const helpConfigs = window.HelpContentCatalog?.getPageHelpConfigs('SeletoresConfiguradorConcorrentes') || {};
+
+        window.LayoutAjudaSeletores?.registerPageHelp({
+            pageId: 'SeletoresConfiguradorConcorrentes',
+            helpConfigs,
+            buttonSelector: 'button.help-icon[data-help-text]',
+            updateTriggerIds: ['COMA', 'COLN', 'COBR', 'CORD', 'criterioReducaoMin', 'criterioReducaoMax', 'criterioTorqueMin', 'criterioTorqueMax']
+        });
+    });
+</script>-->
+
+<script nonce="<?= htmlspecialchars(csp_nonce(), ENT_QUOTES, 'UTF-8'); ?>">
+    document.addEventListener('DOMContentLoaded', () => {
+        const metadataUrl = '/PaginasConfiguradores/InformacoesProdutos.json';
+        let metadataLinhasCache = null;
+
+        const normalizarDescricaoProduto = (texto) => {
+            if (typeof texto !== 'string') return '';
+            return texto
+                .trim()
+                .replace(/([.!?])(?=[A-ZÀ-Ý])/g, '$1 ')
+                .replace(/\s{2,}/g, ' ');
+        };
+
+        const carregarMetadataLinhas = async () => {
+            if (metadataLinhasCache) return metadataLinhasCache;
+            try {
+                const resposta = await fetch(metadataUrl, { cache: 'force-cache' });
+                if (!resposta.ok) return null;
+                metadataLinhasCache = await resposta.json();
+                return metadataLinhasCache;
+            } catch (erro) {
+                console.warn('Falha ao carregar metadados das linhas de produto.', erro);
+                return null;
+            }
+        };
+        window.carregarMetadataLinhas = carregarMetadataLinhas;
+
+        const obterDescricaoLinhaProduto = async (linha) => {
+            if (!linha) return '';
+            const metadata = await carregarMetadataLinhas();
+            if (!metadata || typeof metadata !== 'object') return '';
+            const linhaMetadata = metadata[linha];
+            if (!linhaMetadata || typeof linhaMetadata.description !== 'string') return '';
+            return normalizarDescricaoProduto(linhaMetadata.description);
+        };
+        window.obterDescricaoLinhaProduto = obterDescricaoLinhaProduto;
+
+        const linksProdutosPorGrupoCache = new Map();
+
+        const normalizarChaveProduto = (valor) => String(valor || '')
+            .trim()
+            .toUpperCase()
+            .replace(/[^A-Z0-9]+/g, '');
+
+        const extrairLinksProdutosDoSeletor = (html = '') => {
+            if (!html) return [];
+            const parser = new DOMParser();
+            const doc = parser.parseFromString(html, 'text/html');
+            return Array.from(doc.querySelectorAll('.galeria-produto[data-visible]')).map((bloco) => ({
+                visible: String(bloco.getAttribute('data-visible') || '').trim(),
+                site: String(bloco.getAttribute('data-site') || '').trim(),
+                catalogo: String(bloco.getAttribute('data-catalog') || '').trim(),
+                folder: String(bloco.getAttribute('data-folder') || '').trim(),
+                files: String(bloco.getAttribute('data-files') || '').trim(),
+                title: String(bloco.getAttribute('data-title') || '').trim()
+            }));
+        };
+
+        const carregarLinksProdutosPorGrupo = async (grupo = '') => {
+            const chaveGrupo = String(grupo || '').trim().toUpperCase();
+            if (!chaveGrupo) return [];
+            if (linksProdutosPorGrupoCache.has(chaveGrupo)) {
+                return linksProdutosPorGrupoCache.get(chaveGrupo) || [];
+            }
+
+            try {
+                const resposta = await fetch(`/PaginasConfiguradoresSeletores/SeletoresConfigurador${encodeURIComponent(chaveGrupo)}.html`, { cache: 'force-cache' });
+                if (!resposta.ok) {
+                    linksProdutosPorGrupoCache.set(chaveGrupo, []);
+                    return [];
+                }
+                const html = await resposta.text();
+                const links = extrairLinksProdutosDoSeletor(html);
+                linksProdutosPorGrupoCache.set(chaveGrupo, links);
+                return links;
+            } catch (erro) {
+                console.warn(`Falha ao carregar seletor de produtos do grupo ${chaveGrupo}.`, erro);
+                linksProdutosPorGrupoCache.set(chaveGrupo, []);
+                return [];
+            }
+        };
+
+        const resolverLinksProdutoCardEquivalente = ({ grupo = '', linha = '' } = {}) => {
+            const chaveGrupo = String(grupo || '').trim().toUpperCase();
+            const chaveLinha = String(linha || '').trim().toUpperCase();
+            if (!chaveGrupo || !chaveLinha) return null;
+
+            const linksGrupo = linksProdutosPorGrupoCache.get(chaveGrupo);
+            if (!Array.isArray(linksGrupo) || !linksGrupo.length) return null;
+
+            const chaveLinhaNormalizada = normalizarChaveProduto(chaveLinha);
+            const candidato = linksGrupo.find((item) => {
+                const visible = String(item.visible || '').trim().toUpperCase();
+                const visibleNormalizado = normalizarChaveProduto(visible);
+                const semPrefixo = visible.includes('.') ? visible.split('.').slice(1).join('.') : visible;
+                const semPrefixoNormalizado = normalizarChaveProduto(semPrefixo);
+                const tituloNormalizado = normalizarChaveProduto(item.title || '');
+                return (
+                    visible === chaveLinha
+                    || semPrefixo === chaveLinha
+                    || visible.endsWith(`.${chaveLinha}`)
+                    || visibleNormalizado === chaveLinhaNormalizada
+                    || semPrefixoNormalizado === chaveLinhaNormalizada
+                    || tituloNormalizado === chaveLinhaNormalizada
+                    || tituloNormalizado.endsWith(chaveLinhaNormalizada)
+                );
+            }) || null;
+
+            if (!candidato) return null;
+            return {
+                site: String(candidato.site || '').trim(),
+                catalogo: String(candidato.catalogo || '').trim(),
+                folder: String(candidato.folder || '').trim(),
+                files: String(candidato.files || '').trim(),
+                title: String(candidato.title || '').trim()
+            };
+        };
+
+
+        window.carregarLinksProdutosPorGrupo = carregarLinksProdutosPorGrupo;
+        window.resolverLinksProdutoCardEquivalente = resolverLinksProdutoCardEquivalente;
+
+        document.querySelectorAll('#config-avancada-intercambialidade summary .help-icon').forEach((botaoAjuda) => {
+            botaoAjuda.addEventListener('click', (event) => event.stopPropagation());
+        });
+
+        const inicializarSliderDuplo = ({ minRangeId, maxRangeId, minInputId, maxInputId, sliderId, inputsWrapperId }) => {
+            const minRange = document.getElementById(minRangeId);
+            const maxRange = document.getElementById(maxRangeId);
+            const minInput = document.getElementById(minInputId);
+            const maxInput = document.getElementById(maxInputId);
+            const slider = document.getElementById(sliderId);
+            const inputsWrapper = document.getElementById(inputsWrapperId);
+
+            if (!minRange || !maxRange || !minInput || !maxInput || !slider || !inputsWrapper) return null;
+
+            const limitar = (valor) => Math.max(-50, Math.min(50, Number(valor) || 0));
+            const lerNumeroInput = (inputEl, fallback) => {
+                if (!inputEl) return fallback;
+
+                const valor = String(inputEl.value ?? '').trim();
+                if (valor === '' || valor === '-' || valor === '+') return null;
+
+                const correspondencia = valor.match(/^([+-])?(\d+)$/);
+                if (!correspondencia) return fallback;
+
+                const informouSinalNegativo = correspondencia[1] === '-';
+                const numeroBase = Number(correspondencia[2]);
+                if (!Number.isFinite(numeroBase)) return fallback;
+
+                const numeroNormalizado = informouSinalNegativo
+                    ? -Math.abs(numeroBase)
+                    : Math.abs(numeroBase);
+
+                return limitar(numeroNormalizado);
+            };
+
+
+            const sincronizar = (origem) => {
+                let minValor = limitar(minRange.value);
+                let maxValor = limitar(maxRange.value);
+
+                if (origem === 'input') {
+                    const minLido = lerNumeroInput(minInput, minValor);
+                    const maxLido = lerNumeroInput(maxInput, maxValor);
+
+                    if (minLido !== null) minValor = minLido;
+                    if (maxLido !== null) maxValor = maxLido;
+                }
+
+                if (origem === 'min') minValor = Math.min(minValor, maxValor);
+                if (origem === 'max') maxValor = Math.max(maxValor, minValor);
+
+                if (origem === 'input' && minValor > maxValor) {
+                    if (document.activeElement === minInput) {
+                        maxValor = minValor;
+                    } else {
+                        minValor = maxValor;
+                    }
+                }
+
+                minRange.value = String(minValor);
+                maxRange.value = String(maxValor);
+
+                const valorMinAtual = String(minInput.value ?? '').trim();
+                const valorMaxAtual = String(maxInput.value ?? '').trim();
+                const ativo = document.activeElement;
+                const preservarMinimo = origem === 'input' && ativo === minInput && (valorMinAtual === '' || valorMinAtual === '+' || valorMinAtual === '-');
+                const preservarMaximo = origem === 'input' && ativo === maxInput && (valorMaxAtual === '' || valorMaxAtual === '+' || valorMaxAtual === '-');
+
+                if (!preservarMinimo) {
+                    minInput.value = String(minValor);
+                }
+                if (!preservarMaximo) {
+                    maxInput.value = String(maxValor);
+                }
+
+                const inicio = ((minValor + 50) / 100) * 100;
+                const fim = ((maxValor + 50) / 100) * 100;
+                slider.style.setProperty('--inicio', `${inicio}%`);
+                slider.style.setProperty('--fim', `${fim}%`);
+
+                inputsWrapper.style.setProperty('--inicio', `${inicio}%`);
+                inputsWrapper.style.setProperty('--fim', `${fim}%`);
+            };
+
+            minRange.addEventListener('input', () => sincronizar('min'));
+            maxRange.addEventListener('input', () => sincronizar('max'));
+            minInput.addEventListener('input', () => sincronizar('input'));
+            maxInput.addEventListener('input', () => sincronizar('input'));
+
+            sincronizar('input');
+
+            return {
+                definirValoresPadrao: (minimoPadrao, maximoPadrao) => {
+                    minInput.value = String(minimoPadrao);
+                    maxInput.value = String(maximoPadrao);
+                    sincronizar('input');
+                }
+            };
+        };
+
+        const sliderReducao = inicializarSliderDuplo({
+            minRangeId: 'criterioReducaoMin',
+            maxRangeId: 'criterioReducaoMax',
+            minInputId: 'criterioReducaoMinInput',
+            maxInputId: 'criterioReducaoMaxInput',
+            sliderId: 'criterioReducaoSlider',
+            inputsWrapperId: 'criterioReducaoInputs'
+        });
+
+        const sliderTorque = inicializarSliderDuplo({
+            minRangeId: 'criterioTorqueMin',
+            maxRangeId: 'criterioTorqueMax',
+            minInputId: 'criterioTorqueMinInput',
+            maxInputId: 'criterioTorqueMaxInput',
+            sliderId: 'criterioTorqueSlider',
+            inputsWrapperId: 'criterioTorqueInputs'
+        });
+
+        const dispatchIntercambialidadeTag = (suffix, payload = {}) => {
+            const basePayload = {
+                event_category: 'Seletor',
+                event_label: 'guia-intercambialidade',
+                ...payload
+            };
+            if (typeof window.sendSelectorEvent === 'function') {
+                window.sendSelectorEvent(suffix, basePayload);
+            } else if (typeof window.sendEvent === 'function') {
+                const eventName = typeof window.buildSelectorEventName === 'function'
+                    ? window.buildSelectorEventName(suffix)
+                    : suffix;
+                window.sendEvent(eventName, basePayload);
+            }
+        };
+
+        const configAvancada = document.getElementById('config-avancada-intercambialidade');
+        configAvancada?.addEventListener('toggle', () => {
+            dispatchIntercambialidadeTag(configAvancada.open ? 'configuracoes-avancadas-abrir' : 'configuracoes-avancadas-fechar');
+        });
+
+        [
+            ['criterioReducaoMin', 'criterio-reducao-min'],
+            ['criterioReducaoMax', 'criterio-reducao-max'],
+            ['criterioTorqueMin', 'criterio-torque-min'],
+            ['criterioTorqueMax', 'criterio-torque-max'],
+            ['criterioReducaoMinInput', 'criterio-reducao-min-input'],
+            ['criterioReducaoMaxInput', 'criterio-reducao-max-input'],
+            ['criterioTorqueMinInput', 'criterio-torque-min-input'],
+            ['criterioTorqueMaxInput', 'criterio-torque-max-input']
+        ].forEach(([id, suffix]) => {
+            document.getElementById(id)?.addEventListener('change', (event) => {
+                dispatchIntercambialidadeTag('configuracoes-avancadas-' + suffix + '-alterar', {
+                    campo_id: id,
+                    campo_valor: event?.target?.value
+                });
+                window.dispatchEvent(new CustomEvent('intercambialidade:config-avancada-alterada', {
+                    detail: {
+                        campoId: id,
+                        campoValor: event?.target?.value
+                    }
+                }));
+            });
+        });
+
+        const botaoRestaurarPadrao = document.getElementById('criterioRestaurarPadrao');
+        const limitesPadrao = {
+            criterioReducaoMin: -10,
+            criterioReducaoMax: 10,
+            criterioTorqueMin: -5,
+            criterioTorqueMax: 30
+        };
+
+        const criterioAlteradoDoPadrao = () => Object.entries(limitesPadrao)
+            .some(([id, valorPadrao]) => Number(document.getElementById(id)?.value) !== valorPadrao);
+
+        const atualizarVisibilidadeBotaoRestaurar = () => {
+            if (!botaoRestaurarPadrao) return;
+            botaoRestaurarPadrao.hidden = !criterioAlteradoDoPadrao();
+        };
+
+        [
+            'criterioReducaoMin',
+            'criterioReducaoMax',
+            'criterioTorqueMin',
+            'criterioTorqueMax',
+            'criterioReducaoMinInput',
+            'criterioReducaoMaxInput',
+            'criterioTorqueMinInput',
+            'criterioTorqueMaxInput'
+        ].forEach((id) => {
+            document.getElementById(id)?.addEventListener('input', atualizarVisibilidadeBotaoRestaurar);
+            document.getElementById(id)?.addEventListener('change', atualizarVisibilidadeBotaoRestaurar);
+        });
+
+        document.getElementById('criterioRestaurarPadrao')?.addEventListener('click', () => {
+            dispatchIntercambialidadeTag('configuracoes-avancadas-restaurar-padrao');
+            sliderReducao?.definirValoresPadrao(-10, 10);
+            sliderTorque?.definirValoresPadrao(-5, 30);
+            atualizarVisibilidadeBotaoRestaurar();
+            window.dispatchEvent(new CustomEvent('intercambialidade:config-avancada-alterada', {
+                detail: {
+                    campoId: 'criterioRestaurarPadrao'
+                }
+            }));
+        });
+
+        atualizarVisibilidadeBotaoRestaurar();
+
+        document.getElementById('btn-reset-configuracao')?.addEventListener('click', () => {
+            if (typeof window.sendSelectorEvent === 'function') {
+                window.sendSelectorEvent('reconfigurar', {
+                    event_category: 'Seletor',
+                    event_label: 'guia-intercambialidade'
+                });
+            } else {
+                dispatchIntercambialidadeTag('reconfigurar');
+            }
+            window.location.href = window.location.pathname;
+        });
+
+        const obterLinkCompartilhamentoIntercambialidade = () => {
+            const url = new URL(window.location.href);
+            url.hash = '';
+            return url.toString();
+        };
+
+        const menuCompartilhar = document.getElementById('submenu-compartilhar');
+        const botaoCompartilhar = document.getElementById('btnCompartilhar');
+
+        const fecharMenuCompartilhar = () => {
+            if (!menuCompartilhar || !botaoCompartilhar) return;
+            menuCompartilhar.classList.remove('ativo');
+            menuCompartilhar.style.display = 'none';
+            botaoCompartilhar.setAttribute('aria-expanded', 'false');
+        };
+
+        const toggleMenuCompartilhar = () => {
+            if (!menuCompartilhar || !botaoCompartilhar) return;
+            const abrir = !menuCompartilhar.classList.contains('ativo');
+            menuCompartilhar.classList.toggle('ativo', abrir);
+            menuCompartilhar.style.display = abrir ? 'block' : 'none';
+            botaoCompartilhar.setAttribute('aria-expanded', String(abrir));
+            dispatchIntercambialidadeTag(abrir ? 'compartilhar-menu-abrir' : 'compartilhar-menu-fechar');
+        };
+
+        botaoCompartilhar?.addEventListener('click', (event) => {
+            event.preventDefault();
+            event.stopPropagation();
+            toggleMenuCompartilhar();
+        });
+
+        document.addEventListener('click', (event) => {
+            if (!menuCompartilhar || !botaoCompartilhar) return;
+            const alvo = event.target;
+            if (botaoCompartilhar.contains(alvo) || menuCompartilhar.contains(alvo)) return;
+            fecharMenuCompartilhar();
+        });
+
+        document.getElementById('btnCopiarLink')?.addEventListener('click', async (event) => {
+            event.preventDefault();
+            const link = obterLinkCompartilhamentoIntercambialidade();
+            try {
+                await navigator.clipboard.writeText(link);
+                dispatchIntercambialidadeTag('compartilhar-copiar-link');
+                const alerta = document.getElementById('alerta-copiado-equivalentes');
+                if (alerta) {
+                    alerta.textContent = '✅ Link copiado para a área de transferência!';
+                    alerta.classList.add('mostrar');
+                    window.setTimeout(() => alerta.classList.remove('mostrar'), 3000);
+                }
+            } catch (erro) {
+                console.warn('Falha ao copiar link de compartilhamento.', erro);
+            }
+        });
+
+        document.getElementById('btnCompartilharWhatsapp')?.addEventListener('click', (event) => {
+            event.preventDefault();
+            const link = obterLinkCompartilhamentoIntercambialidade();
+            const telefone = '5519997061326';
+            const mensagem = `Olá! Estou acessando o Configurador de Produtos IBR e preciso de ajuda com a Intercambialidade ao lado: ${link}`;
+            const url = `https://api.whatsapp.com/send?phone=${telefone}&text=${encodeURIComponent(mensagem)}`;
+            dispatchIntercambialidadeTag('compartilhar-whatsapp', { telefone });
+            window.open(url, '_blank', 'noopener,noreferrer');
+        });
+
+        const camposCompartilharIntercCache = {
+            nomeCompartilharEmailInterc: 'compartilhar_interc_nome',
+            emailCompartilharEmailInterc: 'compartilhar_interc_email',
+            comentarioCompartilharEmailInterc: 'compartilhar_interc_comentario'
+        };
+
+        const camposCotacaoIntercCache = {
+            nomeCotacaoInterc: ['cotacao_nome', 'cotacao_interc_nome'],
+            cnpjCotacaoInterc: ['cotacao_cnpj', 'cotacao_interc_cnpj'],
+            empresaCotacaoInterc: ['cotacao_empresa', 'cotacao_interc_empresa'],
+            emailCotacaoInterc: ['cotacao_email', 'cotacao_interc_email'],
+            telefoneCotacaoInterc: ['cotacao_telefone', 'cotacao_interc_telefone'],
+            observacaoCotacaoInterc: ['cotacao_observacao', 'cotacao_interc_observacao']
+        };
+
+        Object.entries(camposCompartilharIntercCache).forEach(([id, key]) => {
+            const campo = document.getElementById(id);
+            if (!campo) return;
+            const salvo = localStorage.getItem(key);
+            if (salvo) campo.value = campo.type === 'email' ? salvo.trim() : salvo;
+            campo.addEventListener('input', () => {
+                try {
+                    const valorAtual = campo.type === 'email' ? campo.value.trim() : campo.value;
+                    localStorage.setItem(key, valorAtual);
+                } catch { }
+            });
+        });
+
+        Object.entries(camposCotacaoIntercCache).forEach(([id, keys]) => {
+            const campo = document.getElementById(id);
+            if (!campo) return;
+            const lista = Array.isArray(keys) ? keys : [keys];
+            const salvo = lista.map((key) => localStorage.getItem(key)).find((valor) => !!valor);
+            if (salvo) {
+                if (id === 'cnpjCotacaoInterc' && typeof formatarDocumento === 'function') {
+                    campo.value = formatarDocumento(salvo);
+                } else {
+                    campo.value = campo.type === 'email' ? salvo.trim() : salvo;
+                }
+            }
+            campo.addEventListener('input', () => {
+                try {
+                    const valorAtual = campo.type === 'email' ? campo.value.trim() : campo.value;
+                    lista.forEach((key) => localStorage.setItem(key, valorAtual));
+                } catch { }
+            });
+        });
+
+        const telefoneCotacaoInterc = document.getElementById('telefoneCotacaoInterc');
+        const cnpjCotacaoInterc = document.getElementById('cnpjCotacaoInterc');
+        const empresaCotacaoInterc = document.getElementById('empresaCotacaoInterc');
+        const empresaCotacaoIntercContainer = document.getElementById('empresaCotacaoIntercContainer');
+
+        const setEmpresaCotIntercLoading = (ativo) => {
+            if (empresaCotacaoIntercContainer) {
+                empresaCotacaoIntercContainer.classList.toggle('campo-loading', ativo);
+            }
+            if (empresaCotacaoInterc) {
+                if (ativo) {
+                    empresaCotacaoInterc.setAttribute('aria-busy', 'true');
+                    empresaCotacaoInterc.dataset.carregandoEmpresa = 'true';
+                    empresaCotacaoInterc.value = 'Carregando...';
+                } else {
+                    empresaCotacaoInterc.removeAttribute('aria-busy');
+                    if (empresaCotacaoInterc.dataset.carregandoEmpresa === 'true' && empresaCotacaoInterc.value === 'Carregando...') {
+                        empresaCotacaoInterc.value = '';
+                    }
+                    delete empresaCotacaoInterc.dataset.carregandoEmpresa;
+                }
+            }
+        };
+
+        const aplicarTelefoneCotacaoInterc = (campo) => {
+            if (!campo) return;
+            campo.value = typeof formatarTelefone === 'function' ? formatarTelefone(campo.value) : campo.value;
+        };
+
+        const aplicarDocumentoCotacaoInterc = (campo) => {
+            if (!campo) return;
+            campo.value = typeof formatarDocumento === 'function' ? formatarDocumento(campo.value) : campo.value;
+        };
+
+        telefoneCotacaoInterc?.addEventListener('input', (event) => aplicarTelefoneCotacaoInterc(event.target));
+        if (telefoneCotacaoInterc) aplicarTelefoneCotacaoInterc(telefoneCotacaoInterc);
+        if (cnpjCotacaoInterc) aplicarDocumentoCotacaoInterc(cnpjCotacaoInterc);
+
+        if (cnpjCotacaoInterc && empresaCotacaoInterc) {
+            let ctrlCotInterc = null;
+            let timeoutCotInterc = null;
+            let ultimoCnpjCotInterc = '';
+
+            const limparEmpresaCotInterc = () => {
+                empresaCotacaoInterc.value = '';
+                empresaCotacaoInterc.readOnly = true;
+            };
+
+            const buscarEmpresaCotacaoInterc = async ({ silenciarAlertas = false } = {}) => {
+                const documento = (typeof limparCNPJ === 'function' ? limparCNPJ(cnpjCotacaoInterc.value) : String(cnpjCotacaoInterc.value || '').toUpperCase().replace(/[^0-9A-Z]/g, '').slice(0, 14));
+                if (documento === ultimoCnpjCotInterc) return;
+                if (ctrlCotInterc) {
+                    ctrlCotInterc.abort();
+                    ctrlCotInterc = null;
+                }
+
+                const ehCPFInterc = documento.length === 11 && documento === documento.replace(/\D/g, '');
+
+                if (ehCPFInterc) {
+                    ultimoCnpjCotInterc = '';
+                    limparEmpresaCotInterc();
+                    setEmpresaCotIntercLoading(false);
+                    if (typeof atualizarCampoEmpresa === 'function') atualizarCampoEmpresa(cnpjCotacaoInterc, empresaCotacaoInterc);
+                    return;
+                }
+
+                if (documento.length !== 14 || (typeof validarCNPJ === 'function' && !validarCNPJ(documento))) {
+                    ultimoCnpjCotInterc = '';
+                    limparEmpresaCotInterc();
+                    setEmpresaCotIntercLoading(false);
+                    if (typeof atualizarCampoEmpresa === 'function') atualizarCampoEmpresa(cnpjCotacaoInterc, empresaCotacaoInterc);
+                    return;
+                }
+
+                if (/[A-Z]/.test(documento)) {
+                    setEmpresaCotIntercLoading(false);
+                    empresaCotacaoInterc.readOnly = false;
+                    return;
+                }
+
+                setEmpresaCotIntercLoading(true);
+                const url = `/AcessosConsultas/BuscarNomeEmpresaReceita.php?cnpj=${documento}&_=${Date.now()}`;
+                ctrlCotInterc = new AbortController();
+
+                try {
+                    const resposta = await fetch(url, { cache: 'no-store', signal: ctrlCotInterc.signal });
+                    if ((typeof limparCNPJ === 'function' ? limparCNPJ(cnpjCotacaoInterc.value) : String(cnpjCotacaoInterc.value || '').toUpperCase().replace(/[^0-9A-Z]/g, '').slice(0, 14)) !== documento) return;
+                    if (!resposta.ok) {
+                        limparEmpresaCotInterc();
+                        if (!silenciarAlertas) {
+                            exibirAlerta(resposta.status === 404
+                                ? '⚠️ CNPJ não encontrado. Digite novamente.'
+                                : '⚠️ Erro ao consultar CNPJ. Tente novamente.');
+                        }
+                        return;
+                    }
+                    const dados = await resposta.json();
+                    const nomeEmpresa = dados?.nome || '';
+                    if (!nomeEmpresa) {
+                        limparEmpresaCotInterc();
+                        if (!silenciarAlertas) {
+                            exibirAlerta('⚠️ CNPJ não encontrado. Digite novamente.');
+                        }
+                        ultimoCnpjCotInterc = '';
+                        return;
+                    }
+                    empresaCotacaoInterc.value = nomeEmpresa;
+                    empresaCotacaoInterc.readOnly = true;
+                    ultimoCnpjCotInterc = documento;
+                    localStorage.setItem('cotacao_empresa', nomeEmpresa);
+                    localStorage.setItem('cotacao_interc_empresa', nomeEmpresa);
+                } catch (erro) {
+                    if (erro.name !== 'AbortError') {
+                        limparEmpresaCotInterc();
+                        if (!silenciarAlertas) {
+                            exibirAlerta('⚠️ Erro ao consultar CNPJ. Tente novamente.');
+                        }
+                    }
+                } finally {
+                    setEmpresaCotIntercLoading(false);
+                    ctrlCotInterc = null;
+                }
+            };
+
+            const agendarBuscaCotInterc = () => {
+                clearTimeout(timeoutCotInterc);
+                timeoutCotInterc = setTimeout(() => buscarEmpresaCotacaoInterc(), 400);
+            };
+
+            cnpjCotacaoInterc.addEventListener('input', (event) => {
+                aplicarDocumentoCotacaoInterc(event.target);
+                ultimoCnpjCotInterc = '';
+                agendarBuscaCotInterc();
+                if (typeof atualizarCampoEmpresa === 'function') atualizarCampoEmpresa(cnpjCotacaoInterc, empresaCotacaoInterc);
+                localStorage.setItem('cotacao_cnpj', cnpjCotacaoInterc.value);
+                localStorage.setItem('cotacao_interc_cnpj', cnpjCotacaoInterc.value);
+            });
+
+            ['blur', 'change'].forEach((evento) => cnpjCotacaoInterc.addEventListener(evento, agendarBuscaCotInterc));
+
+            cnpjCotacaoInterc.addEventListener('paste', () => {
+                requestAnimationFrame(() => {
+                    aplicarDocumentoCotacaoInterc(cnpjCotacaoInterc);
+                    ultimoCnpjCotInterc = '';
+                    agendarBuscaCotInterc();
+                    if (typeof atualizarCampoEmpresa === 'function') atualizarCampoEmpresa(cnpjCotacaoInterc, empresaCotacaoInterc);
+                });
+            });
+
+            if (typeof atualizarCampoEmpresa === 'function') atualizarCampoEmpresa(cnpjCotacaoInterc, empresaCotacaoInterc);
+            const initNum = cnpjCotacaoInterc.value.replace(/\D/g, '');
+            const empresaPreenchida = empresaCotacaoInterc.value.trim();
+            if (initNum.length === 14 && (typeof validarCNPJ !== 'function' || validarCNPJ(initNum))) {
+                if (empresaPreenchida) {
+                    ultimoCnpjCotInterc = initNum;
+                    empresaCotacaoInterc.readOnly = true;
+                } else {
+                    buscarEmpresaCotacaoInterc({ silenciarAlertas: true });
+                }
+            } else if (initNum.length === 11) {
+                limparEmpresaCotInterc();
+            }
+        }
+
+        const preencherCompartilharIntercambialidade = (dadosSessao = {}) => {
+            const nomePerfil = String(dadosSessao?.nome || '').trim();
+            const emailPerfil = String(dadosSessao?.email || '').trim();
+            const telefonePerfil = String(dadosSessao?.celular || dadosSessao?.telefone || '').trim();
+            const documentoPerfil = String(dadosSessao?.cpfcnpj || dadosSessao?.empresaDocumento || '').trim();
+            const empresaPerfil = String(dadosSessao?.empresa || '').trim();
+            const nomeCampo = document.getElementById('nomeCompartilharEmailInterc');
+            const emailCampo = document.getElementById('emailCompartilharEmailInterc');
+            const nomeCotacaoCampo = document.getElementById('nomeCotacaoInterc');
+            const cnpjCotacaoCampo = document.getElementById('cnpjCotacaoInterc');
+            const empresaCotacaoCampo = document.getElementById('empresaCotacaoInterc');
+            const emailCotacaoCampo = document.getElementById('emailCotacaoInterc');
+            const telefoneCotacaoCampo = document.getElementById('telefoneCotacaoInterc');
+
+            if (nomeCampo && !nomeCampo.value.trim() && nomePerfil) {
+                nomeCampo.value = nomePerfil;
+            }
+            if (emailCampo && !emailCampo.value.trim() && emailPerfil) {
+                emailCampo.value = emailPerfil;
+            }
+
+            if (nomeCotacaoCampo && !nomeCotacaoCampo.value.trim() && nomePerfil) {
+                nomeCotacaoCampo.value = nomePerfil;
+            }
+            if (cnpjCotacaoCampo && !cnpjCotacaoCampo.value.trim() && documentoPerfil) {
+                cnpjCotacaoCampo.value = typeof formatarDocumento === 'function' ? formatarDocumento(documentoPerfil) : documentoPerfil;
+            }
+            if (empresaCotacaoCampo && !empresaCotacaoCampo.value.trim() && empresaPerfil) {
+                empresaCotacaoCampo.value = empresaPerfil;
+            }
+            if (emailCotacaoCampo && !emailCotacaoCampo.value.trim() && emailPerfil) {
+                emailCotacaoCampo.value = emailPerfil;
+            }
+            if (telefoneCotacaoCampo && !telefoneCotacaoCampo.value.trim() && telefonePerfil) {
+                telefoneCotacaoCampo.value = telefonePerfil;
+            }
+
+            try {
+                if (nomeCampo?.value.trim()) {
+                    localStorage.setItem('compartilhar_interc_nome', nomeCampo.value.trim());
+                }
+                if (emailCampo?.value.trim()) {
+                    localStorage.setItem('compartilhar_interc_email', emailCampo.value.trim());
+                }
+                if (nomeCotacaoCampo?.value.trim()) {
+                    localStorage.setItem('cotacao_nome', nomeCotacaoCampo.value.trim());
+                    localStorage.setItem('cotacao_interc_nome', nomeCotacaoCampo.value.trim());
+                }
+                if (cnpjCotacaoCampo?.value.trim()) {
+                    localStorage.setItem('cotacao_cnpj', cnpjCotacaoCampo.value.trim());
+                    localStorage.setItem('cotacao_interc_cnpj', cnpjCotacaoCampo.value.trim());
+                }
+                if (empresaCotacaoCampo?.value.trim()) {
+                    localStorage.setItem('cotacao_empresa', empresaCotacaoCampo.value.trim());
+                    localStorage.setItem('cotacao_interc_empresa', empresaCotacaoCampo.value.trim());
+                }
+                if (emailCotacaoCampo?.value.trim()) {
+                    localStorage.setItem('cotacao_email', emailCotacaoCampo.value.trim());
+                    localStorage.setItem('cotacao_interc_email', emailCotacaoCampo.value.trim());
+                }
+                if (telefoneCotacaoCampo?.value.trim()) {
+                    localStorage.setItem('cotacao_telefone', telefoneCotacaoCampo.value.trim());
+                    localStorage.setItem('cotacao_interc_telefone', telefoneCotacaoCampo.value.trim());
+                }
+            } catch { }
+        };
+
+        window.preencherCompartilharIntercambialidade = preencherCompartilharIntercambialidade;
+
+        document.getElementById('btnCompartilharEmail')?.addEventListener('click', (event) => {
+            event.preventDefault();
+            fecharMenuCompartilhar();
+            const modal = document.getElementById('modalformulario-compartilhar-email');
+            if (!modal) return;
+            modal.style.display = 'flex';
+            document.addEventListener('keydown', escFechaFormularioCompartilharEmailIntercambialidade);
+            setTimeout(() => document.getElementById('nomeCompartilharEmailInterc')?.focus(), 50);
+            dispatchIntercambialidadeTag('compartilhar-email-modal-abrir');
+        });
+
+        document.getElementById('btnSolicitarCotacaoInterc')?.addEventListener('click', (event) => {
+            event.preventDefault();
+            fecharMenuCompartilhar();
+            const modal = document.getElementById('modalformulario-cotacao-interc');
+            if (!modal) return;
+            modal.style.display = 'flex';
+            document.addEventListener('keydown', escFechaFormularioCotacaoIntercambialidade);
+            [
+                'nomeCotacaoInterc',
+                'cnpjCotacaoInterc',
+                'empresaCotacaoInterc',
+                'emailCotacaoInterc',
+                'telefoneCotacaoInterc',
+                'observacaoCotacaoInterc'
+            ].forEach((id) => {
+                const campo = document.getElementById(id);
+                if (campo && !campo.value && typeof animarPlaceholder === 'function') {
+                    animarPlaceholder(campo, campo.getAttribute('placeholder'));
+                }
+            });
+            setTimeout(() => document.getElementById('nomeCotacaoInterc')?.focus(), 50);
+            dispatchIntercambialidadeTag('solicitar-cotacao-modal-abrir');
+        });
+    });
+
+    function fecharAoClicarForaCompartilharEmailIntercambialidade(event) {
+        if (event.target?.id === 'modalformulario-compartilhar-email') {
+            fecharFormularioCompartilharEmailIntercambialidade();
+        }
+    }
+
+    function fecharFormularioCompartilharEmailIntercambialidade(registrarCancelamento = true) {
+        const modal = document.getElementById('modalformulario-compartilhar-email');
+        if (!modal || modal.style.display === 'none') return;
+        modal.style.display = 'none';
+        if (registrarCancelamento && typeof window.sendSelectorEvent === 'function') {
+            window.sendSelectorEvent('compartilhar-email-cancelar', { event_category: 'Seletor', event_label: 'guia-intercambialidade' });
+        }
+        document.removeEventListener('keydown', escFechaFormularioCompartilharEmailIntercambialidade);
+        const botao = document.getElementById('botaoEnviarCompartilharEmailInterc');
+        if (botao) {
+            botao.disabled = false;
+            botao.dataset.enviando = 'false';
+            botao.querySelector('.loading-spinner')?.remove();
+        }
+    }
+
+    function escFechaFormularioCompartilharEmailIntercambialidade(event) {
+        if (event.key === 'Escape') {
+            fecharFormularioCompartilharEmailIntercambialidade();
+        }
+    }
+
+    function fecharAoClicarForaCotacaoIntercambialidade(event) {
+        if (event.target?.id === 'modalformulario-cotacao-interc') {
+            fecharFormularioCotacaoIntercambialidade();
+        }
+    }
+
+    function fecharFormularioCotacaoIntercambialidade(registrarCancelamento = true) {
+        const modal = document.getElementById('modalformulario-cotacao-interc');
+        if (!modal || modal.style.display === 'none') return;
+        modal.style.display = 'none';
+        if (registrarCancelamento) {
+            if (typeof window.sendSelectorEvent === 'function') {
+                window.sendSelectorEvent('solicitar-cotacao-cancelar', { event_category: 'Seletor', event_label: 'guia-intercambialidade' });
+            }
+        }
+        document.removeEventListener('keydown', escFechaFormularioCotacaoIntercambialidade);
+        const botao = document.getElementById('botaoEnviarCotacaoInterc');
+        if (botao) {
+            botao.disabled = false;
+            botao.dataset.enviando = 'false';
+            botao.querySelector('.loading-spinner')?.remove();
+        }
+    }
+
+    function escFechaFormularioCotacaoIntercambialidade(event) {
+        if (event.key === 'Escape') {
+            fecharFormularioCotacaoIntercambialidade();
+        }
+    }
+
+    function gerarBase64ArquivoIntercambialidade(html) {
+        return new Promise((resolve, reject) => {
+            try {
+                const blob = new Blob([html], { type: 'text/html;charset=utf-8' });
+                const reader = new FileReader();
+                reader.onloadend = () => {
+                    const resultado = reader.result;
+                    if (typeof resultado !== 'string') {
+                        reject(new Error('Falha ao converter HTML para base64.'));
+                        return;
+                    }
+                    const partes = resultado.split(',');
+                    resolve(partes[1] || '');
+                };
+                reader.onerror = () => reject(new Error('Falha ao ler arquivo HTML.'));
+                reader.readAsDataURL(blob);
+            } catch (erro) {
+                reject(erro);
+            }
+        });
+    }
+
+    function coletarProdutosIbrParaCompartilhamento() {
+        return Array.from(document.querySelectorAll('.equivalente-info-item .equivalente-info-card')).map((card) => {
+            const valorCampo = (seletor) => String(card.querySelector(seletor)?.textContent || '').trim();
+            const hrefLink = (seletor) => {
+                const elemento = card.querySelector(seletor);
+                return elemento instanceof HTMLAnchorElement ? String(elemento.href || '').trim() : '';
+            };
+
+            return {
+                linha: valorCampo('.equivalente-info-campo--linha .equivalente-info-valor') || String(card.dataset.grupo || '').trim(),
+                tamanho: valorCampo('.equivalente-info-valor--tamanhos'),
+                reducoes: valorCampo('.equivalente-info-valor--reducoes'),
+                diametro: valorCampo('.equivalente-info-valor--diametros'),
+                sobreProduto: valorCampo('.equivalente-info-card__descricao-conteudo .equivalente-info-valor'),
+                linkCatalogo: hrefLink('.btn-catalogo-produto'),
+                linkSite: hrefLink('.btn-site-produto'),
+                linkConfigurar: String(card.querySelector('.btn-configurar-produto')?.dataset?.linkConfigurador || '').trim()
+            };
+        });
+    }
+
+    async function coletarProdutosIndicadosCompartilhamento() {
+        const recomendacoes = [];
+        const itensEquivalentes = Array.from(document.querySelectorAll('.equivalente-info-item'));
+        const esperar = (ms) => new Promise((resolve) => window.setTimeout(resolve, ms));
+
+        for (const item of itensEquivalentes) {
+            if (recomendacoes.length >= 5) break;
+
+            const painel = item.querySelector('.equivalente-info-recomendacoes');
+            const botaoVerRecomendados = item.querySelector('.btn-ver-recomendados');
+            if (!painel) continue;
+
+            if (painel.dataset.recomendacoesCarregadas !== 'true' && botaoVerRecomendados instanceof HTMLElement) {
+                botaoVerRecomendados.click();
+
+                const maxTentativas = 40;
+                for (let tentativa = 0; tentativa < maxTentativas; tentativa += 1) {
+                    if (painel.dataset.recomendacoesCarregadas === 'true') break;
+                    await esperar(120);
+                }
+            }
+
+            const recomendacoesPainel = Array.isArray(painel.__recomendacoesEquivalentes)
+                ? painel.__recomendacoesEquivalentes
+                : [];
+
+            for (const produto of recomendacoesPainel) {
+                if (recomendacoes.length >= 5) break;
+
+                const descricao = String(produto?.DS_PRODUTO || '').trim();
+                const codigo = String(produto?.CD_PRODUTO || '').trim();
+                const referencia = String(produto?.DS_REFERENCIA || '').trim();
+
+                recomendacoes.push({
+                    descricao,
+                    codigo,
+                    referencia
+                });
+            }
+        }
+
+        return recomendacoes.slice(0, 5);
+    }
+
+    async function enviarCompartilharEmailIntercambialidade() {
+        const nomeCampo = document.getElementById('nomeCompartilharEmailInterc');
+        const emailCampo = document.getElementById('emailCompartilharEmailInterc');
+        const comentarioCampo = document.getElementById('comentarioCompartilharEmailInterc');
+        const botao = document.getElementById('botaoEnviarCompartilharEmailInterc');
+
+        const nomeVal = nomeCampo?.value.trim() || '';
+        const emailVal = emailCampo?.value.trim() || '';
+        const comentarioVal = comentarioCampo?.value.trim() || '';
+
+        [nomeCampo, emailCampo].forEach(campo => campo?.classList.remove('campo-invalido'));
+
+        if (!nomeVal) {
+            animarErroCampo(nomeCampo);
+            exibirAlerta('⚠️ Informe o nome para compartilhar por email.');
+            nomeCampo?.focus();
+            return;
+        }
+        if (!emailVal) {
+            animarErroCampo(emailCampo);
+            exibirAlerta('⚠️ Informe o email de destino.');
+            emailCampo?.focus();
+            return;
+        }
+
+        const indiceArroba = emailVal.indexOf('@');
+        const possuiPonto = indiceArroba !== -1 && emailVal.indexOf('.', indiceArroba + 1) !== -1;
+        if (indiceArroba === -1 || !possuiPonto || emailVal.includes(' ')) {
+            animarErroCampo(emailCampo);
+            exibirAlerta('⚠️ O email informado parece incorreto. Verifique o formato.');
+            emailCampo?.focus();
+            return;
+        }
+
+        if (botao?.dataset.enviando === 'true') {
+            return;
+        }
+
+        if (botao) {
+            botao.disabled = true;
+            botao.dataset.enviando = 'true';
+            const spinner = document.createElement('span');
+            spinner.className = 'loading-spinner';
+            botao.appendChild(spinner);
+        }
+
+        try {
+            localStorage.setItem('compartilhar_interc_nome', nomeVal);
+            localStorage.setItem('compartilhar_interc_email', emailVal);
+            localStorage.setItem('compartilhar_interc_comentario', comentarioVal);
+        } catch (erroStorage) {
+            console.warn('[Intercambialidade] Falha ao salvar dados do compartilhamento.', erroStorage);
+        }
+
+        const linkCompartilhar = new URL(window.location.href);
+        linkCompartilhar.hash = '';
+        const linkFinal = linkCompartilhar.toString();
+        const produtosIbr = coletarProdutosIbrParaCompartilhamento();
+        const produtosIndicados = await coletarProdutosIndicadosCompartilhamento();
+
+        try {
+            const resp = await fetch('/PaginasConcorrentesSeletores/EnviarIntercambialidadeEmail.php', {
+                method: 'POST',
+                headers: { 'Content-Type': 'application/json' },
+                body: JSON.stringify({
+                    nome: nomeVal,
+                    email: emailVal,
+                    comentario: comentarioVal,
+                    link: linkFinal,
+                    produtosIbr,
+                    produtosIndicados
+                })
+            });
+            const dados = await resp.json().catch(() => ({}));
+            if (resp.ok && (dados?.sucesso || dados?.status === 'ok')) {
+                if (typeof window.sendSelectorEvent === 'function') {
+                    window.sendSelectorEvent('compartilhar-email-enviar', { event_category: 'Seletor', event_label: 'guia-intercambialidade' });
+                }
+                fecharFormularioCompartilharEmailIntercambialidade(false);
+                exibirAlerta('✅ Intercambialidade Enviada por Email com Sucesso!');
+            } else {
+                const mensagem = dados?.mensagem || '⚠️ Não foi possível enviar o email. Tente novamente.';
+                exibirAlerta(mensagem);
+            }
+        } catch (erro) {
+            exibirAlerta('⚠️ Ocorreu um erro ao enviar o email. Tente novamente mais tarde.');
+        } finally {
+            if (botao) {
+                botao.disabled = false;
+                botao.dataset.enviando = 'false';
+                botao.querySelector('.loading-spinner')?.remove();
+            }
+        }
+    }
+
+    function obterTextoSelecionadoInterc(id) {
+        const select = document.getElementById(id);
+        if (!select) return '';
+        const option = select.options?.[select.selectedIndex];
+        return String(option?.textContent || select.value || '').trim();
+    }
+
+    async function coletarSugestoesProdutosCotacaoInterc() {
+        const sugestoes = [];
+        const mapaCodigos = new Set();
+
+        const adicionarSugestao = (codigo = '', referencia = '', descricao = '') => {
+            const cd = String(codigo || '').trim();
+            if (!cd || mapaCodigos.has(cd)) return;
+            mapaCodigos.add(cd);
+            sugestoes.push({
+                codigo: cd,
+                referencia: String(referencia || '').trim(),
+                descricao: String(descricao || '').trim()
+            });
+        };
+
+        document.querySelectorAll('.equivalente-info-recomendacoes .recomendacao-card--produto[data-codigo]').forEach((card) => {
+            const codigo = String(card.dataset.codigo || '').trim();
+            const spans = Array.from(card.querySelectorAll('.recomendacao-descricao span')).map((el) => el.textContent || '');
+            const referencia = String(spans.find((txt) => txt.includes('Referência:')) || '').replace('Referência:', '').trim();
+            const descricao = String(card.querySelector('.recomendacao-titulo')?.textContent || '').trim();
+            adicionarSugestao(codigo, referencia, descricao);
+        });
+
+        if (sugestoes.length < 5) {
+            const painel = document.querySelector('.equivalente-info-recomendacoes');
+            const grupo = String(painel?.dataset?.grupo || '').trim().toUpperCase();
+            const linha = String(painel?.dataset?.linha || '').trim().toUpperCase();
+            const base = String(painel?.dataset?.base || '').trim().toUpperCase();
+            const reducao = String(painel?.dataset?.reducao || '').trim().toUpperCase();
+            if (grupo && linha && base && reducao) {
+                try {
+                    const url = new URL('/PaginasConcorrentesSeletoresConsultas/ProdutosRecomendadosEquivalentes.php', window.location.origin);
+                    url.searchParams.set('grupo', grupo);
+                    url.searchParams.set('linha', linha);
+                    url.searchParams.set('base', base);
+                    url.searchParams.set('reducao', reducao);
+                    const resposta = await fetch(url.toString(), { cache: 'no-store' });
+                    if (resposta.ok) {
+                        const payload = await resposta.json();
+                        const resultados = Array.isArray(payload?.resultados) ? payload.resultados : [];
+                        resultados.forEach((item) => adicionarSugestao(item?.CD_PRODUTO, item?.DS_REFERENCIA, item?.DS_PRODUTO));
+                    }
+                } catch { }
+            }
+        }
+
+        return sugestoes.slice(0, 5);
+    }
+
+    function normalizarParteCodigoInterc(valor) {
+        const texto = String(valor || '').trim();
+        if (!texto || texto === '--' || texto === '?') {
+            return '';
+        }
+        return texto;
+    }
+
+    function montarCodigoItemConcorrenteInterc() {
+        const partesBase = [
+            obterTextoSelecionadoInterc('COMA'),
+            obterTextoSelecionadoInterc('COLN'),
+            obterTextoSelecionadoInterc('COBR'),
+            obterTextoSelecionadoInterc('CORD'),
+            document.getElementById('COTRTexto')?.textContent?.trim() || ''
+        ];
+        const saida = document.getElementById('COVZTexto')?.textContent?.trim() || '';
+        const partes = [...partesBase, saida]
+            .map(normalizarParteCodigoInterc)
+            .filter(Boolean);
+        return partes.join('.');
+    }
+
+    async function montarContextoNotaCotacaoInterc() {
+        const primeiroCard = document.querySelector('#lista-informacoes-equivalentes .equivalente-info-item .equivalente-info-card');
+        const linhaSugerida = String(primeiroCard?.dataset?.grupo || '').trim();
+        const tamanhoSugerido = String(primeiroCard?.dataset?.linha || '').trim();
+        const reducaoSugerida = String(primeiroCard?.dataset?.reducoes || '').trim();
+        const diametroSugerido = String(
+            primeiroCard?.closest('.equivalente-info-item')?.querySelector('.equivalente-info-valor--diametros')?.textContent || ''
+        ).trim();
+
+        const criterios = [
+            `Redução: ${document.getElementById('criterioReducaoMin')?.value || '-10'}% a ${document.getElementById('criterioReducaoMax')?.value || '10'}%`,
+            `Torque: ${document.getElementById('criterioTorqueMin')?.value || '-5'}% a ${document.getElementById('criterioTorqueMax')?.value || '30'}%`
+        ].join(' / ');
+
+        const codigoItemConcorrente = montarCodigoItemConcorrenteInterc();
+
+        return {
+            codigo_item: codigoItemConcorrente,
+            item_sugerido: {
+                linha: linhaSugerida || '--',
+                tamanho: tamanhoSugerido || '--',
+                reducao: reducaoSugerida || '--',
+                diametro_saida: diametroSugerido || '--'
+            },
+            item_concorrente: {
+                marca: obterTextoSelecionadoInterc('COMA') || '--',
+                linha: obterTextoSelecionadoInterc('COLN') || '--',
+                tamanho: obterTextoSelecionadoInterc('COBR') || '--',
+                reducao: obterTextoSelecionadoInterc('CORD') || '--',
+                torque: document.getElementById('COTRTexto')?.textContent?.trim() || '--',
+                saida: document.getElementById('COVZTexto')?.textContent?.trim() || '--',
+                criterios
+            },
+            sugestoes_produto: await coletarSugestoesProdutosCotacaoInterc()
+        };
+    }
+
+    async function enviarSolicitacaoCotacaoIntercambialidade() {
+        const nomeCampo = document.getElementById('nomeCotacaoInterc');
+        const emailCampo = document.getElementById('emailCotacaoInterc');
+        const telefoneCampo = document.getElementById('telefoneCotacaoInterc');
+        const observacaoCampo = document.getElementById('observacaoCotacaoInterc');
+        const empresaCampo = document.getElementById('empresaCotacaoInterc');
+        const cnpjCampo = document.getElementById('cnpjCotacaoInterc');
+        const botao = document.getElementById('botaoEnviarCotacaoInterc');
+
+        const nomeVal = nomeCampo?.value.trim() || '';
+        const emailVal = emailCampo?.value.trim() || '';
+        const telefoneVal = telefoneCampo?.value.trim() || '';
+        const observacaoVal = observacaoCampo?.value.trim() || '';
+        const empresaVal = empresaCampo?.value.trim() || '';
+        const cnpjVal = cnpjCampo?.value.trim() || '';
+
+        [nomeCampo, emailCampo, telefoneCampo, empresaCampo, cnpjCampo].forEach(campo => campo?.classList.remove('campo-invalido'));
+
+        const camposFaltantes = [];
+        if (!nomeVal) { camposFaltantes.push('Nome'); animarErroCampo(nomeCampo); }
+        if (!emailVal) { camposFaltantes.push('Email'); animarErroCampo(emailCampo); }
+        if (!telefoneVal) { camposFaltantes.push('Telefone/Celular'); animarErroCampo(telefoneCampo); }
+        if (!cnpjVal) { camposFaltantes.push('CNPJ ou CPF'); animarErroCampo(cnpjCampo); }
+        const docNormalizado = (typeof limparCNPJ === 'function' ? limparCNPJ(cnpjVal) : String(cnpjVal || '').toUpperCase().replace(/[^0-9A-Z]/g, '').slice(0, 14));
+        const ehCPF = docNormalizado.length === 11 && docNormalizado === docNormalizado.replace(/\D/g, '');
+        if (!empresaVal && !ehCPF) { camposFaltantes.push('Empresa'); animarErroCampo(empresaCampo); }
+
+        if (camposFaltantes.length) {
+            const lista = camposFaltantes.map(campo => `• ${campo}`).join('<br>');
+            exibirAlerta(`⚠️ Preencha os seguintes campos obrigatórios:<br><br>${lista}`);
+            (!nomeVal && nomeCampo?.focus()) || (!emailVal && emailCampo?.focus()) || (!telefoneVal && telefoneCampo?.focus()) ||
+                (!empresaVal && !ehCPF && empresaCampo?.focus()) || (!cnpjVal && cnpjCampo?.focus());
+            return;
+        }
+
+        const indiceArroba = emailVal.indexOf('@');
+        const possuiPonto = indiceArroba !== -1 && emailVal.indexOf('.', indiceArroba + 1) !== -1;
+        if (indiceArroba === -1 || !possuiPonto || emailVal.includes(' ')) {
+            animarErroCampo(emailCampo);
+            exibirAlerta('⚠️ O email informado parece incorreto. Verifique o formato.');
+            emailCampo?.focus();
+            return;
+        }
+
+        const docDigits = cnpjVal.replace(/\D/g, '');
+        const docCnpj = (typeof limparCNPJ === 'function' ? limparCNPJ(cnpjVal) : String(cnpjVal || '').toUpperCase().replace(/[^0-9A-Z]/g, '').slice(0, 14));
+        let docValido = false;
+        if (docDigits.length === 11 && docDigits === docCnpj && typeof validarCPF === 'function') {
+            docValido = validarCPF(docDigits);
+        } else if (docCnpj.length === 14 && typeof validarCNPJ === 'function') {
+            docValido = validarCNPJ(docCnpj);
+        }
+
+        if (!docValido) {
+            animarErroCampo(cnpjCampo);
+            exibirAlerta('❌ O CPF ou CNPJ parece incorreto. Informe um CPF Válido com 11 Dígitos ou um CNPJ Válido com 14 Dígitos.');
+            cnpjCampo?.focus();
+            return;
+        }
+
+        if (botao?.dataset.enviando === 'true') {
+            return;
+        }
+
+        if (botao) {
+            botao.disabled = true;
+            botao.dataset.enviando = 'true';
+            const spinner = document.createElement('span');
+            spinner.className = 'loading-spinner';
+            botao.appendChild(spinner);
+        }
+
+        try {
+            localStorage.setItem('cotacao_nome', nomeVal);
+            localStorage.setItem('cotacao_interc_nome', nomeVal);
+            localStorage.setItem('cotacao_cnpj', cnpjVal);
+            localStorage.setItem('cotacao_interc_cnpj', cnpjVal);
+            localStorage.setItem('cotacao_empresa', empresaVal);
+            localStorage.setItem('cotacao_interc_empresa', empresaVal);
+            localStorage.setItem('cotacao_email', emailVal);
+            localStorage.setItem('cotacao_interc_email', emailVal);
+            localStorage.setItem('cotacao_telefone', telefoneVal);
+            localStorage.setItem('cotacao_interc_telefone', telefoneVal);
+            localStorage.setItem('cotacao_observacao', observacaoVal);
+            localStorage.setItem('cotacao_interc_observacao', observacaoVal);
+        } catch { }
+
+        try {
+            const linkAtualUrl = new URL(window.location.href);
+            linkAtualUrl.hash = '';
+            const linkAtual = linkAtualUrl.toString();
+            const contextoNota = await montarContextoNotaCotacaoInterc();
+
+            const resp = await fetch('/PaginasConcorrentesSeletores/SolicitacaoCotacaoIntercambialidade.php', {
+                method: 'POST',
+                headers: { 'Content-Type': 'application/x-www-form-urlencoded' },
+                body: new URLSearchParams({
+                    nome: nomeVal.toUpperCase(),
+                    empresa: empresaVal.toUpperCase(),
+                    email: emailVal.toUpperCase(),
+                    telefone: telefoneVal,
+                    quantidade: '1',
+                    observacao: observacaoVal.toUpperCase(),
+                    cnpj: cnpjVal,
+                    cd_produto: '',
+                    referencia_produto: 'INTERCAMBIALIDADE',
+                    link: linkAtual,
+                    codigo_item: contextoNota.codigo_item,
+                    item_sugerido: JSON.stringify(contextoNota.item_sugerido),
+                    item_concorrente: JSON.stringify(contextoNota.item_concorrente),
+                    sugestoes_produto: JSON.stringify(contextoNota.sugestoes_produto)
+                })
+            });
+            const respTexto = await resp.text();
+
+            if (resp.ok) {
+                if (typeof window.sendSelectorEvent === 'function') {
+                    window.sendSelectorEvent('solicitar-cotacao-enviar', { event_category: 'Seletor', event_label: 'guia-intercambialidade' });
+                }
+                fecharFormularioCotacaoIntercambialidade(false);
+                exibirAlerta(respTexto);
+            } else {
+                const isHtml = respTexto.trim().startsWith('<');
+                const msgPadrao = '⚠️ Erro ao enviar solicitação. Tente novamente mais tarde ou entre em contato com nossos consultores de venda.';
+                const msgRate = '⚠️ Quantidade de solicitações máximas atingidas. Tente novamente em 1 hora.';
+                const mensagem = resp.status === 429 ? msgRate : (!respTexto || isHtml ? msgPadrao : respTexto);
+                exibirAlerta(mensagem);
+            }
+        } catch {
+            exibirAlerta('⚠️ Erro ao enviar solicitação. Tente novamente mais tarde ou entre em contato com nossos consultores de venda.');
+        } finally {
+            if (botao) {
+                botao.disabled = false;
+                botao.dataset.enviando = 'false';
+                botao.querySelector('.loading-spinner')?.remove();
+            }
+        }
+    }
+</script>
+
+<script nonce="<?= htmlspecialchars(csp_nonce(), ENT_QUOTES, 'UTF-8'); ?>">
+    const inicializarConfiguradorConcorrentes = () => {
+        window.__refreshDynamicDocumentTitle?.({
+            sourceDoc: document,
+            pageUrl: window.location.pathname + window.location.search
+        });
+
+        const dispararTagSeletorConcorrente = (sufixo, payload = {}) => {
+            if (!sufixo) return;
+            const data = {
+                event_category: 'Seletor',
+                event_label: 'guia-intercambialidade',
+                ...payload
+            };
+            if (typeof window.sendSelectorEvent === 'function') {
+                window.sendSelectorEvent(sufixo, data);
+                return;
+            }
+            if (typeof window.buildSelectorEventName === 'function' && typeof window.sendEvent === 'function') {
+                window.sendEvent(window.buildSelectorEventName(sufixo), data);
+                return;
+            }
+            if (typeof window.sendEvent === 'function') {
+                window.sendEvent(sufixo, data);
+            }
+        };
+
+        dispararTagSeletorConcorrente('acessar-pagina');
+        const gruposPermitidos = ['DIAMANTE', 'INTERNO', 'ADMINISTRADOR'];
+        const urlValidarSessao = '/PaginasAreaClienteAcessoCadastro/ValidarSessao.php';
+        document.querySelector('.gerar-produto-wrapper:not(.gerar-equivalentes-wrapper)')?.remove();
+
+        const inicializarSeletores = () => {
+            const seletorIds = [
+                'COMA',
+                'COLN',
+                'COBR',
+                'CORD',
+                'COVZ',
+                'COTR',
+                'IBCN',
+                'IBLN'
+            ];
+            const seletorIdsEntrada = ['COMA', 'COLN', 'COBR', 'CORD'];
+            const parametrosUrl = new URLSearchParams(window.location.search);
+            const seletorIdsCompartilhaveis = ['COMA', 'COLN', 'COBR', 'CORD'];
+            const limitesPadrao = {
+                criterioReducaoMin: -10,
+                criterioReducaoMax: 10,
+                criterioTorqueMin: -5,
+                criterioTorqueMax: 30
+            };
+
+            const obterCriterioDaUrl = (chaveNova, chaveLegada, valorPadrao) => {
+                const valor = (parametrosUrl.get(chaveNova) ?? parametrosUrl.get(chaveLegada) ?? '').trim();
+                if (valor === '') return valorPadrao;
+                const valorNumero = Number(valor);
+                if (!Number.isFinite(valorNumero)) return valorPadrao;
+                return Math.max(-50, Math.min(50, valorNumero));
+            };
+
+            const criteriosIniciais = {
+                criterioReducaoMin: obterCriterioDaUrl('IBRD1', 'criterioReducaoMin', limitesPadrao.criterioReducaoMin),
+                criterioReducaoMax: obterCriterioDaUrl('IBRD2', 'criterioReducaoMax', limitesPadrao.criterioReducaoMax),
+                criterioTorqueMin: obterCriterioDaUrl('IBTO1', 'criterioTorqueMin', limitesPadrao.criterioTorqueMin),
+                criterioTorqueMax: obterCriterioDaUrl('IBTO2', 'criterioTorqueMax', limitesPadrao.criterioTorqueMax)
+            };
+
+            if (criteriosIniciais.criterioReducaoMin > criteriosIniciais.criterioReducaoMax) {
+                [criteriosIniciais.criterioReducaoMin, criteriosIniciais.criterioReducaoMax] = [criteriosIniciais.criterioReducaoMax, criteriosIniciais.criterioReducaoMin];
+            }
+            if (criteriosIniciais.criterioTorqueMin > criteriosIniciais.criterioTorqueMax) {
+                [criteriosIniciais.criterioTorqueMin, criteriosIniciais.criterioTorqueMax] = [criteriosIniciais.criterioTorqueMax, criteriosIniciais.criterioTorqueMin];
+            }
+
+            Object.entries(criteriosIniciais).forEach(([id, valor]) => {
+                const campo = document.getElementById(id);
+                const campoInput = document.getElementById(`${id}Input`);
+                if (campo) campo.value = String(valor);
+                if (campoInput) campoInput.value = String(valor);
+            });
+
+            ['criterioReducaoMinInput', 'criterioReducaoMaxInput', 'criterioTorqueMinInput', 'criterioTorqueMaxInput']
+                .forEach((id) => {
+                    const campo = document.getElementById(id);
+                    campo?.dispatchEvent(new Event('input', { bubbles: true }));
+                });
+
+            const valoresIniciais = seletorIdsCompartilhaveis.reduce((acc, id) => {
+                const valor = (parametrosUrl.get(id) || '').trim();
+                if (valor) acc[id] = valor;
+                return acc;
+            }, {});
+
+            const dependenciasObrigatorias = {
+                COMA: [],
+                COLN: ['COMA'],
+                COBR: ['COMA'],
+                CORD: ['COMA', 'COLN'],
+                COVZ: ['COMA', 'COLN', 'COBR'],
+                COTR: ['COMA', 'COLN', 'COBR', 'CORD'],
+                IBCN: ['COMA', 'COLN'],
+                IBLN: ['COMA', 'COLN']
+            };
+
+            const dependenciasConsulta = {
+                COMA: [],
+                COLN: ['COMA'],
+                COBR: ['COMA', 'COLN'],
+                CORD: ['COMA', 'COLN', 'COBR'],
+                COVZ: ['COMA', 'COLN', 'COBR', 'CORD'],
+                COTR: ['COMA', 'COLN', 'COBR', 'CORD', 'COVZ'],
+                IBCN: ['COMA', 'COLN'],
+                IBLN: ['COMA', 'COLN', 'IBCN']
+            };
+
+            const endpoints = {
+                COMA: '/PaginasConcorrentesSeletoresConsultas/COMA.php',
+                COLN: '/PaginasConcorrentesSeletoresConsultas/COLN.php',
+                COBR: '/PaginasConcorrentesSeletoresConsultas/COBR.php',
+                CORD: '/PaginasConcorrentesSeletoresConsultas/CORD.php',
+                COVZ: '/PaginasConcorrentesSeletoresConsultas/COVZ.php',
+                COTR: '/PaginasConcorrentesSeletoresConsultas/COTR.php',
+                IBCN: '/PaginasConcorrentesSeletoresConsultas/IBCN.php',
+                IBLN: '/PaginasConcorrentesSeletoresConsultas/IBLN.php',
+                IBDETALHES: '/PaginasConcorrentesSeletoresConsultas/DadosEquivalenteIBR.php',
+                RECOMENDADOS_EQUIVALENTES: '/PaginasConcorrentesSeletoresConsultas/ProdutosRecomendadosEquivalentes.php'
+            };
+
+            const getValue = id => (document.getElementById(id)?.value || '').trim();
+
+            const gerarLinkEquivalentes = () => {
+                const params = new URLSearchParams();
+                seletorIdsEntrada.forEach((id) => {
+                    const valor = getValue(id);
+                    if (valor) {
+                        params.append(id, valor);
+                    }
+                });
+                params.set('IBRD1', getValue('criterioReducaoMin') || String(limitesPadrao.criterioReducaoMin));
+                params.set('IBRD2', getValue('criterioReducaoMax') || String(limitesPadrao.criterioReducaoMax));
+                params.set('IBTO1', getValue('criterioTorqueMin') || String(limitesPadrao.criterioTorqueMin));
+                params.set('IBTO2', getValue('criterioTorqueMax') || String(limitesPadrao.criterioTorqueMax));
+                const query = params.toString();
+                return query
+                    ? `${window.location.origin}${window.location.pathname}?${query}`
+                    : `${window.location.origin}${window.location.pathname}`;
+            };
+
+            const estadoRecomendacoes = {
+                ordemAbertura: []
+            };
+
+            const cacheRecomendacoesEquivalentes = new Map();
+            const cacheLinksProdutos = new Map();
+
+            const obterTokenCsrfIntercambialidade = async () => {
+                if (typeof window !== 'undefined' && window.csrfToken) {
+                    return String(window.csrfToken || '').trim();
+                }
+                try {
+                    const resposta = await fetch('/CSRFPega.php', {
+                        credentials: 'same-origin',
+                        cache: 'no-store'
+                    });
+                    const dados = await resposta.json().catch(() => null);
+                    const token = String(dados?.token || '').trim();
+                    if (token) {
+                        window.csrfToken = token;
+                    }
+                } catch {
+                    return '';
+                }
+                return String(window.csrfToken || '').trim();
+            };
+
+            const escaparHtml = (valor) => String(valor ?? '')
+                .replace(/&/g, '&amp;')
+                .replace(/</g, '&lt;')
+                .replace(/>/g, '&gt;')
+                .replace(/"/g, '&quot;')
+                .replace(/'/g, '&#39;');
+            const adicionarParametroUrl = (link, chave, valor) => {
+                const texto = (link || '').toString().trim();
+                if (!texto || !chave) return texto;
+                try {
+                    const url = new URL(texto, window.location.origin);
+                    url.searchParams.set(chave, valor);
+                    return url.toString();
+                } catch {
+                    return texto;
+                }
+            };
+
+            const obterLinkProdutoPorCodigo = async (codigo = '') => {
+                const codigoNormalizado = String(codigo || '').trim();
+                if (!codigoNormalizado) return '';
+                if (cacheLinksProdutos.has(codigoNormalizado)) {
+                    return cacheLinksProdutos.get(codigoNormalizado) || '';
+                }
+                try {
+                    const csrfToken = await obterTokenCsrfIntercambialidade();
+                    const params = new URLSearchParams({ valor: codigoNormalizado });
+                    if (csrfToken) {
+                        params.set('csrf_token', csrfToken);
+                    }
+
+                    const resposta = await fetch('/PaginasConsultaProdutos/EstruturaProduto.php', {
+                        method: 'POST',
+                        headers: { 'Content-Type': 'application/x-www-form-urlencoded; charset=UTF-8' },
+                        body: params.toString(),
+                        credentials: 'same-origin',
+                        cache: 'no-store'
+                    });
+
+                    if (!resposta.ok) {
+                        return '';
+                    }
+
+                    const dados = await resposta.json().catch(() => ({}));
+                    const link = String(dados?.url || '').trim();
+                    if (link) {
+                        cacheLinksProdutos.set(codigoNormalizado, link);
+                    }
+                    return link;
+                } catch {
+                    return '';
+                }
+            };
+
+            const montarDestinoRecomendadoIntercambialidade = async (codigo = '') => {
+                const linkProduto = await obterLinkProdutoPorCodigo(codigo);
+                if (!linkProduto) return '';
+                return adicionarParametroUrl(linkProduto, 'intercambialidade', '1');
+            };
+
+            const carregarRecomendacoesEquivalentes = async ({ grupo = '', linha = '', base = '', reducao = '' } = {}) => {
+                const grupoNormalizado = String(grupo || '').trim().toUpperCase();
+                const linhaNormalizada = String(linha || '').trim().toUpperCase();
+                const baseNormalizada = String(base || '').trim().toUpperCase();
+                const reducaoNormalizada = String(reducao || '').trim().toUpperCase();
+                if (!grupoNormalizado || !linhaNormalizada || !baseNormalizada || !reducaoNormalizada) {
+                    return [];
+                }
+
+                const chaveCache = `${grupoNormalizado}::${linhaNormalizada}::${baseNormalizada}::${reducaoNormalizada}`;
+                if (cacheRecomendacoesEquivalentes.has(chaveCache)) {
+                    return cacheRecomendacoesEquivalentes.get(chaveCache) || [];
+                }
+
+                try {
+                    const url = new URL(endpoints.RECOMENDADOS_EQUIVALENTES, window.location.origin);
+                    url.searchParams.set('grupo', grupoNormalizado);
+                    url.searchParams.set('linha', linhaNormalizada);
+                    url.searchParams.set('base', baseNormalizada);
+                    url.searchParams.set('reducao', reducaoNormalizada);
+
+                    const resposta = await fetch(url.toString(), { cache: 'no-store' });
+                    if (!resposta.ok) {
+                        cacheRecomendacoesEquivalentes.set(chaveCache, []);
+                        return [];
+                    }
+                    const payload = await resposta.json();
+                    const resultados = Array.isArray(payload?.resultados) ? payload.resultados : [];
+
+                    cacheRecomendacoesEquivalentes.set(chaveCache, resultados);
+                    return resultados;
+                } catch (erro) {
+                    if (DEBUG_INTERCAMBIALIDADE) {
+                        console.error('[Intercambialidade][Recomendados] Erro ao consultar recomendações.', erro);
+                    }
+                    cacheRecomendacoesEquivalentes.set(chaveCache, []);
+                    return [];
+                }
+            };
+
+            const obterModalConfigurador = () => {
+                const container = document.getElementById('modal-configurador');
+                if (!container) return null;
+                const iframe = container.querySelector('#iframe-configurador');
+                const fecharBtn = container.querySelector('.modal-configurador__fechar');
+                return { container, iframe, fecharBtn };
+            };
+
+            let ultimoFocoModalConfigurador = null;
+
+            const definirModalConfiguradorInert = (container, valor) => {
+                if (!container) return;
+                if ('inert' in container) {
+                    container.inert = valor;
+                } else if (valor) {
+                    container.setAttribute('inert', '');
+                } else {
+                    container.removeAttribute('inert');
+                }
+            };
+
+            const restaurarFocoModalConfigurador = () => {
+                if (ultimoFocoModalConfigurador && document.contains(ultimoFocoModalConfigurador)) {
+                    ultimoFocoModalConfigurador.focus({ preventScroll: true });
+                } else {
+                    const fallback = document.querySelector('main') || document.body;
+                    if (fallback) {
+                        const precisaTabindex = !fallback.hasAttribute('tabindex');
+                        if (precisaTabindex) {
+                            fallback.setAttribute('tabindex', '-1');
+                        }
+                        fallback.focus?.({ preventScroll: true });
+                        if (precisaTabindex) {
+                            fallback.removeAttribute('tabindex');
+                        }
+                    }
+                }
+                ultimoFocoModalConfigurador = null;
+            };
+
+            const garantirFocoForaModalConfigurador = (container) => {
+                if (!container) return;
+                const ativo = document.activeElement;
+                if (ativo instanceof HTMLElement && container.contains(ativo)) {
+                    ativo.blur?.();
+                }
+                const ativoDepois = document.activeElement;
+                if (ativoDepois instanceof HTMLElement && container.contains(ativoDepois)) {
+                    const fallback = document.querySelector('main') || document.body;
+                    if (fallback) {
+                        const precisaTabindex = !fallback.hasAttribute('tabindex');
+                        if (precisaTabindex) {
+                            fallback.setAttribute('tabindex', '-1');
+                        }
+                        fallback.focus?.({ preventScroll: true });
+                        if (precisaTabindex) {
+                            fallback.removeAttribute('tabindex');
+                        }
+                    }
+                }
+            };
+
+            const abrirModalConfigurador = (destino) => {
+                const modal = obterModalConfigurador();
+                if (!modal || !modal.iframe || !destino) return false;
+                ultimoFocoModalConfigurador = document.activeElement instanceof HTMLElement
+                    ? document.activeElement
+                    : null;
+
+                const urlEmbed = adicionarParametroUrl(destino, 'embed', '1');
+                const urlEmbedSemFechar = adicionarParametroUrl(urlEmbed, 'hideEmbedClose', '1');
+
+                modal.iframe.setAttribute('src', urlEmbedSemFechar);
+                modal.container.classList.add('is-open');
+                modal.container.setAttribute('aria-hidden', 'false');
+                definirModalConfiguradorInert(modal.container, false);
+                modal.fecharBtn?.classList.remove('is-hidden');
+                document.body.style.overflow = 'hidden';
+                modal.fecharBtn?.focus({ preventScroll: true });
+                return true;
+            };
+
+            const fecharModalConfigurador = () => {
+                const modal = obterModalConfigurador();
+                if (!modal) return;
+
+                restaurarFocoModalConfigurador();
+                garantirFocoForaModalConfigurador(modal.container);
+                modal.container.classList.remove('is-open');
+                modal.container.setAttribute('aria-hidden', 'true');
+                definirModalConfiguradorInert(modal.container, true);
+                modal.fecharBtn?.classList.add('is-hidden');
+
+                if (modal.iframe) {
+                    modal.iframe.setAttribute('src', 'about:blank');
+                }
+
+                document.body.style.overflow = '';
+            };
+
+            const registrarEventosModalConfigurador = () => {
+                const modal = obterModalConfigurador();
+                if (!modal) return;
+                if (modal.container.dataset.inicializado === 'true') return;
+
+                modal.container.dataset.inicializado = 'true';
+
+                modal.container.addEventListener('click', (event) => {
+                    const alvo = event.target;
+                    if (alvo && alvo.getAttribute('data-acao') === 'fechar') {
+                        fecharModalConfigurador();
+                    }
+                });
+
+                document.addEventListener('keydown', (event) => {
+                    if (event?.key !== 'Escape') return;
+                    const modalAtual = obterModalConfigurador();
+                    if (!modalAtual?.container?.classList.contains('is-open')) return;
+                    fecharModalConfigurador();
+                });
+
+                window.addEventListener('message', (event) => {
+                    if (!event || !event.data) return;
+                    if (event.origin && event.origin !== window.location.origin) return;
+
+                    if (event.data.type === 'embed-close') {
+                        fecharModalConfigurador();
+                        return;
+                    }
+
+                    if (event.data.type === 'carrinho-item-adicionado' || event.data.type === 'carrinho-item-atualizado') {
+                        fecharModalConfigurador();
+                        exibirAlertaCopiado('🛒 Produto adicionado ao carrinho');
+                    }
+                });
+            };
+
+            const abrirProdutoRecomendado = async ({ codigo = '', botao = null } = {}) => {
+                const codigoNormalizado = String(codigo || '').trim();
+                if (!codigoNormalizado) return;
+                dispararTagSeletorConcorrente('equivalente-recomendado-acessar-produto', {
+                    codigo_produto: codigoNormalizado
+                });
+                const destino = await montarDestinoRecomendadoIntercambialidade(codigoNormalizado);
+                if (!destino) {
+                    exibirAlertaCopiado('⚠️ Não foi possível abrir o configurador do produto.');
+                    return;
+                }
+                if (botao) botao.disabled = true;
+                registrarEventosModalConfigurador();
+                const modalAberto = abrirModalConfigurador(destino);
+                if (!modalAberto) {
+                    exibirAlertaCopiado('⚠️ Não foi possível abrir o configurador do produto.');
+                }
+                if (botao) {
+                    window.setTimeout(() => {
+                        botao.disabled = false;
+                    }, 900);
+                }
+            };
+
+            const RECOMENDACOES_EQUIVALENTES_POR_LOTE = 5;
+
+            const embaralharLista = (lista = []) => {
+                const itens = Array.isArray(lista) ? [...lista] : [];
+                for (let indice = itens.length - 1; indice > 0; indice -= 1) {
+                    const indiceSorteado = Math.floor(Math.random() * (indice + 1));
+                    [itens[indice], itens[indiceSorteado]] = [itens[indiceSorteado], itens[indice]];
+                }
+                return itens;
+            };
+
+            const atualizarNavegacaoRecomendacoesEquivalentes = (painel) => {
+                if (!painel) return;
+                const grid = painel.querySelector('.recomendacoes-grid--equivalentes');
+                const navPrev = painel.querySelector('[data-recomendacoes-nav="prev"]');
+                const navNext = painel.querySelector('[data-recomendacoes-nav="next"]');
+                if (!grid || !navPrev || !navNext) return;
+
+                const maxScroll = grid.scrollWidth - grid.clientWidth;
+                const semOverflow = maxScroll <= 1;
+                const scrollLeft = grid.scrollLeft;
+
+                navPrev.disabled = semOverflow || scrollLeft <= 0;
+                navNext.disabled = semOverflow || scrollLeft >= maxScroll - 1;
+
+                const visibility = semOverflow ? 'hidden' : '';
+                navPrev.style.visibility = visibility;
+                navNext.style.visibility = visibility;
+            };
+
+            const agendarAtualizacaoNavegacaoRecomendacoesEquivalentes = (painel) => {
+                if (typeof window.requestAnimationFrame === 'function') {
+                    window.requestAnimationFrame(() => atualizarNavegacaoRecomendacoesEquivalentes(painel));
+                } else {
+                    atualizarNavegacaoRecomendacoesEquivalentes(painel);
+                }
+            };
+
+            const inicializarCarrosselRecomendacoesEquivalentes = (painel) => {
+                if (!painel || painel.dataset.recomendacoesCarrosselInicializado === 'true') return;
+                const grid = painel.querySelector('.recomendacoes-grid--equivalentes');
+                const navPrev = painel.querySelector('[data-recomendacoes-nav="prev"]');
+                const navNext = painel.querySelector('[data-recomendacoes-nav="next"]');
+                if (!grid || !navPrev || !navNext) return;
+
+                const deslocar = (direcao) => {
+                    const deslocamento = Math.max(grid.clientWidth * 0.8, 220);
+                    grid.scrollBy({ left: direcao * deslocamento, behavior: 'smooth' });
+                };
+
+                navPrev.addEventListener('click', () => deslocar(-1));
+                navNext.addEventListener('click', () => deslocar(1));
+                grid.addEventListener('scroll', () => agendarAtualizacaoNavegacaoRecomendacoesEquivalentes(painel), { passive: true });
+                window.addEventListener('resize', () => agendarAtualizacaoNavegacaoRecomendacoesEquivalentes(painel));
+
+                painel.dataset.recomendacoesCarrosselInicializado = 'true';
+                agendarAtualizacaoNavegacaoRecomendacoesEquivalentes(painel);
+            };
+
+            const renderizarLoteRecomendacoesEquivalentes = (painel) => {
+                if (!painel) return;
+                const grid = painel.querySelector('.recomendacoes-grid--equivalentes');
+                if (!grid) return;
+
+                const recomendacoes = Array.isArray(painel.__recomendacoesEquivalentes)
+                    ? painel.__recomendacoesEquivalentes
+                    : [];
+                const indiceInicial = Number.parseInt(painel.dataset.recomendacoesIndice || '0', 10) || 0;
+                const indiceFinal = Math.min(indiceInicial + RECOMENDACOES_EQUIVALENTES_POR_LOTE, recomendacoes.length);
+                const lote = recomendacoes.slice(indiceInicial, indiceFinal);
+
+                grid.querySelector('[data-recomendacoes-ver-mais="true"]')?.remove();
+
+                lote.forEach((item, indice) => {
+                    const card = document.createElement('div');
+                    card.className = 'recomendacao-card recomendacao-card--produto';
+                    card.dataset.codigo = String(item?.CD_PRODUTO || '').trim();
+                    card.innerHTML = `
+                        <span class="recomendacao-tipo recomendacao-tipo--data">Linha: ${escaparHtml(String(painel.dataset.linha || '').trim())}</span>
+                        <p class="recomendacao-titulo">${escaparHtml(item?.DS_PRODUTO || 'Produto recomendado')}</p>
+                        <p class="recomendacao-descricao">
+                            <span>Código: ${escaparHtml(item?.CD_PRODUTO || '--')}</span>
+                            <span>Referência: ${escaparHtml(item?.DS_REFERENCIA || '--')}</span>
+                        </p>
+                        <button type="button" class="botao-ibr botao-primario botao-recomendacao" data-idx="${indiceInicial + indice}">Acessar o Produto</button>
+                    `;
+                    grid.appendChild(card);
+                });
+
+                painel.dataset.recomendacoesIndice = String(indiceFinal);
+
+                if (indiceFinal < recomendacoes.length) {
+                    const botaoCard = document.createElement('div');
+                    botaoCard.className = 'recomendacao-card recomendacao-card--produto recomendacao-card--ver-mais';
+                    botaoCard.dataset.recomendacoesVerMais = 'true';
+                    botaoCard.innerHTML = `
+                        <button type="button" class="botao-ibr botao-ver-mais-recomendacoes">
+                            <span>Ver Mais...</span>
+                            <svg viewBox="0 0 24 24" aria-hidden="true" class="recomendacao-ver-mais-icon">
+                                <path d="M11 2L13 3.99545L12.9408 4.05474M13 18.0001L11 19.9108L11.0297 19.9417M12.9408 4.05474L11 6M12.9408 4.05474C12.6323 4.01859 12.3183 4 12 4C7.58172 4 4 7.58172 4 12C4 14.5264 5.17107 16.7793 7 18.2454M17 5.75463C18.8289 7.22075 20 9.47362 20 12C20 16.4183 16.4183 20 12 20C11.6716 20 11.3477 19.9802 11.0297 19.9417M13 22.0001L11.0297 19.9417" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"></path>
+                            </svg>
+                        </button>
+                    `;
+                    botaoCard.querySelector('button')?.addEventListener('click', () => {
+                        renderizarLoteRecomendacoesEquivalentes(painel);
+                    });
+                    grid.appendChild(botaoCard);
+                }
+
+                grid.querySelectorAll('.botao-recomendacao').forEach((botao) => {
+                    if (botao.dataset.recomendacaoBind === 'true') return;
+                    botao.dataset.recomendacaoBind = 'true';
+                    botao.addEventListener('click', (event) => {
+                        event.preventDefault();
+                        const card = botao.closest('.recomendacao-card--produto');
+                        const codigo = String(card?.dataset?.codigo || '').trim();
+                        abrirProdutoRecomendado({ codigo, botao });
+                    });
+                });
+
+                agendarAtualizacaoNavegacaoRecomendacoesEquivalentes(painel);
+            };
+
+            const renderizarRecomendacoesPainel = async (painel) => {
+                if (!painel) return;
+                const grid = painel.querySelector('.recomendacoes-grid--equivalentes');
+                if (!grid) return;
+
+                const grupo = String(painel.dataset.grupo || '').trim();
+                const linha = String(painel.dataset.linha || '').trim();
+                if (!grupo || !linha) return;
+
+                if (painel.dataset.recomendacoesCarregadas === 'true') {
+                    return;
+                }
+
+                painel.dataset.recomendacoesCarregadas = 'loading';
+                grid.innerHTML = '<p class="recomendacao-card recomendacao-card--produto">⏳ Carregando...</p>';
+
+                const recomendacoes = await carregarRecomendacoesEquivalentes({ grupo, linha, base: painel.dataset.base || '', reducao: painel.dataset.reducao || '' });
+                if (!recomendacoes.length) {
+                    grid.innerHTML = '<p class="equivalente-info-recomendacoes__mensagem">❌ Oops. Não possuimos produtos equivalentes cadastrados em nossa base. 😔 Por favor, entre em contato com nossos Consultores Comerciais para obter ajuda ou configure um produto pelo botão acima.</p>';
+                    painel.dataset.recomendacoesCarregadas = 'true';
+                    agendarAtualizacaoNavegacaoRecomendacoesEquivalentes(painel);
+                    agendarAjusteAlturasEquivalentes();
+                    return;
+                }
+
+                grid.innerHTML = '';
+                painel.__recomendacoesEquivalentes = embaralharLista(recomendacoes);
+                painel.dataset.recomendacoesIndice = '0';
+                renderizarLoteRecomendacoesEquivalentes(painel);
+
+                painel.dataset.recomendacoesCarregadas = 'true';
+                agendarAjusteAlturasEquivalentes();
+            };
+
+            const definirBotaoExpansaoAtivo = (botao, expandido) => {
+                if (!botao) return;
+                botao.classList.toggle('is-expanded', expandido);
+                botao.setAttribute('aria-expanded', expandido ? 'true' : 'false');
+            };
+
+            const fecharRecomendacaoCard = (item) => {
+                if (!item) return;
+                const painel = item.querySelector('.equivalente-info-recomendacoes');
+                const botao = item.querySelector('.btn-ver-recomendados');
+                if (!painel || !botao) return;
+                painel.classList.add('recomendacoes-equivalentes-hidden');
+                painel.classList.remove('recomendacoes-equivalentes--com-seta');
+                definirBotaoExpansaoAtivo(botao, false);
+            };
+
+            const alternarRecomendacoes = (botaoAcionador = null) => {
+                const item = botaoAcionador?.closest('.equivalente-info-item');
+                const card = item?.querySelector('.equivalente-info-card');
+                const painel = item?.querySelector('.equivalente-info-recomendacoes');
+                if (!item || !card || !painel) return;
+
+                const estaAberto = !painel.classList.contains('recomendacoes-equivalentes-hidden');
+                const isDesktop = window.matchMedia('(min-width: 881px)').matches;
+
+                if (!estaAberto && isDesktop) {
+                    const cardsAbertos = document.querySelectorAll('.equivalente-info-item .equivalente-info-recomendacoes:not(.recomendacoes-equivalentes-hidden)');
+                    if (cardsAbertos.length >= 2) {
+                        document.querySelectorAll('.equivalente-info-item').forEach((itemAberto) => fecharRecomendacaoCard(itemAberto));
+                        estadoRecomendacoes.ordemAbertura = [];
+                    }
+                }
+
+                const deveAbrir = !estaAberto;
+                dispararTagSeletorConcorrente(deveAbrir
+                    ? 'equivalente-ver-recomendados-expandir'
+                    : 'equivalente-ver-recomendados-recolher');
+                painel.classList.toggle('recomendacoes-equivalentes-hidden', !deveAbrir);
+                painel.classList.toggle('recomendacoes-equivalentes--com-seta', deveAbrir);
+                definirBotaoExpansaoAtivo(botaoAcionador, deveAbrir);
+
+                if (deveAbrir) {
+                    estadoRecomendacoes.ordemAbertura = estadoRecomendacoes.ordemAbertura
+                        .filter((id) => id !== card.dataset.cardId)
+                        .concat(card.dataset.cardId);
+                    renderizarRecomendacoesPainel(painel);
+                    animarRecomendacoes(painel);
+                } else {
+                    estadoRecomendacoes.ordemAbertura = estadoRecomendacoes.ordemAbertura
+                        .filter((id) => id !== card.dataset.cardId);
+                }
+
+                agendarAjusteAlturasEquivalentes();
+            };
+
+            const inicializarAcoesCardsEquivalentes = () => {
+                const obterContextoConfiguradorDoCard = (card) => {
+                    const grupo = String(card?.dataset?.grupo || '').trim();
+                    const linha = String(card?.dataset?.linha || '').trim();
+                    const tamanhos = String(card?.dataset?.tamanhos || '').trim();
+                    const reducoes = String(card?.dataset?.reducoes || '').trim();
+                    let reducoesPorTamanho = null;
+
+                    try {
+                        const mapaCru = String(card?.dataset?.reducoesPorTamanho || '').trim();
+                        reducoesPorTamanho = mapaCru ? JSON.parse(mapaCru) : null;
+                    } catch (erro) {
+                        reducoesPorTamanho = null;
+                    }
+
+                    return { grupo, linha, tamanhos, reducoes, reducoesPorTamanho };
+                };
+
+                const atualizarLinkConfigurarDoBotao = async (botao) => {
+                    const card = botao?.closest('.equivalente-info-card');
+                    if (!card || !(botao instanceof HTMLElement)) return;
+                    const { grupo, linha, tamanhos, reducoes, reducoesPorTamanho } = obterContextoConfiguradorDoCard(card);
+                    if (!grupo || !linha) return;
+
+                    const linkConfigurador = await montarLinkConfiguradorEquivalente({ grupo, linha, tamanhos, reducoes, reducoesPorTamanho });
+                    if (!linkConfigurador) return;
+
+                    const destinoComContextoIntercambialidade = adicionarParametroUrl(linkConfigurador, 'intercambialidadeModoPreenchimento', '1');
+                    const destinoComCarrinhoFlutuante = adicionarParametroUrl(destinoComContextoIntercambialidade, 'intercambialidade', '1');
+                    botao.dataset.linkConfigurador = destinoComCarrinhoFlutuante;
+                };
+
+                document.querySelectorAll('.btn-configurar-produto').forEach((botao) => {
+
+                    botao.addEventListener('click', async (event) => {
+                        event.preventDefault();
+                        dispararTagSeletorConcorrente('equivalente-configurar');
+
+                        const card = botao.closest('.equivalente-info-card');
+                        const { grupo, linha, tamanhos, reducoes, reducoesPorTamanho } = obterContextoConfiguradorDoCard(card);
+
+                        if (!grupo || !linha) {
+                            exibirAlertaCopiado('⚠️ Não foi possível montar o link do configurador.');
+                            return;
+                        }
+
+                        const linkConfigurador = await montarLinkConfiguradorEquivalente({ grupo, linha, tamanhos, reducoes, reducoesPorTamanho });
+                        if (!linkConfigurador) {
+                            exibirAlertaCopiado('⚠️ Não foi possível montar o link do configurador.');
+                            return;
+                        }
+
+                        const destinoComContextoIntercambialidade = adicionarParametroUrl(linkConfigurador, 'intercambialidadeModoPreenchimento', '1');
+                        const destinoComCarrinhoFlutuante = adicionarParametroUrl(destinoComContextoIntercambialidade, 'intercambialidade', '1');
+                        botao.dataset.linkConfigurador = destinoComCarrinhoFlutuante;
+
+                        await abrirConfiguradorEquivalente({ grupo, linha, tamanhos, reducoes, reducoesPorTamanho });
+                    });
+                });
+
+                document.querySelectorAll('.btn-catalogo-produto').forEach((botao) => {
+                    botao.addEventListener('click', () => {
+                        if (botao.hasAttribute('disabled') || botao.getAttribute('aria-disabled') === 'true') return;
+                        dispararTagSeletorConcorrente('equivalente-catalogo');
+                    });
+                });
+
+                document.querySelectorAll('.btn-site-produto').forEach((botao) => {
+                    botao.addEventListener('click', () => {
+                        if (botao.hasAttribute('disabled') || botao.getAttribute('aria-disabled') === 'true') return;
+                        dispararTagSeletorConcorrente('equivalente-site');
+                    });
+                });
+
+                document.querySelectorAll('.equivalente-info-card__galeria').forEach((galeria) => {
+                    galeria.querySelectorAll('.swiper-button-prev, .swiper-button-next').forEach((seta) => {
+                        seta.addEventListener('click', () => {
+                            dispararTagSeletorConcorrente('equivalente-galeria-navegar');
+                        });
+                    });
+                    galeria.querySelector('.galeria__corpo')?.addEventListener('click', (event) => {
+                        if (!event.target.closest('.elemento-figure a')) return;
+                        dispararTagSeletorConcorrente('equivalente-galeria-expandir');
+                    });
+                });
+
+                document.querySelectorAll('.btn-ver-recomendados').forEach((botao) => {
+                    botao.addEventListener('click', (event) => {
+                        event.preventDefault();
+                        alternarRecomendacoes(botao);
+                    });
+                });
+
+                document.querySelectorAll('.equivalente-info-card__acoes').forEach((acoesCard) => {
+                    const botaoExpandir = acoesCard.querySelector('.btn-ver-recomendados');
+                    if (!botaoExpandir) return;
+                    acoesCard.addEventListener('click', (event) => {
+                        if (event.target.closest('button, a')) return;
+                        botaoExpandir.click();
+                    });
+                });
+            };
+
+            const mostrarRecomendacoes = () => {
+                const acoes = document.getElementById('equivalentes-actions-wrapper');
+                if (acoes) {
+                    acoes.style.display = 'flex';
+                }
+                document.getElementById('equivalentes-sem-resultado')?.classList.add('equivalentes-info-hidden');
+                document.getElementById('equivalentes-info-bloco')?.classList.remove('equivalentes-info-hidden');
+                document.querySelectorAll('.equivalente-info-item').forEach((item) => fecharRecomendacaoCard(item));
+                agendarAjusteAlturasEquivalentes();
+            };
+
+            const exibirMensagemSemEquivalentes = () => {
+                document.getElementById('equivalentes-info-bloco')?.classList.add('equivalentes-info-hidden');
+                document.getElementById('equivalentes-sem-resultado')?.classList.remove('equivalentes-info-hidden');
+            };
+
+            const ocultarMensagemSemEquivalentes = () => {
+                document.getElementById('equivalentes-sem-resultado')?.classList.add('equivalentes-info-hidden');
+            };
+
+            const ocultarRecomendacoes = () => {
+                const acoes = document.getElementById('equivalentes-actions-wrapper');
+                if (acoes) {
+                    acoes.style.display = 'none';
+                }
+                ocultarMensagemSemEquivalentes();
+                document.getElementById('equivalentes-info-bloco')?.classList.add('equivalentes-info-hidden');
+                const listaInformacoes = document.getElementById('lista-informacoes-equivalentes');
+                if (listaInformacoes) {
+                    listaInformacoes.innerHTML = '';
+                }
+            };
+
+            const rolarParaGerarEquivalentes = () => {
+                const alvo =
+                    document.querySelector('.gerar-equivalentes-wrapper') ||
+                    document.getElementById('btn-gerar-equivalentes') ||
+                    document.getElementById('equivalentes-info-bloco');
+                if (!alvo) return;
+                if (typeof window.scrollParaCentro === 'function') {
+                    window.scrollParaCentro(alvo);
+                } else {
+                    alvo.scrollIntoView({ behavior: 'smooth', block: 'center' });
+                }
+            };
+
+            const focarRecomendacoes = () => {
+                const primeiroPainelAberto = document.querySelector('.equivalente-info-recomendacoes:not(.recomendacoes-equivalentes-hidden)');
+                if (!primeiroPainelAberto) return;
+                if (!primeiroPainelAberto.hasAttribute('tabindex')) {
+                    primeiroPainelAberto.setAttribute('tabindex', '-1');
+                }
+                primeiroPainelAberto.focus({ preventScroll: true });
+            };
+
+            const animarRecomendacoes = (recomendacoes) => {
+                if (!recomendacoes) return;
+                recomendacoes.classList.remove('recomendacoes--animar');
+                void recomendacoes.offsetWidth;
+                recomendacoes.classList.add('recomendacoes--animar');
+            };
+
+            const ajustarAlturasEquivalentes = () => {
+                const itens = Array.from(document.querySelectorAll('#lista-informacoes-equivalentes .equivalente-info-item'));
+                if (!itens.length) return;
+
+                const conteudosCards = itens
+                    .map((item) => item.querySelector('.equivalente-info-card__conteudo'))
+                    .filter(Boolean);
+
+                conteudosCards.forEach((conteudo) => {
+                    conteudo.style.minHeight = '';
+                });
+
+                if (conteudosCards.length > 1) {
+                    const maiorAlturaConteudo = Math.max(...conteudosCards.map((conteudo) => conteudo.offsetHeight));
+                    conteudosCards.forEach((conteudo) => {
+                        conteudo.style.minHeight = `${maiorAlturaConteudo}px`;
+                    });
+                }
+
+                const camposParaEqualizar = [
+                    '.equivalente-info-campo--linha',
+                    '.equivalente-info-campo--tamanhos',
+                    '.equivalente-info-campo--reducoes',
+                    '.equivalente-info-campo--diametros'
+                ];
+
+                camposParaEqualizar.forEach((seletorCampo) => {
+                    const campos = itens
+                        .map((item) => item.querySelector(seletorCampo))
+                        .filter(Boolean);
+
+                    campos.forEach((campo) => {
+                        campo.style.minHeight = '';
+                    });
+
+                    if (campos.length > 1) {
+                        const maiorAlturaCampo = Math.max(...campos.map((campo) => campo.offsetHeight));
+                        campos.forEach((campo) => {
+                            campo.style.minHeight = `${maiorAlturaCampo}px`;
+                        });
+                    }
+                });
+
+                const corposRecomendacoesAbertos = itens
+                    .map((item) => item.querySelector('.equivalente-info-recomendacoes:not(.recomendacoes-equivalentes-hidden) .recomendacoes-carrossel'))
+                    .filter(Boolean);
+
+                corposRecomendacoesAbertos.forEach((corpo) => {
+                    corpo.style.minHeight = '';
+                });
+
+                if (corposRecomendacoesAbertos.length > 1) {
+                    const maiorAlturaCorpo = Math.max(...corposRecomendacoesAbertos.map((corpo) => corpo.offsetHeight));
+                    corposRecomendacoesAbertos.forEach((corpo) => {
+                        corpo.style.minHeight = `${maiorAlturaCorpo}px`;
+                    });
+                }
+            };
+
+            let frameAjusteAlturasEquivalentes = null;
+            const agendarAjusteAlturasEquivalentes = () => {
+                if (frameAjusteAlturasEquivalentes) return;
+                if (typeof window.requestAnimationFrame === 'function') {
+                    frameAjusteAlturasEquivalentes = window.requestAnimationFrame(() => {
+                        frameAjusteAlturasEquivalentes = null;
+                        ajustarAlturasEquivalentes();
+                    });
+                    return;
+                }
+                ajustarAlturasEquivalentes();
+            };
+
+            window.addEventListener('resize', agendarAjusteAlturasEquivalentes);
+
+            let timeoutAlertaCopiado = null;
+            const exibirAlertaCopiado = (mensagem) => {
+                const alerta = document.getElementById('alerta-copiado-equivalentes');
+                if (!alerta) return;
+                alerta.textContent = mensagem;
+                alerta.classList.add('is-visible');
+                if (timeoutAlertaCopiado) {
+                    window.clearTimeout(timeoutAlertaCopiado);
+                }
+                timeoutAlertaCopiado = window.setTimeout(() => {
+                    alerta.classList.remove('is-visible');
+                }, 2200);
+            };
+
+            const CONFIGURADOR_IBR_ORIGIN = 'https://configurador.redutoresibr.com.br';
+            const CONFIGURADOR_IBR_ROTA_POR_LINHA = {
+                '1.Q': '/ConfiguradorIBRQ?QULN=1.Q',
+                '1.QDR': '/ConfiguradorIBRQDR?QULN=1.QDR',
+                '1.QP': '/ConfiguradorIBRQP?QULN=1.QP',
+                '1.C': '/ConfiguradorIBRC?HYLN=1.C',
+                '1.H': '/ConfiguradorIBRH?HYLN=1.H',
+                '1.M': '/ConfiguradorIBRM?HYLN=1.M',
+                '1.P': '/ConfiguradorIBRP?HYLN=1.P',
+                '1.R': '/ConfiguradorIBRR?HYLN=1.R',
+                '1.X': '/ConfiguradorIBRX?HYLN=1.X',
+                '1.FFA': '/ConfiguradorIBRFFA?FXLN=1.FFA',
+                '1.FKA': '/ConfiguradorIBRFKA?FXLN=1.FKA',
+                '1.FR': '/ConfiguradorIBRFR?FXLN=1.FR',
+                '2.I': '/ConfiguradorIBRMSI?MOLN=2.I',
+                '3.I': '/ConfiguradorIBRMI?MOLN=3.I',
+                '3.W': '/ConfiguradorIBRMW?MOLN=3.W',
+                '3.APM': '/ConfiguradorIBRMAPM?MOLN=3.APM',
+                '3.SPM': '/ConfiguradorIBRMSPM?MOLN=3.SPM',
+                '1.V': '/ConfiguradorIBRV?VALN=1.V',
+                '1.Z': '/ConfiguradorIBRZ?ACLN=1.Z',
+                '1.VFN': '/ConfiguradorIBRVFN?ACLN=1.VFN',
+                '3.GR': '/ConfiguradorIBRGR?AELN=3.GR',
+                '3.GS': '/ConfiguradorIBRGS?AELN=3.GS',
+                '3.RIC': '/ConfiguradorIBRRIC?AELN=3.RIC',
+                '4.K': '/ConfiguradorIBRK?INLN=4.K',
+                '3.PB': '/ConfiguradorIBRPB?PLLN=3.PB',
+                '3.PBL': '/ConfiguradorIBRPBL?PLLN=3.PBL',
+                '3.SA': '/ConfiguradorIBRSA?PLLN=3.SA',
+                '3.SB': '/ConfiguradorIBRSB?PLLN=3.SB',
+                '3.SBL': '/ConfiguradorIBRSBL?PLLN=3.SBL',
+                '3.SD': '/ConfiguradorIBRSD?PLLN=3.SD'
+            };
+
+            const resolverUrlBaseConfiguradorEquivalente = ({ grupo = '', linha = '' } = {}) => {
+                const grupoNormalizado = String(grupo || '').trim().toUpperCase();
+                const linhaNormalizada = String(linha || '').trim().toUpperCase();
+                const rotaAmigavel = CONFIGURADOR_IBR_ROTA_POR_LINHA[linhaNormalizada];
+                if (rotaAmigavel) {
+                    return new URL(rotaAmigavel, CONFIGURADOR_IBR_ORIGIN);
+                }
+
+                const urlPadrao = new URL('/Configurador', CONFIGURADOR_IBR_ORIGIN);
+                if (grupoNormalizado && linhaNormalizada) {
+                    urlPadrao.searchParams.set(`${grupoNormalizado}LN`, linhaNormalizada);
+                }
+                return urlPadrao;
+            };
+
+            const normalizarListaValores = (valor) => String(valor || '')
+                .split('/')
+                .map((item) => item.trim())
+                .filter(Boolean);
+
+            const ordenarValoresReducao = (valores = []) => valores
+                .map((valor) => String(valor || '').trim())
+                .filter(Boolean)
+                .sort((valorA, valorB) => {
+                    const numeroA = Number.parseFloat(valorA.replace(',', '.'));
+                    const numeroB = Number.parseFloat(valorB.replace(',', '.'));
+                    const valorANumerico = Number.isFinite(numeroA);
+                    const valorBNumerico = Number.isFinite(numeroB);
+
+                    if (valorANumerico && valorBNumerico) {
+                        return numeroA - numeroB;
+                    }
+
+                    if (valorANumerico) return -1;
+                    if (valorBNumerico) return 1;
+
+                    return valorA.localeCompare(valorB, 'pt-BR', { numeric: true, sensitivity: 'base' });
+                });
+
+            const ordenarTextoReducao = (texto = '') => ordenarValoresReducao(normalizarListaValores(texto)).join(' / ');
+
+            const selecionarOpcoesConfigurador = ({ opcoesTamanho = [], opcoesReducao = [], reducoesPorTamanho = null } = {}) => {
+                const modal = document.getElementById('modal-opcoes-configurador');
+                if (!modal) return Promise.resolve(null);
+
+                const secaoTamanho = modal.querySelector('[data-grupo="tamanho"]');
+                const secaoReducao = modal.querySelector('[data-grupo="reducao"]');
+                const listaTamanho = modal.querySelector('[data-lista="tamanho"]');
+                const listaReducao = modal.querySelector('[data-lista="reducao"]');
+                const botaoConfirmar = modal.querySelector('[data-acao="confirmar"]');
+                const botaoCancelar = modal.querySelector('[data-acao="cancelar"]');
+                const mapaReducoesPorTamanho = (reducoesPorTamanho && typeof reducoesPorTamanho === 'object')
+                    ? reducoesPorTamanho
+                    : {};
+
+                const montarBotoes = ({ container, opcoes = [], tipo, valorSelecionado = '' }) => {
+                    if (!container) return;
+                    container.innerHTML = '';
+                    const selecaoPreferencial = opcoes.includes(valorSelecionado)
+                        ? valorSelecionado
+                        : (opcoes[0] || '');
+
+                    opcoes.forEach((opcao, indice) => {
+                        const botao = document.createElement('button');
+                        botao.type = 'button';
+                        botao.className = 'modal-opcoes-configurador__opcao';
+                        botao.dataset.tipo = tipo;
+                        botao.dataset.valor = opcao;
+                        const estaSelecionado = opcao === selecaoPreferencial || (indice === 0 && !selecaoPreferencial);
+                        botao.setAttribute('aria-pressed', estaSelecionado ? 'true' : 'false');
+                        if (estaSelecionado) {
+                            botao.classList.add('is-selected');
+                        }
+                        botao.textContent = opcao;
+                        container.appendChild(botao);
+                    });
+                };
+
+                const obterSelecionado = (tipo) => modal.querySelector(`.modal-opcoes-configurador__opcao[data-tipo="${tipo}"].is-selected`)?.dataset?.valor || '';
+
+                const normalizarValorComparacao = (valor = '') => {
+                    const texto = String(valor || '').trim();
+                    if (!texto) return '';
+                    const numero = Number.parseFloat(texto.replace(',', '.'));
+                    if (Number.isFinite(numero)) {
+                        return String(numero);
+                    }
+                    return texto.toUpperCase();
+                };
+
+                const obterReducoesParaTamanho = (tamanhoSelecionado = '') => {
+                    const chave = String(tamanhoSelecionado || '').trim();
+                    const reducoesMapeadas = Array.isArray(mapaReducoesPorTamanho[chave])
+                        ? mapaReducoesPorTamanho[chave]
+                        : [];
+
+                    if (!reducoesMapeadas.length) {
+                        return opcoesReducao;
+                    }
+
+                    const reducoesMapeadasNormalizadas = new Set(
+                        reducoesMapeadas
+                            .map((reducao) => normalizarValorComparacao(reducao))
+                            .filter(Boolean)
+                    );
+
+                    const reducoesFiltradas = opcoesReducao.filter((reducao) => (
+                        reducoesMapeadasNormalizadas.has(normalizarValorComparacao(reducao))
+                    ));
+
+                    if (reducoesFiltradas.length) {
+                        return reducoesFiltradas;
+                    }
+
+                    return Array.from(new Set(
+                        reducoesMapeadas
+                            .map((reducao) => String(reducao || '').trim())
+                            .filter(Boolean)
+                    ));
+                };
+
+                const atualizarReducoesDisponiveis = ({ tamanhoSelecionado = '', reducaoPreferida = '' } = {}) => {
+                    const reducoesDisponiveis = obterReducoesParaTamanho(tamanhoSelecionado);
+                    montarBotoes({
+                        container: listaReducao,
+                        opcoes: reducoesDisponiveis,
+                        tipo: 'reducao',
+                        valorSelecionado: reducaoPreferida
+                    });
+
+                    if (secaoReducao) {
+                        secaoReducao.hidden = reducoesDisponiveis.length === 0;
+                    }
+                };
+
+                montarBotoes({ container: listaTamanho, opcoes: opcoesTamanho, tipo: 'tamanho' });
+                atualizarReducoesDisponiveis({ tamanhoSelecionado: opcoesTamanho[0] || '' });
+
+                if (secaoTamanho) {
+                    secaoTamanho.hidden = opcoesTamanho.length <= 1;
+                }
+                if (!opcoesTamanho.length) {
+                    atualizarReducoesDisponiveis();
+                }
+
+                return new Promise((resolve) => {
+                    const focoAnteriorModal = document.activeElement instanceof HTMLElement
+                        ? document.activeElement
+                        : null;
+
+                    const limpar = () => {
+                        const elementoAtivo = document.activeElement;
+                        if (elementoAtivo instanceof HTMLElement && modal.contains(elementoAtivo)) {
+                            if (focoAnteriorModal && document.contains(focoAnteriorModal) && !modal.contains(focoAnteriorModal)) {
+                                focoAnteriorModal.focus({ preventScroll: true });
+                            } else {
+                                elementoAtivo.blur();
+                                document.body.setAttribute('tabindex', '-1');
+                                document.body.focus();
+                                document.body.removeAttribute('tabindex');
+                            }
+                        }
+
+                        modal.hidden = true;
+                        modal.classList.remove('is-open');
+                        modal.setAttribute('aria-hidden', 'true');
+                        document.body.classList.remove('modal-opcoes-configurador-open');
+                        modal.removeEventListener('click', aoClicarModal);
+                        document.removeEventListener('keydown', aoPressionarTecla);
+                        botaoConfirmar?.removeEventListener('click', aoConfirmar);
+                        botaoCancelar?.removeEventListener('click', aoCancelar);
+                    };
+
+                    const aoCancelar = () => {
+                        limpar();
+                        resolve(null);
+                    };
+
+                    const aoConfirmar = () => {
+                        limpar();
+                        resolve({
+                            tamanho: obterSelecionado('tamanho'),
+                            reducao: obterSelecionado('reducao')
+                        });
+                    };
+
+                    const aoClicarModal = (event) => {
+                        const alvo = event.target;
+                        if (!(alvo instanceof Element)) return;
+
+                        if (alvo.matches('[data-acao="fechar"]')) {
+                            aoCancelar();
+                            return;
+                        }
+
+                        if (!alvo.classList.contains('modal-opcoes-configurador__opcao')) return;
+                        const tipo = alvo.dataset.tipo;
+                        if (!tipo) return;
+                        const selecaoAtualReducao = obterSelecionado('reducao');
+
+                        modal.querySelectorAll(`.modal-opcoes-configurador__opcao[data-tipo="${tipo}"]`).forEach((botaoOpcao) => {
+                            botaoOpcao.classList.remove('is-selected');
+                            botaoOpcao.setAttribute('aria-pressed', 'false');
+                        });
+
+                        alvo.classList.add('is-selected');
+                        alvo.setAttribute('aria-pressed', 'true');
+
+                        if (tipo === 'tamanho') {
+                            atualizarReducoesDisponiveis({
+                                tamanhoSelecionado: alvo.dataset.valor,
+                                reducaoPreferida: selecaoAtualReducao
+                            });
+                        }
+                    };
+
+                    const aoPressionarTecla = (event) => {
+                        if (event.key === 'Escape') {
+                            aoCancelar();
+                        }
+                    };
+
+                    modal.hidden = false;
+                    modal.classList.add('is-open');
+                    modal.setAttribute('aria-hidden', 'false');
+                    document.body.classList.add('modal-opcoes-configurador-open');
+                    modal.addEventListener('click', aoClicarModal);
+                    document.addEventListener('keydown', aoPressionarTecla);
+                    botaoConfirmar?.addEventListener('click', aoConfirmar);
+                    botaoCancelar?.addEventListener('click', aoCancelar);
+                    modal.querySelector('.modal-opcoes-configurador__opcao.is-selected')?.focus({ preventScroll: true });
+                });
+            };
+
+            const montarLinkConfiguradorEquivalente = async ({ grupo = '', linha = '', tamanhos = '', reducoes = '', reducoesPorTamanho = null } = {}) => {
+                const grupoNormalizado = String(grupo || '').trim().toUpperCase();
+                const linhaNormalizada = String(linha || '').trim();
+                if (!grupoNormalizado || !linhaNormalizada) return '';
+
+                const opcoesTamanho = normalizarListaValores(tamanhos);
+                const opcoesReducao = normalizarListaValores(reducoes);
+
+                let tamanhoSelecionado = opcoesTamanho[0] || '';
+                let reducaoSelecionada = opcoesReducao[0] || '';
+
+                if (opcoesTamanho.length > 1 || opcoesReducao.length > 1) {
+                    const selecao = await selecionarOpcoesConfigurador({
+                        opcoesTamanho,
+                        opcoesReducao,
+                        reducoesPorTamanho
+                    });
+                    if (!selecao) return '';
+                    if (opcoesTamanho.length > 1) {
+                        tamanhoSelecionado = selecao.tamanho;
+                    }
+                    if (opcoesReducao.length > 1) {
+                        reducaoSelecionada = selecao.reducao;
+                    }
+                }
+
+                const urlConfigurador = resolverUrlBaseConfiguradorEquivalente({
+                    grupo: grupoNormalizado,
+                    linha: linhaNormalizada
+                });
+
+                const chaveLinha = `${grupoNormalizado}LN`;
+                const chaveTamanho = `${grupoNormalizado}BR`;
+                const chaveReducao = `${grupoNormalizado}RD`;
+
+                Array.from(urlConfigurador.searchParams.keys())
+                    .filter((chave) => /^[A-Z0-9]+LN$/.test(chave) && chave !== chaveLinha)
+                    .forEach((chave) => urlConfigurador.searchParams.delete(chave));
+
+                urlConfigurador.searchParams.set(chaveLinha, linhaNormalizada);
+
+                if (tamanhoSelecionado) {
+                    urlConfigurador.searchParams.set(chaveTamanho, tamanhoSelecionado);
+                }
+                if (reducaoSelecionada) {
+                    urlConfigurador.searchParams.set(chaveReducao, reducaoSelecionada);
+                }
+
+                return urlConfigurador.toString();
+            };
+
+            const abrirConfiguradorEquivalente = async ({ grupo = '', linha = '', tamanhos = '', reducoes = '', reducoesPorTamanho = null } = {}) => {
+                const linkConfigurador = await montarLinkConfiguradorEquivalente({ grupo, linha, tamanhos, reducoes, reducoesPorTamanho });
+                if (!linkConfigurador) return;
+                const destinoComContextoIntercambialidade = adicionarParametroUrl(linkConfigurador, 'intercambialidadeModoPreenchimento', '1');
+                const destinoComCarrinhoFlutuante = adicionarParametroUrl(destinoComContextoIntercambialidade, 'intercambialidade', '1');
+                registrarEventosModalConfigurador();
+                const modalAberto = abrirModalConfigurador(destinoComCarrinhoFlutuante);
+                if (!modalAberto) {
+                    exibirAlertaCopiado('⚠️ Não foi possível abrir o configurador do produto.');
+                }
+            };
+
+
+            const criarGaleriaCardEquivalente = ({ linha, tamanho, linksProduto = null } = {}) => {
+                const folder = String(linksProduto?.folder || '').trim();
+                if (!folder) return '';
+
+                const altLinha = String(tamanho || linha || '').trim();
+                const altTitulo = String(linksProduto?.title || '').trim();
+                const alt = altTitulo || `Linha ${altLinha} - ${String(linha || '').trim() || 'Produto Equivalente IBR'}`;
+                const filesRaw = String(linksProduto?.files || '').trim();
+                const dataFiles = filesRaw
+                    ? `
+                        data-files='${filesRaw.replace(/'/g, '&apos;')}'`
+                    : '';
+
+                return `
+                    <div class="galeria-produto comparacao-galeria equivalente-info-card__galeria"
+                        data-folder="${folder}"
+                        ${dataFiles}
+                        data-lightbox-module="/Layout/ModuloPhotoSwipe.js"
+                        data-enable-lightbox="true"
+                        data-hide-buttons="true"
+                        data-disable-loop="true"
+                        data-hide-thumbs="true"
+                        data-alt="${alt}">
+                    </div>
+                `;
+            };
+
+            const criarCardInformacaoEquivalente = ({ linha, tamanho, linksProduto = null }, indice) => {
+                const itemInfo = document.createElement('div');
+                itemInfo.className = 'equivalente-info-item';
+                const galeriaCard = criarGaleriaCardEquivalente({ linha, tamanho, linksProduto });
+
+                const cardInfo = document.createElement('article');
+                cardInfo.className = 'equivalente-info-card';
+                cardInfo.dataset.cardId = `equivalente-${indice}`;
+                cardInfo.dataset.grupo = String(linha || '').trim().toUpperCase();
+                cardInfo.dataset.linha = String(tamanho || '').trim();
+                cardInfo.innerHTML = `
+                    <button type="button" class="equivalente-info-copiar-tudo" title="Copiar Informações" aria-label="Copiar Informações">
+                        ⧉ Copiar
+                    </button>
+                    <div class="equivalente-info-card__conteudo">
+                        ${galeriaCard}
+                        <p class="equivalente-info-campo equivalente-info-campo--linha"><span class="equivalente-info-label">Linha:</span> <span class="equivalente-info-valor">${tamanho}</span></p>
+                        <p class="equivalente-info-campo equivalente-info-campo--tamanhos"><span class="equivalente-info-label">Tamanhos:</span> <span class="equivalente-info-valor equivalente-info-vazio equivalente-info-valor--tamanhos">vazio</span></p>
+                        <p class="equivalente-info-campo equivalente-info-campo--reducoes"><span class="equivalente-info-label">Reduções:</span> <span class="equivalente-info-valor equivalente-info-vazio equivalente-info-valor--reducoes">vazio</span></p>
+                        <p class="equivalente-info-campo equivalente-info-campo--diametros"><span class="equivalente-info-label">Diâmetro do Eixo de Saída:</span> <span class="equivalente-info-valor equivalente-info-vazio equivalente-info-valor--diametros">vazio</span></p>
+                        <p class="equivalente-info-card__descricao">
+                            <span class="equivalente-info-label">Sobre o Produto:</span>
+                            <span class="equivalente-info-card__descricao-conteudo">
+                                <span class="equivalente-info-valor equivalente-info-vazio">vazio</span>
+                            </span>
+                        </p>
+                    </div>
+                    <div class="equivalente-info-card__acoes">
+                        ${linksProduto?.catalogo ? `<a href="${linksProduto.catalogo}" target="_blank" rel="noopener noreferrer" class="equivalente-info-botao equivalente-info-botao--secundario btn-catalogo-produto">Catálogo do Produto</a>` : `<button type="button" class="equivalente-info-botao equivalente-info-botao--secundario btn-catalogo-produto" disabled aria-disabled="true">Catálogo do Produto</button>`}
+                        ${linksProduto?.site ? `<a href="${linksProduto.site}" target="_blank" rel="noopener noreferrer" class="equivalente-info-botao equivalente-info-botao--secundario btn-site-produto">Site do Produto</a>` : `<button type="button" class="equivalente-info-botao equivalente-info-botao--secundario btn-site-produto" disabled aria-disabled="true">Site do Produto</button>`}
+                        <button type="button" class="equivalente-info-botao btn-configurar-produto">Configure o Produto</button>
+                        <button type="button" class="equivalente-info-botao equivalente-info-botao--secundario btn-ver-recomendados" aria-expanded="false">
+                            <span class="equivalente-info-botao__texto">Ver Produtos Recomendados</span>
+                            <span class="equivalente-info-seta" aria-hidden="true">
+                                <svg viewBox="0 0 12 12" xmlns="http://www.w3.org/2000/svg" focusable="false">
+                                    <path d="M3 4.5L6 7.5L9 4.5" />
+                                </svg>
+                            </span>
+                        </button>
+                    </div>
+                `;
+
+                const painelRecomendacoes = document.createElement('section');
+                painelRecomendacoes.className = 'equivalente-info-recomendacoes recomendacoes-equivalentes-hidden';
+                painelRecomendacoes.setAttribute('aria-label', 'Produtos equivalentes do card');
+                painelRecomendacoes.dataset.grupo = String(linha || '').trim();
+                painelRecomendacoes.dataset.linha = String(tamanho || '').trim();
+                painelRecomendacoes.dataset.base = '';
+                painelRecomendacoes.dataset.reducao = '';
+                painelRecomendacoes.dataset.recomendacoesCarregadas = 'false';
+                painelRecomendacoes.innerHTML = `
+                    <div class="equivalente-info-recomendacoes__header">
+                        <h3>Equivalentes IBR</h3>
+                        <p>⚠️Apenas itens cadastrados na base. 📦 Para mais opções, use os botões de configuração.</p>
+                    </div>
+                    <div class="recomendacoes-carrossel">
+                        <button class="recomendacoes-nav recomendacoes-nav--prev" type="button" data-recomendacoes-nav="prev" aria-label="Ver recomendações anteriores">
+                            <svg viewBox="0 0 24 24" aria-hidden="true">
+                                <path d="M15 6l-6 6 6 6" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"></path>
+                            </svg>
+                        </button>
+                        <div class="recomendacoes-grid recomendacoes-grid--equivalentes recomendacoes-grid--horizontal"></div>
+                        <button class="recomendacoes-nav recomendacoes-nav--next" type="button" data-recomendacoes-nav="next" aria-label="Ver próximas recomendações">
+                            <svg viewBox="0 0 24 24" aria-hidden="true">
+                                <path d="M9 6l6 6-6 6" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"></path>
+                            </svg>
+                        </button>
+                    </div>
+                `;
+                inicializarCarrosselRecomendacoesEquivalentes(painelRecomendacoes);
+
+                itemInfo.appendChild(cardInfo);
+                itemInfo.appendChild(painelRecomendacoes);
+
+                const botaoCopiarTudo = cardInfo.querySelector('.equivalente-info-copiar-tudo');
+                botaoCopiarTudo?.addEventListener('click', async (event) => {
+                    event.preventDefault();
+                    event.stopPropagation();
+                    dispararTagSeletorConcorrente('equivalente-copiar');
+                    const linkCatalogo = String(cardInfo.querySelector('.btn-catalogo-produto')?.getAttribute('href') || '').trim();
+                    const linkSite = String(cardInfo.querySelector('.btn-site-produto')?.getAttribute('href') || '').trim();
+                    const botaoConfigurar = cardInfo.querySelector('.btn-configurar-produto');
+                    if (botaoConfigurar instanceof HTMLElement && !String(botaoConfigurar.dataset?.linkConfigurador || '').trim()) {
+                        await atualizarLinkConfigurarDoBotao(botaoConfigurar).catch(() => { });
+                    }
+                    const linkConfigurador = String(botaoConfigurar?.dataset?.linkConfigurador || '').trim();
+                    const conteudo = Array.from(cardInfo.querySelectorAll('.equivalente-info-card__conteudo p'))
+                        .map((bloco) => {
+                            const label = bloco.querySelector('.equivalente-info-label')?.textContent?.trim() || '';
+                            const valor = bloco.querySelector('.equivalente-info-valor')?.textContent?.trim() || '';
+                            return `${label} ${valor}`.trim();
+                        })
+                        .filter(Boolean)
+                        .concat([
+                            `Catálogo: ${linkCatalogo || 'indisponível'}`,
+                            `Site: ${linkSite || 'indisponível'}`,
+                            `Configurador: ${linkConfigurador || 'indisponível'}`
+                        ])
+                        .join('\n');
+                    if (!conteudo) return;
+
+                    try {
+                        await navigator.clipboard.writeText(conteudo);
+                        botaoCopiarTudo.classList.add('is-copiado');
+                        exibirAlertaCopiado('🔗 Informações Copiadas para a Área de Transferência!');
+                        window.setTimeout(() => botaoCopiarTudo.classList.remove('is-copiado'), 1100);
+                    } catch (erro) {
+                        console.warn('Falha ao copiar conteúdo do card.', erro);
+                    }
+                });
+
+                const campoDescricao = Array.from(cardInfo.querySelectorAll('.equivalente-info-card__conteudo p'))
+                    .find((linhaInfo) => linhaInfo.querySelector('.equivalente-info-label')?.textContent?.trim() === 'Sobre o Produto:')
+                    ?.querySelector('.equivalente-info-valor');
+                const resolverDescricaoLinha = typeof obterDescricaoLinhaProduto === 'function'
+                    ? obterDescricaoLinhaProduto
+                    : window.obterDescricaoLinhaProduto;
+
+                if (typeof resolverDescricaoLinha !== 'function') {
+                    return itemInfo;
+                }
+
+                resolverDescricaoLinha(tamanho).then((descricaoLinha) => {
+                    if (!campoDescricao) return;
+                    if (descricaoLinha) {
+                        campoDescricao.textContent = descricaoLinha;
+                        campoDescricao.classList.remove('equivalente-info-vazio');
+                    }
+                    agendarAjusteAlturasEquivalentes();
+                });
+
+                return itemInfo;
+            };
+
+            const buscarDetalhesCardEquivalente = async ({ linha, tamanho } = {}) => {
+                const linhaNormalizada = String(linha || '').trim();
+                const tamanhoNormalizado = String(tamanho || '').trim();
+                if (!linhaNormalizada || !tamanhoNormalizado) return null;
+
+                const params = new URLSearchParams({
+                    IBCN: linhaNormalizada,
+                    IBLN: tamanhoNormalizado,
+                    CORD: getValue('CORD'),
+                    COTR: getValue('COTR'),
+                    COVZ: getValue('COVZ'),
+                    criterioReducaoMin: getValue('criterioReducaoMin') || '-10',
+                    criterioReducaoMax: getValue('criterioReducaoMax') || '10',
+                    criterioTorqueMin: getValue('criterioTorqueMin') || '-5',
+                    criterioTorqueMax: getValue('criterioTorqueMax') || '30'
+                });
+
+                try {
+                    const url = `${endpoints.IBDETALHES}?${params.toString()}`;
+                    const resposta = await fetch(url, { cache: 'no-store' });
+                    if (!resposta.ok) return null;
+                    const payload = await resposta.json();
+
+                    const tamanhos = String(payload?.tamanhos || '').trim();
+                    const reducoes = ordenarTextoReducao(payload?.reducoes);
+                    const diametros = String(payload?.diametros || '').trim();
+                    const reducoesPorTamanho = payload?.reducoesPorTamanho && typeof payload.reducoesPorTamanho === 'object'
+                        ? Object.fromEntries(
+                            Object.entries(payload.reducoesPorTamanho).map(([tamanho, listaReducoes]) => [
+                                tamanho,
+                                ordenarValoresReducao(Array.isArray(listaReducoes) ? listaReducoes : [])
+                            ])
+                        )
+                        : null;
+
+                    if (!tamanhos && !reducoes && !diametros) {
+                        return null;
+                    }
+
+                    return { tamanhos, reducoes, diametros, reducoesPorTamanho };
+                } catch (erro) {
+                    console.warn('Falha ao carregar detalhes do card equivalente.', erro);
+                    return null;
+                }
+            };
+
+            const preencherDetalhesCardEquivalente = (itemInfo, detalhes = null) => {
+                if (!itemInfo || !detalhes) return;
+
+                const campoTamanhos = itemInfo.querySelector('.equivalente-info-valor--tamanhos');
+                const campoReducoes = itemInfo.querySelector('.equivalente-info-valor--reducoes');
+                const campoDiametros = itemInfo.querySelector('.equivalente-info-valor--diametros');
+                if (!campoTamanhos || !campoReducoes || !campoDiametros) return;
+
+                const mapearCampo = (campo, valor) => {
+                    const texto = String(valor || '').trim();
+                    if (!texto) return;
+                    campo.textContent = texto;
+                    campo.classList.remove('equivalente-info-vazio');
+                };
+
+                mapearCampo(campoTamanhos, detalhes.tamanhos);
+                mapearCampo(campoReducoes, detalhes.reducoes);
+                mapearCampo(campoDiametros, detalhes.diametros);
+
+                const card = itemInfo.querySelector('.equivalente-info-card');
+                if (card) {
+                    card.dataset.tamanhos = String(detalhes.tamanhos || '').trim();
+                    card.dataset.reducoes = String(detalhes.reducoes || '').trim();
+                    card.dataset.reducoesPorTamanho = JSON.stringify(detalhes.reducoesPorTamanho || {});
+                    const painelRecomendacoes = card.closest('.equivalente-info-item')?.querySelector('.equivalente-info-recomendacoes');
+                    if (painelRecomendacoes) {
+                        const baseTexto = String(detalhes.tamanhos || '').trim();
+                        const reducaoTexto = String(detalhes.reducoes || '').trim();
+                        painelRecomendacoes.dataset.base = baseTexto.replace(/\s*\/\s*/g, ', ');
+                        painelRecomendacoes.dataset.reducao = reducaoTexto.replace(/\s*\/\s*/g, ', ');
+                    }
+                }
+
+                agendarAjusteAlturasEquivalentes();
+            };
+
+            const carregarCardsEquivalentes = async () => {
+                const seletorLinha = document.getElementById('IBCN');
+                if (!seletorLinha) return [];
+
+                const marca = getValue('COMA');
+                const linhaConcorrente = getValue('COLN');
+                const linhasEquivalentes = Array.from(seletorLinha.options)
+                    .map((option) => String(option.value || '').trim())
+                    .filter(Boolean);
+                const linhasUnicas = Array.from(new Set(linhasEquivalentes));
+                const cards = [];
+                const chavesCards = new Set();
+
+                for (const linha of linhasUnicas) {
+                    const params = new URLSearchParams({
+                        COMA: marca,
+                        COLN: linhaConcorrente,
+                        IBCN: linha
+                    });
+                    const url = `${endpoints.IBLN}?${params.toString()}`;
+                    const resposta = await fetch(url);
+                    const html = await resposta.text();
+                    const documento = new DOMParser().parseFromString(`<select>${html}</select>`, 'text/html');
+                    const tamanhos = Array.from(documento.querySelectorAll('option'))
+                        .map((option) => String(option.value || '').trim())
+                        .filter(Boolean);
+                    const tamanhosUnicos = Array.from(new Set(tamanhos));
+                    tamanhosUnicos.forEach((tamanho) => {
+                        const chave = `${linha}::${tamanho}`;
+                        if (chavesCards.has(chave)) return;
+                        chavesCards.add(chave);
+                        cards.push({ linha, tamanho });
+                    });
+                }
+
+                return cards;
+            };
+
+            const atualizarEquivalentes = async () => {
+                const listaInformacoes = document.getElementById('lista-informacoes-equivalentes');
+                if (!listaInformacoes) return;
+
+                if (seletorIdsEntrada.some((campo) => !getValue(campo))) {
+                    listaInformacoes.innerHTML = '';
+                    return;
+                }
+
+                listaInformacoes.innerHTML = '';
+                ocultarMensagemSemEquivalentes();
+
+                let cards = [];
+                try {
+                    cards = await carregarCardsEquivalentes();
+                } catch (erro) {
+                    console.warn('Falha ao carregar equivalentes.', erro);
+                    return;
+                }
+
+                if (!cards.length) {
+                    exibirMensagemSemEquivalentes();
+                    return;
+                }
+
+                const resolverCarregarMetadataLinhas =
+                    typeof carregarMetadataLinhas === 'function'
+                        ? carregarMetadataLinhas
+                        : window.carregarMetadataLinhas;
+
+                if (typeof resolverCarregarMetadataLinhas === 'function') {
+                    await resolverCarregarMetadataLinhas();
+                }
+
+                const resolverCarregarLinksProdutosPorGrupo =
+                    typeof carregarLinksProdutosPorGrupo === 'function'
+                        ? carregarLinksProdutosPorGrupo
+                        : window.carregarLinksProdutosPorGrupo;
+                const resolverLinksProdutoCard =
+                    typeof resolverLinksProdutoCardEquivalente === 'function'
+                        ? resolverLinksProdutoCardEquivalente
+                        : window.resolverLinksProdutoCardEquivalente;
+
+                const gruposUnicos = Array.from(new Set(cards.map((cardData) => String(cardData?.linha || '').trim().toUpperCase()).filter(Boolean)));
+                if (typeof resolverCarregarLinksProdutosPorGrupo === 'function') {
+                    await Promise.all(gruposUnicos.map((grupo) => resolverCarregarLinksProdutosPorGrupo(grupo)));
+                }
+
+                const blocoGaleriaPrincipal = document.querySelector('.galeria-produto[data-visible="GUIA-INTERCAMBIALIDADE"]');
+                const linksPadraoPagina = {
+                    site: String(blocoGaleriaPrincipal?.dataset?.site || '').trim(),
+                    catalogo: String(blocoGaleriaPrincipal?.dataset?.catalog || '').trim(),
+                    folder: '',
+                    files: '',
+                    title: ''
+                };
+
+                let indiceCard = 0;
+                for (const cardData of cards) {
+                    const detalhes = await buscarDetalhesCardEquivalente(cardData);
+                    if (!detalhes) {
+                        continue;
+                    }
+
+                    const linksResolvidos = typeof resolverLinksProdutoCard === 'function'
+                        ? resolverLinksProdutoCard({
+                            grupo: cardData?.linha,
+                            linha: cardData?.tamanho
+                        })
+                        : null;
+                    const linksProduto = {
+                        ...linksPadraoPagina,
+                        ...(linksResolvidos || {})
+                    };
+                    const cardElemento = criarCardInformacaoEquivalente({ ...cardData, linksProduto }, indiceCard);
+                    preencherDetalhesCardEquivalente(cardElemento, detalhes);
+                    listaInformacoes.appendChild(cardElemento);
+                    indiceCard += 1;
+                }
+
+                if (!listaInformacoes.children.length) {
+                    exibirMensagemSemEquivalentes();
+                    return;
+                }
+
+                document.getElementById('equivalentes-info-bloco')?.classList.remove('equivalentes-info-hidden');
+
+                if (typeof window.initGaleriasProduto === 'function') {
+                    window.initGaleriasProduto();
+                }
+
+                inicializarAcoesCardsEquivalentes();
+                agendarAjusteAlturasEquivalentes();
+            };
+
+            const montarQuery = (id) => {
+                const params = new URLSearchParams();
+                (dependenciasConsulta[id] || []).forEach(dep => {
+                    params.append(dep, getValue(dep));
+                });
+                return params.toString();
+            };
+
+            const seletoresOcultos = new Set(['IBCN', 'IBLN']);
+
+            const atualizarVisibilidade = (id, temDados, manterValor = false, forcarVisivel = false) => {
+                const grupo = document.getElementById(`Grupo${id}`);
+                const select = document.getElementById(id);
+                if (!grupo || !select) return;
+
+                if (seletoresOcultos.has(id)) {
+                    grupo.style.display = 'none';
+                    if (!temDados && !manterValor) {
+                        select.value = '';
+                    }
+                    return;
+                }
+
+                if (temDados || forcarVisivel) {
+                    grupo.style.display = 'block';
+                    select.style.display = 'block';
+                    return;
+                }
+                grupo.style.display = 'none';
+                select.style.display = 'none';
+                select.value = '';
+            };
+
+            const carregarSelector = async (id) => {
+                const select = document.getElementById(id);
+                if (!select) return false;
+                const dependenciasAtendidas = (dependenciasObrigatorias[id] || []).every(dep => getValue(dep));
+                if (!dependenciasAtendidas) {
+                    select.innerHTML = '';
+                    select.value = '';
+                    atualizarVisibilidade(id, false, false, true);
+                    return false;
+                }
+                const query = montarQuery(id);
+                const url = query ? `${endpoints[id]}?${query}` : endpoints[id];
+                const response = await fetch(url);
+                const html = await response.text();
+                select.innerHTML = html;
+                const options = Array.from(select.options);
+                options.forEach((option) => {
+                    if (typeof option.value === 'string') {
+                        option.value = option.value.trim();
+                    }
+                    if (typeof option.text === 'string') {
+                        option.text = option.text.trim();
+                    }
+                });
+                const opcoesValidas = options.filter((option) => {
+                    const valor = String(option.value || '').trim();
+                    const texto = String(option.text || '').trim();
+                    return valor && texto;
+                });
+                options.forEach((option) => {
+                    if (!opcoesValidas.includes(option)) {
+                        option.remove();
+                    }
+                });
+                const temDados = opcoesValidas.length > 0;
+                if (!temDados) {
+                    select.value = '';
+                    atualizarVisibilidade(id, false);
+                    return false;
+                }
+                const quantidadeOpcoes = select.options.length;
+                if (seletoresOcultos.has(id) && opcoesValidas.length > 0) {
+                    select.selectedIndex = 0;
+                } else if (quantidadeOpcoes === 1) {
+                    select.selectedIndex = 0;
+                } else {
+                    select.selectedIndex = -1;
+                    select.value = '';
+                }
+                atualizarVisibilidade(id, true, true);
+                return true;
+            };
+
+            const aplicarValorInicial = (id) => {
+                const valor = valoresIniciais[id];
+                if (!valor) return false;
+                const select = document.getElementById(id);
+                if (!select) return false;
+                const existe = Array.from(select.options).some(option => option.value === valor);
+                if (!existe) return false;
+                select.value = valor;
+                return true;
+            };
+
+            const atualizarResultadoAutomatico = (id) => {
+                const campoTexto = document.getElementById(`${id}Texto`);
+                if (!campoTexto) return;
+                const valor = getValue(id);
+                if (valor) {
+                    campoTexto.textContent = valor;
+                    campoTexto.dataset.vazio = 'false';
+                    return;
+                }
+                campoTexto.textContent = '⏳';
+                campoTexto.dataset.vazio = 'true';
+            };
+
+            const carregarSequencia = async (startIndex = 0) => {
+                for (let i = startIndex; i < seletorIds.length; i += 1) {
+                    const id = seletorIds[i];
+                    await carregarSelector(id);
+                    aplicarValorInicial(id);
+                    if (id === 'COVZ' || id === 'COTR') {
+                        atualizarResultadoAutomatico(id);
+                    }
+                }
+            };
+
+            let equivalentesGerados = false;
+
+            const atualizarEstadoPorConfiguracaoAvancada = () => {
+                const link = gerarLinkEquivalentes();
+                window.history.replaceState({}, '', link);
+                if (!equivalentesGerados) return;
+                equivalentesGerados = false;
+                ocultarRecomendacoes();
+            };
+
+            window.addEventListener('intercambialidade:config-avancada-alterada', atualizarEstadoPorConfiguracaoAvancada);
+
+            seletorIdsEntrada.forEach((id, index) => {
+                const select = document.getElementById(id);
+                if (!select) return;
+                select.addEventListener('change', async () => {
+                    const valorSelecionado = getValue(id);
+                    dispararTagSeletorConcorrente('seletor-' + id.toLowerCase() + '-alterar', {
+                        seletor_id: id,
+                        seletor_valor: valorSelecionado || undefined
+                    });
+                    if (id === 'COMA') {
+                        dispararTagSeletorConcorrente('marca-coma-selecionada', {
+                            coma_marca: valorSelecionado || undefined
+                        });
+                    }
+                    if (equivalentesGerados) {
+                        equivalentesGerados = false;
+                        ocultarRecomendacoes();
+                    }
+                    await carregarSequencia(index + 1);
+                });
+            });
+
+            document.addEventListener('todosCamposPreenchidos', () => {
+                const link = gerarLinkEquivalentes();
+                window.history.replaceState({}, '', link);
+            });
+
+            const botaoEquivalentes = document.getElementById('btn-gerar-equivalentes');
+            if (botaoEquivalentes) {
+                botaoEquivalentes.addEventListener('click', (event) => {
+                    event.preventDefault();
+                    dispararTagSeletorConcorrente('gerar-equivalente');
+                    if (seletorIdsEntrada.every((campo) => getValue(campo))) {
+                        equivalentesGerados = true;
+                        mostrarRecomendacoes();
+                        atualizarEquivalentes();
+                        rolarParaGerarEquivalentes();
+                        focarRecomendacoes();
+                    }
+                });
+            }
+
+            carregarSequencia().finally(() => {
+                const possuiValoresIniciais = seletorIdsEntrada.every(id => getValue(id));
+                if (possuiValoresIniciais) {
+                    const link = gerarLinkEquivalentes();
+                    window.history.replaceState({}, '', link);
+                    equivalentesGerados = true;
+                    mostrarRecomendacoes();
+                    atualizarEquivalentes();
+                    rolarParaGerarEquivalentes();
+                    focarRecomendacoes();
+                }
+                if (typeof window.finishLoading === 'function') window.finishLoading();
+            });
+
+
+        };
+
+        const exibirMensagemPermissao = () => {
+            const mensagemPermissao = document.getElementById('mensagem-permissao');
+            const conteudoRestrito = document.getElementById('conteudo-restrito');
+            if (mensagemPermissao) {
+                mensagemPermissao.style.display = 'block';
+            }
+            if (conteudoRestrito) {
+                conteudoRestrito.style.display = 'none';
+            }
+            if (typeof window.finishLoading === 'function') window.finishLoading();
+        };
+
+        fetch(urlValidarSessao, { credentials: 'include', cache: 'no-store' })
+            .then((resposta) => {
+                if (!resposta.ok) {
+                    throw new Error('SessaoInvalida');
+                }
+                return resposta.json();
+            })
+            .then((dados) => {
+                const grupoAtual = String(dados.grupo || '').toUpperCase();
+                if (!gruposPermitidos.includes(grupoAtual)) {
+                    throw new Error('SemPermissao');
+                }
+                if (typeof window.preencherCompartilharIntercambialidade === 'function') {
+                    window.preencherCompartilharIntercambialidade(dados);
+                }
+                inicializarSeletores();
+            })
+            .catch(() => {
+                exibirMensagemPermissao();
+            });
+    };
+
+    if (document.readyState === 'loading') {
+        document.addEventListener('DOMContentLoaded', inicializarConfiguradorConcorrentes);
+    } else {
+        inicializarConfiguradorConcorrentes();
+    }
+</script>

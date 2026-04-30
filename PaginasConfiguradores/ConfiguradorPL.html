@@ -1,0 +1,350 @@
+<!DOCTYPE html>
+
+<html lang="pt-BR">
+
+<head>
+
+  <meta charset="utf-8" />
+  <meta content="width=device-width, initial-scale=1.0, viewport-fit=cover" name="viewport" />
+  <title>Configurador PL | Configurador de Produtos IBR</title>
+
+  <?php
+    $canonical_origin = 'https://' . ($_SERVER['HTTP_HOST'] ?? 'configurador.redutoresibr.com.br');
+    $canonical_path = parse_url($_SERVER['REQUEST_URI'] ?? '/', PHP_URL_PATH) ?: '/';
+    $canonical_query = $_SERVER['QUERY_STRING'] ?? '';
+    $friendly_map = [
+        '1.C' => 'IBRC',
+        '1.FFA' => 'IBRPFFA',
+        '1.FKA' => 'IBRXFKA',
+        '1.FR' => 'IBRCFR',
+        '1.H' => 'IBRH',
+        '1.M' => 'IBRM',
+        '1.P' => 'IBRP',
+        '1.Q' => 'IBRQ',
+        '1.QDR' => 'IBRQDR',
+        '1.QP' => 'IBRQP',
+        '1.R' => 'IBRR',
+        '1.V' => 'IBRV',
+        '1.VFN' => 'IBRVFN',
+        '1.X' => 'IBRX',
+        '1.Z' => 'IBRZ',
+        '2.I' => 'IBRMSML',
+        '3.APM' => 'ANTICORROSIVOSAPM',
+        '3.GR' => 'IBRGR',
+        '3.GS' => 'IBRGS',
+        '3.I' => 'IBRT3AT3C',
+        '3.PB' => 'IBRPB',
+        '3.PBL' => 'IBRPBL',
+        '3.RIC' => 'IBRRIC',
+        '3.SA' => 'IBRSA',
+        '3.SB' => 'IBRSB',
+        '3.SBL' => 'IBRSBL',
+        '3.SD' => 'IBRSD',
+        '3.SPM' => 'ANTICORROSIVOSSPM',
+        '3.W' => 'WEGALTORENDIMENTO',
+        '4.K' => 'IBRK'
+    ];
+    $friendly_slug = null;
+    $friendly_slug_map = array_flip($friendly_map);
+    if ($canonical_query !== '') {
+        parse_str($canonical_query, $params);
+        foreach ($params as $value) {
+            if (is_array($value)) {
+                continue;
+            }
+            $lookup = strtoupper((string) $value);
+            if (isset($friendly_map[$lookup])) {
+                $friendly_slug = $friendly_map[$lookup];
+                break;
+            }
+        }
+    }
+    if (!$friendly_slug && preg_match('/\/Configurador([^\/?#]+)/i', $canonical_path, $pathname_match)) {
+        $pathname_slug = strtoupper((string) $pathname_match[1]);
+        if (isset($friendly_slug_map[$pathname_slug])) {
+            $friendly_slug = $pathname_slug;
+        }
+    }
+    $canonical_params = [];
+    if ($canonical_query !== '') {
+        parse_str($canonical_query, $canonical_params);
+    }
+    if ($friendly_slug) {
+        $canonical_path = '/Configurador' . $friendly_slug;
+        if (count($canonical_params) === 1) {
+            $single_value = reset($canonical_params);
+            if (!is_array($single_value) && strtoupper((string) $single_value) === array_search($friendly_slug, $friendly_map, true)) {
+                $canonical_query = '';
+            }
+        }
+    }
+    $canonical_effective_query = $friendly_slug ? '' : $canonical_query;
+    $canonical_url = $canonical_origin . $canonical_path . ($canonical_effective_query ? '?' . $canonical_effective_query : '');
+    $canonical_url_attr = htmlspecialchars($canonical_url, ENT_QUOTES, 'UTF-8');
+    $canonical_url_json = json_encode($canonical_url, JSON_UNESCAPED_SLASHES);
+    $canonical_url_breadcrumb = json_encode($canonical_url . '#breadcrumb', JSON_UNESCAPED_SLASHES);
+    $product_line_map = [
+      'IBRC' => 'Redutor IBR C',
+      'IBRH' => 'Redutor IBR H',
+      'IBRM' => 'Redutor IBR M',
+      'IBRP' => 'Redutor IBR P',
+      'IBRR' => 'Redutor IBR R',
+      'IBRX' => 'Redutor IBR X',
+      'IBRQ' => 'Redutor IBR Q',
+      'IBRQDR' => 'Redutor IBR QDR',
+      'IBRQP' => 'Redutor IBR QP',
+      'IBRFFA' => 'Redutor IBR FFA',
+      'IBRFKA' => 'Redutor IBR FKA',
+      'IBRFR' => 'Redutor IBR FR',
+      'IBRMSI' => 'Motor IBR MS/ML',
+      'IBRMI' => 'Motor IBR T3A/T3C',
+      'IBRMW' => 'Motor WEG alto rendimento',
+      'IBRMAPM' => 'Motor anticorrosivo APM',
+      'IBRMSPM' => 'Motor anticorrosivo SPM',
+      'IBRPB' => 'Planetário IBR PB',
+      'IBRPBL' => 'Planetário IBR PBL',
+      'IBRSA' => 'Planetário IBR SA',
+      'IBRSB' => 'Planetário IBR SB',
+      'IBRSBL' => 'Planetário IBR SBL',
+      'IBRSD' => 'Planetário IBR SD',
+      'IBRV' => 'Variador IBR V',
+      'IBRZ' => 'Redutor IBR Z',
+      'IBRVFN' => 'Variador IBR VFN',
+      'IBRGR' => 'Acoplamento IBR GR',
+      'IBRGS' => 'Acoplamento IBR GS',
+      'IBRRIC' => 'Acoplamento IBR RIC',
+      'IBRK' => 'Inversor IBR K'
+    ];
+    $seoLineName = $friendly_slug && isset($product_line_map[$friendly_slug])
+      ? $product_line_map[$friendly_slug]
+      : 'linha selecionada no configurador';
+    $seoPageHeadline = 'Configurador de Produtos - ' . $seoLineName;
+    $seoPageDescription = 'Configure, solicite desenho, veja informações e solicite cotações da linha ' . $seoLineName . ' com o Configurador Online de Produtos.';
+    $seoPageHeadlineAttr = htmlspecialchars($seoPageHeadline, ENT_QUOTES, 'UTF-8');
+    $seoPageDescriptionAttr = htmlspecialchars($seoPageDescription, ENT_QUOTES, 'UTF-8');
+    $product_structured_data = null;
+    if ($friendly_slug && isset($product_line_map[$friendly_slug])) {
+      $product_name = $product_line_map[$friendly_slug];
+      $product_structured_data = [
+        '@context' => 'https://schema.org',
+        '@type' => 'Product',
+        'name' => $product_name,
+        'description' => $product_name . ' com configuração personalizada para aplicações industriais.',
+        'brand' => [
+          '@type' => 'Brand',
+          'name' => 'Redutores IBR'
+        ],
+        'url' => $canonical_url,
+        'aggregateRating' => [
+          '@type' => 'AggregateRating',
+          'ratingValue' => '5',
+          'reviewCount' => '1'
+        ],
+        'review' => [
+          '@type' => 'Review',
+          'reviewRating' => [
+            '@type' => 'Rating',
+            'ratingValue' => '5',
+            'bestRating' => '5'
+          ],
+          'author' => [
+            '@type' => 'Organization',
+            'name' => 'Redutores IBR'
+          ],
+          'reviewBody' => 'Produto industrial com configuração personalizada sob consulta técnica.'
+        ]
+      ];
+    }
+  ?>
+
+  <script nonce="<?= htmlspecialchars(csp_nonce(), ENT_QUOTES, 'UTF-8'); ?>"
+    data-versioned-src="/PaginasCarregarPagina/CarregamentoInicial.min.js"></script>
+  <meta name="description" content="<?= $seoPageDescriptionAttr ?>">
+  <meta property="og:title" content="<?= $seoPageHeadlineAttr ?>">
+  <meta property="og:description" content="<?= $seoPageDescriptionAttr ?>">
+  <meta name="twitter:card" content="summary_large_image">
+  <meta name="twitter:title" content="<?= $seoPageHeadlineAttr ?>">
+  <meta name="twitter:description" content="<?= $seoPageDescriptionAttr ?>">
+  <meta name="keywords"
+    content="IBR, redutores, configurador, motores, variadores, planetários, desenhos, cotações, 3D Download, Download, 3D, PDF, PDF Download, Desenhos Download, Cotação, Orçamento, Redutores Planetários de Precisão">
+  <meta property="og:type" content="website">
+  <meta name="robots" content="index, follow">
+  <meta property="og:image" content="https://configurador.redutoresibr.com.br/Imagens/LogotipoAplicativo512512.png">
+  <meta name="twitter:image" content="https://configurador.redutoresibr.com.br/Imagens/LogotipoAplicativo512512.png">
+  <meta property="og:locale" content="pt_BR">
+  <meta property="og:site_name" content="Configurador de Produtos IBR">
+  <meta property="og:url" content="<?= $canonical_url_attr ?>">
+  <meta name="twitter:url" content="<?= $canonical_url_attr ?>">
+  <link rel="canonical" href="<?= $canonical_url_attr ?>">
+  <link rel="alternate" href="<?= $canonical_url_attr ?>" hreflang="pt-BR">
+  <link rel="alternate" href="<?= $canonical_url_attr ?>" hreflang="x-default">
+  <script nonce="<?= htmlspecialchars(csp_nonce(), ENT_QUOTES, 'UTF-8'); ?>">
+    window.APP_VERSION = 'versao.8.7.2';
+    window.__APP_VERSION_SOURCE__ = 'inline';
+  </script>
+  <script nonce="<?= htmlspecialchars(csp_nonce(), ENT_QUOTES, 'UTF-8'); ?>" src="/Versionamento/CarregarVersao.js"
+    defer></script>
+  <script nonce="<?= htmlspecialchars(csp_nonce(), ENT_QUOTES, 'UTF-8'); ?>">
+    (function preloadCarregarPagina() {
+      try {
+        var head = document.head || document.getElementsByTagName('head')[0];
+        if (!head || head.querySelector('link[data-preload-carregar-pagina]')) {
+          return;
+        }
+        var supportCheck = document.createElement('link');
+        if (supportCheck.relList && typeof supportCheck.relList.supports === 'function' &&
+          !supportCheck.relList.supports('preload')) {
+          return;
+        }
+        var link = document.createElement('link');
+        link.rel = 'preload';
+        link.as = 'script';
+        link.setAttribute('data-preload-carregar-pagina', 'true');
+        var resolver = typeof buildVersionedAssetUrl === 'function'
+          ? buildVersionedAssetUrl
+          : function fallbackResolver(url) {
+            if (typeof window !== 'undefined') {
+              var version = window.APP_VERSION;
+              if (typeof version === 'string') {
+                version = version.trim();
+              } else if (version != null) {
+                version = String(version);
+              }
+              if (version) {
+                var normalizedUrl = url;
+                var hashIndex = normalizedUrl.indexOf('#');
+                var hash = '';
+                if (hashIndex >= 0) {
+                  hash = normalizedUrl.slice(hashIndex);
+                  normalizedUrl = normalizedUrl.slice(0, hashIndex);
+                }
+                var separator = normalizedUrl.indexOf('?') >= 0 ? '&' : '?';
+                return normalizedUrl + separator + 'versao=' + encodeURIComponent(version) + hash;
+              }
+            }
+            return url;
+          };
+        link.href = resolver('/PaginasCarregarPagina/CarregarPagina.min.js');
+        head.appendChild(link);
+      } catch (error) {
+        console.warn('CarregarPagina preload setup failed.', error);
+      }
+    })();
+  </script>
+  <script nonce="<?= htmlspecialchars(csp_nonce(), ENT_QUOTES, 'UTF-8'); ?>"
+    data-versioned-src="/SEO/RegraLinksCanonicos.js" defer></script>
+  <script nonce="<?= htmlspecialchars(csp_nonce(), ENT_QUOTES, 'UTF-8'); ?>" type="application/ld+json">
+    {
+      "@context": "https://schema.org",
+      "@type": "WebPage",
+      "name": <?= json_encode($seoPageHeadline, JSON_UNESCAPED_SLASHES | JSON_UNESCAPED_UNICODE); ?>,
+      "description": <?= json_encode($seoPageDescription, JSON_UNESCAPED_SLASHES | JSON_UNESCAPED_UNICODE); ?>
+    }
+  </script>
+
+  <?php if ($product_structured_data): ?>
+  <script nonce="<?= htmlspecialchars(csp_nonce(), ENT_QUOTES, 'UTF-8'); ?>"
+    type="application/ld+json"><?= json_encode($product_structured_data, JSON_UNESCAPED_SLASHES | JSON_UNESCAPED_UNICODE); ?></script>
+  <?php endif; ?>
+
+  <script nonce="<?= htmlspecialchars(csp_nonce(), ENT_QUOTES, 'UTF-8'); ?>" type="application/ld+json">
+    {
+      "@context": "https://schema.org",
+      "@graph": [
+        {
+          "@type": "BreadcrumbList",
+          "@id": <?= $canonical_url_breadcrumb ?>,
+          "itemListElement": [
+            {
+              "@type": "ListItem",
+              "position": 1,
+              "name": "Home",
+              "item": "https://configurador.redutoresibr.com.br/"
+            },
+            {
+              "@type": "ListItem",
+              "position": 2,
+              "name": <?= json_encode($seoPageHeadline, JSON_UNESCAPED_SLASHES | JSON_UNESCAPED_UNICODE); ?>,
+              "item": <?= $canonical_url_json ?>
+            }
+          ]
+        },
+        {
+          "@type": "SoftwareApplication",
+          "name": <?= json_encode($seoPageHeadline, JSON_UNESCAPED_SLASHES | JSON_UNESCAPED_UNICODE); ?>,
+          "image": "https://configurador.redutoresibr.com.br/Imagens/LogotipoAplicativo512512.png",
+          "brand": {
+            "@type": "Brand",
+            "name": "Redutores IBR"
+          },
+          "url": <?= $canonical_url_json ?>
+        }
+      ]
+    }
+  </script>
+  <style>
+    body {
+      margin: 0;
+      background: #fff;
+    }
+
+    @media (prefers-color-scheme: dark) {
+      body {
+        background: #121212;
+      }
+    }
+  </style>
+
+
+  <?php
+    require_once __DIR__ . '/../SEO/HiddenSeoText.php';
+  ?>
+</head>
+
+<body>
+
+  <main id="main-content">
+    <h1
+      style="position:absolute;width:1px;height:1px;padding:0;margin:-1px;overflow:hidden;clip:rect(0,0,0,0);white-space:nowrap;border:0;">
+      <?= $seoPageHeadlineAttr ?>
+    </h1>
+
+    <?php echo renderHiddenSeoText('Redutores planetários de precisão para aplicações de alto desempenho', [
+      'Nesta página estão as opções de redutores planetários de precisão para máquinas que exigem controle de movimento, repetibilidade e resposta dinâmica. A configuração ajuda a escolher a relação de redução e o formato construtivo conforme torque, ciclo e tipo de acionamento.',
+      'O conteúdo complementar descreve cenários comuns de automação, embalagem e eixos servoassistidos, em que folga controlada e eficiência mecânica são relevantes. A rota também facilita o envio para cotação e revisão técnica com informações úteis para dimensionamento e integração final do sistema.',
+      'Linha em destaque para esta rota: ' . ($seoLineName ?? 'conteúdo institucional da página') . '. O texto permanece oculto visualmente para preservar a interface e, ao mesmo tempo, manter contexto semântico no HTML inicial.',
+      'Conteúdo complementar padronizado desta página: esta rota apresenta critérios técnicos de seleção, aplicação e continuidade da configuração para apoiar a indexação sem alterar a experiência visual do usuário.'
+    ]); ?>
+
+    <section aria-label="Resumo da página"
+      style="max-width:960px;margin:1rem auto 0;padding:0 1rem 1rem;color:#1f2937;line-height:1.6;">
+      <h2 style="margin:0 0 .5rem;font-size:1.1rem;font-weight:700;">Resumo técnico do configurador</h2>
+      <p style="margin:0 0 .75rem;">Este configurador foi desenvolvido para apoiar a seleção técnica da linha <strong>
+          <?= htmlspecialchars($seoLineName, ENT_QUOTES, 'UTF-8'); ?>
+        </strong>, reunindo opções de montagem, desempenho e aplicação em um único fluxo. A página ajuda equipes de
+        engenharia, manutenção e compras a comparar alternativas com critérios objetivos, documentar escolhas e reduzir
+        retrabalho durante a especificação de componentes industriais.</p>
+      <p style="margin:0;">Ao concluir a configuração, você pode avançar para informações detalhadas, solicitação de
+        desenho e cotação, mantendo consistência entre dados técnicos e necessidades operacionais. Esse conteúdo textual
+        complementa os campos interativos e facilita a interpretação do tema da página por mecanismos de busca e por
+        usuários que precisam de contexto antes de iniciar a seleção.</p>
+    </section>
+    <div id="pagina-completa"></div>
+    <div id="pagina-completa"></div>
+  </main>
+
+  <script nonce="<?= htmlspecialchars(csp_nonce(), ENT_QUOTES, 'UTF-8'); ?>"
+    data-versioned-src="/PaginasCarregarPagina/CarregarPagina.min.js"></script>
+  <script nonce="<?= htmlspecialchars(csp_nonce(), ENT_QUOTES, 'UTF-8'); ?>">
+    (function waitForCarregarPagina() {
+      if (typeof carregarPagina === 'function') {
+        carregarPagina('/PaginasConfiguradoresSeletores/SeletoresConfiguradorPL.html');
+      } else {
+        window.setTimeout(waitForCarregarPagina, 50);
+      }
+    })();
+  </script>
+
+</body>
+
+</html>

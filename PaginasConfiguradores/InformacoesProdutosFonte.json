@@ -1,0 +1,238 @@
+{
+  "1.Q": {
+    "categories": [
+      "Motorredutores",
+      "Redutores de Velocidade"
+    ],
+    "groups": [
+      "Coroa e Sem Fim"
+    ]
+  },
+  "1.QDR": {
+    "categories": [
+      "Motorredutores",
+      "Redutores de Velocidade"
+    ],
+    "groups": [
+      "Coroa e Sem Fim",
+      "Dupla Redução"
+    ]
+  },
+  "1.QP": {
+    "categories": [
+      "Motorredutores",
+      "Redutores de Velocidade"
+    ],
+    "groups": [
+      "Coroa e Sem Fim",
+      "Dupla Redução"
+    ]
+  },
+  "1.C": {
+    "categories": [
+      "Motorredutores",
+      "Redutores de Velocidade"
+    ],
+    "groups": []
+  },
+  "1.H": {
+    "categories": [
+      "Motorredutores",
+      "Redutores de Velocidade"
+    ],
+    "groups": []
+  },
+  "1.M": {
+    "categories": [
+      "Motorredutores",
+      "Redutores de Velocidade"
+    ],
+    "groups": []
+  },
+  "1.P": {
+    "categories": [
+      "Motorredutores",
+      "Redutores de Velocidade"
+    ],
+    "groups": []
+  },
+  "1.R": {
+    "categories": [
+      "Motorredutores",
+      "Redutores de Velocidade"
+    ],
+    "groups": []
+  },
+  "1.X": {
+    "categories": [
+      "Motorredutores",
+      "Redutores de Velocidade"
+    ],
+    "groups": []
+  },
+  "1.FFA": {
+    "categories": [
+      "Motorredutores",
+      "Redutores de Velocidade"
+    ],
+    "groups": []
+  },
+  "1.FKA": {
+    "categories": [
+      "Motorredutores",
+      "Redutores de Velocidade"
+    ],
+    "groups": []
+  },
+  "1.FR": {
+    "categories": [
+      "Motorredutores",
+      "Redutores de Velocidade"
+    ],
+    "groups": []
+  },
+  "2.I": {
+    "categories": [
+      "Motores"
+    ],
+    "groups": []
+  },
+  "3.I": {
+    "categories": [
+      "Motores"
+    ],
+    "groups": [
+      "Alto Rendimento"
+    ]
+  },
+  "3.W": {
+    "categories": [
+      "Motores"
+    ],
+    "groups": [
+      "Alto Rendimento"
+    ]
+  },
+  "3.APM": {
+    "categories": [
+      "Alimentícios, Anticorrosivos e IP69K",
+      "Motores"
+    ],
+    "groups": [
+      "Anticorrosivos"
+    ]
+  },
+  "3.SPM": {
+    "categories": [
+      "Alimentícios, Anticorrosivos e IP69K",
+      "Motores"
+    ],
+    "groups": [
+      "Anticorrosivos"
+    ]
+  },
+  "3.PB": {
+    "categories": [
+      "Redutores de Velocidade"
+    ],
+    "groups": [
+      "Precisão"
+    ]
+  },
+  "3.PBL": {
+    "categories": [
+      "Redutores de Velocidade"
+    ],
+    "groups": [
+      "Precisão"
+    ]
+  },
+  "3.SA": {
+    "categories": [
+      "Redutores de Velocidade"
+    ],
+    "groups": [
+      "Precisão"
+    ]
+  },
+  "3.SB": {
+    "categories": [
+      "Redutores de Velocidade"
+    ],
+    "groups": [
+      "Precisão"
+    ]
+  },
+  "3.SBL": {
+    "categories": [
+      "Redutores de Velocidade"
+    ],
+    "groups": [
+      "Precisão"
+    ]
+  },
+  "3.SD": {
+    "categories": [
+      "Redutores de Velocidade"
+    ],
+    "groups": [
+      "Precisão"
+    ]
+  },
+  "1.V": {
+    "categories": [
+      "Variadores de Velocidade"
+    ],
+    "groups": [
+      "Variadores"
+    ]
+  },
+  "1.Z": {
+    "categories": [
+      "Alimentícios, Anticorrosivos e IP69K",
+      "Motorredutores",
+      "Redutores de Velocidade"
+    ],
+    "groups": [
+      "Anticorrosivos",
+      "Coroa e Sem Fim"
+    ]
+  },
+  "1.VFN": {
+    "categories": [
+      "Alimentícios, Anticorrosivos e IP69K",
+      "Motorredutores",
+      "Redutores de Velocidade"
+    ],
+    "groups": [
+      "Anticorrosivos",
+      "Coroa e Sem Fim"
+    ]
+  },
+  "3.GR": {
+    "categories": [
+      "Acoplamentos"
+    ],
+    "groups": []
+  },
+  "3.GS": {
+    "categories": [
+      "Acoplamentos"
+    ],
+    "groups": []
+  },
+  "3.RIC": {
+    "categories": [
+      "Acoplamentos"
+    ],
+    "groups": []
+  },
+  "4.K": {
+    "categories": [
+      "Inversores de Frequência"
+    ],
+    "groups": [
+      "Descentralizado"
+    ]
+  }
+}

@@ -1,0 +1,1105 @@
+<!DOCTYPE html>
+
+<div id="titulo-estrutural" class="sr-only">Configurador</div>
+
+<link rel="stylesheet" href="/Layout/Galeria.min.css" data-versioned-href="/Layout/Galeria.min.css">
+
+<main class="main mb-0 pb-0">
+    <div class="pagina__titulo--bloco fw-bold mt-5 mb-4">
+    </div>
+    <div class="container">
+        <div class="galeria-produto" data-visible="3.APM" data-lightbox-module="/Layout/ModuloPhotoSwipe.js"
+            data-folder="IBRAPM" data-title="IBR APM"
+            data-description="Os motores elétricos da linha APM oferecem alta tecnologia e eficiência premium (classe IE3), desde os materiais com os quais foi projetado até seu design elegante, foi concebido especialmente para trabalhar em ambientes com grandes exigências de higiene, onde os ciclos e os agentes de limpeza são agressivos."
+            data-site="https://www.redutoresibr.com.br/pt/Produtos/motor-apm"
+            data-catalog="https://www.redutoresibr.com.br/pt/Arquivos/visualizar/catalogo-anticorrosivos#book/">
+        </div>
+
+        <div class="galeria-produto" data-visible="3.SPM" data-lightbox-module="/Layout/ModuloPhotoSwipe.js"
+            data-folder="IBRSPM" data-title="IBR SPM"
+            data-description="Os motores elétricos da linha SPM são totalmente construídos com aço inoxidável, permitindo sua aplicação em ambientes que necessitam de grande resistência a corrosão. Seu design sem aletas facilita a limpeza, uma vez que não acumula sujeira, a cuidadosa seleção dos seus materiais, permite que ainda assim opere com baixa temperatura na superfície. A sua eficiência premium (IE3) garante o melhor custo-benefício."
+            data-site="https://www.redutoresibr.com.br/pt/Produtos/motor-spm"
+            data-catalog="https://www.redutoresibr.com.br/pt/Arquivos/visualizar/catalogo-anticorrosivos#book/">
+        </div>
+
+        <div class="galeria-produto" data-visible="3.I" data-lightbox-module="/Layout/ModuloPhotoSwipe.js"
+            data-folder="IBRT3AT3C" data-title="IBR T3A/T3C"
+            data-description="A linha de motores elétricos trifásicos T3A e T3C são motores de indução assíncronos de alto rendimento (IR3), fabricados em carcaça de alumínio ou ferro fundido com revestimento de pintura, o que confere leveza, boa dissipação de calor e resistência a corrosão e degradação pelo ambiente. Possui versatilidade na aplicação, uma vez que é possível customizar a posição dos pés de apoio, como também da caixa de ligação e do prensa cabos. Disponível com concepção de 2 a 8 polos. <i>Os motores elétricos trifásicos das linhas T3A e T3C atendem aos níveis mínimos de rendimento determinados na Portaria Interministerial 01 de 2017, estando em conformidade com a Portaria 290 de 2021 do INMETRO, com rendimentos e fatores de potência aprovados.</i>"
+            data-site="https://www.redutoresibr.com.br/pt/Produtos/motor-ibr-t3a-"
+            data-catalog="https://www.redutoresibr.com.br/pt/Arquivos/visualizar/catalogo-geral#book/">
+        </div>
+
+        <div class="galeria-produto" data-visible="2.I" data-lightbox-module="/Layout/ModuloPhotoSwipe.js"
+            data-folder="IBRMSML" data-title="IBR MS/ML"
+            data-description="As linhas de motores elétricos monofásicos ML e trifásicos standard MS são fabricadas com carcaça de alumínio, revestidas com pintura de alta qualidade e possuem múltiplas aletas, o que proporciona leveza, excelente dissipação de calor, além de garantir resistência à corrosão e à degradação pelo ambiente. Ambas as linhas oferecem alta versatilidade na aplicação, permitindo a customização da posição dos pés de apoio, da caixa de ligação e do prensa cabos, adaptando-se facilmente às necessidades de montagem dos clientes. Os motores estão disponíveis com concepção de 4 polos, atendendo a uma ampla gama de aplicações industriais e comerciais."
+            data-site="https://www.redutoresibr.com.br/pt/Produtos/motor-ibr-ms-"
+            data-catalog="https://www.redutoresibr.com.br/pt/Arquivos/visualizar/catalogo-geral#book/">
+        </div>
+
+        <div class="galeria-produto" data-visible="3.W" data-lightbox-module="/Layout/ModuloPhotoSwipe.js"
+            data-folder="WEGT3A" data-title="IBR WEG ALTO RENDIMENTO"
+            data-description="Motores da linha W22 da marca WEG, fabricados em carcaça de ferro fundido. São ideais para sistemas automatizados, equipamentos industriais e uso contínuo. Possuem registro de objeto do INMETRO na portaria número 290, de 07 de julho de 2021 e recebem a Etiqueta Nacional de Conservação de Energia. <i>Os motores elétricos trifásicos da WEG atendem aos níveis mínimos de rendimento determinados na Portaria Interministerial 01 de 2017, estando em conformidade com a Portaria 290 de 2021 do INMETRO, com rendimentos e fatores de potência aprovados.</i>""
+            data-site=" https://www.redutoresibr.com.br/pt/CategorLinhas/motores"
+            data-catalog="https://www.redutoresibr.com.br/pt/Arquivos/visualizar/catalogo-geral#book/">
+        </div>
+    </div>
+    <div id="titulo-configurador" class="pagina__titulo--bloco mt-5 mb-5 text-center">
+        <h2 id="texto-configurador" class="fs-3 fw-bolder m-0"></h2>
+    </div>
+</main>
+
+<script nonce="<?= htmlspecialchars(csp_nonce(), ENT_QUOTES, 'UTF-8'); ?>">
+    document.addEventListener('DOMContentLoaded', () => {
+        const metaDescription = document.querySelector('meta[name="description"]');
+        const ogTitle = document.querySelector('meta[property="og:title"]');
+        const ogDescription = document.querySelector('meta[property="og:description"]');
+        const metaKeywords = document.querySelector('meta[name="keywords"]');
+        const schemaInfo = (() => {
+            const isWebPageNode = (node) => node && typeof node === 'object' && !Array.isArray(node)
+                && (node['@type'] === 'WebPage' || (typeof node['@id'] === 'string' && node['@id'].includes('#webpage')));
+            const scripts = Array.from(document.querySelectorAll('head script[type="application/ld+json"]'));
+
+            for (const script of scripts) {
+                const content = script.textContent?.trim();
+                if (!content) continue;
+                try {
+                    const parsed = JSON.parse(content);
+
+                    if (Array.isArray(parsed)) {
+                        const index = parsed.findIndex(isWebPageNode);
+                        if (index !== -1) {
+                            const original = JSON.parse(JSON.stringify(parsed[index]));
+                            return {
+                                script,
+                                original,
+                                update(data) {
+                                    const next = parsed.map((item, i) => i === index ? data : item);
+                                    script.textContent = JSON.stringify(next);
+                                }
+                            };
+                        }
+                    } else if (parsed && Array.isArray(parsed['@graph'])) {
+                        const index = parsed['@graph'].findIndex(isWebPageNode);
+                        if (index !== -1) {
+                            const original = JSON.parse(JSON.stringify(parsed['@graph'][index]));
+                            return {
+                                script,
+                                original,
+                                update(data) {
+                                    const next = {
+                                        ...parsed,
+                                        '@graph': parsed['@graph'].map((item, i) => i === index ? data : item)
+                                    };
+                                    script.textContent = JSON.stringify(next);
+                                }
+                            };
+                        }
+                    } else if (isWebPageNode(parsed)) {
+                        const original = JSON.parse(JSON.stringify(parsed));
+                        return {
+                            script,
+                            original,
+                            update(data) {
+                                script.textContent = JSON.stringify(data);
+                            }
+                        };
+                    }
+                } catch { }
+            }
+
+            return { script: null, original: null, update() { } };
+        })();
+
+        const ldJsonScript = schemaInfo.script;
+        const originalLdJson = schemaInfo.original;
+        const updateLdJson = schemaInfo.update;
+
+        const originalMeta = {
+            description: metaDescription?.getAttribute('content') || '',
+            ogTitle: ogTitle?.getAttribute('content') || '',
+            ogDescription: ogDescription?.getAttribute('content') || '',
+            keywords: metaKeywords?.getAttribute('content') || ''
+        };
+
+        function atualizarMetadados(visivel, tituloCompleto) {
+            const descricao = (visivel?.dataset.description || '').replace(/\s+/g, ' ').trim();
+            const site = visivel?.dataset.site || '';
+            const catalogo = visivel?.dataset.catalog || '';
+            const priceValidUntil = new Date(Date.now() + 1000 * 60 * 60 * 24 * 180).toISOString().slice(0, 10);
+            const moeda = (visivel?.dataset.priceCurrency || visivel?.dataset.currency || 'BRL').trim() || 'BRL';
+            const precoBruto = (visivel?.dataset.price || visivel?.dataset.preco || '0.00').trim();
+            const precoNormalizado = precoBruto.replace(/\./g, '').replace(',', '.');
+            const precoNumero = Number(precoNormalizado);
+            const preco = Number.isFinite(precoNumero) ? precoNumero.toFixed(2) : '0.00';
+
+            const paginaTitulo = tituloCompleto ? 'Configurador de Produtos - ' + tituloCompleto : 'Configurador de Produtos';
+
+            if (metaDescription) {
+                metaDescription.setAttribute('content', descricao || originalMeta.description);
+            }
+
+            if (ogTitle) {
+                ogTitle.setAttribute('content', paginaTitulo);
+            }
+
+            if (ogDescription) {
+                ogDescription.setAttribute('content', descricao || originalMeta.ogDescription);
+            }
+
+            if (metaKeywords) {
+                const palavrasChave = originalMeta.keywords ? originalMeta.keywords.split(',').map(k => k.trim()).filter(Boolean) : [];
+                if (tituloCompleto && !palavrasChave.includes(tituloCompleto)) {
+                    palavrasChave.unshift(tituloCompleto);
+                }
+                if (descricao) {
+                    const termosDescricao = descricao.split(/[,;\.]/).map(parte => parte.trim()).filter(Boolean);
+                    termosDescricao.forEach(termo => {
+                        if (!palavrasChave.includes(termo)) {
+                            palavrasChave.push(termo);
+                        }
+                    });
+                }
+                metaKeywords.setAttribute('content', palavrasChave.join(', '));
+            }
+
+            if (ldJsonScript && originalLdJson) {
+                try {
+                    const atualizado = {
+                        ...originalLdJson,
+                        name: paginaTitulo,
+                        description: descricao || originalLdJson.description || ''
+                    };
+                    if (site) {
+                        atualizado.url = site;
+                    }
+                    if (catalogo) {
+                        atualizado.offers = {
+                            '@type': 'Offer',
+                            url: catalogo,
+                            availability: 'https://schema.org/InStock',
+                            priceValidUntil: priceValidUntil,
+                            priceCurrency: 'BRL',
+                            priceCurrency: moeda,
+                            price: preco,
+                            shippingDetails: {
+                                '@type': 'OfferShippingDetails',
+                                shippingRate: {
+                                    '@type': 'MonetaryAmount',
+                                    value: '0',
+                                    currency: 'BRL'
+                                },
+                                deliveryTime: {
+                                    '@type': 'ShippingDeliveryTime',
+                                    handlingTime: {
+                                        '@type': 'QuantitativeValue',
+                                        minValue: 0,
+                                        maxValue: 1,
+                                        unitCode: 'DAY'
+                                    },
+                                    transitTime: {
+                                        '@type': 'QuantitativeValue',
+                                        minValue: 1,
+                                        maxValue: 10,
+                                        unitCode: 'DAY'
+                                    }
+                                }
+                            }
+                        };
+                    } else if (!originalLdJson?.offers) {
+                        delete atualizado.offers;
+                    }
+                    updateLdJson(atualizado);
+                } catch { }
+            }
+        }
+
+        function atualizarTituloDinamicoDocumento() {
+            window.__refreshDynamicDocumentTitle?.({
+                sourceDoc: document,
+                pageUrl: window.location.pathname + window.location.search
+            });
+        }
+
+        function atualizarTitulo() {
+            const visivel = Array.from(document.querySelectorAll('.galeria-produto[data-title]'))
+                .find(g => g.style.display !== 'none');
+            const titulo = visivel ? visivel.dataset.title : '';
+            const el = document.getElementById('texto-configurador');
+            if (!el) return;
+            if (!titulo) {
+                el.innerHTML = '';
+                atualizarMetadados(null, '');
+                atualizarTituloDinamicoDocumento();
+                return;
+            }
+            let html = 'Configure o seu ';
+            if (titulo.toUpperCase().startsWith('IBR ')) {
+                const partes = titulo.split(' ');
+                const primeiro = partes.shift();
+                const resto = partes.join(' ');
+                html += '<span class="text-dark">' + primeiro + '</span>';
+                if (resto) html += ' <span class="text-orange">' + resto + '</span>';
+            } else {
+                html += titulo;
+            }
+            el.innerHTML = html;
+            atualizarMetadados(visivel, titulo);
+            atualizarTituloDinamicoDocumento();
+        }
+        atualizarTitulo();
+        setTimeout(atualizarTitulo);
+        document.getElementById('MOLN')?.addEventListener('change', atualizarTitulo);
+    });
+</script>
+
+
+<script nonce="<?= htmlspecialchars(csp_nonce(), ENT_QUOTES, 'UTF-8'); ?>"
+    src="/Layout/LayoutAjudaSeletores.min.js"></script>
+
+<script src="/PaginasNavegacaoCompartilhada/ConfiguracaoGuiada.min.js"></script>
+
+<script nonce="<?= htmlspecialchars(csp_nonce(), ENT_QUOTES, 'UTF-8'); ?>">
+    document.addEventListener('DOMContentLoaded', () => {
+        const pageId = 'SeletoresConfiguradorMO';
+        const helpConfigs = window.HelpContentCatalog?.getPageHelpConfigs(pageId) || {};
+
+        window.LayoutAjudaSeletores.registerPageHelp({
+            pageId: 'SeletoresConfiguradorMO',
+            helpConfigs,
+            buttonSelector: 'button.help-icon[data-help-text]',
+            updateTriggerIds: ['MOLN', 'MOTP', 'MOTT', 'MOFQ', 'MOPT', 'MOPL', 'MOCM', 'MOCP', 'MOCPP', 'MOPP', 'MOPM', 'MOOPC', 'MOCR']
+        });
+    });
+</script>
+
+<script nonce="<?= htmlspecialchars(csp_nonce(), ENT_QUOTES, 'UTF-8'); ?>"
+    data-versioned-src="/Layout/Galeria.min.js"></script>
+<script nonce="<?= htmlspecialchars(csp_nonce(), ENT_QUOTES, 'UTF-8'); ?>"
+    data-versioned-src="/Layout/FiltrarPorURL.min.js"></script>
+
+<section id="GrupoMOLN">
+    <label class="cssB d-flex align-items-center gap-1 justify-content-center" for="MOLN">Linha do Motor:
+        <button class="help-icon" data-help-title="" data-help-text="" data-help-class="perm-popover" data-bs-title=""
+            data-bs-content="" aria-label="Ajuda sobre Linha do Motor"></button>
+    </label>
+    <select class="cssC" id="MOLN" name="MOLN">
+    </select>
+</section>
+
+<section id="GrupoMOTP">
+    <label class="cssB d-flex align-items-center gap-1 justify-content-center" for="MOTP">Tipo do Motor:
+        <button class="help-icon" data-help-title="" data-help-text="" data-help-class="perm-popover" data-bs-title=""
+            data-bs-content="" aria-label="Ajuda sobre Tipo do Motor"></button>
+    </label>
+    <select class="cssC" id="MOTP" name="MOTP">
+    </select>
+</section>
+
+
+<section id="GrupoMOTT">
+    <label class="cssB d-flex align-items-center gap-1 justify-content-center" for="MOTT">Tensão do Motor:
+        <button class="help-icon" data-help-title="" data-help-text="" data-help-class="perm-popover" data-bs-title=""
+            data-bs-content="" aria-label="Ajuda sobre Tensão do Motor"></button>
+    </label>
+    <select class="cssC" id="MOTT" name="MOTT">
+    </select>
+</section>
+
+
+<section id="GrupoMOFQ">
+    <label class="cssB d-flex align-items-center gap-1 justify-content-center" for="MOFQ">Frequência do Motor:
+        <button class="help-icon" data-help-title="" data-help-text="" data-help-class="perm-popover" data-bs-title=""
+            data-bs-content="" aria-label="Ajuda sobre Frequência do Motor"></button>
+    </label>
+    <select class="cssC" id="MOFQ" name="MOFQ">
+    </select>
+</section>
+
+
+<section id="GrupoMOPT">
+    <label class="cssB d-flex align-items-center gap-1 justify-content-center" for="MOPT">Potência do Motor:
+        <button class="help-icon" data-help-title="" data-help-text="" data-help-class="perm-popover" data-bs-title=""
+            data-bs-content="" aria-label="Ajuda sobre Potência do Motor"></button>
+    </label>
+    <select class="cssC" id="MOPT" name="MOPT">
+    </select>
+</section>
+
+
+<section id="GrupoMOPL">
+    <label class="cssB d-flex align-items-center gap-1 justify-content-center" for="MOPL">Polaridade do Motor:
+        <button class="help-icon" data-help-title="" data-help-text="" data-help-class="perm-popover" data-bs-title=""
+            data-bs-content="" aria-label="Ajuda sobre Polaridade do Motor"></button>
+    </label>
+    <select class="cssC" id="MOPL" name="MOPL">
+    </select>
+</section>
+
+
+<section id="GrupoMOCM">
+    <label class="cssB d-flex align-items-center gap-1 justify-content-center" for="MOCM">Carcaça do Motor:
+        <button class="help-icon" data-help-title="" data-help-text="" data-help-class="perm-popover" data-bs-title=""
+            data-bs-content="" aria-label="Ajuda sobre Carcaça do Motor"></button>
+    </label>
+    <select class="cssC" id="MOCM" name="MOCM">
+    </select>
+</section>
+
+
+<section id="GrupoMOCP" class="grupo-condicional">
+    <label class="cssB d-flex align-items-center gap-1 justify-content-center" for="MOCP">Forma Construtiva do Motor:
+        <button class="help-icon" data-help-title="" data-help-text="" data-help-class="perm-popover" data-bs-title=""
+            data-bs-content="" aria-label="Ajuda sobre Forma Construtiva do Motor"></button>
+    </label>
+    <select class="cssC" id="MOCP" name="MOCP">
+
+    </select>
+
+
+    <div class="SubgrupoMOCP" style="display: none;">
+        <section id="GrupoMOCPP" class="subgrupo subgrupo-aninhado grupo-condicional">
+            <label class="cssB" for="MOCPP">Posição dos Pés do Motor:</label>
+            <select class="cssC" id="MOCPP" name="MOCPP">
+
+            </select>
+        </section>
+    </div>
+</section>
+
+
+<section id="GrupoMOPP" class="grupo-condicional" style="display: none;">
+    <label class="cssB d-flex align-items-center gap-1 justify-content-center" for="MOPP">Posição do Prensa Cabo:
+        <button class="help-icon" data-help-title="" data-help-text="" data-help-class="perm-popover" data-bs-title=""
+            data-bs-content="" aria-label="Ajuda sobre Posição do Prensa Cabo"></button>
+    </label>
+    <select class="cssC" id="MOPP" name="MOPP">
+
+    </select>
+</section>
+
+
+<section id="GrupoMOPM" class="grupo-condicional" style="display: none;">
+    <label class="cssB d-flex align-items-center gap-1 justify-content-center" for="MOPM">Posição de Montagem do Motor:
+        <button class="help-icon" data-help-title="" data-help-text="" data-help-class="perm-popover" data-bs-title=""
+            data-bs-content="" aria-label="Ajuda sobre Posição de Montagem do Motor"></button>
+    </label>
+    <select class="cssC" id="MOPM" name="MOPM">
+    </select>
+</section>
+
+
+<section id="GrupoMOOPC" class="grupo-condicional">
+    <label class="cssB d-flex align-items-center gap-1 justify-content-center" for="MOOPC_NAO">Itens Opcionais do Motor:
+        <button class="help-icon" data-help-title="" data-help-text="" data-help-class="perm-popover" data-bs-title=""
+            data-bs-content="" aria-label="Ajuda sobre Itens Opcionais do Motor"></button>
+    </label>
+    <div id="dropdownMOOPC" class="dropdown-checkbox" style="max-width:400px; margin: 0 auto;">
+        <div class="dropdown-button cssC" onclick="toggleDropdown(this)">NÃO</div>
+        <div class="dropdown-list"
+            style="display:none; border: 1px solid #ec4115; max-height: 180px; overflow-y: auto; border-radius: 6px; background: white; padding: 10px; margin-top: 4px;">
+            <div id="checklistMOOPC" style="display:flex; flex-direction:column; gap:6px; text-align:left;">
+                <label><input type="checkbox" id="MOOPC_NAO" name="MOOPC" value="NÃO" checked> NÃO</label>
+                <label><input type="checkbox" name="MOOPC" value="ACOR"> PINTURA ANTICORROSIVA</label>
+                <label><input type="checkbox" name="MOOPC" value="PINTCZ"> PINTURA CINZA</label>
+                <label><input type="checkbox" name="MOOPC" value="VF"> VENTILAÇÃO FORÇADA</label>
+                <label><input type="checkbox" name="MOOPC" value="CR"> CONTRA RECUO</label>
+            </div>
+        </div>
+        <input type="hidden" id="MOOPC" name="MOOPC" value="NÃO">
+    </div>
+
+
+    <div class="SubgrupoMOOPC" style="display: none;">
+        <section id="GrupoMOCR" class="subgrupo subgrupo-aninhado grupo-condicional">
+            <label class="cssB d-flex align-items-center gap-1 justify-content-center" for="MOCR">Sentido de Giro do
+                Motor:
+                <button class="help-icon" data-help-title="" data-help-text="" data-help-class="perm-popover"
+                    data-bs-title="" data-bs-content="" aria-label="Ajuda sobre Sentido de Giro do Motor"></button>
+            </label>
+            <select class="cssC" id="MOCR" name="MOCR">
+                <option value="H">HORÁRIO</option>
+                <option value="AH">ANTI-HORÁRIO</option>
+            </select>
+        </section>
+    </div>
+</section>
+
+
+</div>
+</section>
+
+<script nonce="<?= htmlspecialchars(csp_nonce(), ENT_QUOTES, 'UTF-8'); ?>">
+
+    async function carregarMOLN() {
+        const grupoMOLN = document.getElementById('GrupoMOLN');
+        const molnSelect = document.getElementById('MOLN');
+
+        try {
+            const response = await fetch(`/PaginasConfiguradoresSeletoresConsultas/MO/MOLN.php`);
+            const optionsHTML = await response.text();
+            molnSelect.innerHTML = optionsHTML;
+
+            molnSelect.style.display = 'block';
+            molnSelect.dispatchEvent(new Event('change'));
+        } catch (error) {
+
+            grupoMOLN.style.display = 'none';
+            molnSelect.style.display = 'none';
+            molnSelect.innerHTML = '';
+        }
+
+        molnSelect.value = '';
+
+        carregarMOTP();
+        carregarMOOPC();
+
+        molnSelect.addEventListener('change', carregarMOTP);
+        molnSelect.addEventListener('change', carregarMOOPC);
+    }
+
+    async function carregarMOTP() {
+        const moln = document.getElementById('MOLN')?.value;
+        const grupoMOTP = document.getElementById('GrupoMOTP');
+        const motpSelect = document.getElementById('MOTP');
+
+        const response = await fetch(`/PaginasConfiguradoresSeletoresConsultas/MO/MOTP.php?MOLN=${encodeURIComponent(moln)}`);
+        const optionsHTML = await response.text();
+        motpSelect.innerHTML = optionsHTML;
+
+        grupoMOTP.style.display = 'block';
+        motpSelect.style.display = 'block';
+        motpSelect.value = '';
+
+        carregarMOTT();
+    }
+
+    async function carregarMOTT() {
+        const moln = document.getElementById('MOLN')?.value;
+        const motp = document.getElementById('MOTP')?.value;
+        const grupoMOTT = document.getElementById('GrupoMOTT');
+        const mottSelect = document.getElementById('MOTT');
+
+        const response = await fetch(`/PaginasConfiguradoresSeletoresConsultas/MO/MOTT.php?MOLN=${encodeURIComponent(moln)}&MOTP=${encodeURIComponent(motp)}`);
+        const optionsHTML = await response.text();
+        mottSelect.innerHTML = optionsHTML;
+
+        grupoMOTT.style.display = 'block';
+        mottSelect.style.display = 'block';
+        mottSelect.value = '';
+
+        carregarMOFQ();
+    }
+
+    async function carregarMOFQ() {
+        const moln = document.getElementById('MOLN')?.value;
+        const motp = document.getElementById('MOTP')?.value;
+        const mott = document.getElementById('MOTT')?.value;
+        const grupoMOFQ = document.getElementById('GrupoMOFQ');
+        const mofqSelect = document.getElementById('MOFQ');
+
+        const response = await fetch(`/PaginasConfiguradoresSeletoresConsultas/MO/MOFQ.php?MOLN=${encodeURIComponent(moln)}&MOTP=${encodeURIComponent(motp)}&MOTT=${encodeURIComponent(mott)}`);
+        const optionsHTML = await response.text();
+        mofqSelect.innerHTML = optionsHTML;
+
+        grupoMOFQ.style.display = 'block';
+        mofqSelect.style.display = 'block';
+        mofqSelect.value = '';
+
+        carregarMOPT();
+    }
+
+    async function carregarMOPT() {
+        const moln = document.getElementById('MOLN')?.value;
+        const motp = document.getElementById('MOTP')?.value;
+        const mott = document.getElementById('MOTT')?.value;
+        const mofq = document.getElementById('MOFQ')?.value;
+        const grupoMOPT = document.getElementById('GrupoMOPT');
+        const moptSelect = document.getElementById('MOPT');
+
+        const response = await fetch(`/PaginasConfiguradoresSeletoresConsultas/MO/MOPT.php?MOLN=${encodeURIComponent(moln)}&MOTP=${encodeURIComponent(motp)}&MOTT=${encodeURIComponent(mott)}&MOFQ=${encodeURIComponent(mofq)}`);
+        const optionsHTML = await response.text();
+        moptSelect.innerHTML = optionsHTML;
+
+        grupoMOPT.style.display = 'block';
+        moptSelect.style.display = 'block';
+        moptSelect.value = '';
+
+        carregarMOPL();
+    }
+
+    async function carregarMOPL() {
+        const moln = document.getElementById('MOLN')?.value;
+        const motp = document.getElementById('MOTP')?.value;
+        const mott = document.getElementById('MOTT')?.value;
+        const mofq = document.getElementById('MOFQ')?.value;
+        const mopt = document.getElementById('MOPT')?.value;
+        const grupoMOPL = document.getElementById('GrupoMOPL');
+        const moplSelect = document.getElementById('MOPL');
+
+        const response = await fetch(`/PaginasConfiguradoresSeletoresConsultas/MO/MOPL.php?MOLN=${encodeURIComponent(moln)}&MOTP=${encodeURIComponent(motp)}&MOTT=${encodeURIComponent(mott)}&MOFQ=${encodeURIComponent(mofq)}&MOPT=${encodeURIComponent(mopt)}`);
+        const optionsHTML = await response.text();
+        moplSelect.innerHTML = optionsHTML;
+
+        grupoMOPL.style.display = 'block';
+        moplSelect.style.display = 'block';
+        moplSelect.value = '';
+
+        carregarMOCM();
+    }
+
+    async function carregarMOCM() {
+        const moln = document.getElementById('MOLN')?.value;
+        const motp = document.getElementById('MOTP')?.value;
+        const mott = document.getElementById('MOTT')?.value;
+        const mofq = document.getElementById('MOFQ')?.value;
+        const mopt = document.getElementById('MOPT')?.value;
+        const mopl = document.getElementById('MOPL')?.value;
+        const grupoMOCM = document.getElementById('GrupoMOCM');
+        const mocmSelect = document.getElementById('MOCM');
+
+        const response = await fetch(`/PaginasConfiguradoresSeletoresConsultas/MO/MOCM.php?MOLN=${encodeURIComponent(moln)}&MOTP=${encodeURIComponent(motp)}&MOTT=${encodeURIComponent(mott)}&MOFQ=${encodeURIComponent(mofq)}&MOPT=${encodeURIComponent(mopt)}&MOPL=${encodeURIComponent(mopl)}`);
+        const optionsHTML = await response.text();
+        mocmSelect.innerHTML = optionsHTML;
+
+        grupoMOCM.style.display = 'block';
+        mocmSelect.style.display = 'block';
+
+        carregarMOCP();
+    }
+
+    async function carregarMOCP() {
+        const moln = document.getElementById('MOLN')?.value;
+        const motp = document.getElementById('MOTP')?.value;
+        const mott = document.getElementById('MOTT')?.value;
+        const mofq = document.getElementById('MOFQ')?.value;
+        const mopt = document.getElementById('MOPT')?.value;
+        const mopl = document.getElementById('MOPL')?.value;
+        const mocm = document.getElementById('MOCM')?.value;
+        const mocp = document.getElementById('MOCP')?.value;
+        const grupoMOCP = document.getElementById('GrupoMOCP');
+        const mocpSelect = document.getElementById('MOCP');
+
+        const response = await fetch(`/PaginasConfiguradoresSeletoresConsultas/MO/MOCP.php?MOLN=${encodeURIComponent(moln)}&MOTP=${encodeURIComponent(motp)}&MOTT=${encodeURIComponent(mott)}&MOFQ=${encodeURIComponent(mofq)}&MOPT=${encodeURIComponent(mopt)}&MOPL=${encodeURIComponent(mopl)}&MOCM=${encodeURIComponent(mocm)}&MOCP=${encodeURIComponent(mocp)}`);
+        const optionsHTML = await response.text();
+        mocpSelect.innerHTML = optionsHTML;
+
+        grupoMOCP.style.display = 'block';
+        mocpSelect.style.display = 'block';
+        mocpSelect.value = mocp;
+        mocpSelect.dispatchEvent(new Event('change'));
+
+        carregarMOCPP();
+    }
+
+    function carregarMOCPP() {
+        const moln = document.getElementById('MOLN')?.value;
+        const mocp = document.getElementById('MOCP')?.value;
+        const mocm = document.getElementById('MOCM')?.value;
+        const grupoMOCPP = document.getElementById('GrupoMOCPP');
+        const divSubgrupo = document.querySelector('.SubgrupoMOCP');
+        const mocppSelect = document.getElementById('MOCPP');
+
+        const deveExibir = moln !== "3.W" && ["B3", "B34", "B35"].includes(mocp);
+
+        if (deveExibir) {
+            mocppSelect.innerHTML = '';
+            mocppSelect.innerHTML += '<option value="T" selected>Topo</option>';
+
+            const bloqueado = moln === "2.I" && mocm === "56";
+            if (!bloqueado) {
+                mocppSelect.innerHTML += '<option value="D">Direita</option>';
+                mocppSelect.innerHTML += '<option value="E">Esquerda</option>';
+            }
+
+            divSubgrupo.style.display = 'block';
+            grupoMOCPP.style.display = 'block';
+        } else {
+            divSubgrupo.style.display = 'none';
+            grupoMOCPP.style.display = 'none';
+        }
+
+        if (["3.APM", "3.SPM"].includes(moln)) {
+            carregarMOPM();
+        } else {
+            carregarMOPP();
+        }
+    }
+
+    function carregarMOPP() {
+        const moln = document.getElementById('MOLN')?.value;
+        const motp = document.getElementById('MOTP')?.value;
+        const mocp = document.getElementById('MOCP')?.value;
+        const grupoMOPP = document.getElementById('GrupoMOPP');
+        const moppSelect = document.getElementById('MOPP');
+        const grupoMOPM = document.getElementById('GrupoMOPM');
+
+        grupoMOPM.style.display = 'none';
+
+        moppSelect.innerHTML = '';
+
+        let valorPadrao = '';
+
+        if (moln === "3.I" || (moln === "2.I" && motp === "T")) {
+            valorPadrao = "PC1";
+        } else if (moln === "2.I" && motp === "M") {
+            valorPadrao = "PC2";
+        } else if (moln === "3.W") {
+            valorPadrao = "PC3";
+        }
+
+        const deveOcultar = motp === "M" && ["B5", "B35"].includes(mocp);
+
+        moppSelect.innerHTML += `<option value="PC1">1</option>`;
+        moppSelect.innerHTML += `<option value="PC2">2</option>`;
+        moppSelect.innerHTML += `<option value="PC3">3</option>`;
+        moppSelect.innerHTML += `<option value="PC4">4</option>`;
+
+        if (deveOcultar && ["PC1", "PC3", "PC4"].includes(valorPadrao)) {
+            valorPadrao = "";
+        }
+
+        grupoMOPP.style.display = 'block';
+        moppSelect.style.display = 'block';
+        moppSelect.value = valorPadrao;
+
+        carregarMOOPC();
+        validarMOOPC();
+    }
+
+    function carregarMOPM() {
+        const grupoMOPM = document.getElementById('GrupoMOPM');
+        const mopmSelect = document.getElementById('MOPM');
+        const grupoMOPP = document.getElementById('GrupoMOPP');
+
+        grupoMOPP.style.display = 'none';
+
+        mopmSelect.innerHTML = '';
+        mopmSelect.innerHTML += `<option value="B3" selected>B3</option>`;
+        mopmSelect.innerHTML += `<option value="B5">B5</option>`;
+        mopmSelect.innerHTML += `<option value="B6">B6</option>`;
+        mopmSelect.innerHTML += `<option value="B7">B7</option>`;
+        mopmSelect.innerHTML += `<option value="B8">B8</option>`;
+        mopmSelect.innerHTML += `<option value="V5">V5</option>`;
+        mopmSelect.innerHTML += `<option value="V6">V6</option>`;
+
+        grupoMOPM.style.display = 'block';
+        mopmSelect.style.display = 'block';
+        mopmSelect.value = "B3";
+
+        carregarMOOPC();
+        validarMOOPC();
+    }
+
+    function carregarMOOPC() {
+        const moln = document.getElementById('MOLN')?.value.trim();
+        const mocm = document.getElementById('MOCM')?.value;
+        const motp = document.getElementById('MOTP')?.value;
+        const grupoMOPP = document.getElementById('GrupoMOPP');
+        const grupoMOOPC = document.getElementById('GrupoMOOPC');
+        const checklist = document.querySelectorAll('#checklistMOOPC input[type="checkbox"]');
+
+        const grupoMOPM = document.getElementById('GrupoMOPM');
+
+        if ((!grupoMOPP || grupoMOPP.style.display !== 'block') &&
+            (!grupoMOPM || grupoMOPM.style.display !== 'block') ||
+            !grupoMOOPC) {
+            grupoMOOPC.style.display = 'none';
+            return;
+        }
+
+        grupoMOOPC.style.display = 'block';
+
+        checklist.forEach(cb => {
+            const value = cb.value;
+            let mostrar = true;
+
+            if (["ACOR", "PINTCZ"].includes(value) && (moln === "3.APM" || moln === "3.SPM")) {
+                mostrar = false;
+            }
+
+            if (value === "VF") {
+                mostrar = (moln === "2.I" && ["63", "71"].includes(mocm)) ||
+                    (moln === "3.I" && motp !== "F" && ["63", "71", "80", "90", "100", "112", "132"].includes(mocm));
+            }
+
+            if (value === "CR") {
+                mostrar = (moln === "3.W" && ["80", "90", "100", "112", "132"].includes(mocm)) ||
+                    (moln === "3.I" && ["80", "90", "100", "112"].includes(mocm));
+            }
+
+            cb.closest('label').style.display = mostrar ? 'block' : 'none';
+
+            if (!mostrar) cb.checked = false;
+        });
+
+        validarMOOPC();
+        carregarMOCR();
+    }
+
+    const moopcSelect = document.getElementById('MOOPC');
+    if (moopcSelect) {
+        moopcSelect.addEventListener('change', carregarMOCR);
+        moopcSelect.addEventListener('change', validarMOOPC);
+    }
+
+    function validarMOOPC() {
+        const checkboxes = document.querySelectorAll('#checklistMOOPC input[type="checkbox"]');
+        let selecionados = Array.from(checkboxes)
+            .filter(cb => cb.checked)
+            .map(cb => cb.value);
+
+        if (selecionados.includes("NÃO") && selecionados.length > 1) {
+            document.querySelector('input[name="MOOPC"][value="NÃO"]').checked = false;
+            selecionados = selecionados.filter(v => v !== "NÃO");
+        }
+
+        if (selecionados.length === 0) {
+            document.querySelector('input[name="MOOPC"][value="NÃO"]').checked = true;
+            selecionados = ["NÃO"];
+        }
+
+        if (selecionados.includes("ACOR") && selecionados.includes("PINTCZ")) {
+            document.querySelector('input[name="MOOPC"][value="ACOR"]').checked = false;
+            selecionados = selecionados.filter(v => v !== "ACOR");
+        }
+
+        document.getElementById('MOOPC').value = selecionados.join(',');
+
+        const nomesVisiveis = selecionados.map(valor => {
+            const label = Array.from(document.querySelectorAll('#checklistMOOPC label')).find(lbl =>
+                lbl.querySelector(`input[value="${valor}"]`)
+            );
+            return label ? label.textContent.trim() : valor;
+        });
+
+        document.querySelector('#dropdownMOOPC .dropdown-button').textContent = nomesVisiveis.join(', ');
+
+        carregarMOCR();
+    }
+
+    document.getElementById('MOOPC').dispatchEvent(new Event('change'));
+
+    document.addEventListener('DOMContentLoaded', () => {
+        const checkboxes = document.querySelectorAll('#checklistMOOPC input[type="checkbox"]');
+        checkboxes.forEach(cb => {
+            cb.addEventListener('change', validarMOOPC);
+        });
+    });
+
+    function carregarMOCR() {
+        const grupoMOCR = document.getElementById('GrupoMOCR');
+        const grupoQUCR = document.getElementById('GrupoQUCR');
+        const subgrupoMOOPC = document.querySelector('.SubgrupoMOOPC');
+        const mocrSelect = document.getElementById('MOCR');
+        const moopc = document.getElementById('MOOPC')?.value || '';
+
+        const crSelecionado = moopc.split(',').includes('CR');
+
+        if (!crSelecionado) {
+            if (subgrupoMOOPC) subgrupoMOOPC.style.display = 'none';
+            if (grupoMOCR) grupoMOCR.style.display = 'none';
+            if (grupoQUCR) grupoQUCR.style.display = 'none';
+            if (mocrSelect) mocrSelect.value = '';
+            return;
+        }
+
+        if (subgrupoMOOPC) subgrupoMOOPC.style.display = 'block';
+        if (grupoMOCR) grupoMOCR.style.display = 'block';
+        if (grupoQUCR) grupoQUCR.style.display = 'none';
+
+        if (mocrSelect) {
+            mocrSelect.innerHTML = `
+            <option value="H">HORÁRIO</option>
+            <option value="AH">ANTI-HORÁRIO</option>
+        `;
+            mocrSelect.value = '';
+        }
+    }
+
+    document.addEventListener("DOMContentLoaded", () => {
+        carregarMOLN();
+
+        const dropdownButton = document.querySelector('#dropdownMOOPC .dropdown-button');
+        const dropdownList = document.querySelector('#dropdownMOOPC .dropdown-list');
+
+        document.querySelectorAll('#checklistMOOPC input[type="checkbox"]').forEach(cb => {
+            cb.addEventListener('change', validarMOOPC);
+        });
+
+        window.toggleDropdown = function (button) {
+            const list = button.nextElementSibling;
+            list.style.display = list.style.display === 'block' ? 'none' : 'block';
+        };
+
+        document.addEventListener('click', function (e) {
+            document.querySelectorAll('.dropdown-checkbox').forEach(dropdown => {
+                if (!dropdown.contains(e.target)) {
+                    dropdown.querySelector('.dropdown-list').style.display = 'none';
+                }
+            });
+        });
+
+        document.getElementById('MOLN')?.addEventListener('change', carregarMOTP);
+        document.getElementById('MOTP')?.addEventListener('change', carregarMOTT);
+        document.getElementById('MOTT')?.addEventListener('change', carregarMOFQ);
+        document.getElementById('MOFQ')?.addEventListener('change', carregarMOPT);
+        document.getElementById('MOPT')?.addEventListener('change', carregarMOPL);
+        document.getElementById('MOPL')?.addEventListener('change', carregarMOCM);
+        document.getElementById('MOCM')?.addEventListener('change', carregarMOCP);
+        document.getElementById('MOCP')?.addEventListener('change', carregarMOCPP);
+    });
+
+
+</script>
+
+<script nonce="<?= htmlspecialchars(csp_nonce(), ENT_QUOTES, 'UTF-8'); ?>">
+    function exibirBotaoCompartilhar() {
+        const wrapper = document.getElementById("compartilhar-wrapper");
+        if (wrapper) wrapper.style.display = "block";
+        if (typeof exibirBotaoRefazerConfiguracao === "function") exibirBotaoRefazerConfiguracao();
+    }
+
+    function exibirBotaoSolicitarDesenho() {
+        document.getElementById("solicitar-wrapper").style.display = "inline-flex";
+    }
+
+    function exibirBotaoSolicitarCotacao() {
+        const wrapper = document.getElementById("cotacao-wrapper");
+        if (wrapper) wrapper.style.display = "block";
+    }
+
+    async function gerarCodigoProduto() {
+        if (typeof formularioCompleto === 'function' && !formularioCompleto(true)) {
+            if (typeof exibirAlerta === 'function') {
+                exibirAlerta('⚠️ Por favor, preencha todos os campos antes de gerar o produto.');
+            }
+            return;
+        }
+        const MOLN = v("MOLN");
+        const MOTP = v("MOTP");
+        const MOTT = v("MOTT");
+        const MOFQ = v("MOFQ");
+        const MOPT = v("MOPT");
+        const MOPL = v("MOPL");
+        const MOCM = v("MOCM");
+        const MOCP = v("MOCP");
+        const MOCPP = v("MOCPP");
+        const MOOPC = v("MOOPC");
+        const MOCR = v("MOCR");
+        const MOPP = v("MOPP");
+        const MOPM = v("MOPM");
+
+        const CARCACAINICIO = await get("CarcacaInicio.php", {
+            MOLN,
+            MOTP,
+            MOTT,
+            MOFQ,
+            MOPT,
+            MOPL,
+            MOCM
+        });
+
+        const CARCACAFIM = await get("CarcacaFim.php", {
+            MOLN,
+            MOTP,
+            MOTT,
+            MOFQ,
+            MOPT,
+            MOPL,
+            MOCM
+        });
+
+        const CARCACA = `${CARCACAINICIO}${MOCM}${CARCACAFIM}`;
+
+        const PES = MOLN !== "3.W" && ["B3", "B34", "B35"].includes(MOCP) ? MOCPP : "";
+
+        let TEMOPCIONAIS = (MOOPC === "NÃO" || vazio(MOOPC)) ? "" : `.${MOOPC}`;
+        let VARIOSOPCIONAIS = TEMOPCIONAIS.includes(",") ? TEMOPCIONAIS.replaceAll(", ", ".") : TEMOPCIONAIS;
+
+        let OPCIONAISPADRAO = VARIOSOPCIONAIS.includes("CR") ? `${VARIOSOPCIONAIS}${MOCR}` : VARIOSOPCIONAIS;
+
+        let PRENSACABO = "";
+
+        const condicaoExcluir = (
+            MOLN === "3.APM" ||
+            MOLN === "3.SPM" ||
+            (MOLN === "3.I" && MOPP === "PC1") ||
+            (MOLN === "2.I" && MOTP === "T" && MOPP === "PC1") ||
+            (MOLN === "2.I" && MOTP === "M" && MOPP === "PC2") ||
+            (MOLN === "3.W" && MOPP === "PC3")
+        );
+
+        if (!condicaoExcluir && !vazio(MOPP)) {
+            PRENSACABO = `.${MOPP}`;
+        }
+
+
+        const POSICAOMOTOR = ["3.APM", "3.SPM"].includes(MOLN) ? `.${MOPM}` : "";
+
+        const COMPOSICAOCODIGO = [
+            MOLN,
+            MOTP,
+            MOTT,
+            MOPT,
+            MOPL,
+            `${CARCACA}${MOCP}${PES}`,
+            MOFQ,
+            OPCIONAISPADRAO,
+            POSICAOMOTOR,
+            PRENSACABO
+        ]
+            .map(s => s.replace(/^\.|\.$/g, ""))
+            .map(s => s.replace(/,\s*/g, ".").replace(/\s+/g, ""))
+            .map(s => s.replace(/\.{2,}/g, "."))
+            .filter(Boolean)
+            .join(".");
+
+        document.getElementById("refProduto").textContent = COMPOSICAOCODIGO;
+        mostrarDetalhesProduto({}, COMPOSICAOCODIGO);
+
+        fetch("/PaginasConsultaProdutos/CodigoDescricaoObservacaoProduto.php", {
+            method: "POST",
+            headers: { "Content-Type": "application/x-www-form-urlencoded" },
+            body: `codigo=${encodeURIComponent(COMPOSICAOCODIGO)}`
+        })
+            .then(resp => resp.text())
+            .then(text => {
+                let dados;
+                try { dados = JSON.parse(text); } catch { throw new Error(text); }
+                return dados;
+            })
+            .then(dados => {
+                mostrarDetalhesProduto(dados || {}, COMPOSICAOCODIGO);
+                window.codigoProduto = dados?.CD_PRODUTO || "";
+                window.codigoProduto = dados?.CD_PRODUTO || "";
+                window.codigoEstoquePendente = dados?.CD_PRODUTO || "";
+                if (typeof mostrarDetalhesEstoque === 'function') {
+                    mostrarDetalhesEstoque(dados?.CD_PRODUTO || "");
+                }
+                if (typeof mostrarDetalhesPreco === 'function') {
+                    const params = gerarLinkAtual().split('?')[1] || '';
+                    mostrarDetalhesPreco(params);
+                }
+            })
+            .catch(err => {
+
+                if (typeof mostrarDetalhesPreco === 'function') {
+                    const params = gerarLinkAtual().split('?')[1] || '';
+                    mostrarDetalhesPreco(params);
+                }
+            });
+
+
+        if (window.manualHistoricoProduto && window.ultimoHistoricoProduto !== COMPOSICAOCODIGO) {
+            const linkAtual = gerarLinkAtual();
+            fetch("/PaginasAreaClienteSessaoPerfil/RegistrarProduto.php", {
+                method: "POST",
+                headers: { "Content-Type": "application/x-www-form-urlencoded" },
+                body: `produto=${encodeURIComponent(COMPOSICAOCODIGO)}&link=${encodeURIComponent(linkAtual)}`
+            });
+            window.ultimoHistoricoProduto = COMPOSICAOCODIGO;
+            window.manualHistoricoProduto = false;
+        }
+
+        exibirBotaoCompartilhar();
+        exibirBotaoSolicitarDesenho();
+        exibirBotaoSolicitarCotacao();
+    }
+</script>
+
+<script nonce="<?= htmlspecialchars(csp_nonce(), ENT_QUOTES, 'UTF-8'); ?>">
+    const endpointPreco = '/PaginasConfiguradoresPrecoVenda/MOPV.php';
+    function mostrarDetalhesPreco(paramString) {
+        const params = new URLSearchParams(
+            typeof paramString === 'string'
+                ? paramString
+                : new URLSearchParams(paramString).toString()
+        );
+        if (window.codigoProduto) {
+            params.append('produto', window.codigoProduto);
+        }
+        const codInput = document.getElementById('codigoClienteInput');
+        if (codInput && codInput.value.trim()) {
+            params.set('pessoa', codInput.value.trim());
+        }
+        fetch(endpointPreco, {
+            method: 'POST',
+            headers: { 'Content-Type': 'application/x-www-form-urlencoded' },
+            body: params.toString()
+        })
+            .then(r => r.json())
+            .then(p => {
+                const valorRS = p && p['001'] ? parseFloat(String(p['001']).replace(/\./g, '').replace(',', '.')) : NaN;
+                const valorSP = p && p['003'] ? parseFloat(String(p['003']).replace(/\./g, '').replace(',', '.')) : NaN;
+                const textoRS = !isNaN(valorRS) && valorRS !== 0 ? `R$ ${valorRS.toLocaleString('pt-BR', { minimumFractionDigits: 2, maximumFractionDigits: 2 })}` : '👉 😊 Ops! O preço de venda está indisponível no momento. 📞 Fale com nossos Consultores Comerciais para mais informações!';
+                const textoSP = !isNaN(valorSP) && valorSP !== 0 ? `R$ ${valorSP.toLocaleString('pt-BR', { minimumFractionDigits: 2, maximumFractionDigits: 2 })}` : '👉 😊 Ops! O preço de venda está indisponível no momento. 📞 Fale com nossos Consultores Comerciais para mais informações!';
+                const precoRSElem = document.getElementById('precoRS');
+                if (precoRSElem) precoRSElem.innerHTML = `<strong>Preço Final de Venda:</strong> ${textoRS}`;
+                const precoSPElem = document.getElementById('precoSP');
+                if (precoSPElem) precoSPElem.innerHTML = `<strong>Preço Final de Venda:</strong> ${textoSP}`;
+                const linhaPrecoElem = document.getElementById('linhaEntreEmpresasPreco');
+                if (linhaPrecoElem) linhaPrecoElem.style.display = 'block';
+                const notaRS = document.getElementById('notaPrecoRS');
+                const notaSP = document.getElementById('notaPrecoSP');
+                const mostrarNota = window.produtoExiste === false;
+                if (notaRS) notaRS.style.display = mostrarNota ? 'block' : 'none';
+                if (notaSP) notaSP.style.display = mostrarNota ? 'block' : 'none';
+            });
+    }
+
+    document.addEventListener('DOMContentLoaded', () => {
+        const codInput = document.getElementById('codigoClienteInput');
+        const codBtn = document.getElementById('codigoClienteBtn');
+        const limparBtn = document.getElementById('limparClienteBtn');
+        const nomeInfo = document.getElementById('nomeClienteInfo');
+
+        let nomeCtrl = null;
+        const carregarNome = async codigo => {
+            if (!nomeInfo) return;
+            if (nomeCtrl) nomeCtrl.abort();
+            if (!codigo) { nomeInfo.textContent = ''; nomeCtrl = null; return; }
+            nomeCtrl = new AbortController();
+            try {
+                const r = await fetch('/AcessosConsultas/BuscarDadosPessoaPlenus.php?q=' + encodeURIComponent(codigo) + '&offset=0', { signal: nomeCtrl.signal });
+                if (!r.ok) throw new Error('HTTP');
+                const j = await r.json();
+                const pessoa = (j.pessoas || []).find(p => p.CD_PESSOA === codigo);
+                nomeInfo.textContent = pessoa ? pessoa.NM_PESSOA : '';
+            } catch (e) {
+                if (e.name !== 'AbortError') nomeInfo.textContent = '';
+            } finally {
+                nomeCtrl = null;
+            }
+        };
+
+        const atualizarPreco = () => {
+            const params = gerarLinkAtual().split('?')[1] || '';
+            carregarNome(codInput?.value.trim());
+            mostrarDetalhesPreco(params);
+        };
+
+        if (codInput) {
+            codInput.value = '001';
+            codInput.addEventListener('change', atualizarPreco);
+            codInput.addEventListener('keydown', e => {
+                if (e.key === 'Enter') { e.preventDefault(); atualizarPreco(); }
+            });
+        }
+        if (codBtn) {
+            codBtn.addEventListener('click', atualizarPreco);
+        }
+        if (limparBtn) {
+            limparBtn.addEventListener('click', () => {
+                if (codInput) codInput.value = '001';
+                atualizarPreco();
+            });
+        }
+    });
+</script>
+
+
+
+
+</body>
+
+</html>
