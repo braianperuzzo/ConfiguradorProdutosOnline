@@ -1,0 +1,37 @@
+ROTA | ARQUIVO | PALAVRAS | MÍNIMO | STATUS
+--- | --- | ---: | ---: | ---
+/ | RedutoresIBR.html | 150 | 150 | OK
+/ConfiguradorANTICORROSIVOSAPM?MOLN=3.APM | PaginasConfiguradores/ConfiguradorMO.html | 162 | 150 | OK
+/ConfiguradorANTICORROSIVOSSPM?MOLN=3.SPM | PaginasConfiguradores/ConfiguradorMO.html | 162 | 150 | OK
+/ConfiguradorIBRC?HYLN=1.C | PaginasConfiguradores/ConfiguradorHY.html | 169 | 150 | OK
+/ConfiguradorIBRCFR?FXLN=1.FR | PaginasConfiguradores/ConfiguradorFX.html | 178 | 150 | OK
+/ConfiguradorIBRGR?AELN=3.GR | PaginasConfiguradores/ConfiguradorAE.html | 167 | 150 | OK
+/ConfiguradorIBRGS?AELN=3.GS | PaginasConfiguradores/ConfiguradorAE.html | 167 | 150 | OK
+/ConfiguradorIBRH?HYLN=1.H | PaginasConfiguradores/ConfiguradorHY.html | 169 | 150 | OK
+/ConfiguradorIBRK?INLN=4.K | PaginasConfiguradores/ConfiguradorIN.html | 168 | 150 | OK
+/ConfiguradorIBRM?HYLN=1.M | PaginasConfiguradores/ConfiguradorHY.html | 169 | 150 | OK
+/ConfiguradorIBRMSML?MOLN=2.I | PaginasConfiguradores/ConfiguradorMO.html | 162 | 150 | OK
+/ConfiguradorIBRP?HYLN=1.P | PaginasConfiguradores/ConfiguradorHY.html | 169 | 150 | OK
+/ConfiguradorIBRPB?PLLN=3.PB | PaginasConfiguradores/ConfiguradorPL.html | 170 | 150 | OK
+/ConfiguradorIBRPBL?PLLN=3.PBL | PaginasConfiguradores/ConfiguradorPL.html | 170 | 150 | OK
+/ConfiguradorIBRPFFA?FXLN=1.FFA | PaginasConfiguradores/ConfiguradorFX.html | 178 | 150 | OK
+/ConfiguradorIBRQ?QULN=1.Q | PaginasConfiguradores/ConfiguradorQU.html | 173 | 150 | OK
+/ConfiguradorIBRQDR?QULN=1.QDR | PaginasConfiguradores/ConfiguradorQUDR.html | 166 | 150 | OK
+/ConfiguradorIBRQP?QULN=1.QP | PaginasConfiguradores/ConfiguradorQUDR.html | 166 | 150 | OK
+/ConfiguradorIBRR?HYLN=1.R | PaginasConfiguradores/ConfiguradorHY.html | 169 | 150 | OK
+/ConfiguradorIBRRIC?AELN=3.RIC | PaginasConfiguradores/ConfiguradorAE.html | 167 | 150 | OK
+/ConfiguradorIBRSA?PLLN=3.SA | PaginasConfiguradores/ConfiguradorPL.html | 170 | 150 | OK
+/ConfiguradorIBRSB?PLLN=3.SB | PaginasConfiguradores/ConfiguradorPL.html | 170 | 150 | OK
+/ConfiguradorIBRSBL?PLLN=3.SBL | PaginasConfiguradores/ConfiguradorPL.html | 170 | 150 | OK
+/ConfiguradorIBRSD?PLLN=3.SD | PaginasConfiguradores/ConfiguradorPL.html | 170 | 150 | OK
+/ConfiguradorIBRT3AT3C?MOLN=3.I | PaginasConfiguradores/ConfiguradorMO.html | 162 | 150 | OK
+/ConfiguradorIBRV?VALN=1.V | PaginasConfiguradores/ConfiguradorVA.html | 165 | 150 | OK
+/ConfiguradorIBRVFN?ACLN=1.VFN | PaginasConfiguradores/ConfiguradorAC.html | 178 | 150 | OK
+/ConfiguradorIBRX?HYLN=1.X | PaginasConfiguradores/ConfiguradorHY.html | 169 | 150 | OK
+/ConfiguradorIBRXFKA?FXLN=1.FKA | PaginasConfiguradores/ConfiguradorFX.html | 178 | 150 | OK
+/ConfiguradorIBRZ?ACLN=1.Z | PaginasConfiguradores/ConfiguradorAC.html | 178 | 150 | OK
+/ConfiguradorWEGALTORENDIMENTO?MOLN=3.W | PaginasConfiguradores/ConfiguradorMO.html | 162 | 150 | OK
+/Intercambialidade | PaginasConcorrentes/ConfiguradorConcorrentes.html | 164 | 150 | OK
+/PoliticaPrivacidade | PaginasPoliticaPrivacidade/PoliticaPrivacidade.html | 144 | 80 | OK
+
+Resumo: 33 rotas avaliadas, 0 com conteúdo insuficiente.

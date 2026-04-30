@@ -1,0 +1,43 @@
+{
+  "generatedAt": "2026-03-10T16:53:36.829Z",
+  "totalUrls": 32,
+  "payload": {
+    "host": "configurador.redutoresibr.com.br",
+    "key": "abc392c302734be1af94ae150423ccf7",
+    "keyLocation": "https://configurador.redutoresibr.com.br/abc392c302734be1af94ae150423ccf7.txt",
+    "urlList": [
+      "https://configurador.redutoresibr.com.br",
+      "https://configurador.redutoresibr.com.br/ConfiguradorANTICORROSIVOSAPM?MOLN=3.APM",
+      "https://configurador.redutoresibr.com.br/ConfiguradorANTICORROSIVOSSPM?MOLN=3.SPM",
+      "https://configurador.redutoresibr.com.br/ConfiguradorIBRT3AT3C?MOLN=3.I",
+      "https://configurador.redutoresibr.com.br/ConfiguradorIBRC?HYLN=1.C",
+      "https://configurador.redutoresibr.com.br/ConfiguradorIBRCFR?FXLN=1.FR",
+      "https://configurador.redutoresibr.com.br/ConfiguradorIBRGR?AELN=3.GR",
+      "https://configurador.redutoresibr.com.br/ConfiguradorIBRGS?AELN=3.GS",
+      "https://configurador.redutoresibr.com.br/ConfiguradorIBRH?HYLN=1.H",
+      "https://configurador.redutoresibr.com.br/ConfiguradorIBRM?HYLN=1.M",
+      "https://configurador.redutoresibr.com.br/ConfiguradorIBRP?HYLN=1.P",
+      "https://configurador.redutoresibr.com.br/ConfiguradorIBRPB?PLLN=3.PB",
+      "https://configurador.redutoresibr.com.br/ConfiguradorIBRPBL?PLLN=3.PBL",
+      "https://configurador.redutoresibr.com.br/ConfiguradorIBRPFFA?FXLN=1.FFA",
+      "https://configurador.redutoresibr.com.br/ConfiguradorIBRQ?QULN=1.Q",
+      "https://configurador.redutoresibr.com.br/ConfiguradorIBRQDR?QULN=1.QDR",
+      "https://configurador.redutoresibr.com.br/ConfiguradorIBRQP?QULN=1.QP",
+      "https://configurador.redutoresibr.com.br/ConfiguradorIBRR?HYLN=1.R",
+      "https://configurador.redutoresibr.com.br/ConfiguradorIBRRIC?AELN=3.RIC",
+      "https://configurador.redutoresibr.com.br/ConfiguradorIBRSA?PLLN=3.SA",
+      "https://configurador.redutoresibr.com.br/ConfiguradorIBRSB?PLLN=3.SB",
+      "https://configurador.redutoresibr.com.br/ConfiguradorIBRSBL?PLLN=3.SBL",
+      "https://configurador.redutoresibr.com.br/ConfiguradorIBRSD?PLLN=3.SD",
+      "https://configurador.redutoresibr.com.br/ConfiguradorIBRMSML?MOLN=2.I",
+      "https://configurador.redutoresibr.com.br/ConfiguradorIBRV?VALN=1.V",
+      "https://configurador.redutoresibr.com.br/ConfiguradorIBRVFN?ACLN=1.VFN",
+      "https://configurador.redutoresibr.com.br/ConfiguradorIBRX?HYLN=1.X",
+      "https://configurador.redutoresibr.com.br/ConfiguradorIBRXFKA?FXLN=1.FKA",
+      "https://configurador.redutoresibr.com.br/ConfiguradorIBRZ?ACLN=1.Z",
+      "https://configurador.redutoresibr.com.br/ConfiguradorIBRK?INLN=4.K",
+      "https://configurador.redutoresibr.com.br/ConfiguradorWEGALTORENDIMENTO?MOLN=3.W",
+      "https://configurador.redutoresibr.com.br/PoliticaPrivacidade"
+    ]
+  }
+}

@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Simulador de Consumo | Configurador de Produtos IBR</title>
+  <meta name="description" content="Página do Simulador de Consumo da IBR." />
+  <meta name="robots" content="noindex, nofollow" />
+  <link rel="canonical" href="https://configurador.redutoresibr.com.br/PaginaSimuladorConsumo" />
+  <style>
+    :root {
+      --ibr-orange: #ec4115;
+      --bg: #f8f9fa;
+      --text: #212529;
+    }
+
+    * {
+      box-sizing: border-box;
+    }
+
+    body {
+      margin: 0;
+      min-height: 100vh;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      background: var(--bg);
+      color: var(--text);
+      font-family: 'Sarabun', Arial, sans-serif;
+      text-align: center;
+      padding: 24px;
+    }
+
+    .card {
+      width: 100%;
+      max-width: 520px;
+      background: #fff;
+      border-radius: 16px;
+      box-shadow: 0 10px 28px rgba(0, 0, 0, 0.1);
+      padding: 40px 24px;
+      border-top: 6px solid var(--ibr-orange);
+    }
+
+    h1 {
+      margin: 0;
+      font-size: 2rem;
+      color: var(--ibr-orange);
+    }
+  </style>
+  <?php require_once __DIR__ . '/../SEO/HiddenSeoText.php'; ?>
+</head>
+
+<body>
+  <main class="card" role="main" aria-label="Simulador de Consumo">
+    <h1>Em Desenvolvimento</h1>
+    <?php echo renderHiddenSeoText('Simulador de consumo para estimativa operacional de equipamentos', [
+        'O simulador de consumo está em evolução para oferecer uma estimativa clara de uso energético e comportamento operacional conforme o perfil de aplicação informado. A proposta é apoiar decisões técnicas com base em cenários comparativos de carga, regime de funcionamento e condições de operação.',
+        'Quando disponível, esta funcionalidade permitirá projetar custos de operação com maior previsibilidade, identificar oportunidades de eficiência e orientar escolhas mais assertivas de produto. O recurso foi planejado para complementar o configurador e reduzir incertezas antes da etapa de cotação.',
+        'Enquanto a versão completa é finalizada, o portal continua disponibilizando páginas de configuração, consulta técnica e intercambialidade para apoiar o processo de especificação industrial.'
+    ]); ?>
+  </main>
+</body>
+
+</html>

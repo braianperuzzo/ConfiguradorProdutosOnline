@@ -1,0 +1,16 @@
+[Unit]
+Description=Worker da fila de jobs (ConfiguradorOnline)
+After=network.target
+
+[Service]
+Type=simple
+WorkingDirectory=/var/www/ConfiguradorOnline
+ExecStart=/usr/bin/php /var/www/ConfiguradorOnline/bin/WorkerFilaJobs.php
+Restart=always
+RestartSec=5
+StandardOutput=append:/var/log/fila-jobs-worker.log
+StandardError=append:/var/log/fila-jobs-worker.log
+User=www-data
+
+[Install]
+WantedBy=multi-user.target
